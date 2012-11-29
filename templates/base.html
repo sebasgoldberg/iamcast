@@ -1,0 +1,13 @@
+<h1><a href=/agencia/>Alternativa</a></h1>
+{%block menu%}
+<ul>
+  <li><a href="/agencia/agenciado/">Agenciado</a></li>
+  <li><a href="/admin/">Administracion</a></li>
+  {% if user.is_authenticated %}
+    <li><a href="/agencia/logout/">Sair ({{user.username}})</a></li>
+  {% endif %}
+</ul>
+{%endblock%}
+
+{% block content %}
+{% endblock %}
