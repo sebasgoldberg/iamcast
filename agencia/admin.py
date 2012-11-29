@@ -1,33 +1,18 @@
-from agencia.models import Ciudad, Danza, Deporte, Estado, EstadoDientes, Idioma, Instrumento, Ojos, Pelo, Piel, Talle, Agenciado, Rol, TrabajoRealizadoAgenciado, FotoAgenciado, VideoAgenciado, Compania, ItemPortfolio, Trabajo, Telefono, Postulacion
+from agencia.models import Ciudad, Danza, Deporte, Estado, EstadoDientes, Idioma, Instrumento, Ojos, Pelo, Piel, Talle, Agenciado, Rol, TrabajoRealizadoAgenciado, FotoAgenciado, VideoAgenciado, Compania, ItemPortfolio, Trabajo, Telefono, Postulacion, validarTelefonoIngresado, validarFotoIngresada
 from django.contrib import admin
 from django.forms import CheckboxSelectMultiple
 from django.db import models
 from django.forms.models import BaseInlineFormSet
-from django.core.exceptions import ValidationError
 
 class TelefonoFormSet(BaseInlineFormSet):
   def clean(self):
-    """Verifica que al menos se haya ingresado algun telefono"""
-    if any(self.errors):
-      return
-    for form in self.forms:
-      if not 'telefono' in form.cleaned_data:
-        continue
-      if form.cleaned_data['telefono'] != "" and not form.cleaned_data['DELETE']:
-        return
-    raise ValidationError('Tem que informar um telefone')
+    super(TelefonoFormSet,self).clean()
+    validarTelefonoIngresado(self)
 
 class FotoAgenciadoFormSet(BaseInlineFormSet):
   def clean(self):
-    """Verifica que al menos se haya ingresado una foto"""
-    if any(self.errors):
-      return
-    for form in self.forms:
-      if not 'foto' in form.cleaned_data:
-        continue
-      if form.cleaned_data['foto'] != "" and not form.cleaned_data['DELETE']:
-        return
-    raise ValidationError('Tem que subir uma foto')
+    super(FotoAgenciadoFormSet,self).clean()
+    validarFotoIngresada(self)
 
 class TelefonoInline(admin.TabularInline):
   model=Telefono

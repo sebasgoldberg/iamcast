@@ -10,6 +10,24 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import date
+from django.core.exceptions import ValidationError
+
+# @pre Esta rutina se llama desde el metodo clean de una clase que lo redefine y hereda de formset
+def validarUnoIngresado(formset,campo,mensaje):
+  if any(formset.errors):
+    return
+  for form in formset.forms:
+    if not campo in form.cleaned_data:
+      continue
+    if form.cleaned_data[campo] != "" and not form.cleaned_data['DELETE']:
+      return
+  raise ValidationError(mensaje)
+
+def validarTelefonoIngresado(formset):
+  validarUnoIngresado(formset,'telefono','Tem que informar um telefone')
+
+def validarFotoIngresada(formset):
+  validarUnoIngresado(formset,'foto','Tem que subir uma foto')
 
 class Ciudad(models.Model):
     descripcion = models.CharField(max_length=60, unique=True)
@@ -67,6 +85,31 @@ class Talle(models.Model):
       return self.descripcion
 
 class Agenciado(models.Model):
+    def save(self, *args, **kwargs):
+
+      if not self.user:
+        if self.mail != '':
+          password = User.objects.make_random_password()
+          self.user = User.objects.create_user(self.mail,self.mail,password)
+          #self.user = User.objects.create_user(self.mail,self.mail)
+          # @todo Notificar de la creacion del usuario
+          from django.core.mail import EmailMessage
+          cuerpo="\
+Oi %s!\n\
+\n\
+Voce tem uma nova conta em http://192.168.15.128:8000/agencia/agenciado/ com dados de sue perfil.\n\
+\n\
+Voce podera ingresar a sua nova conta com seu usuario (%s) e sua clave (%s).\n\
+\n\
+Por favor, verifique se os dados da sua conta som corretos. Em caso de precisar modifique os dados que correspondam.\n\
+\n\
+Atentamente, o equipe da Alternativa" % (self.nombre,self.user.username,password)
+          email = EmailMessage('AgenciaAlternativa - Tu perfila a sido creado', cuerpo, to=['agencia.test@gmail.com'])
+          email.send()
+
+      super(Agenciado, self).save(args,kwargs)
+
+
     user= models.OneToOneField(User, null=True, blank=True, editable=False)
 
     #

@@ -2,12 +2,43 @@
 
 {% block content %}
 
-<form method="post"  action="/agencia/agenciado/">
+<form enctype="multipart/form-data" method="post"  action="/agencia/agenciado/">
   {% csrf_token %}
+  {% if telefonoFormSet.non_form_errors or fotoAgenciadoFormSet.non_form_errors or videoAgenciadoFormSet.non_form_errors %}
+    <ul class="errorlist"><li>Tem errores por corregir</li></ul>
+  {% endif %}
   {{ form.as_p }}
+
   <table>
+    <thead>
+      <h3>Telefonos</h3>
+      {% for error in telefonoFormSet.non_form_errors %}
+        <ul class="errorlist"><li>{{ error }}</li></ul>
+      {% endfor %}
+    </thead>
     {{ telefonoFormSet }}
   </table>
+
+  <table>
+    <thead>
+      <h3>Fotos</h3>
+      {% for error in fotoAgenciadoFormSet.non_form_errors %}
+        <ul class="errorlist"><li>{{ error }}</li></ul>
+      {% endfor %}
+    </thead>
+    {{ fotoAgenciadoFormSet }}
+  </table>
+
+  <table>
+    <thead>
+      <h3>Videos</h3>
+      {% for error in videoAgenciadoFormSet.non_form_errors %}
+        <ul class="errorlist"><li>{{ error }}</li></ul>
+      {% endfor %}
+    </thead>
+    {{ videoAgenciadoFormSet }}
+  </table>
+
   <input type="submit" value="Submit" />
 </form>
 

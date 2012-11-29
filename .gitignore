@@ -1,2 +1,5 @@
 manage.py
 /uploads/*
+tags
+*.swp
+
