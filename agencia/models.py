@@ -104,7 +104,7 @@ Voce podera ingresar a sua nova conta com seu usuario (%s) e sua clave (%s).\n\
 Por favor, verifique se os dados da sua conta som corretos. Em caso de precisar modifique os dados que correspondam.\n\
 \n\
 Atentamente, o equipe da Alternativa" % (self.nombre,self.user.username,password)
-          email = EmailMessage('AgenciaAlternativa - Tu perfila a sido creado', cuerpo, to=['agencia.test@gmail.com'])
+          email = EmailMessage('AgenciaAlternativa - Seu perfil ja esta creado', cuerpo, to=['agencia.test@gmail.com'])
           email.send()
 
       super(Agenciado, self).save(args,kwargs)

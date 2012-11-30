@@ -2,4 +2,5 @@ manage.py
 /uploads/*
 tags
 *.swp
+*.pyc
 
