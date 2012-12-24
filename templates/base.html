@@ -4,6 +4,7 @@
   <li><a href="/agencia/agenciado/">Agenciado</a></li>
   <li><a href="/admin/">Administracion</a></li>
   {% if user.is_authenticated %}
+    <li><a href="/agencia/cambio/clave/">Trocar Senha</a></li>
     <li><a href="/agencia/logout/">Sair ({{user.username}})</a></li>
   {% endif %}
 </ul>
