@@ -44,7 +44,7 @@ class AgenciadoAdmin(admin.ModelAdmin):
   ]
   inlines=[TelefonoInline, FotoAgenciadoInline, VideoAgenciadoInline]
   list_display=['thumbnail','id','apellido','nombre','fecha_nacimiento','descripcion','telefonos','mail', 'responsable']
-  list_filter=['sexo','ojos','pelo','piel','fecha_ingreso']
+  list_filter=['activo','sexo','ojos','pelo','piel','fecha_ingreso']
   search_fields=['nombre','apellido','responsable','mail','id']
   date_hierarchy='fecha_nacimiento'
   filter_horizontal=['deportes','danzas','instrumentos','idiomas']

@@ -92,8 +92,9 @@ class Agenciado(models.Model):
           password = User.objects.make_random_password()
           self.user = User.objects.create_user(self.mail,self.mail,password)
           #self.user = User.objects.create_user(self.mail,self.mail)
-          # @todo Notificar de la creacion del usuario
           from django.core.mail import EmailMessage
+          # @todo Armar la url absoluta en forma dinamica.
+          # @todo Enviar mail al agenciado
           cuerpo="\
 Oi %s!\n\
 \n\
@@ -167,8 +168,8 @@ Atentamente, o equipe da Alternativa" % (self.nombre,self.user.username,password
     observaciones = models.TextField(blank=True)
 
     # Datos administrativos del sistema 
-    activo = models.BooleanField()
-    fecha_ingreso = models.DateField()
+    activo = models.BooleanField(default=True)
+    fecha_ingreso = models.DateField(default=date.today())
     recurso_id = models.IntegerField(null=True, editable=False) #Clave en aplicacion DELPHI
 
     def __unicode__(self):
