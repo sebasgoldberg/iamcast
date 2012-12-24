@@ -13,9 +13,12 @@ middleware here, or combine a Django application with an application of another
 framework.
 
 """
-import os
+import os, sys
+
+sys.path.append('/home/cerebro/django-projects/alternativa')
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "alternativa.settings")
+
 
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION
