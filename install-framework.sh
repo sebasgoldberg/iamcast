@@ -6,25 +6,43 @@ apt-get install libapache2-mod-wsgi
 apt-get install python-mysqldb
 apt-get install python-imaging
 
-# El paquete a continuación es necesario para interactuar con base de datos Microsoft SQL Server
-apt-get remove python-pymssql #Se quita en caso de existir una instalación (la version instalada por apt-get no funciona correctamente)
-apt-get install python-dev #Necesatio para poder instalar pymssql
-mkdir pymssql
-cd pymssql/
-wget http://pymssql.googlecode.com/files/pymssql-2.0.0b1-dev-20111019.tar.gz
-if [ $? -ne 0 ]
+#Instalacion del modulo python para SQL Server
+
+#Se verifica si hay alguna version instalada
+instalar_pymssql = 'X'
+python -c "import pssssymssql" > /dev/null 2>&1
+if [ $? -eq 0 ]
 then
-  echo "No se ha encontrado el paquete para la instalación de pymssql. Por favor ingrese a la siguiente página http://code.google.com/p/pymssql/ y modifique url, nombre de archivo y nombre de carpeta en este script, el contexto es donde se está mostrando este mensaje."
-  exit 0
+  # En caso de haber alguna version instalada se verifica si sirve
+  pymssql_version=$(python -c "import pymssql; print pymssql.__version__" | cut -f 1 -d '.')
+  if [ pymssql_version -ge 2 ]
+  then
+    instalar_pymssql = ''
+  fi
 fi
-tar -zxvf pymssql-2.0.0b1-dev-20111019.tar.gz
-cd pymssql-2.0.0b1-dev-20111019/
-apt-get install cython
-python setup.py build
-python setup.py install
-cd ..
-cd ..
-rm -rf pymssql
+
+if [ "$instalar_pymssql" = "X" ]
+then
+  # El paquete a continuación es necesario para interactuar con base de datos Microsoft SQL Server
+  apt-get remove python-pymssql #Se quita en caso de existir una instalación (la version instalada por apt-get no funciona correctamente)
+  apt-get install python-dev #Necesatio para poder instalar pymssql
+  mkdir pymssql
+  cd pymssql/
+  wget http://pymssql.googlecode.com/files/pymssql-2.0.0b1-dev-20111019.tar.gz
+  if [ $? -ne 0 ]
+  then
+    echo "No se ha encontrado el paquete para la instalación de pymssql. Por favor ingrese a la siguiente página http://code.google.com/p/pymssql/ y modifique url, nombre de archivo y nombre de carpeta en este script, el contexto es donde se está mostrando este mensaje."
+    exit 0
+  fi
+  tar -zxvf pymssql-2.0.0b1-dev-20111019.tar.gz
+  cd pymssql-2.0.0b1-dev-20111019/
+  apt-get install cython
+  python setup.py build
+  python setup.py install
+  cd ..
+  cd ..
+  rm -rf pymssql
+fi
 
 apt-get install python-pip
 pip install Django
