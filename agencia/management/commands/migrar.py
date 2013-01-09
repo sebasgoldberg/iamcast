@@ -12,6 +12,7 @@ class Command(BaseCommand):
     cursor.execute('SELECT * FROM '+tabla)
 
     for row in cursor:
+      #self.stdout.write('%s\n'%row['descripcion'].decode('unicode-escape'))
       #self.stdout.write(row['descripcion']+'\n')
       instanciaClase=clase(descripcion=row['descripcion'].decode('unicode-escape'))
       instanciaClase.save()

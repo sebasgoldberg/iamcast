@@ -9,8 +9,8 @@ class Command(BaseCommand):
 
   # Migra cada foto para el agenciado pasado
   # @pre La foto del agenciado se encuentra en carpeta self.origenFotos, con el siguiente nombre:
-  #   imagen_recurso.id>.jpg
-  # De forma uqe el path absoluto sera 
+  #   <imagen_recurso.id>.jpg
+  # De forma que el path absoluto sera 
   #   self.origenFotos/<imagen_recurso.id>.jpg
   # El contenido de la foto sera la correspondiente al campo imagen_recurso.imagen para el
   # id encontrado en el nombre.
