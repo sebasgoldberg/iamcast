@@ -32,8 +32,9 @@ class VideoAgenciadoInline(admin.TabularInline):
   max_num=6
 
 class AgenciadoAdmin(admin.ModelAdmin):
+  readonly_fields=['id','thumbnails']
   fieldsets=[
-    (None, {'fields':['mail']}),
+    (None, {'fields':['thumbnails','id','mail']}),
     ('Datos personales', {'fields':[('nombre', 'apellido', 'fecha_nacimiento')]}),
     ('Datos Administrativos', { 'fields':[ ('documento_rg', 'documento_cpf'), 'responsable', 'cuenta_bancaria']}),
     ('Datos de direccion', { 'fields':[ ('estado', 'ciudad', 'barrio'), ('direccion', 'codigo_postal')]}),
@@ -44,6 +45,7 @@ class AgenciadoAdmin(admin.ModelAdmin):
   ]
   inlines=[TelefonoInline, FotoAgenciadoInline, VideoAgenciadoInline]
   list_display=['thumbnail','id','apellido','nombre','fecha_nacimiento','descripcion','telefonos','mail', 'responsable']
+  list_display_links = ('thumbnail', 'id')
   list_filter=['activo','sexo','ojos','pelo','piel','fecha_ingreso']
   search_fields=['nombre','apellido','responsable','mail','id']
   date_hierarchy='fecha_nacimiento'

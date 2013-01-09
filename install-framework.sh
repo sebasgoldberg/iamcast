@@ -28,6 +28,11 @@ rm -rf pymssql
 
 apt-get install python-pip
 pip install Django
+
+# Se crean las carpetas que no están incluidas en el repo
+mkdir -p uploads/agenciados/fotos
+chmod 777 -R uploads
+
 echo 'A continuación debería realizar las siguientes tareas:'
 echo '1) Crear la base de datos y usuario según ha definido en alternativa/settings.py.'
 echo '2) Ejecutar el script reiniciar.sh'

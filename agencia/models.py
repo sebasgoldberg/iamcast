@@ -128,8 +128,8 @@ Atentamente, o equipe da Alternativa" % (self.nombre,self.user.username,password
     cuenta_bancaria = models.CharField(max_length=100, blank=True)
 
     # Datos de direccion
-    estado = models.ForeignKey(Estado)
-    ciudad = models.ForeignKey(Ciudad)
+    estado = models.ForeignKey(Estado,on_delete=models.PROTECT)
+    ciudad = models.ForeignKey(Ciudad,on_delete=models.PROTECT)
     barrio = models.CharField(max_length=60)
     direccion = models.CharField(max_length=120)
     codigo_postal = models.CharField(max_length=40)
@@ -143,16 +143,16 @@ Atentamente, o equipe da Alternativa" % (self.nombre,self.user.username,password
       ('F', 'Femenino'),
     )
     sexo = models.CharField(max_length=1,choices=SEXO)
-    ojos = models.ForeignKey(Ojos)
-    pelo = models.ForeignKey(Pelo)
-    piel = models.ForeignKey(Piel)
+    ojos = models.ForeignKey(Ojos,on_delete=models.PROTECT)
+    pelo = models.ForeignKey(Pelo,on_delete=models.PROTECT)
+    piel = models.ForeignKey(Piel,on_delete=models.PROTECT)
     altura = models.FloatField()
     peso = models.FloatField()
-    talle = models.ForeignKey(Talle)
+    talle = models.ForeignKey(Talle,on_delete=models.PROTECT)
     talle_camisa = models.IntegerField()
     talle_pantalon = models.IntegerField()
     calzado = models.IntegerField()
-    estado_dientes = models.ForeignKey(EstadoDientes)
+    estado_dientes = models.ForeignKey(EstadoDientes,on_delete=models.PROTECT)
 
     # Habilidades
     deportes = models.ManyToManyField(Deporte, blank=True)
@@ -181,6 +181,16 @@ Atentamente, o equipe da Alternativa" % (self.nombre,self.user.username,password
         url = self.fotoagenciado_set.order_by('id')[:1][0].foto.url
       return "<img src='%s' height=100 />" % url
     thumbnail.allow_tags = True
+
+    def thumbnails(self):
+      html=''
+      fotos=self.fotoagenciado_set.order_by('id')
+      for foto in fotos:
+        url = foto.foto.url
+        html = html + "<a href='%s'><img src='%s' height=100 /></a>" % (url,url)
+      return html
+    thumbnails.allow_tags = True
+
     def telefonos(self):
       listadoTelefonos=[]
       for telefono in self.telefono_set.all():
@@ -199,8 +209,8 @@ class Rol(models.Model):
       return self.descripcion
 
 class TrabajoRealizadoAgenciado(models.Model):
-    rol = models.ForeignKey(Rol)
-    agenciado = models.ForeignKey(Agenciado)
+    rol = models.ForeignKey(Rol,on_delete=models.PROTECT)
+    agenciado = models.ForeignKey(Agenciado,on_delete=models.PROTECT)
     producto = models.CharField(max_length=100)
     fecha_trabajo = models.DateField()
     cache = models.DecimalField(max_digits=11, decimal_places=2)
@@ -238,15 +248,15 @@ class Trabajo(models.Model):
       return self.descripcion
 
 class Telefono(models.Model):
-    compania = models.ForeignKey(Compania, null=True, blank=True)
+    compania = models.ForeignKey(Compania, null=True, blank=True,on_delete=models.PROTECT)
     agenciado = models.ForeignKey(Agenciado)
     telefono = models.CharField(max_length=60)
     def __unicode__(self):
       return self.telefono
     
 class Postulacion(models.Model):
-    agenciado = models.ForeignKey(Agenciado)
-    trabajo = models.ForeignKey(Trabajo)
+    agenciado = models.ForeignKey(Agenciado,on_delete=models.PROTECT)
+    trabajo = models.ForeignKey(Trabajo,on_delete=models.PROTECT)
     ESTADO_POSTULACION=(
       ('PO', 'POSTULADO'),
     )
