@@ -9,15 +9,15 @@ apt-get install python-imaging
 #Instalacion del modulo python para SQL Server
 
 #Se verifica si hay alguna version instalada
-instalar_pymssql = 'X'
-python -c "import pssssymssql" > /dev/null 2>&1
+instalar_pymssql='X'
+python -c "import pymssql" > /dev/null 2>&1
 if [ $? -eq 0 ]
 then
   # En caso de haber alguna version instalada se verifica si sirve
   pymssql_version=$(python -c "import pymssql; print pymssql.__version__" | cut -f 1 -d '.')
-  if [ pymssql_version -ge 2 ]
+  if [ $pymssql_version -ge 2 ]
   then
-    instalar_pymssql = ''
+    instalar_pymssql=''
   fi
 fi
 
