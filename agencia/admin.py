@@ -65,9 +65,9 @@ admin.site.register(Piel)
 admin.site.register(Talle)
 admin.site.register(Rol)
 
-admin.site.register(TrabajoRealizadoAgenciado)
+#admin.site.register(TrabajoRealizadoAgenciado)
 
 admin.site.register(Compania)
 admin.site.register(ItemPortfolio)
 admin.site.register(Trabajo)
-admin.site.register(Postulacion)
+#admin.site.register(Postulacion)

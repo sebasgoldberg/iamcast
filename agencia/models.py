@@ -1,3 +1,4 @@
+# coding=utf-8
 # This is an auto-generated Django model module.
 # You'll have to do the following manually to clean this up:
 #     * Rearrange models' order
@@ -30,59 +31,97 @@ def validarFotoIngresada(formset):
   validarUnoIngresado(formset,'foto','Tem que subir uma foto')
 
 class Ciudad(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True)
+    descripcion = models.CharField(max_length=60, unique=True, verbose_name='Descripçao')
     def __unicode__(self):
       return self.descripcion
+    class Meta:
+      ordering = ['descripcion']
+      verbose_name = "Cidade"
+      verbose_name_plural = "Cidades"
 
 class Danza(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True)
+    descripcion = models.CharField(max_length=60, unique=True, verbose_name='Descripçao')
     def __unicode__(self):
       return self.descripcion
+    class Meta:
+      ordering = ['descripcion']
+      verbose_name = "Dança"
+      verbose_name_plural = "Danças"
 
 class Deporte(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True)
+    descripcion = models.CharField(max_length=60, unique=True, verbose_name='Descripçao')
     def __unicode__(self):
       return self.descripcion
+    class Meta:
+      ordering = ['descripcion']
+      verbose_name = "Esporte"
+      verbose_name_plural = "Esportes"
 
 class Estado(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True)
+    descripcion = models.CharField(max_length=60, unique=True, verbose_name='Descripçao')
     def __unicode__(self):
       return self.descripcion
+    class Meta:
+      ordering = ['descripcion']
 
 class EstadoDientes(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True)
+    descripcion = models.CharField(max_length=60, unique=True, verbose_name='Descripçao')
     def __unicode__(self):
       return self.descripcion
+    class Meta:
+      ordering = ['descripcion']
+      verbose_name = "Estado Dentes"
+      verbose_name_plural = "Estados Dentes"
 
 class Idioma(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True)
+    descripcion = models.CharField(max_length=60, unique=True, verbose_name='Descripçao')
     def __unicode__(self):
       return self.descripcion
+    class Meta:
+      ordering = ['descripcion']
 
 class Instrumento(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True)
+    descripcion = models.CharField(max_length=60, unique=True, verbose_name='Descripçao')
     def __unicode__(self):
       return self.descripcion
+    class Meta:
+      ordering = ['descripcion']
 
 class Ojos(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True)
+    descripcion = models.CharField(max_length=60, unique=True, verbose_name='Descripçao')
     def __unicode__(self):
       return self.descripcion
+    class Meta:
+      ordering = ['descripcion']
+      verbose_name = "Olhos"
+      verbose_name_plural = "Olhos"
 
 class Pelo(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True)
+    descripcion = models.CharField(max_length=60, unique=True, verbose_name='Descripçao')
     def __unicode__(self):
       return self.descripcion
+    class Meta:
+      ordering = ['descripcion']
+      verbose_name = "Cabelo"
+      verbose_name_plural = "Cabelos"
 
 class Piel(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True)
+    descripcion = models.CharField(max_length=60, unique=True, verbose_name='Descripçao')
     def __unicode__(self):
       return self.descripcion
+    class Meta:
+      ordering = ['descripcion']
+      verbose_name = "Pele"
+      verbose_name_plural = "Peles"
 
 class Talle(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True)
+    descripcion = models.CharField(max_length=60, unique=True, verbose_name='Descripçao')
     def __unicode__(self):
       return self.descripcion
+    class Meta:
+      ordering = ['descripcion']
+      verbose_name = "Manequem"
+      verbose_name_plural = "Manequems"
 
 class Agenciado(models.Model):
     def save(self, *args, **kwargs):
@@ -114,25 +153,25 @@ Atentamente, o equipe da Alternativa" % (self.nombre,self.user.username,password
     user= models.OneToOneField(User, null=True, blank=True, editable=False)
 
     #
-    mail = models.EmailField(unique=True)
+    mail = models.EmailField(unique=True, verbose_name='e-mail')
 
     # Datos personales
-    nombre = models.CharField(max_length=60)
-    apellido = models.CharField(max_length=60)
-    fecha_nacimiento = models.DateField()
+    nombre = models.CharField(max_length=60, verbose_name='Nome')
+    apellido = models.CharField(max_length=60, verbose_name='Sobrenome')
+    fecha_nacimiento = models.DateField(verbose_name='Data nascimento')
 
     # Datos Administrativos
-    documento_rg = models.CharField(max_length=60,unique=True)
-    documento_cpf = models.CharField(max_length=60,unique=True)
-    responsable = models.CharField(max_length=60, blank=True)
-    cuenta_bancaria = models.CharField(max_length=100, blank=True)
+    documento_rg = models.CharField(max_length=60,unique=True, verbose_name='RG')
+    documento_cpf = models.CharField(max_length=60,unique=True, verbose_name='CPF')
+    responsable = models.CharField(max_length=60, blank=True, verbose_name='Responsabel')
+    cuenta_bancaria = models.CharField(max_length=100, blank=True, verbose_name='Conta bancaria')
 
     # Datos de direccion
     estado = models.ForeignKey(Estado,on_delete=models.PROTECT)
-    ciudad = models.ForeignKey(Ciudad,on_delete=models.PROTECT)
+    ciudad = models.ForeignKey(Ciudad,on_delete=models.PROTECT, verbose_name='Cidade')
     barrio = models.CharField(max_length=60)
-    direccion = models.CharField(max_length=120)
-    codigo_postal = models.CharField(max_length=40)
+    direccion = models.CharField(max_length=120, verbose_name='Endereço')
+    codigo_postal = models.CharField(max_length=40, verbose_name='CEP')
 
     # Datos de contacto
     nextel = models.CharField(max_length=60, blank=True)
@@ -143,33 +182,33 @@ Atentamente, o equipe da Alternativa" % (self.nombre,self.user.username,password
       ('F', 'Femenino'),
     )
     sexo = models.CharField(max_length=1,choices=SEXO)
-    ojos = models.ForeignKey(Ojos,on_delete=models.PROTECT)
-    pelo = models.ForeignKey(Pelo,on_delete=models.PROTECT)
-    piel = models.ForeignKey(Piel,on_delete=models.PROTECT)
-    altura = models.FloatField()
+    ojos = models.ForeignKey(Ojos,on_delete=models.PROTECT, verbose_name='Olhos')
+    pelo = models.ForeignKey(Pelo,on_delete=models.PROTECT, verbose_name='Cabelo')
+    piel = models.ForeignKey(Piel,on_delete=models.PROTECT, verbose_name='Pele')
+    altura = models.FloatField(verbose_name='Atura')
     peso = models.FloatField()
-    talle = models.ForeignKey(Talle,on_delete=models.PROTECT)
-    talle_camisa = models.IntegerField()
-    talle_pantalon = models.IntegerField()
-    calzado = models.IntegerField()
-    estado_dientes = models.ForeignKey(EstadoDientes,on_delete=models.PROTECT)
+    talle = models.ForeignKey(Talle,on_delete=models.PROTECT, verbose_name='Manequem')
+    talle_camisa = models.IntegerField(verbose_name='Camisa')
+    talle_pantalon = models.IntegerField(verbose_name='Calça')
+    calzado = models.IntegerField(verbose_name='Calçado')
+    estado_dientes = models.ForeignKey(EstadoDientes,on_delete=models.PROTECT, verbose_name='Estado Dentes')
 
     # Habilidades
-    deportes = models.ManyToManyField(Deporte, blank=True)
-    danzas = models.ManyToManyField(Danza, blank=True)
+    deportes = models.ManyToManyField(Deporte, blank=True, verbose_name='Esportes')
+    danzas = models.ManyToManyField(Danza, blank=True, verbose_name='Danças')
     instrumentos = models.ManyToManyField(Instrumento, blank=True)
     idiomas = models.ManyToManyField(Idioma, blank=True)
-    indicador_maneja = models.BooleanField()
-    indicador_tiene_registro = models.BooleanField()
+    indicador_maneja = models.BooleanField(verbose_name='Dirige')
+    indicador_tiene_registro = models.BooleanField(verbose_name='Habilitaçao')
 
     # Otros datos
-    trabaja_como_extra = models.BooleanField()
-    como_nos_conocio = models.TextField(blank=True)
-    observaciones = models.TextField(blank=True)
+    trabaja_como_extra = models.BooleanField(verbose_name='Figuraçao')
+    como_nos_conocio = models.TextField(blank=True, verbose_name='Como nos conheceu')
+    observaciones = models.TextField(blank=True, verbose_name='Observaçoes')
 
     # Datos administrativos del sistema 
-    activo = models.BooleanField(default=True)
-    fecha_ingreso = models.DateField(default=date.today())
+    activo = models.BooleanField(default=True, verbose_name='Ativo')
+    fecha_ingreso = models.DateField(default=date.today(), verbose_name='Data de agenciamento')
     recurso_id = models.IntegerField(null=True, editable=False) #Clave en aplicacion DELPHI
 
     def __unicode__(self):
@@ -197,16 +236,24 @@ Atentamente, o equipe da Alternativa" % (self.nombre,self.user.username,password
         listadoTelefonos.append(telefono.telefono)
       return '<br />'.join(listadoTelefonos)
     telefonos.allow_tags = True
+    telefonos.short_description = 'Telefones'
+
+
     def descripcion(self):
       return 'Edad %s, sexo %s, olhos %s, cabelo %s, pele %s, atura %s, peso %s, estado dentes %s.'%(str(self.edad()), dict(self.SEXO)[self.sexo],self.ojos,self.pelo,self.piel,self.altura,self.peso, self.estado_dientes)
     def edad(self):
       # @todo Definir como corresponde sin aproximar
       return (date.today()-self.fecha_nacimiento).days/365
+    descripcion.short_description = 'Descripçao'
 
 class Rol(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True)
+    descripcion = models.CharField(max_length=60, unique=True, verbose_name='Descripçao')
     def __unicode__(self):
       return self.descripcion
+    class Meta:
+      ordering = ['descripcion']
+      verbose_name = "Rol"
+      verbose_name_plural = "Roles"
 
 class TrabajoRealizadoAgenciado(models.Model):
     rol = models.ForeignKey(Rol,on_delete=models.PROTECT)
@@ -222,30 +269,44 @@ class FotoAgenciado(models.Model):
     foto = models.ImageField(upload_to='agenciados/fotos/')
     def __unicode__(self):
       return self.foto.url
+    class Meta:
+      verbose_name = "Foto"
+      verbose_name_plural = "Fotos"
 
 class VideoAgenciado(models.Model):
     agenciado = models.ForeignKey(Agenciado)
     url = models.URLField()
     def __unicode__(self):
       return self.url
+    class Meta:
+      verbose_name = "Video"
+      verbose_name_plural = "Videos"
 
 class Compania(models.Model):
-    descripcion = models.CharField(max_length=100, unique=True)
+    descripcion = models.CharField(max_length=100, unique=True, verbose_name='Descripçao')
     def __unicode__(self):
       return self.descripcion
+    class Meta:
+      ordering = ['descripcion']
 
 class ItemPortfolio(models.Model):
     titulo = models.CharField(max_length=100, unique=True)
     url = models.URLField()
-    fecha = models.DateTimeField()
+    fecha = models.DateTimeField(verbose_name='Data')
     def __unicode__(self):
       return self.titulo
+    class Meta:
+      ordering = ['-fecha']
+      verbose_name = "Item Portfolio"
+      verbose_name_plural = "Portfolio"
 
 class Trabajo(models.Model):
     titulo = models.CharField(max_length=100, unique=True)
-    descripcion = models.TextField()
+    descripcion = models.TextField(verbose_name='Descripçao')
     def __unicode__(self):
       return self.descripcion
+    class Meta:
+      ordering = ['descripcion']
 
 class Telefono(models.Model):
     compania = models.ForeignKey(Compania, null=True, blank=True,on_delete=models.PROTECT)
