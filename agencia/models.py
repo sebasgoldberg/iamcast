@@ -11,7 +11,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import date
-from django.core.exceptions import ValidationError
 
 # @pre Esta rutina se llama desde el metodo clean de una clase que lo redefine y hereda de formset
 def validarUnoIngresado(formset,campo,mensaje):
@@ -124,31 +123,6 @@ class Talle(models.Model):
       verbose_name_plural = "Manequems"
 
 class Agenciado(models.Model):
-    def save(self, *args, **kwargs):
-
-      if not self.user:
-        if self.mail != '':
-          password = User.objects.make_random_password()
-          self.user = User.objects.create_user(self.mail,self.mail,password)
-          #self.user = User.objects.create_user(self.mail,self.mail)
-          from django.core.mail import EmailMessage
-          # @todo Armar la url absoluta en forma dinamica.
-          # @todo Enviar mail al agenciado
-          cuerpo="\
-Oi %s!\n\
-\n\
-Voce tem uma nova conta em http://192.168.15.128:8000/agencia/agenciado/ com dados de sue perfil.\n\
-\n\
-Voce podera ingresar a sua nova conta com seu usuario (%s) e sua clave (%s).\n\
-\n\
-Por favor, verifique se os dados da sua conta som corretos. Em caso de precisar modifique os dados que correspondam.\n\
-\n\
-Atentamente, o equipe da Alternativa" % (self.nombre,self.user.username,password)
-          email = EmailMessage('AgenciaAlternativa - Seu perfil ja esta creado', cuerpo, to=['agencia.test@gmail.com'])
-          email.send()
-
-      super(Agenciado, self).save(args,kwargs)
-
 
     user= models.OneToOneField(User, null=True, blank=True, editable=False)
 

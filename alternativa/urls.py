@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^uploads/(?P<path>.*)$', 'django.views.static.serve',
       {'document_root': settings.MEDIA_ROOT}),
     url(r'^agencia/', include('agencia.urls')),
+    url(r'^agenciado/', include('agenciado.urls')),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^$', redirect_to, {'url': '/agencia/'}),
 )

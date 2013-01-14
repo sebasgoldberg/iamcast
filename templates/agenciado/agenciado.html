@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form enctype="multipart/form-data" method="post"  action="/agencia/agenciado/">
+<form enctype="multipart/form-data" method="post"  action="/agenciado/">
   {% csrf_token %}
   {% if telefonoFormSet.non_form_errors or fotoAgenciadoFormSet.non_form_errors or videoAgenciadoFormSet.non_form_errors %}
     <ul class="errorlist"><li>Tem errores por corregir</li></ul>

@@ -16,6 +16,12 @@ class Command(BaseCommand):
 
   def handle(self,*args,**options):
 
+    self.borrarClaseSimple(TrabajoRealizadoAgenciado)
+    self.borrarClaseSimple(Postulacion)
+    self.borrarClaseSimple(Trabajo)
+
+    self.borrarClaseSimple(Agenciado)
+
     self.borrarClaseSimple(Ciudad)
     self.borrarClaseSimple(Danza)
     self.borrarClaseSimple(Deporte)
@@ -34,11 +40,6 @@ class Command(BaseCommand):
     self.borrarClaseSimple(Telefono)
     self.borrarClaseSimple(FotoAgenciado)
     self.borrarClaseSimple(VideoAgenciado)
-    self.borrarClaseSimple(TrabajoRealizadoAgenciado)
-    self.borrarClaseSimple(Postulacion)
-
-    self.borrarClaseSimple(Agenciado)
-    self.borrarClaseSimple(Trabajo)
 
     self.borrarClaseSimple(ItemPortfolio)
 
