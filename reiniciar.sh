@@ -12,11 +12,14 @@ then
   exit 1
 fi
 
-python manage.py syncdb 
+echo -e 'no\n' | python manage.py syncdb 
 if [ $? -ne 0 ]
 then
   exit 1
 fi
+
+echo 'Ingrese clave del superusuario de la aplicación'
+python manage.py createsuperuser --username=cerebro --email=cerebro@cerebro.com
 
 python manage.py migrar
 if [ $? -ne 0 ]

@@ -1,4 +1,4 @@
-from agencia.models import Ciudad, Danza, Deporte, Estado, EstadoDientes, Idioma, Instrumento, Ojos, Pelo, Piel, Talle, Agenciado, Rol, TrabajoRealizadoAgenciado, FotoAgenciado, VideoAgenciado, Compania, ItemPortfolio, Trabajo, Telefono, Postulacion, validarTelefonoIngresado, validarFotoIngresada
+from agencia.models import Ciudad, Danza, Deporte, Estado, EstadoDientes, Idioma, Instrumento, Ojos, Pelo, Piel, Talle, Agenciado, FotoAgenciado, VideoAgenciado, Compania, Telefono, validarTelefonoIngresado, validarFotoIngresada
 from django.contrib import admin
 from django.forms import CheckboxSelectMultiple
 from django.db import models
@@ -63,11 +63,4 @@ admin.site.register(Ojos)
 admin.site.register(Pelo)
 admin.site.register(Piel)
 admin.site.register(Talle)
-admin.site.register(Rol)
-
-#admin.site.register(TrabajoRealizadoAgenciado)
-
 admin.site.register(Compania)
-admin.site.register(ItemPortfolio)
-admin.site.register(Trabajo)
-#admin.site.register(Postulacion)

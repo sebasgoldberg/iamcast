@@ -11,6 +11,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import date
+from django.core.exceptions import ValidationError
 
 # @pre Esta rutina se llama desde el metodo clean de una clase que lo redefine y hereda de formset
 def validarUnoIngresado(formset,campo,mensaje):
@@ -220,24 +221,6 @@ class Agenciado(models.Model):
       return (date.today()-self.fecha_nacimiento).days/365
     descripcion.short_description = 'Descripçao'
 
-class Rol(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True, verbose_name=u'Descripçao')
-    def __unicode__(self):
-      return self.descripcion
-    class Meta:
-      ordering = ['descripcion']
-      verbose_name = "Rol"
-      verbose_name_plural = "Roles"
-
-class TrabajoRealizadoAgenciado(models.Model):
-    rol = models.ForeignKey(Rol,on_delete=models.PROTECT)
-    agenciado = models.ForeignKey(Agenciado,on_delete=models.PROTECT)
-    producto = models.CharField(max_length=100)
-    fecha_trabajo = models.DateField()
-    cache = models.DecimalField(max_digits=11, decimal_places=2)
-    productora = models.CharField(max_length=100)
-    fecha_pago = models.DateField()
-
 class FotoAgenciado(models.Model):
     agenciado = models.ForeignKey(Agenciado)
     foto = models.ImageField(upload_to='agenciados/fotos/')
@@ -263,38 +246,9 @@ class Compania(models.Model):
     class Meta:
       ordering = ['descripcion']
 
-class ItemPortfolio(models.Model):
-    titulo = models.CharField(max_length=100, unique=True)
-    url = models.URLField()
-    fecha = models.DateTimeField(verbose_name='Data')
-    def __unicode__(self):
-      return self.titulo
-    class Meta:
-      ordering = ['-fecha']
-      verbose_name = "Item Portfolio"
-      verbose_name_plural = "Portfolio"
-
-class Trabajo(models.Model):
-    titulo = models.CharField(max_length=100, unique=True)
-    descripcion = models.TextField(verbose_name=u'Descripçao')
-    def __unicode__(self):
-      return self.descripcion
-    class Meta:
-      ordering = ['descripcion']
-
 class Telefono(models.Model):
     compania = models.ForeignKey(Compania, null=True, blank=True,on_delete=models.PROTECT)
     agenciado = models.ForeignKey(Agenciado)
     telefono = models.CharField(max_length=60)
     def __unicode__(self):
       return self.telefono
-    
-class Postulacion(models.Model):
-    agenciado = models.ForeignKey(Agenciado,on_delete=models.PROTECT)
-    trabajo = models.ForeignKey(Trabajo,on_delete=models.PROTECT)
-    ESTADO_POSTULACION=(
-      ('PO', 'POSTULADO'),
-    )
-    estado = models.CharField(max_length=2,choices=ESTADO_POSTULACION)
-    def __unicode__(self):
-      return self.estado+'-'+self.trabajo+'-'+self.agenciado
