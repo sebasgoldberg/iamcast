@@ -75,9 +75,21 @@ then
 fi
 noip2
 
+# Instalacion de PyYaml
+cd "$INSTALL_SCRIPT_DIR"
+apt-get install mercurial #necesario para hacer el pull del proyecto
+mkdir pyyaml
+cd pyyaml
+hg clone https://bitbucket.org/xi/pyyaml
+cd pyyaml
+python setup.py install
+cd ../..
+rm -rf pyyaml
+
 
 echo 'A continuación debería realizar las siguientes tareas:'
 echo '1) Crear la base de datos y usuario según ha definido en alternativa/settings.py.'
 echo '2) Ejecutar el script reiniciar.sh'
-echo '3) Crear la configuracion para el servidor virtual en /etc/apache2/sites-available y crear el correspondiente link a dicha configuración en /etc/apache2/sites-enabled'
+echo '3) Crear la configuracion para el servidor virtual en /etc/apache2/sites-available (copiar el ya existente y modificar dominio) y crear el correspondiente link a dicha configuración en /etc/apache2/sites-enabled'
+echo '4) Generar archivos de certificado y clave referenciados por el archivo de configuración del servidor virtual'
 

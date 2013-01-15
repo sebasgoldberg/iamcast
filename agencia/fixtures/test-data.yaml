@@ -1,0 +1,110 @@
+- model: agencia.Ciudad
+  pk: 1
+  fields:
+    descripcion: Ciudad 1
+
+- model: agencia.Danza
+  pk: 1
+  fields:
+    descripcion: Danza 1
+
+- model: agencia.Deporte
+  pk: 1
+  fields:
+    descripcion: Deporte 1
+
+- model: agencia.Estado
+  pk: 1
+  fields:
+    descripcion: Estado 1
+
+- model: agencia.EstadoDientes
+  pk: 1
+  fields:
+    descripcion: EstadoDientes 1
+
+- model: agencia.Idioma
+  pk: 1
+  fields:
+    descripcion: Idioma 1
+
+- model: agencia.Instrumento
+  pk: 1
+  fields:
+    descripcion: Instrumento 1
+
+- model: agencia.Ojos
+  pk: 1
+  fields:
+    descripcion: Ojos 1
+
+- model: agencia.Pelo
+  pk: 1
+  fields:
+    descripcion: Pelo 1
+
+- model: agencia.Piel
+  pk: 1
+  fields:
+    descripcion: Piel 1
+
+- model: agencia.Talle
+  pk: 1
+  fields:
+    descripcion: Talle 1
+
+- model: agencia.Compania
+  pk: 1
+  fields:
+    descripcion: Compania 1
+
+- model: agencia.Agenciado
+  pk: 1
+  fields:
+    #user= models.OneToOneField(User, null=True, blank=True, editable=False)
+    mail: test@test.com
+    ## Datos personales
+    nombre: Test
+    apellido: Test
+    fecha_nacimiento: 1982-12-20
+    ## Datos Administrativos
+    documento_rg: 123
+    documento_cpf: 123
+    responsable: Responsable de Test
+    #cuenta_bancaria: 
+    ## Datos de direccion
+    estado: 1
+    ciudad: 1
+    barrio: Barrio de Test
+    direccion: Direccion de Test
+    codigo_postal: 1234
+    ## Datos de contacto
+    #nextel: 
+    ## Caracteristicas fisicas
+    sexo: M
+    ojos: 1
+    pelo: 1
+    piel: 1
+    altura: 1.81 
+    peso: 82
+    talle: 1
+    talle_camisa: 38
+    talle_pantalon: 36
+    calzado: 44
+    estado_dientes: 1
+    ## Habilidades
+    deportes:
+      - 1
+    #danzas: 
+    #instrumentos: 
+    #idiomas: 
+    indicador_maneja: True
+    indicador_tiene_registro: False
+    ## Otros datos
+    trabaja_como_extra: False
+    como_nos_conocio: Por Internet
+    #observaciones: 
+    ## Datos administrativos del sistema 
+    activo: True
+    fecha_ingreso: 2013-01-14
+    #recurso_id: 

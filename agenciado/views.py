@@ -76,7 +76,7 @@ def registro(request):
     form = UserCreationForm(request.POST)
     if form.is_valid():
       user = form.save()
-      grupo=Group.objects.get(name='agenciado')
+      #grupo=Group.objects.get(name='agenciado')
       user = authenticate(username=request.POST['username'], password=request.POST['password1'])
       login(request,user)
       #@todo Indicar registro satisfactorio y que por favor complete sus datos a ser analizados por la agencia

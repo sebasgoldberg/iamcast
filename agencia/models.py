@@ -30,7 +30,7 @@ def validarFotoIngresada(formset):
   validarUnoIngresado(formset,'foto','Tem que subir uma foto')
 
 class Ciudad(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True, verbose_name='Descripçao')
+    descripcion = models.CharField(max_length=60, unique=True, verbose_name=u'Descripçao')
     def __unicode__(self):
       return self.descripcion
     class Meta:
@@ -39,16 +39,16 @@ class Ciudad(models.Model):
       verbose_name_plural = "Cidades"
 
 class Danza(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True, verbose_name='Descripçao')
+    descripcion = models.CharField(max_length=60, unique=True, verbose_name=u'Descripçao')
     def __unicode__(self):
       return self.descripcion
     class Meta:
       ordering = ['descripcion']
-      verbose_name = "Dança"
-      verbose_name_plural = "Danças"
+      verbose_name = u"Dança"
+      verbose_name_plural = u"Danças"
 
 class Deporte(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True, verbose_name='Descripçao')
+    descripcion = models.CharField(max_length=60, unique=True, verbose_name=u'Descripçao')
     def __unicode__(self):
       return self.descripcion
     class Meta:
@@ -57,14 +57,14 @@ class Deporte(models.Model):
       verbose_name_plural = "Esportes"
 
 class Estado(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True, verbose_name='Descripçao')
+    descripcion = models.CharField(max_length=60, unique=True, verbose_name=u'Descripçao')
     def __unicode__(self):
       return self.descripcion
     class Meta:
       ordering = ['descripcion']
 
 class EstadoDientes(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True, verbose_name='Descripçao')
+    descripcion = models.CharField(max_length=60, unique=True, verbose_name=u'Descripçao')
     def __unicode__(self):
       return self.descripcion
     class Meta:
@@ -73,21 +73,21 @@ class EstadoDientes(models.Model):
       verbose_name_plural = "Estados Dentes"
 
 class Idioma(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True, verbose_name='Descripçao')
+    descripcion = models.CharField(max_length=60, unique=True, verbose_name=u'Descripçao')
     def __unicode__(self):
       return self.descripcion
     class Meta:
       ordering = ['descripcion']
 
 class Instrumento(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True, verbose_name='Descripçao')
+    descripcion = models.CharField(max_length=60, unique=True, verbose_name=u'Descripçao')
     def __unicode__(self):
       return self.descripcion
     class Meta:
       ordering = ['descripcion']
 
 class Ojos(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True, verbose_name='Descripçao')
+    descripcion = models.CharField(max_length=60, unique=True, verbose_name=u'Descripçao')
     def __unicode__(self):
       return self.descripcion
     class Meta:
@@ -96,7 +96,7 @@ class Ojos(models.Model):
       verbose_name_plural = "Olhos"
 
 class Pelo(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True, verbose_name='Descripçao')
+    descripcion = models.CharField(max_length=60, unique=True, verbose_name=u'Descripçao')
     def __unicode__(self):
       return self.descripcion
     class Meta:
@@ -105,7 +105,7 @@ class Pelo(models.Model):
       verbose_name_plural = "Cabelos"
 
 class Piel(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True, verbose_name='Descripçao')
+    descripcion = models.CharField(max_length=60, unique=True, verbose_name=u'Descripçao')
     def __unicode__(self):
       return self.descripcion
     class Meta:
@@ -114,7 +114,7 @@ class Piel(models.Model):
       verbose_name_plural = "Peles"
 
 class Talle(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True, verbose_name='Descripçao')
+    descripcion = models.CharField(max_length=60, unique=True, verbose_name=u'Descripçao')
     def __unicode__(self):
       return self.descripcion
     class Meta:
@@ -163,22 +163,22 @@ class Agenciado(models.Model):
     peso = models.FloatField()
     talle = models.ForeignKey(Talle,on_delete=models.PROTECT, verbose_name='Manequem')
     talle_camisa = models.IntegerField(verbose_name='Camisa')
-    talle_pantalon = models.IntegerField(verbose_name='Calça')
-    calzado = models.IntegerField(verbose_name='Calçado')
+    talle_pantalon = models.IntegerField(verbose_name=u'Calça')
+    calzado = models.IntegerField(verbose_name=u'Calçado')
     estado_dientes = models.ForeignKey(EstadoDientes,on_delete=models.PROTECT, verbose_name='Estado Dentes')
 
     # Habilidades
     deportes = models.ManyToManyField(Deporte, blank=True, verbose_name='Esportes')
-    danzas = models.ManyToManyField(Danza, blank=True, verbose_name='Danças')
+    danzas = models.ManyToManyField(Danza, blank=True, verbose_name=u"Danças")
     instrumentos = models.ManyToManyField(Instrumento, blank=True)
     idiomas = models.ManyToManyField(Idioma, blank=True)
     indicador_maneja = models.BooleanField(verbose_name='Dirige')
-    indicador_tiene_registro = models.BooleanField(verbose_name='Habilitaçao')
+    indicador_tiene_registro = models.BooleanField(verbose_name=u'Habilitaçao')
 
     # Otros datos
-    trabaja_como_extra = models.BooleanField(verbose_name='Figuraçao')
+    trabaja_como_extra = models.BooleanField(verbose_name=u'Figuraçao')
     como_nos_conocio = models.TextField(blank=True, verbose_name='Como nos conheceu')
-    observaciones = models.TextField(blank=True, verbose_name='Observaçoes')
+    observaciones = models.TextField(blank=True, verbose_name=u'Observaçoes')
 
     # Datos administrativos del sistema 
     activo = models.BooleanField(default=True, verbose_name='Ativo')
@@ -221,7 +221,7 @@ class Agenciado(models.Model):
     descripcion.short_description = 'Descripçao'
 
 class Rol(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True, verbose_name='Descripçao')
+    descripcion = models.CharField(max_length=60, unique=True, verbose_name=u'Descripçao')
     def __unicode__(self):
       return self.descripcion
     class Meta:
@@ -257,7 +257,7 @@ class VideoAgenciado(models.Model):
       verbose_name_plural = "Videos"
 
 class Compania(models.Model):
-    descripcion = models.CharField(max_length=100, unique=True, verbose_name='Descripçao')
+    descripcion = models.CharField(max_length=100, unique=True, verbose_name=u'Descripçao')
     def __unicode__(self):
       return self.descripcion
     class Meta:
@@ -276,7 +276,7 @@ class ItemPortfolio(models.Model):
 
 class Trabajo(models.Model):
     titulo = models.CharField(max_length=100, unique=True)
-    descripcion = models.TextField(verbose_name='Descripçao')
+    descripcion = models.TextField(verbose_name=u'Descripçao')
     def __unicode__(self):
       return self.descripcion
     class Meta:
