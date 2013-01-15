@@ -123,6 +123,14 @@ class Talle(models.Model):
       verbose_name = "Manequem"
       verbose_name_plural = "Manequems"
 
+def validate_fecha_nacimiento(value):
+  if value > date.today():
+    raise ValidationError('A data de nascimento nao pode ser maior que a data do dia')
+
+def validate_altura(value):
+  if value > 2.5:
+    raise ValidationError('A atura debe ser informada em metros')
+
 class Agenciado(models.Model):
 
     user= models.OneToOneField(User, null=True, blank=True, editable=False)
@@ -133,7 +141,7 @@ class Agenciado(models.Model):
     # Datos personales
     nombre = models.CharField(max_length=60, verbose_name='Nome')
     apellido = models.CharField(max_length=60, verbose_name='Sobrenome')
-    fecha_nacimiento = models.DateField(verbose_name='Data nascimento')
+    fecha_nacimiento = models.DateField(verbose_name='Data nascimento',validators=[validate_fecha_nacimiento])
 
     # Datos Administrativos
     documento_rg = models.CharField(max_length=60,unique=True, verbose_name='RG')
@@ -160,7 +168,7 @@ class Agenciado(models.Model):
     ojos = models.ForeignKey(Ojos,on_delete=models.PROTECT, verbose_name='Olhos')
     pelo = models.ForeignKey(Pelo,on_delete=models.PROTECT, verbose_name='Cabelo')
     piel = models.ForeignKey(Piel,on_delete=models.PROTECT, verbose_name='Pele')
-    altura = models.FloatField(verbose_name='Atura')
+    altura = models.FloatField(verbose_name='Atura',validators=[validate_altura])
     peso = models.FloatField()
     talle = models.ForeignKey(Talle,on_delete=models.PROTECT, verbose_name='Manequem')
     talle_camisa = models.IntegerField(verbose_name='Camisa')

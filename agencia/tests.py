@@ -8,7 +8,9 @@ Replace this with more appropriate tests for your application.
 from agencia.models import Ciudad, Danza, Deporte, Estado, EstadoDientes, Idioma, Instrumento, Ojos, Pelo, Piel, Talle, Agenciado, FotoAgenciado, VideoAgenciado, Compania, Telefono
 from django.test import TestCase
 from datetime import date
+from datetime import timedelta
 from django.db import IntegrityError
+from django.core.exceptions import ValidationError
 
 class AgenciaTestCase(TestCase):
 
@@ -149,3 +151,12 @@ class AgenciaTestCase(TestCase):
     agenciado.documento_cpf = u'123102'
     agenciado.save()
 
+  def test_fecha_nacimiento_menor_fecha_dia(self):
+    # @todo redefinir test utilizando formularios ya que los validadores no corren a nivel del modelo
+    return
+    agenciado = self.get_agenciado_default()
+    agenciado.mail = u'test120@test.com'
+    agenciado.documento_rg = u'123120'
+    agenciado.documento_cpf = u'123120'
+    agenciado.fecha_nacimiento = date.today() + timedelta(days=1)
+    self.assertRaises(ValidationError,agenciado.save) 

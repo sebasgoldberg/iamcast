@@ -1,5 +1,6 @@
 # Django settings for alternativa project.
 
+# @todo Asignar false en PRD
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -158,6 +159,7 @@ LOGGING = {
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
+# @todo Cambiar en prd
 EMAIL_HOST_USER = 'agencia.test@gmail.com'
 EMAIL_HOST_PASSWORD = 'agencia1234'
 EMAIL_PORT = 587
