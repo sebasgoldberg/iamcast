@@ -135,8 +135,8 @@ class Agenciado(models.Model):
 
     user= models.OneToOneField(User, null=True, blank=True, editable=False)
 
-    #
-    mail = models.EmailField(unique=True, verbose_name='e-mail')
+    # @todo Ver si se puede quitar null luego de migrar, agregar validacion de que si ya existe que tenga asignado responsable
+    mail = models.EmailField(verbose_name='e-mail', null=True)
 
     # Datos personales
     nombre = models.CharField(max_length=60, verbose_name='Nome')
@@ -144,8 +144,10 @@ class Agenciado(models.Model):
     fecha_nacimiento = models.DateField(verbose_name='Data nascimento',validators=[validate_fecha_nacimiento])
 
     # Datos Administrativos
-    documento_rg = models.CharField(max_length=60,unique=True, verbose_name='RG')
-    documento_cpf = models.CharField(max_length=60,unique=True, verbose_name='CPF')
+    # @todo Ver si se puede quitar null luego de migrar, agregar validacion de que si ya existe que tenga asignado responsable
+    documento_rg = models.CharField(max_length=60, verbose_name='RG')
+    # @todo Ver si se puede quitar null luego de migrar, agregar validacion de que si ya existe que tenga asignado responsable
+    documento_cpf = models.CharField(max_length=60, verbose_name='CPF',null=True)
     responsable = models.CharField(max_length=60, blank=True, verbose_name='Responsabel')
     cuenta_bancaria = models.CharField(max_length=100, blank=True, verbose_name='Conta bancaria')
 

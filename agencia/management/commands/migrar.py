@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 from agencia.models import Ciudad, Danza, Deporte, Estado, EstadoDientes, Idioma, Instrumento, Ojos, Pelo, Piel, Talle, Agenciado, FotoAgenciado, VideoAgenciado, Compania, Telefono, validarTelefonoIngresado, validarFotoIngresada
 import pymssql
 from django.core.files.images import ImageFile
+import re
 
 class Command(BaseCommand):
 
@@ -99,7 +100,8 @@ class Command(BaseCommand):
         on ag.ojos_id = oj.id \
         inner join estado_dientes esdi \
         on ag.estado_dientes_id = esdi.id \
-      where ag.id = 17 or ag.id = 18"
+        "
+      #where ag.id = 17 or ag.id = 18"
 # @todo Quitar filtro
 
     cursor.execute(query)
@@ -116,15 +118,26 @@ class Command(BaseCommand):
       ojos=Ojos.objects.get(descripcion=row['ojos'].decode('unicode-escape'))
       estadoDientes=EstadoDientes.objects.get(descripcion=row['estado_dientes'].decode('unicode-escape'))
 
+      if row['mail'].decode('unicode-escape')=='':
+        mail = None
+      else:
+        mail = row['mail'].decode('unicode-escape')
+
+      repat=re.compile("^0*$")
+      if repat.search(row['documento_CPF']) is None:
+        documento_cpf = row['documento_CPF']
+      else:
+        documento_cpf = None
+
       agenciado=Agenciado(
-        mail = row['mail'].decode('unicode-escape'),
+        mail = mail,
         # Datos personales
         nombre = row['nombre'].decode('unicode-escape'),
         apellido = row['apellido'].decode('unicode-escape'),
         fecha_nacimiento = row['fecha_nacimiento'],
         # Datos Administrativos
         documento_rg = row['documento_RG'],
-        documento_cpf = row['documento_CPF'],
+        documento_cpf = documento_cpf,
         responsable = row['responsable'].decode('unicode-escape'),
         cuenta_bancaria = row['cuenta_bancaria'],
         indicador_tiene_registro = row['indicador_tiene_registro'],
@@ -178,8 +191,6 @@ class Command(BaseCommand):
       self.addTelefono(agenciado,row['telefono_movil_alternativo_1'])
       self.addTelefono(agenciado,row['telefono_movil_alternativo_2'])
 
-
-
     for idAgenciado, idRecurso in idRecursos.iteritems():
 
       agenciado=Agenciado.objects.get(id=idAgenciado)
@@ -212,15 +223,6 @@ class Command(BaseCommand):
     self.migrarTablasSimples(cursor,'Talle',Talle)
 
     self.migrarAgenciados(cursor)
-    #Rol
-    #TrabajoRealizadoAgenciado
-    #FotoAgenciado
-    #VideoAgenciado
-    #Compania
-    #ItemPortfolio
-    #Trabajo
-    #Telefono
-    #Postulacion
 
     self.connection.close()
 
