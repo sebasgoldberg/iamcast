@@ -46,7 +46,7 @@ class Command(BaseCommand):
   def migrarAgenciados(self,cursor):
     
     query="\
-      SELECT \
+      SELECT top 5 \
         ag.id, \
         nombre, \
         apellido, \
@@ -99,9 +99,7 @@ class Command(BaseCommand):
         inner join ojos oj \
         on ag.ojos_id = oj.id \
         inner join estado_dientes esdi \
-        on ag.estado_dientes_id = esdi.id \
-        "
-      #where ag.id = 17 or ag.id = 18"
+        on ag.estado_dientes_id = esdi.id "
 # @todo Quitar filtro
 
     cursor.execute(query)

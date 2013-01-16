@@ -12,6 +12,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from datetime import date
 from django.core.exceptions import ValidationError
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill, Adjust
 
 # @pre Esta rutina se llama desde el metodo clean de una clase que lo redefine y hereda de formset
 def validarUnoIngresado(formset,campo,mensaje):
@@ -202,7 +204,7 @@ class Agenciado(models.Model):
     def thumbnail(self):
       url = ''
       if any(self.fotoagenciado_set.order_by('id')):
-        url = self.fotoagenciado_set.order_by('id')[:1][0].foto.url
+        url = self.fotoagenciado_set.order_by('id')[:1][0].thumbnail.url
       return "<img src='%s' height=100 />" % url
     thumbnail.allow_tags = True
 
@@ -211,7 +213,8 @@ class Agenciado(models.Model):
       fotos=self.fotoagenciado_set.order_by('id')
       for foto in fotos:
         url = foto.foto.url
-        html = html + "<a href='%s'><img src='%s' height=100 /></a>" % (url,url)
+        url_thumbnail = foto.thumbnail.url
+        html = html + "<a href='%s'><img src='%s' height=100 /></a>" % (url,url_thumbnail)
       return html
     thumbnails.allow_tags = True
 
@@ -234,6 +237,7 @@ class Agenciado(models.Model):
 class FotoAgenciado(models.Model):
     agenciado = models.ForeignKey(Agenciado)
     foto = models.ImageField(upload_to='agenciados/fotos/')
+    thumbnail = ImageSpecField([Adjust(contrast=1.2, sharpness=1.1), ResizeToFill(100,100)], image_field='foto', format='JPEG', options={'quality': 90})
     def __unicode__(self):
       return self.foto.url
     class Meta:

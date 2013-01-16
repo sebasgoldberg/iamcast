@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 from agencia.models import Ciudad, Danza, Deporte, Estado, EstadoDientes, Idioma, Instrumento, Ojos, Pelo, Piel, Talle, Agenciado, FotoAgenciado, VideoAgenciado, Compania, Telefono
 import pymssql
 from django.core.files.images import ImageFile
+import os
 
 class Command(BaseCommand):
 
@@ -31,28 +32,35 @@ class Command(BaseCommand):
 
     for row in cursor:
 
-      #filename='/home/cerebro/django-projects/alternativa/uploads/agenciados/fotos/'+str(row['id'])
+      filename=str(row['id'])+'.tmp.jpg'
 
-      f=open(self.origenFotos+'/'+str(row['id'])+'.jpg','rb')
+      f=open(filename,'wb')
+
+      f.write(row['imagen'])
+
+      f.close()
+
+      f=open(filename,'rb')
       imageFile=ImageFile(f)
 
       fa=agenciado.fotoagenciado_set.create( )
-      fa.foto.save(str(row['id'])+'.jpg',imageFile,save=True)
+      fa.foto.save(filename,imageFile,save=True)
 
       self.stdout.write('Foto agregada al agenciado %s\n'%agenciado)
       f.close()
-    
+      
+      os.remove(filename)
 
   def handle(self,*args,**options):
 
     self.connection = pymssql.connect(host='25.92.66.172', user='aretha', password='aretha01', database='alternativa', as_dict=True)
 
     cursor = self.connection.cursor()
+    
+    agenciados = Agenciado.objects.all()
 
-    self.origenFotos='/mnt/hgfs/vm-compartido/fotos-recursos'
-
-    self.migrarFotos(Agenciado.objects.get(recurso_id=17))
-    self.migrarFotos(Agenciado.objects.get(recurso_id=18))
+    for agenciado in agenciados:
+      self.migrarFotos(agenciado)
 
     self.connection.close()
 
