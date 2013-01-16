@@ -1,3 +1,4 @@
+# coding=utf-8
 from django.core.management.base import BaseCommand, CommandError
 from agencia.models import Ciudad, Danza, Deporte, Estado, EstadoDientes, Idioma, Instrumento, Ojos, Pelo, Piel, Talle, Agenciado, FotoAgenciado, VideoAgenciado, Compania, Telefono, validarTelefonoIngresado, validarFotoIngresada
 import pymssql
@@ -5,6 +6,8 @@ from django.core.files.images import ImageFile
 import re
 
 class Command(BaseCommand):
+
+  compania_nextel = Compania.objects.get(descripcion='Nextel')
 
   help=u'Migra los datos actuales en la base de datos de produccion de la aplicacion DELPHI a la base de datos de esta aplicacion'
 
@@ -36,15 +39,16 @@ class Command(BaseCommand):
       instancia=claseModelo.objects.get(descripcion=row['descripcion'].decode('unicode-escape'))
       relatedManager.add(instancia)
 
-  def addTelefono(self,agenciado,telefono):
+  def addTelefono(self,agenciado,telefono, compania=None):
     
     if telefono == '':
       return
 
-    agenciado.telefono_set.create( telefono = telefono )
+    agenciado.telefono_set.create( telefono = telefono, compania = compania )
     
   def migrarAgenciados(self,cursor):
     
+# @todo Quitar restricción de cantidad
     query="\
       SELECT top 5 \
         ag.id, \
@@ -99,8 +103,7 @@ class Command(BaseCommand):
         inner join ojos oj \
         on ag.ojos_id = oj.id \
         inner join estado_dientes esdi \
-        on ag.estado_dientes_id = esdi.id "
-# @todo Quitar filtro
+        on ag.estado_dientes_id = esdi.id"
 
     cursor.execute(query)
 
@@ -146,7 +149,7 @@ class Command(BaseCommand):
         direccion = row['direccion'].decode('unicode-escape'),
         codigo_postal = row['codigo_postal'],
         # Datos de contacto
-        nextel = row['nextel'],
+        #nextel = row['nextel'],
         # Caracteristicas fisicas
         #SEXO=(
          # ('M', 'Masculino'),
@@ -181,7 +184,8 @@ class Command(BaseCommand):
       agenciado.save()
       
       idRecursos[agenciado.id]=row['id']
-
+    
+      self.addTelefono(agenciado,row['nextel'],self.compania_nextel)
       self.addTelefono(agenciado,row['telefono_particular'])
       self.addTelefono(agenciado,row['tel_particular_alt_1'])
       self.addTelefono(agenciado,row['tel_particular_alt_2'])

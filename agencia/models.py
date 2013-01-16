@@ -138,7 +138,8 @@ class Agenciado(models.Model):
     user= models.OneToOneField(User, null=True, blank=True, editable=False)
 
     # @todo Ver si se puede quitar null luego de migrar, agregar validacion de que si ya existe que tenga asignado responsable
-    mail = models.EmailField(verbose_name='e-mail', null=True)
+    # @todo Agregar validación de obligatoriedad cuando no es editado por un agenciador
+    mail = models.EmailField(verbose_name='e-mail', null=True, blank=True)
 
     # Datos personales
     nombre = models.CharField(max_length=60, verbose_name='Nome')
@@ -230,7 +231,6 @@ class Agenciado(models.Model):
     def descripcion(self):
       return 'Edad %s, sexo %s, olhos %s, cabelo %s, pele %s, atura %s, peso %s, estado dentes %s.'%(str(self.edad()), dict(self.SEXO)[self.sexo],self.ojos,self.pelo,self.piel,self.altura,self.peso, self.estado_dientes)
     def edad(self):
-      # @todo Definir como corresponde sin aproximar
       return (date.today()-self.fecha_nacimiento).days/365
     descripcion.short_description = 'Descripçao'
 

@@ -15,6 +15,7 @@ from datetime import date
 from django.forms.models import inlineformset_factory
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
 
 def index(request):
   return render(request,'agencia/index.html')
@@ -44,8 +45,8 @@ def reiniciar_clave(request):
       password = User.objects.make_random_password()
       user.set_password(password)
       user.save()
-      # @todo Armar la url absoluta en forma dinamica.
-      # @todo Enviar mail al agenciado
+      site=Site.objects.get(name='Alternativa')
+
       cuerpo="\
 Oi %s!\n\
 \n\
@@ -53,11 +54,11 @@ Voce tem uma nova senha.\n\
 \n\
 Sua nova senha e (%s). Lembre que seu usuario e (%s).\n\
 \n\
-Voce pode trocar sua senha accesando a http://192.168.15.128:8000/agencia/cambio/clave/\n\
+Voce pode trocar sua senha accesando a https://%s/agencia/cambio/clave/\n\
 \n\
-Atentamente, o equipe da Alternativa" % (user.username,password,user.username)
+Atentamente, o equipe da Alternativa" % (user.first_name,password,user.username, site.domain)
       from django.core.mail import EmailMessage
-      email = EmailMessage('AgenciaAlternativa - Sua senha ha mudado', cuerpo, to=['agencia.test@gmail.com'])
+      email = EmailMessage('AgenciaAlternativa - Sua senha ha mudado', cuerpo, to=[user.email])
       email.send()
 
       #@todo Indicar cambio de password satisfactorio

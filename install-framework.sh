@@ -1,7 +1,6 @@
 apt-get install apache2
 apt-get install mysql-server
-# @todo Verificar si es necesario instalar cython
-#apt-get install cython
+apt-get install cython
 apt-get install libapache2-mod-wsgi
 apt-get install python-mysqldb
 apt-get install python-imaging
@@ -88,10 +87,12 @@ python setup.py install
 cd ../..
 rm -rf pyyaml
 
-
+echo ''
 echo 'A continuación debería realizar las siguientes tareas:'
-echo '1) Crear la base de datos y usuario según ha definido en alternativa/settings.py.'
-echo '2) Ejecutar el script reiniciar.sh'
-echo '3) Crear la configuracion para el servidor virtual en /etc/apache2/sites-available (copiar el ya existente y modificar dominio) y crear el correspondiente link a dicha configuración en /etc/apache2/sites-enabled'
-echo '4) Generar archivos de certificado y clave referenciados por el archivo de configuración del servidor virtual'
-
+echo '+ Crear la base de datos y usuario según ha definido en alternativa/settings.py.'
+echo '+ Crear la configuracion para el servidor virtual en /etc/apache2/sites-available (copiar el ya existente y modificar dominio) y crear el correspondiente link a dicha configuración en /etc/apache2/sites-enabled'
+echo '+ Generar archivos de certificado y clave referenciados por el archivo de configuración del servidor virtual'
+echo "+ Buscar y modificar los @todo que correspondan."
+echo "+ Asignar el dominio correspondiente al modelo Site"
+echo '+ Ejecutar el script reiniciar.sh'
+echo ''

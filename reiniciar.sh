@@ -18,9 +18,6 @@ then
   exit 1
 fi
 
-echo 'Ingrese clave del superusuario de la aplicación'
-python manage.py createsuperuser --username=cerebro --email=cerebro@cerebro.com
-
 python manage.py migrar
 if [ $? -ne 0 ]
 then
