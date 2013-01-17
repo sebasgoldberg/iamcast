@@ -1,5 +1,6 @@
 [ $# -gt 0 ] && forzar_instalacion_pymssql=$1
 
+apt-get install bc
 apt-get install apache2
 apt-get install mysql-server
 apt-get install cython
