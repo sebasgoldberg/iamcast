@@ -93,6 +93,23 @@ python setup.py install
 cd ../..
 rm -rf pyyaml
 
+# Generación de los certificados:
+if [ ! -d /etc/apache2/ssl ]
+then
+  mkdir /etc/apache2/ssl 
+fi
+
+cd /etc/apache2/ssl 
+/usr/sbin/make-ssl-cert /usr/share/ssl-cert/ssleay.cnf /etc/apache2/ssl/agencia.crt
+CANTIDAD_LINEAS_ARCHIVO=$(wc -l agencia.crt | cut -f 1 -d ' ')
+CANTIDAD_LINEAS_CLAVE=$(grep -n "END PRIVATE KEY" agencia.crt | cut -f 1 -d ':')
+head -n "$CANTIDAD_LINEAS_CLAVE" agencia.crt > agencia.key
+CANTIDAD_LINEAS_CERTIFICADO=$(echo "$CANTIDAD_LINEAS_ARCHIVO-$CANTIDAD_LINEAS_CLAVE" | bc)
+tail -n "$CANTIDAD_LINEAS_CERTIFICADO" agencia.crt > agencia.pem
+rm agencia.crt
+echo "Certificado (agencia.pem) y clave (agencia.key) generados en /etc/apache2/ssl. Tener en cuenta a la hora de configurar el sitio"
+
+
 echo ''
 echo 'A continuación debería realizar las siguientes tareas:'
 echo '+ Crear la base de datos y usuario según ha definido en alternativa/ambiente.py'
