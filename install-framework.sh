@@ -6,6 +6,7 @@ apt-get install cython
 apt-get install libapache2-mod-wsgi
 apt-get install python-mysqldb
 apt-get install python-imaging
+apt-get install mercurial #necesario para hacer el pull de algunos pagetes a ser instalados
 
 #Instalacion del modulo python para SQL Server
 
@@ -84,7 +85,6 @@ noip2
 
 # Instalacion de PyYaml
 cd "$INSTALL_SCRIPT_DIR"
-apt-get install mercurial #necesario para hacer el pull del proyecto
 mkdir pyyaml
 cd pyyaml
 hg clone https://bitbucket.org/xi/pyyaml
