@@ -15,14 +15,12 @@
   pk: 1
 
 - fields:
-    date_joined: 2013-01-16 18:58:50+00:00
     email: sebas.goldberg@gmail.com
     first_name: Sebastian
     groups: []
     is_active: true
     is_staff: true
     is_superuser: true
-    last_login: 2013-01-16 20:36:33+00:00
     last_name: Goldberg
     password: pbkdf2_sha256$10000$ulRmSTXy2QN1$SjPn+QPgx9eXXGznzM9ZkYKA5/dCwmVoJIQFmIBn6gI=
     user_permissions: []
@@ -30,14 +28,12 @@
   model: auth.user
   pk: 1
 - fields:
-    date_joined: 2013-01-16 19:27:19+00:00
     email: marina.c.almeida@gmail.com
     first_name: Marina
     groups: [1]
     is_active: true
     is_staff: true
     is_superuser: false
-    last_login: 2013-01-16 19:27:19+00:00
     last_name: Almeida
     password: pbkdf2_sha256$10000$QnUj2dN2Ls9t$OPdN4/4awWh0Twy4MeEeM0DXVJJ10DXDgs/2heBqHxE=
     user_permissions: []
@@ -45,14 +41,12 @@
   model: auth.user
   pk: 2
 - fields:
-    date_joined: 2013-01-16 19:33:26+00:00
     email: fatima-oliveira@uol.com.br
     first_name: Fatima
     groups: [1]
     is_active: true
     is_staff: true
     is_superuser: false
-    last_login: 2013-01-16 19:33:26+00:00
     last_name: Oliveira
     password: pbkdf2_sha256$10000$nMOSKMW30vdN$8vdPkMfRRlawKF2ONLCzA8srDgqphqlNRHtV0YVOIRg=
     user_permissions: []
@@ -60,14 +54,12 @@
   model: auth.user
   pk: 3
 - fields:
-    date_joined: 2013-01-16 19:34:38+00:00
     email: kleaoliveira@gmail.com
     first_name: Kleber
     groups: [1]
     is_active: true
     is_staff: true
     is_superuser: false
-    last_login: 2013-01-16 19:34:38+00:00
     last_name: Oliveira
     password: pbkdf2_sha256$10000$m8HDi6QNCBVJ$a9/ALd7ZAalEIu1wL0MCYez926kRW/08fZnsz/EcmkU=
     user_permissions: []
@@ -75,14 +67,12 @@
   model: auth.user
   pk: 4
 - fields:
-    date_joined: 2013-01-16 19:36:44+00:00
     email: aretha.oliveira@gmail.com
     first_name: Aretha
     groups: [1]
     is_active: true
     is_staff: true
     is_superuser: false
-    last_login: 2013-01-16 19:48:47+00:00
     last_name: Oliveira
     password: pbkdf2_sha256$10000$yucRc9T5UqSK$HRI4Db91HbzCHpAoIbSIAyUMxCZOLIUkZEduLnQ5+OQ=
     user_permissions: []
@@ -90,14 +80,12 @@
   model: auth.user
   pk: 5
 - fields:
-    date_joined: 2013-01-16 20:11:15+00:00
     email: estephanieillanes@gmail.com
     first_name: Estephanie
     groups: [1]
     is_active: true
     is_staff: true
     is_superuser: false
-    last_login: 2013-01-16 20:11:15+00:00
     last_name: Illanes
     password: pbkdf2_sha256$10000$HIfhCijUG2Zv$qOkhYfctsmN+cySwy5kQSHMnEw/U4KK+kQC+ix4iS1E=
     user_permissions: []

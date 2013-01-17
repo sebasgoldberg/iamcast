@@ -8,6 +8,7 @@ from django.http import HttpRequest
 from django.core.mail import EmailMessage
 from django.db.utils import IntegrityError
 from django.contrib.sites.models import Site
+from django.conf import settings
 
 # @todo Ver si va a aplicar lo de la creación automática del usuario por agenciado
 #@receiver(post_save, sender=Agenciado)
@@ -38,9 +39,10 @@ def callback_creacion_agenciado(sender, instance, created, raw, using, **kwargs)
     if modificado:
       instance.user.save()
 
-
 @receiver(post_save, sender=User)
 def callback_mail_creacion_usuario(sender, instance, created, raw, using, **kwargs):
+  if not settings.AMBIENTE_PRODUCTIVO:
+    return
   if created:
     if instance.email is not None:
       site=Site.objects.get(name='Alternativa')
@@ -61,5 +63,5 @@ Por favor, verifique se os dados da sua conta som corretos. Em caso de precisar 
 \n\
 Atentamente, o equipe da Alternativa" % (instance.first_name,site.domain,site.domain,site.domain,instance.username,site.domain)
       # @todo enviar al mail correspondiente
-      email = EmailMessage('AgenciaAlternativa - Sua conta esta creado', cuerpo, to=['agencia.test@gmail.com'])
+      email = EmailMessage('AgenciaAlternativa - Sua conta esta creado', cuerpo, to=[instance.email])
       email.send()

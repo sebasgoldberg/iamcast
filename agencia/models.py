@@ -130,8 +130,8 @@ def validate_fecha_nacimiento(value):
     raise ValidationError('A data de nascimento nao pode ser maior que a data do dia')
 
 def validate_altura(value):
-  if value > 2.5:
-    raise ValidationError('A atura debe ser informada em metros')
+  if value < 15:
+    raise ValidationError('A atura debe ser informada em centimetros')
 
 class Agenciado(models.Model):
 
@@ -155,8 +155,8 @@ class Agenciado(models.Model):
     cuenta_bancaria = models.CharField(max_length=100, blank=True, verbose_name='Conta bancaria')
 
     # Datos de direccion
-    estado = models.ForeignKey(Estado,on_delete=models.PROTECT)
-    ciudad = models.ForeignKey(Ciudad,on_delete=models.PROTECT, verbose_name='Cidade')
+    estado = models.ForeignKey(Estado,on_delete=models.PROTECT,null=True, blank=False)
+    ciudad = models.ForeignKey(Ciudad,on_delete=models.PROTECT, verbose_name='Cidade',null=True, blank=False)
     barrio = models.CharField(max_length=60)
     direccion = models.CharField(max_length=120, verbose_name='Endereço')
     codigo_postal = models.CharField(max_length=40, verbose_name='CEP')
@@ -170,16 +170,16 @@ class Agenciado(models.Model):
       ('F', 'Femenino'),
     )
     sexo = models.CharField(max_length=1,choices=SEXO)
-    ojos = models.ForeignKey(Ojos,on_delete=models.PROTECT, verbose_name='Olhos')
-    pelo = models.ForeignKey(Pelo,on_delete=models.PROTECT, verbose_name='Cabelo')
-    piel = models.ForeignKey(Piel,on_delete=models.PROTECT, verbose_name='Pele')
+    ojos = models.ForeignKey(Ojos,on_delete=models.PROTECT, verbose_name='Olhos',null=True, blank=False)
+    pelo = models.ForeignKey(Pelo,on_delete=models.PROTECT, verbose_name='Cabelo',null=True, blank=False)
+    piel = models.ForeignKey(Piel,on_delete=models.PROTECT, verbose_name='Pele',null=True, blank=False)
     altura = models.FloatField(verbose_name='Atura',validators=[validate_altura])
     peso = models.FloatField()
-    talle = models.ForeignKey(Talle,on_delete=models.PROTECT, verbose_name='Manequem')
+    talle = models.ForeignKey(Talle,on_delete=models.PROTECT, verbose_name='Manequem',null=True, blank=False)
     talle_camisa = models.IntegerField(verbose_name='Camisa')
     talle_pantalon = models.IntegerField(verbose_name=u'Calça')
     calzado = models.IntegerField(verbose_name=u'Calçado')
-    estado_dientes = models.ForeignKey(EstadoDientes,on_delete=models.PROTECT, verbose_name='Estado Dentes')
+    estado_dientes = models.ForeignKey(EstadoDientes,on_delete=models.PROTECT, verbose_name='Estado Dentes',null=True, blank=False)
 
     # Habilidades
     deportes = models.ManyToManyField(Deporte, blank=True, verbose_name='Esportes')

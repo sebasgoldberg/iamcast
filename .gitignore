@@ -3,3 +3,4 @@ tags
 *.swp
 *.pyc
 agencia-ssl
+alternativa/ambiente.py

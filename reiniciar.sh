@@ -1,5 +1,9 @@
 #!/bin/bash
 
+cantidad=5
+
+[ $# -gt 0 ] && cantidad="$1"
+
 echo "drop database agencia; create database agencia;" | mysql agencia -u agencia -pagencia1234  
 if [ $? -ne 0 ]
 then
@@ -18,7 +22,7 @@ then
   exit 1
 fi
 
-python manage.py migrar
+python manage.py migrar "--cantidad=${cantidad}"
 if [ $? -ne 0 ]
 then
   exit 1

@@ -1,3 +1,5 @@
+[ $# -gt 0 ] && forzar_instalacion_pymssql=$1
+
 apt-get install apache2
 apt-get install mysql-server
 apt-get install cython
@@ -9,14 +11,18 @@ apt-get install python-imaging
 
 #Se verifica si hay alguna version instalada
 instalar_pymssql='X'
-python -c "import pymssql" > /dev/null 2>&1
-if [ $? -eq 0 ]
+
+if [ "$forzar_instalacion_pymssql" = "" ]
 then
-  # En caso de haber alguna version instalada se verifica si sirve
-  pymssql_version=$(python -c "import pymssql; print pymssql.__version__" | cut -f 1 -d '.')
-  if [ $pymssql_version -ge 2 ]
+  python -c "import pymssql" > /dev/null 2>&1
+  if [ $? -eq 0 ]
   then
-    instalar_pymssql=''
+    # En caso de haber alguna version instalada se verifica si sirve
+    pymssql_version=$(python -c "import pymssql; print pymssql.__version__" | cut -f 1 -d '.')
+    if [ $pymssql_version -ge 2 ]
+    then
+      instalar_pymssql=''
+    fi
   fi
 fi
 
@@ -89,10 +95,10 @@ rm -rf pyyaml
 
 echo ''
 echo 'A continuación debería realizar las siguientes tareas:'
-echo '+ Crear la base de datos y usuario según ha definido en alternativa/settings.py.'
+echo '+ Crear la base de datos y usuario según ha definido en alternativa/ambiente.py'
+echo '+ Generar archivos de certificado y clave a ser referenciados por el archivo de configuración del servidor virtual'
 echo '+ Crear la configuracion para el servidor virtual en /etc/apache2/sites-available (copiar el ya existente y modificar dominio) y crear el correspondiente link a dicha configuración en /etc/apache2/sites-enabled'
-echo '+ Generar archivos de certificado y clave referenciados por el archivo de configuración del servidor virtual'
 echo "+ Buscar y modificar los @todo que correspondan."
-echo "+ Asignar el dominio correspondiente al modelo Site"
+echo "+ Asignar el dominio correspondiente al modelo Site en agencia/fixtures/initial_data.yml"
 echo '+ Ejecutar el script reiniciar.sh'
 echo ''

@@ -4,6 +4,7 @@ from agencia.models import Ciudad, Danza, Deporte, Estado, EstadoDientes, Idioma
 import pymssql
 from django.core.files.images import ImageFile
 import re
+from optparse import make_option
 
 class Command(BaseCommand):
 
@@ -11,18 +12,25 @@ class Command(BaseCommand):
 
   help=u'Migra los datos actuales en la base de datos de produccion de la aplicacion DELPHI a la base de datos de esta aplicacion'
 
+  option_list = BaseCommand.option_list + (
+    make_option('--cantidad', default=5),
+    make_option('--recurso'),
+    )
+
   def migrarTablasSimples(self,cursor,tabla,clase):
 
     cursor.execute('SELECT * FROM '+tabla)
 
     for row in cursor:
-      #self.stdout.write('%s\n'%row['descripcion'].decode('unicode-escape'))
-      #self.stdout.write(row['descripcion']+'\n')
       instanciaClase=clase(descripcion=row['descripcion'].decode('unicode-escape'))
       instanciaClase.save()
 
     self.stdout.write('La tabla %s se a migrado correctamente al modelo %s\n'%(tabla,clase))
 
+  def get_object(self, model, descripcion):
+    if descripcion is None:
+      return None
+    return model.objects.get(descripcion=descripcion.decode('unicode-escape'))
 
   def migrarTablaManyOneMany(self,tablaIntermedia,tablaDescripcion,claseModelo,relatedManager,recursoId):
     
@@ -47,10 +55,14 @@ class Command(BaseCommand):
     agenciado.telefono_set.create( telefono = telefono, compania = compania )
     
   def migrarAgenciados(self,cursor):
-    
-# @todo Quitar restricción de cantidad
+
+    if int(self.cantidad) > 0:
+      select='select top %s '%self.cantidad
+    else:
+      select='select '
+
     query="\
-      SELECT top 5 \
+      %s \
         ag.id, \
         nombre, \
         apellido, \
@@ -90,20 +102,23 @@ class Command(BaseCommand):
         como_nos_conocio, \
         observaciones \
       FROM \
-        recurso ag inner join piel pi \
+        recurso ag left join piel pi \
         on ag.piel_id = pi.id \
-        inner join ciudad ci \
+        left join ciudad ci \
         on ag.ciudad_id = ci.id \
-        inner join estado es \
+        left join estado es \
         on ag.estado_id = es.id \
-        inner join talle ta \
+        left join talle ta \
         on ag.talle_id = ta.id \
-        inner join pelo pe \
+        left join pelo pe \
         on ag.pelo_id = pe.id \
-        inner join ojos oj \
+        left join ojos oj \
         on ag.ojos_id = oj.id \
-        inner join estado_dientes esdi \
-        on ag.estado_dientes_id = esdi.id"
+        left join estado_dientes esdi \
+        on ag.estado_dientes_id = esdi.id "%select
+    
+    if self.recurso is not None:
+      query += 'where ag.id = %s '%self.recurso
 
     cursor.execute(query)
 
@@ -111,13 +126,13 @@ class Command(BaseCommand):
 
     for row in cursor:
       #self.stdout.write(row['descripcion']+'\n')
-      piel=Piel.objects.get(descripcion=row['piel'].decode('unicode-escape'))
-      ciudad=Ciudad.objects.get(descripcion=row['ciudad'].decode('unicode-escape'))
-      estado=Estado.objects.get(descripcion=row['estado'].decode('unicode-escape'))
-      talle=Talle.objects.get(descripcion=row['talle'].decode('unicode-escape'))
-      pelo=Pelo.objects.get(descripcion=row['pelo'].decode('unicode-escape'))
-      ojos=Ojos.objects.get(descripcion=row['ojos'].decode('unicode-escape'))
-      estadoDientes=EstadoDientes.objects.get(descripcion=row['estado_dientes'].decode('unicode-escape'))
+      piel=self.get_object(Piel,row['piel'])
+      ciudad=self.get_object(Ciudad,row['ciudad'])
+      estado=self.get_object(Estado,row['estado'])
+      talle=self.get_object(Talle,row['talle'])
+      pelo=self.get_object(Pelo,row['pelo'])
+      ojos=self.get_object(Ojos,row['ojos'])
+      estadoDientes=self.get_object(EstadoDientes,row['estado_dientes'])
 
       if row['mail'].decode('unicode-escape')=='':
         mail = None
@@ -182,6 +197,8 @@ class Command(BaseCommand):
         )
 
       agenciado.save()
+
+      self.stdout.write('Agenciado %s creado con éxito a partir del recurso %s'%(agenciado.id,agenciado.recurso_id))
       
       idRecursos[agenciado.id]=row['id']
     
@@ -209,20 +226,24 @@ class Command(BaseCommand):
 
   def handle(self,*args,**options):
 
+    self.cantidad=options['cantidad']
+    self.recurso=options['recurso']
+
     self.connection = pymssql.connect(host='25.92.66.172', user='aretha', password='aretha01', database='alternativa', as_dict=True)
     cursor = self.connection.cursor()
 
-    self.migrarTablasSimples(cursor,'Ciudad',Ciudad)
-    self.migrarTablasSimples(cursor,'Danzas',Danza)
-    self.migrarTablasSimples(cursor,'Deportes',Deporte)
-    self.migrarTablasSimples(cursor,'Estado',Estado)
-    self.migrarTablasSimples(cursor,'Estado_Dientes',EstadoDientes)
-    self.migrarTablasSimples(cursor,'Idiomas',Idioma)
-    self.migrarTablasSimples(cursor,'Instrumentos',Instrumento)
-    self.migrarTablasSimples(cursor,'Ojos',Ojos)
-    self.migrarTablasSimples(cursor,'Pelo',Pelo)
-    self.migrarTablasSimples(cursor,'Piel',Piel)
-    self.migrarTablasSimples(cursor,'Talle',Talle)
+    if self.recurso is None:
+      self.migrarTablasSimples(cursor,'Ciudad',Ciudad)
+      self.migrarTablasSimples(cursor,'Danzas',Danza)
+      self.migrarTablasSimples(cursor,'Deportes',Deporte)
+      self.migrarTablasSimples(cursor,'Estado',Estado)
+      self.migrarTablasSimples(cursor,'Estado_Dientes',EstadoDientes)
+      self.migrarTablasSimples(cursor,'Idiomas',Idioma)
+      self.migrarTablasSimples(cursor,'Instrumentos',Instrumento)
+      self.migrarTablasSimples(cursor,'Ojos',Ojos)
+      self.migrarTablasSimples(cursor,'Pelo',Pelo)
+      self.migrarTablasSimples(cursor,'Piel',Piel)
+      self.migrarTablasSimples(cursor,'Talle',Talle)
 
     self.migrarAgenciados(cursor)
 

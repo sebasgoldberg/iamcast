@@ -1,7 +1,9 @@
 # Django settings for alternativa project.
+import ambiente
 
-# @todo Asignar false en PRD
-DEBUG = True
+AMBIENTE_PRODUCTIVO = ambiente.productivo
+
+DEBUG = (not ambiente.productivo)
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -13,10 +15,9 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'agencia',                      # Or path to database file if using sqlite3.
-        'USER': 'agencia',                      # Not used with sqlite3.
-        # @todo Cambiar en produccion
-        'PASSWORD': 'agencia1234',                  # Not used with sqlite3.
+        'NAME': ambiente.db.name,                      # Or path to database file if using sqlite3.
+        'USER': ambiente.db.user,                      # Not used with sqlite3.
+        'PASSWORD': ambiente.db.password,                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -47,8 +48,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-# @todo Cambiar al path correspondiente
-MEDIA_ROOT = '/home/cerebro/django-projects/alternativa/uploads/'
+MEDIA_ROOT = ambiente.media_root
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -109,7 +109,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/home/cerebro/django-projects/alternativa/templates',
+    ambiente.template_dir,
 )
 
 INSTALLED_APPS = (
@@ -159,8 +159,7 @@ LOGGING = {
 }
 
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-# @todo Cambiar en prd
-EMAIL_HOST_USER = 'agencia.test@gmail.com'
-EMAIL_HOST_PASSWORD = 'agencia1234'
-EMAIL_PORT = 587
+EMAIL_HOST = ambiente.email.host
+EMAIL_HOST_USER = ambiente.email.user
+EMAIL_HOST_PASSWORD = ambiente.email.password
+EMAIL_PORT = ambiente.email.port
