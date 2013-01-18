@@ -48,11 +48,11 @@ def callback_mail_creacion_usuario(sender, instance, created, raw, using, **kwar
       cuerpo="\
 Oi %s!\n\
 \n\
-Voce tem uma nova conta em https://%s/agencia/agenciado/ com dados de sue perfil.\n\
+Voce tem uma nova conta em https://%s/ com dados de sue perfil.\n\
 \n\
-Se voce e um agenciado, entao pode caregar informaCao de seu perfil: https://%s/agencia/agenciado/\n\
+Se voce e um agenciado, entao pode caregar informaçao de seu perfil: https://%s/agencia/agenciado/\n\
 \n\
-Se voce e um agenciador pode accesar a administraCao do site: https://%s/admin/\n\
+Se voce e um agenciador pode accesar a administraçao do site: https://%s/admin/\n\
 \n\
 Voce podera ingresar a sua nova conta com seu usuario (%s) e sua chave.\n\
 \n\
@@ -60,7 +60,8 @@ Se voce nao lembra sua chave, podera gerarla de novo aqui: https://%s/agencia/re
 \n\
 Por favor, verifique se os dados da sua conta som corretos. Em caso de precisar modifique os dados que correspondam.\n\
 \n\
-Atentamente, o equipe da Alternativa" % (instance.first_name,domain,domain,domain,instance.username,domain)
+Atentamente, o equipe da Alternativa\n\
+agencia.alternativa@gmail.com" % (instance.first_name,domain,domain,domain,instance.username,domain)
       # @todo enviar al mail correspondiente
-      email = EmailMessage('AgenciaAlternativa - Sua conta esta creada', cuerpo, to=[instance.email])
+      email = EmailMessage('AgenciaAlternativa[no responder] - Sua conta esta creada', cuerpo, to=[instance.email])
       email.send()
