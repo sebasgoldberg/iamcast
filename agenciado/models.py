@@ -63,5 +63,5 @@ Por favor, verifique se os dados da sua conta som corretos. Em caso de precisar 
 \n\
 Atentamente, o equipe da Alternativa" % (instance.first_name,site.domain,site.domain,site.domain,instance.username,site.domain)
       # @todo enviar al mail correspondiente
-      email = EmailMessage('AgenciaAlternativa - Sua conta esta creado', cuerpo, to=[instance.email])
+      email = EmailMessage('AgenciaAlternativa - Sua conta esta creada', cuerpo, to=[instance.email])
       email.send()

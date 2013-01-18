@@ -198,7 +198,7 @@ class Command(BaseCommand):
 
       agenciado.save()
 
-      self.stdout.write('Agenciado %s creado con éxito a partir del recurso %s'%(agenciado.id,agenciado.recurso_id))
+      self.stdout.write('Agenciado %s creado con éxito a partir del recurso %s\n'%(agenciado.id,agenciado.recurso_id))
       
       idRecursos[agenciado.id]=row['id']
     
