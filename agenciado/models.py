@@ -45,7 +45,7 @@ def callback_mail_creacion_usuario(sender, instance, created, raw, using, **kwar
   if created:
     if instance.email is not None:
       domain=settings.AMBIENTE.dominio
-      cuerpo="\
+      cuerpo=u"\
 Oi %s!\n\
 \n\
 Voce tem uma nova conta em https://%s/ com dados de sue perfil.\n\
