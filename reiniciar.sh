@@ -16,6 +16,10 @@ then
   exit 1
 fi
 
+# Se borran las fotos y los thumbnails
+rm -f uploads/agenciados/fotos/*
+rm -f uploads/cache/agenciados/fotos/*
+
 echo -e 'no\n' | python manage.py syncdb 
 if [ $? -ne 0 ]
 then
