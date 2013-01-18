@@ -111,6 +111,9 @@ tail -n "$CANTIDAD_LINEAS_CERTIFICADO" agencia.crt > agencia.pem
 rm agencia.crt
 echo "Certificado (agencia.pem) y clave (agencia.key) generados en /etc/apache2/ssl. Tener en cuenta a la hora de configurar el sitio"
 
+a2enmod ssl
+service apache restart
+
 
 echo ''
 echo 'A continuación debería realizar las siguientes tareas:'
