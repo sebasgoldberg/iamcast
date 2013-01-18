@@ -5,6 +5,7 @@ import pymssql
 from django.core.files.images import ImageFile
 import re
 from optparse import make_option
+from django.conf import settings
 
 class Command(BaseCommand):
 
@@ -229,7 +230,7 @@ class Command(BaseCommand):
     self.cantidad=options['cantidad']
     self.recurso=options['recurso']
 
-    self.connection = pymssql.connect(host='25.92.66.172', user='aretha', password='aretha01', database='alternativa', as_dict=True)
+    self.connection = pymssql.connect(host=settings.AMBIENTE.mssqlserver.host, user='aretha', password='aretha01', database='alternativa', as_dict=True)
     cursor = self.connection.cursor()
 
     if self.recurso is None:

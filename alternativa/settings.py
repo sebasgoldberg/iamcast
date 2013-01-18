@@ -1,5 +1,7 @@
 # Django settings for alternativa project.
-import ambiente
+from ambiente import ambiente
+
+AMBIENTE=ambiente
 
 AMBIENTE_PRODUCTIVO = ambiente.productivo
 

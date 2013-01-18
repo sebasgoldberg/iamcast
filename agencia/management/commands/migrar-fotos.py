@@ -3,6 +3,7 @@ from agencia.models import Ciudad, Danza, Deporte, Estado, EstadoDientes, Idioma
 import pymssql
 from django.core.files.images import ImageFile
 import os
+from django.conf import settings
 
 class Command(BaseCommand):
 
@@ -53,7 +54,7 @@ class Command(BaseCommand):
 
   def handle(self,*args,**options):
 
-    self.connection = pymssql.connect(host='25.92.66.172', user='aretha', password='aretha01', database='alternativa', as_dict=True)
+    self.connection = pymssql.connect(host=settings.AMBIENTE.mssqlserver.host, user='aretha', password='aretha01', database='alternativa', as_dict=True)
 
     cursor = self.connection.cursor()
     
