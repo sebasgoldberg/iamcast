@@ -1,5 +1,6 @@
 [ $# -gt 0 ] && forzar_instalacion_pymssql=$1
 
+apt-get install make
 apt-get install bc
 apt-get install apache2
 apt-get install mysql-server
@@ -62,30 +63,27 @@ chmod 777 -R uploads
 
 INSTALL_SCRIPT_DIR=$(pwd)
 
-if [ INSTALAR_NOIP = 'X' ]
-then
 # Instalacion de no-ip
 which noip2 > /dev/null
 if [ $? -ne 0 ]
-  then
-    cd /usr/local/src/
-    wget http://www.no-ip.com/client/linux/noip-duc-linux.tar.gz
-    tar xf noip-duc-linux.tar.gz
-    cd noip-2.1.9-1/
-    make install
+then
+  cd /usr/local/src/
+  wget http://www.no-ip.com/client/linux/noip-duc-linux.tar.gz
+  tar xf noip-duc-linux.tar.gz
+  cd noip-2.1.9-1/
+  make install
 
 # Se configura como servicio y en el startup
-    if [ -f noip2 ]
-    then
-      cp noip2 /etc/init.d/
-      update-rc.d noip2 defaults 90
-    else
-      echo 'ERROR: No se ha encontrado script para servicio noip2'
-    fi
-
+  if [ -f noip2 ]
+  then
+    cp noip2 /etc/init.d/
+    update-rc.d noip2 defaults 90
+  else
+    echo 'ERROR: No se ha encontrado script para servicio noip2'
   fi
-  noip2
+
 fi
+noip2
 
 # Instalacion de PyYaml
 cd "$INSTALL_SCRIPT_DIR"
