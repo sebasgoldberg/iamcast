@@ -4,7 +4,7 @@ cantidad=5
 
 [ $# -gt 0 ] && cantidad="$1"
 
-echo "drop database agencia; create database agencia;" | mysql agencia -u agencia -pagencia1234  
+echo "drop database agencia; create database agencia;" | mysql agencia -u agencia -p"$(python -c 'from alternativa.ambiente import ambiente; print ambiente.db.password')"
 if [ $? -ne 0 ]
 then
   exit 1
