@@ -44,7 +44,7 @@ def callback_mail_creacion_usuario(sender, instance, created, raw, using, **kwar
     return
   if created:
     if instance.email is not None:
-      site=settings.AMBIENTE.dominio
+      domain=settings.AMBIENTE.dominio
       cuerpo="\
 Oi %s!\n\
 \n\
@@ -60,7 +60,7 @@ Se voce nao lembra sua chave, podera gerarla de novo aqui: https://%s/agencia/re
 \n\
 Por favor, verifique se os dados da sua conta som corretos. Em caso de precisar modifique os dados que correspondam.\n\
 \n\
-Atentamente, o equipe da Alternativa" % (instance.first_name,site.domain,site.domain,site.domain,instance.username,site.domain)
+Atentamente, o equipe da Alternativa" % (instance.first_name,domain,domain,domain,instance.username,domain)
       # @todo enviar al mail correspondiente
       email = EmailMessage('AgenciaAlternativa - Sua conta esta creada', cuerpo, to=[instance.email])
       email.send()

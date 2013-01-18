@@ -15,7 +15,6 @@ from datetime import date
 from django.forms.models import inlineformset_factory
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
-from django.contrib.sites.models import Site
 from django.conf import settings
 
 def index(request):
@@ -46,7 +45,7 @@ def reiniciar_clave(request):
       password = User.objects.make_random_password()
       user.set_password(password)
       user.save()
-      site=settings.AMBIENTE.dominio
+      domain=settings.AMBIENTE.dominio
 
       cuerpo="\
 Oi %s!\n\
@@ -57,7 +56,7 @@ Sua nova senha e (%s). Lembre que seu usuario e (%s).\n\
 \n\
 Voce pode trocar sua senha accesando a https://%s/agencia/cambio/clave/\n\
 \n\
-Atentamente, o equipe da Alternativa" % (user.first_name,password,user.username, site.domain)
+Atentamente, o equipe da Alternativa" % (user.first_name,password,user.username, domain)
       from django.core.mail import EmailMessage
       email = EmailMessage('AgenciaAlternativa - Sua senha ha mudado', cuerpo, to=[user.email])
       email.send()
