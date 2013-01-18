@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 from django.http import HttpRequest
 from django.core.mail import EmailMessage
 from django.db.utils import IntegrityError
-from django.contrib.sites.models import Site
 from django.conf import settings
 
 # @todo Ver si va a aplicar lo de la creación automática del usuario por agenciado
@@ -45,7 +44,7 @@ def callback_mail_creacion_usuario(sender, instance, created, raw, using, **kwar
     return
   if created:
     if instance.email is not None:
-      site=Site.objects.get(name='Alternativa')
+      site=settings.AMBIENTE.dominio
       cuerpo="\
 Oi %s!\n\
 \n\

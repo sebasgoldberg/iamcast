@@ -16,6 +16,7 @@ from django.forms.models import inlineformset_factory
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
+from django.conf import settings
 
 def index(request):
   return render(request,'agencia/index.html')
@@ -45,7 +46,7 @@ def reiniciar_clave(request):
       password = User.objects.make_random_password()
       user.set_password(password)
       user.save()
-      site=Site.objects.get(name='Alternativa')
+      site=settings.AMBIENTE.dominio
 
       cuerpo="\
 Oi %s!\n\
