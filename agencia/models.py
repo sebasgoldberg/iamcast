@@ -161,9 +161,6 @@ class Agenciado(models.Model):
     direccion = models.CharField(max_length=120, verbose_name='Endereço')
     codigo_postal = models.CharField(max_length=40, verbose_name='CEP')
 
-    # Datos de contacto
-    nextel = models.CharField(max_length=60, blank=True)
-
     # Caracteristicas fisicas
     SEXO=(
       ('M', 'Masculino'),
