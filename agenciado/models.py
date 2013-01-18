@@ -50,7 +50,7 @@ Oi %s!\n\
 \n\
 Voce tem uma nova conta em https://%s/ com dados de sue perfil.\n\
 \n\
-Se voce e um agenciado, entao pode caregar informaçao de seu perfil: https://%s/agencia/agenciado/\n\
+Se voce e um agenciado, entao pode caregar informaçao de seu perfil: https://%s/agenciado/\n\
 \n\
 Se voce e um agenciador pode accesar a administraçao do site: https://%s/admin/\n\
 \n\
