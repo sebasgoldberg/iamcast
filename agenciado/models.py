@@ -48,15 +48,15 @@ def callback_mail_creacion_usuario(sender, instance, created, raw, using, **kwar
       cuerpo=u"\
 Oi %s!\n\
 \n\
-Voce tem uma nova conta em %s/ com dados de sue perfil.\n\
+Voce tem uma nova conta em http://%s/ com dados de sue perfil.\n\
 \n\
-Se voce e um agenciado, entao pode caregar informaçao de seu perfil: %s/agenciado/\n\
+Se voce e um agenciado, entao pode caregar informaçao de seu perfil: http://%s/agenciado/\n\
 \n\
-Se voce e um agenciador pode accesar a administraçao do site: %s/admin/\n\
+Se voce e um agenciador pode accesar a administraçao do site: http://%s/admin/\n\
 \n\
 Voce podera ingresar a sua nova conta com seu usuario (%s) e sua chave.\n\
 \n\
-Se voce nao lembra sua chave, podera gerarla de novo aqui: %s/agencia/reiniciar/clave/\n\
+Se voce nao lembra sua chave, podera gerarla de novo aqui: http://%s/agencia/reiniciar/clave/\n\
 \n\
 Por favor, verifique se os dados da sua conta som corretos. Em caso de precisar modifique os dados que correspondam.\n\
 \n\
