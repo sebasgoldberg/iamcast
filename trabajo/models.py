@@ -34,16 +34,26 @@ class ItemPortfolio(models.Model):
 class Trabajo(models.Model):
     titulo = models.CharField(max_length=100, unique=True)
     descripcion = models.TextField(verbose_name=u'Descripçao')
+    ESTADO_TRABAJO=(
+      ('AT','Ativo'),
+      ('PC','Pendente de cobrar'),
+      ('FI','Finalisado'),
+    )
+    fecha_ingreso = models.DateTimeField(verbose_name='Data')
+    estado = models.CharField(max_length=2,choices=ESTADO_TRABAJO)
     def __unicode__(self):
       return self.descripcion
     class Meta:
-      ordering = ['descripcion']
+      ordering = ['-fecha_ingreso']
 
 class Postulacion(models.Model):
     agenciado = models.ForeignKey(Agenciado,on_delete=models.PROTECT)
     trabajo = models.ForeignKey(Trabajo,on_delete=models.PROTECT)
     ESTADO_POSTULACION=(
-      ('PO', 'POSTULADO'),
+      ('PC', 'Postulado para casting'),
+      ('ST', 'Selecionado para trabalho'),
+      ('TR', 'Trabalho realisado'),
+      ('TP', 'Trabalho pagado'),
     )
     estado = models.CharField(max_length=2,choices=ESTADO_POSTULACION)
     def __unicode__(self):

@@ -54,7 +54,7 @@ Voce tem uma nova senha.\n\
 \n\
 Sua nova senha e (%s). Lembre que seu usuario e (%s).\n\
 \n\
-Voce pode trocar sua senha accesando a https://%s/agencia/cambio/clave/\n\
+Voce pode trocar sua senha accesando a %s/agencia/cambio/clave/\n\
 \n\
 Atentamente, o equipe da Alternativa" % (user.first_name,password,user.username, domain)
       from django.core.mail import EmailMessage
