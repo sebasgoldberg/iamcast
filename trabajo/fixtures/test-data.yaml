@@ -1,0 +1,22 @@
+- fields: {descripcion: Esta es la descripcion, estado: IN, fecha_finalizacion: 2013-01-22,
+    fecha_ingreso: 2013-01-22, fecha_trabajo_desde: 2013-01-22, fecha_trabajo_hasta: 2013-01-22,
+    imagen: '', titulo: Trabajo de prueba}
+  model: trabajo.trabajo
+  pk: 1
+- fields: {descripcion: La descripcion de otro trabajo, estado: IN, fecha_finalizacion: 2013-01-22,
+    fecha_ingreso: 2013-01-22, fecha_trabajo_desde: 2013-01-22, fecha_trabajo_hasta: 2013-01-22,
+    imagen: '', titulo: Otro trabajo}
+  model: trabajo.trabajo
+  pk: 2
+- fields: {cantidad: null, caracteristicas: Rol, descripcion: Rol 1, trabajo: 2}
+  model: trabajo.rol
+  pk: 2
+- fields: {cantidad: null, caracteristicas: dsadsa, descripcion: Azul, trabajo: 1}
+  model: trabajo.rol
+  pk: 3
+- fields: {cantidad: null, caracteristicas: Test, descripcion: test, trabajo: 1}
+  model: trabajo.rol
+  pk: 1
+- fields: {agenciado: 606, estado: PC, rol: 2}
+  model: trabajo.postulacion
+  pk: 5

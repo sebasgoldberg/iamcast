@@ -7,10 +7,45 @@ from django.forms.models import BaseInlineFormSet
 from django.http import HttpResponseRedirect
 from agencia.admin import AgenciadoAdmin
 
+class PostulacionInline(admin.TabularInline):
+  model=Postulacion
+  extra=1
+
+class RolAdmin(admin.ModelAdmin):
+  readonly_fields=['id']
+  inlines=[PostulacionInline]
+  list_display=[
+    'id', 'descripcion', 'trabajo', 'cantidad', 'cantidad_postulados_casting', 
+    'cantidad_seleccionados_casting', 'cantidad_seleccionados_trabajo', 
+    'cantidad_trabajos_realizados', 'cantidad_trabajos_pagados', 'caracteristicas',
+  ]
+  list_display_links = ['id']
+  list_filter=['trabajo__estado', 'trabajo']
+  search_fields=['trabajo__titulo', 'descripcion', 'id']
+
+class RolInline(admin.TabularInline):
+  model=Rol
+  extra=1
+
+class TrabajoAdmin(admin.ModelAdmin):
+  readonly_fields=['id','thumbnail_img_link']
+  inlines=[RolInline]
+  list_display=['thumbnail_img','id','titulo', 'estado', 'descripcion', 'fecha_ingreso']
+  list_display_links = ('thumbnail_img', 'id')
+  list_filter=['estado']
+  search_fields=['titulo','id']
+  date_hierarchy='fecha_ingreso'
+
+class PostulacionAdmin(admin.ModelAdmin):
+  readonly_fields=['id']
+  list_display=['id', 'trabajo_rol', 'rol', 'thumbnail_agenciado_link', 'agenciado', 'estado']
+  list_display_links = ('id',)
+  list_filter=['rol', 'estado']
+  search_fields=['trabajo__titulo', 'rol__descripcion', 'agenciado__nombre', 'agenciado__apellido', 'id']
+  list_editable=['estado']
 
 def add_agenciados_trabajo(modeladmin, request, queryset):
   selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
-  #ct = ContentType.objects.get_for_model(queryset.model)
   return HttpResponseRedirect("/trabajo/seleccionar/y/agregar/agenciados/?ids=%s" %  ",".join(selected))
 
 add_agenciados_trabajo.short_description='Adicionar agenciados selecionados a trabalho'
@@ -21,7 +56,7 @@ if len(AgenciadoAdmin.actions)==0:
 else:
   AgenciadoAdmin.actions+=[add_agenciados_trabajo]
 
-admin.site.register(Rol)
+admin.site.register(Rol,RolAdmin)
 admin.site.register(ItemPortfolio)
-admin.site.register(Trabajo)
-admin.site.register(Postulacion)
+admin.site.register(Trabajo,TrabajoAdmin)
+admin.site.register(Postulacion,PostulacionAdmin)

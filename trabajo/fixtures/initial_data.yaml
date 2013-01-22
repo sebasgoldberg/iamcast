@@ -1,22 +1,8 @@
-- fields: {descripcion: Esta es la descripcion, estado: RE, fecha_finalizacion: 2013-01-22,
-    fecha_ingreso: 2013-01-22, fecha_trabajo_desde: 2013-01-22, fecha_trabajo_hasta: 2013-01-22,
-    imagen: '', titulo: Trabajo de prueba}
-  model: trabajo.trabajo
+- fields:
+    name: Agenciadores
+    permissions: [55, 56, 22, 23, 24, 64, 65, 66, 25, 26, 27, 28, 29, 30, 31, 32,
+      33, 34, 35, 36, 58, 59, 60, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48,
+      49, 50, 51, 52, 53, 54, 67, 68, 69, 61, 62, 63, 70, 71, 72, 79, 80, 81, 76,
+      77, 78, 73, 74]
+  model: auth.group
   pk: 1
-- fields: {descripcion: La descripcion de otro trabajo, estado: RE, fecha_finalizacion: 2013-01-22,
-    fecha_ingreso: 2013-01-22, fecha_trabajo_desde: 2013-01-22, fecha_trabajo_hasta: 2013-01-22,
-    imagen: '', titulo: Otro trabajo}
-  model: trabajo.trabajo
-  pk: 2
-- fields: {cantidad: null, caracteristicas: Rol, descripcion: Rol 1, trabajo: 2}
-  model: trabajo.rol
-  pk: 2
-- fields: {cantidad: null, caracteristicas: dsadsa, descripcion: Azul, trabajo: 1}
-  model: trabajo.rol
-  pk: 3
-- fields: {cantidad: null, caracteristicas: Test, descripcion: test, trabajo: 1}
-  model: trabajo.rol
-  pk: 1
-- fields: {agenciado: 606, estado: PC, rol: 2}
-  model: trabajo.postulacion
-  pk: 5

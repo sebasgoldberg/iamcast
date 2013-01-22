@@ -198,7 +198,7 @@ class Agenciado(models.Model):
     recurso_id = models.IntegerField(null=True, editable=False) #Clave en aplicacion DELPHI
 
     def __unicode__(self):
-      return self.nombre+' '+self.apellido
+      return '%s %s (%s)' % (self.nombre, self.apellido, self.fecha_nacimiento)
 
     def thumbnail(self):
       url = ''
@@ -216,6 +216,10 @@ class Agenciado(models.Model):
         html = html + "<a href='%s'><img src='%s' height=100 /></a>" % (url,url_thumbnail)
       return html
     thumbnails.allow_tags = True
+
+    def thumbnail_agenciado_link(self):
+      return "<a href='/admin/agencia/agenciado/%s/'>%s</a>" % (str(self.id),self.thumbnail())
+    thumbnail_agenciado_link.allow_tags = True
 
     def telefonos(self):
       listadoTelefonos=[]

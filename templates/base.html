@@ -2,7 +2,7 @@
 {%block menu%}
 <ul>
   <li><a href="/agenciado/">Agenciado</a></li>
-  <li><a href="/admin/">Administracion</a></li>
+  <li><a href="/admin/">Administração</a></li>
   {% if user.is_authenticated %}
     <li><a href="/agencia/cambio/clave/">Trocar Senha</a></li>
     <li><a href="/agencia/logout/">Sair ({{user.username}})</a></li>
