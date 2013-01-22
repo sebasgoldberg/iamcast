@@ -166,6 +166,7 @@ class Agenciado(models.Model):
       ('M', 'Masculino'),
       ('F', 'Femenino'),
     )
+    DICT_SEXO=dict(SEXO)
     sexo = models.CharField(max_length=1,choices=SEXO)
     ojos = models.ForeignKey(Ojos,on_delete=models.PROTECT, verbose_name='Olhos',null=True, blank=False)
     pelo = models.ForeignKey(Pelo,on_delete=models.PROTECT, verbose_name='Cabelo',null=True, blank=False)
@@ -226,10 +227,13 @@ class Agenciado(models.Model):
 
 
     def descripcion(self):
-      return 'Edad %s, sexo %s, olhos %s, cabelo %s, pele %s, atura %s, peso %s, estado dentes %s.'%(str(self.edad()), dict(self.SEXO)[self.sexo],self.ojos,self.pelo,self.piel,self.altura,self.peso, self.estado_dientes)
+      return 'Edad %s, sexo %s, olhos %s, cabelo %s, pele %s, atura %s, peso %s, estado dentes %s.'%(str(self.edad()), Agenciado.DICT_SEXO[self.sexo],self.ojos,self.pelo,self.piel,self.altura,self.peso, self.estado_dientes)
     def edad(self):
       return (date.today()-self.fecha_nacimiento).days/365
     descripcion.short_description = 'Descripçao'
+
+    class Meta:
+      ordering = ['nombre', 'apellido']
 
 class FotoAgenciado(models.Model):
     agenciado = models.ForeignKey(Agenciado)

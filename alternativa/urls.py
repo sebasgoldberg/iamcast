@@ -21,6 +21,7 @@ urlpatterns = patterns('',
       {'document_root': settings.MEDIA_ROOT}),
     url(r'^agencia/', include('agencia.urls')),
     url(r'^agenciado/', include('agenciado.urls')),
+    url(r'^trabajo/', include('trabajo.urls')),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^$', redirect_to, {'url': '/agencia/'}),
 )
