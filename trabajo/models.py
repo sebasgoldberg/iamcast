@@ -8,19 +8,43 @@ from datetime import date, datetime
 from agencia.models import Estado, Ciudad, Compania
 from django.contrib.auth.models import User
 
+class Direccion(models.Model):
+  descripcion = models.CharField(max_length=60, verbose_name=u'Descripçao',blank=True,null=True)
+  estado = models.ForeignKey(Estado,on_delete=models.PROTECT,null=True, blank=True, verbose_name=u'Estado')
+  ciudad = models.ForeignKey(Ciudad,on_delete=models.PROTECT, verbose_name='Cidade',null=True, blank=True)
+  barrio = models.CharField(max_length=60, verbose_name='Barrio', blank=True, null=True)
+  direccion = models.CharField(max_length=120, verbose_name='Endereço', blank=True, null=True)
+  codigo_postal = models.CharField(max_length=40, verbose_name='CEP', blank=True, null=True)
+  def __unicode__(self):
+    return '%s, %s, %s, %s, %s (%s)' % (self.direccion, self.barrio, self.ciudad, self.estado, self.codigo_postal, self.descripcion)
+  class Meta:
+    abstract = True
+    verbose_name = u"Endereço"
+    verbose_name_plural = u"Endereços"
+
+class Telefono(models.Model):
+  compania = models.ForeignKey(Compania, null=True, blank=True,on_delete=models.PROTECT,related_name='telefono_productora_set')
+  telefono = models.CharField(max_length=60)
+  def __unicode__(self):
+    return '%s (%s)' % (self.telefono,self.compania)
+  class Meta:
+    abstract = True
+    verbose_name = u"Telefone"
+    verbose_name_plural = u"Telefones"
+
+class Evento(Direccion):
+  fecha = models.DateTimeField(default=datetime.today(),verbose_name=u'Data do evento', blank=True, null=True)
+  class Meta:
+    abstract = True
+    verbose_name = u'Evento'
+    verbose_name_plural = u'Eventos'
+
 class Productora(models.Model):
   user= models.OneToOneField(User, null=True, blank=True, editable=False)
 
   # Datos 
   nombre = models.CharField(max_length=60, verbose_name='Nome')
   mail = models.EmailField(verbose_name='e-mail')
-
-  # Datos de direccion
-  estado = models.ForeignKey(Estado,on_delete=models.PROTECT,null=True, blank=False)
-  ciudad = models.ForeignKey(Ciudad,on_delete=models.PROTECT, verbose_name='Cidade',null=True, blank=False)
-  barrio = models.CharField(max_length=60)
-  direccion = models.CharField(max_length=120, verbose_name='Endereço')
-  codigo_postal = models.CharField(max_length=40, verbose_name='CEP')
 
   imagen = models.ImageField(upload_to='trabajo/productora/', null=True, blank=True)
   thumbnail = ImageSpecField(
@@ -34,12 +58,11 @@ class Productora(models.Model):
     verbose_name = u"Produtora"
     verbose_name_plural = u"Produtoras"
 
-class Telefono(models.Model):
-  compania = models.ForeignKey(Compania, null=True, blank=True,on_delete=models.PROTECT,related_name='telefono_productora_set')
+class DireccionProductora(Direccion):
   productora = models.ForeignKey(Productora, verbose_name=u'Produtora')
-  telefono = models.CharField(max_length=60)
-  def __unicode__(self):
-    return self.telefono
+
+class TelefonoProductora(Telefono):
+  productora = models.ForeignKey(Productora, verbose_name=u'Produtora')
 
 class ItemPortfolio(models.Model):
     titulo = models.CharField(max_length=100, unique_for_date='fecha')
@@ -55,10 +78,10 @@ class ItemPortfolio(models.Model):
       verbose_name = u"Item Portfolio"
       verbose_name_plural = u"Portfolio"
 
-# @todo agregar direeccion, horario y fecha del test 
+# @todo Múltiples horarios y direcciones 
 class Trabajo(models.Model):
     titulo = models.CharField(max_length=100, unique_for_date='fecha_ingreso')
-    productora= models.ForeignKey(Productora,on_delete=models.PROTECT)
+    productora= models.ForeignKey(Productora,on_delete=models.PROTECT, verbose_name=u'Produtora')
     descripcion = models.TextField(verbose_name=u'Descripçao')
     imagen = models.ImageField(upload_to='trabajo/trabajo/',blank=True)
     thumbnail = ImageSpecField([Adjust(contrast=1.2, sharpness=1.1), ResizeToFill(100,100)], image_field='imagen', format='JPEG', options={'quality': 90})
@@ -72,25 +95,11 @@ class Trabajo(models.Model):
 # @todo agregar validación entre secuencia de las distintas fechas
     fecha_ingreso = models.DateField(default=date.today(),verbose_name=u'Data ingreso')
 
-    # Datos del test
-    fecha_test = models.DateTimeField(default=datetime.today(),verbose_name=u'Data do test')
-    estado_test = models.ForeignKey(Estado,on_delete=models.PROTECT,null=True, blank=False, related_name='test_set')
-    ciudad_test = models.ForeignKey(Ciudad,on_delete=models.PROTECT, verbose_name='Cidade',null=True, blank=False, related_name='test_set')
-    barrio_test = models.CharField(max_length=60)
-    direccion_test = models.CharField(max_length=120, verbose_name='Endereço')
-
-    # Datos del trabajo
-    fecha_trabajo = models.DateTimeField(default=datetime.today(),verbose_name=u'Data do trabalho')
-    estado_trabajo = models.ForeignKey(Estado,on_delete=models.PROTECT,null=True, blank=False, related_name='trabajo_set')
-    ciudad_trabajo = models.ForeignKey(Ciudad,on_delete=models.PROTECT, verbose_name='Cidade',null=True, blank=False, related_name='trabajo_set')
-    barrio_trabajo = models.CharField(max_length=60)
-    direccion_trabajo = models.CharField(max_length=120, verbose_name='Endereço')
-
     def __unicode__(self):
       return '%s (%s)' % (self.titulo, self.fecha_ingreso)
     class Meta:
       verbose_name = u'Trabalho'
-      verbose_name_plural = u"Trabalhos e roles" 
+      verbose_name_plural = u"Trabalhos" 
       ordering = ['-fecha_ingreso']
 
     def thumbnail_img(self):
@@ -111,21 +120,50 @@ class Trabajo(models.Model):
       roles=self.rol_set.all()
       html = '</ul>'
       for rol in roles:
-        html+='<li>%s</li>' % rol.rol_admin_link()
+        html+='<li>%s</li>' % rol.admin_link()
       html += '</ul>'
       return html
     roles.allow_tags = True
 
+    def productora_admin_link(self):
+      if self.productora.id is None:
+        return None
+      return "<a href='/admin/trabajo/productora/%s/'>%s</a>" % (self.productora.id, str(self.productora))
+    productora_admin_link.allow_tags=True
+
+    def admin_link(self):
+      if self.id is None:
+        return None
+      return "<a href='/admin/trabajo/trabajo/%s/'>%s</a>" % (self.id, str(self))
+    admin_link.allow_tags=True
+
+TIPO_EVENTO_TRABAJO=(
+  ('C', u'Casting'),
+  ('B', u'Callback'),
+  ('P', u'Proba de ropa'),
+  ('R', u'Realizaçao do trabalho'),
+  ('O', u'Outro'),
+)
+DICT_TIPO_EVENTO_TRABAJO=dict(TIPO_EVENTO_TRABAJO)
+
+class EventoTrabajo(Evento):
+  tipo = models.CharField(max_length=1,choices=TIPO_EVENTO_TRABAJO)
+  trabajo = models.ForeignKey(Trabajo,on_delete=models.PROTECT)
+  class Meta(Evento.Meta):
+    verbose_name = 'Evento do trabalho'
+    verbose_name_plural = 'Eventos do trabalho'
+
 class Rol(models.Model):
     trabajo = models.ForeignKey(Trabajo,on_delete=models.PROTECT)
     descripcion = models.CharField(max_length=60, verbose_name=u'Descripçao')
+    cache = models.DecimalField(max_digits=15, decimal_places=4, null=True, blank=True)
     caracteristicas = models.TextField(verbose_name=u'Caraterísticas')
     def __unicode__(self):
       return '%s (%s)' % (self.descripcion, self.trabajo.titulo)
     class Meta:
       ordering = ['-trabajo__fecha_ingreso','descripcion']
       verbose_name = u"Rol"
-      verbose_name_plural = u"Roles e postulaçoes" 
+      verbose_name_plural = u"Roles" 
       unique_together = (("trabajo", "descripcion"),)
 
     def cantidad_postulados_casting(self):
@@ -144,17 +182,22 @@ class Rol(models.Model):
       return self.postulacion_set.filter(estado='TP').count()
     cantidad_trabajos_pagados.short_description = 'Trabalhos pagados'
 
-    def rol_admin_link(self):
+    def admin_link(self):
       if self.id is None:
         return None
       return "<a href='/admin/trabajo/rol/%s/'>%s</a>" % (self.id, str(self))
-    rol_admin_link.allow_tags=True
+    admin_link.allow_tags=True
 
     def trabajo_admin_link(self):
-      if self.trabajo.id is None:
-        return None
-      return "<a href='/admin/trabajo/trabajo/%s/'>%s</a>" % (self.trabajo.id, str(self.trabajo))
+      return self.trabajo.admin_link()
     trabajo_admin_link.allow_tags=True
+
+class EventoRol(Evento):
+  tipo = models.CharField(max_length=1,choices=TIPO_EVENTO_TRABAJO)
+  rol = models.ForeignKey(Rol,on_delete=models.PROTECT)
+  class Meta(Evento.Meta):
+    verbose_name = 'Evento do rol'
+    verbose_name_plural = 'Eventos do rol'
 
 class Postulacion(models.Model):
     agenciado = models.ForeignKey(Agenciado,on_delete=models.PROTECT)
@@ -188,4 +231,14 @@ class Postulacion(models.Model):
 
     def apellido_agenciado(self):
       return self.agenciado.apellido
+
+    def agenciado_admin_link(self):
+      if self.agenciado.id is None:
+        return ''
+      return "<a href='/admin/agencia/agenciado/%s/'>%s</a>" % (self.agenciado.id, self.agenciado)
+    agenciado_admin_link.allow_tags = True
+
+    def rol_admin_link(self):
+      return self.rol.admin_link()
+    rol_admin_link.allow_tags = True
 

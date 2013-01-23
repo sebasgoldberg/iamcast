@@ -1,33 +1,30 @@
-- fields: {barrio: Vila Maria, ciudad: 19, codigo_postal: '18090210', direccion: Rua
-      Jose Durval de Barros, estado: 2, imagen: '', mail: contato@brasilprodutora.com,
-    nombre: BRASIL PRODUTORA, user: null}
+- fields: {imagen: '', mail: contato@brasilprodutora.com, nombre: BRASIL PRODUTORA,
+    user: null}
   model: trabajo.productora
   pk: 1
-- fields: {descripcion: Protagonico y bolos para pelicula, estado: IN, 
-    fecha_ingreso: 2013-01-22, productora: 1,
-    imagen: '', titulo: De Pernas Pro Ar 18}
+- fields: {descripcion: Protagonico y bolos para pelicula, estado: IN, fecha_ingreso: 2013-01-22,
+    imagen: '', productora: 1, titulo: De Pernas Pro Ar 18}
   model: trabajo.trabajo
   pk: 1
 - fields: {descripcion: Extras y Principales para publicidad de Tang, estado: AT,
-    fecha_ingreso: 2013-01-22, productora: 1,
-    imagen: trabajo/trabajo/Reguesh_y_los_4_Elementos.jpg,
-    titulo: Tang}
+    fecha_ingreso: 2013-01-22, imagen: trabajo/trabajo/Reguesh_y_los_4_Elementos.jpg,
+    productora: 1, titulo: Tang}
   model: trabajo.trabajo
   pk: 2
-- fields: {caracteristicas: Todo tipo de personas que sean muy habiles jugando al
-      futbol., descripcion: Bolos, trabajo: 1}
+- fields: {cache: null, caracteristicas: Todo tipo de personas que sean muy habiles
+      jugando al futbol., descripcion: Bolos, trabajo: 1}
   model: trabajo.rol
   pk: 3
-- fields: {caracteristicas: "Ni\xF1os de 10 a 12 a\xF1os que sepan cantar.\r\n", descripcion: Extra,
-    trabajo: 2}
+- fields: {cache: null, caracteristicas: "Ni\xF1os de 10 a 12 a\xF1os que sepan cantar.\r\
+      \n", descripcion: Extra, trabajo: 2}
   model: trabajo.rol
   pk: 2
-- fields: {caracteristicas: "Mujeres con aspecto de madre entre 30 y 35 a\xF1os",
-    descripcion: Madres, trabajo: 2}
+- fields: {cache: null, caracteristicas: "Mujeres con aspecto de madre entre 30 y\
+      \ 35 a\xF1os", descripcion: Madres, trabajo: 2}
   model: trabajo.rol
   pk: 4
-- fields: {caracteristicas: "Hombre muy bien parecido entre 25 y 35 a\xF1os", descripcion: Protagonico,
-    trabajo: 1}
+- fields: {cache: null, caracteristicas: "Hombre muy bien parecido entre 25 y 35 a\xF1\
+      os", descripcion: Protagonico, trabajo: 1}
   model: trabajo.rol
   pk: 1
 - fields: {agenciado: 1404, estado: PC, rol: 3}
