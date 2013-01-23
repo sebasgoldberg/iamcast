@@ -38,7 +38,6 @@ class AgenciadoAdmin(admin.ModelAdmin):
     ('Datos personales', {'fields':[('nombre', 'apellido', 'fecha_nacimiento')]}),
     ('Datos Administrativos', { 'fields':[ ('documento_rg', 'documento_cpf'), 'responsable', 'cuenta_bancaria']}),
     ('Datos de direccion', { 'fields':[ ('estado', 'ciudad', 'barrio'), ('direccion', 'codigo_postal')]}),
-    #('Datos de contacto', { 'fields':[ 'nextel']}),
     ('Caracteristicas fisicas', { 'fields':[ 'sexo', ('ojos', 'pelo', 'piel', 'estado_dientes'), ('altura', 'peso', 'talle', 'talle_camisa', 'talle_pantalon', 'calzado')]}),
     ('Habilidades', { 'fields':[ ('deportes', 'danzas'), ('instrumentos', 'idiomas'), ('indicador_maneja', 'indicador_tiene_registro')]}),
     ('Otros datos', { 'fields':[ 'trabaja_como_extra', 'como_nos_conocio', 'observaciones', 'activo', 'fecha_ingreso']}),

@@ -1,22 +1,62 @@
-- fields: {descripcion: Esta es la descripcion, estado: IN, fecha_finalizacion: 2013-01-22,
-    fecha_ingreso: 2013-01-22, fecha_trabajo_desde: 2013-01-22, fecha_trabajo_hasta: 2013-01-22,
-    imagen: '', titulo: Trabajo de prueba}
+- fields: {barrio: Vila Maria, ciudad: 19, codigo_postal: '18090210', direccion: Rua
+      Jose Durval de Barros, estado: 2, imagen: '', mail: contato@brasilprodutora.com,
+    nombre: BRASIL PRODUTORA, user: null}
+  model: trabajo.productora
+  pk: 1
+- fields: {descripcion: Protagonico y bolos para pelicula, estado: IN, 
+    fecha_ingreso: 2013-01-22, productora: 1,
+    imagen: '', titulo: De Pernas Pro Ar 18}
   model: trabajo.trabajo
   pk: 1
-- fields: {descripcion: La descripcion de otro trabajo, estado: IN, fecha_finalizacion: 2013-01-22,
-    fecha_ingreso: 2013-01-22, fecha_trabajo_desde: 2013-01-22, fecha_trabajo_hasta: 2013-01-22,
-    imagen: '', titulo: Otro trabajo}
+- fields: {descripcion: Extras y Principales para publicidad de Tang, estado: AT,
+    fecha_ingreso: 2013-01-22, productora: 1,
+    imagen: trabajo/trabajo/Reguesh_y_los_4_Elementos.jpg,
+    titulo: Tang}
   model: trabajo.trabajo
   pk: 2
-- fields: {cantidad: null, caracteristicas: Rol, descripcion: Rol 1, trabajo: 2}
-  model: trabajo.rol
-  pk: 2
-- fields: {cantidad: null, caracteristicas: dsadsa, descripcion: Azul, trabajo: 1}
+- fields: {caracteristicas: Todo tipo de personas que sean muy habiles jugando al
+      futbol., descripcion: Bolos, trabajo: 1}
   model: trabajo.rol
   pk: 3
-- fields: {cantidad: null, caracteristicas: Test, descripcion: test, trabajo: 1}
+- fields: {caracteristicas: "Ni\xF1os de 10 a 12 a\xF1os que sepan cantar.\r\n", descripcion: Extra,
+    trabajo: 2}
+  model: trabajo.rol
+  pk: 2
+- fields: {caracteristicas: "Mujeres con aspecto de madre entre 30 y 35 a\xF1os",
+    descripcion: Madres, trabajo: 2}
+  model: trabajo.rol
+  pk: 4
+- fields: {caracteristicas: "Hombre muy bien parecido entre 25 y 35 a\xF1os", descripcion: Protagonico,
+    trabajo: 1}
   model: trabajo.rol
   pk: 1
+- fields: {agenciado: 1404, estado: PC, rol: 3}
+  model: trabajo.postulacion
+  pk: 7
+- fields: {agenciado: 1589, estado: PC, rol: 3}
+  model: trabajo.postulacion
+  pk: 9
+- fields: {agenciado: 610, estado: SC, rol: 3}
+  model: trabajo.postulacion
+  pk: 10
+- fields: {agenciado: 1210, estado: SC, rol: 3}
+  model: trabajo.postulacion
+  pk: 11
+- fields: {agenciado: 597, estado: SC, rol: 3}
+  model: trabajo.postulacion
+  pk: 6
 - fields: {agenciado: 606, estado: PC, rol: 2}
   model: trabajo.postulacion
   pk: 5
+- fields: {agenciado: 3, estado: PC, rol: 2}
+  model: trabajo.postulacion
+  pk: 14
+- fields: {agenciado: 610, estado: TP, rol: 4}
+  model: trabajo.postulacion
+  pk: 15
+- fields: {agenciado: 1492, estado: PC, rol: 1}
+  model: trabajo.postulacion
+  pk: 13
+- fields: {agenciado: 1216, estado: PC, rol: 1}
+  model: trabajo.postulacion
+  pk: 12

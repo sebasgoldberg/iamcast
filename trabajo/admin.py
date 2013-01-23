@@ -1,5 +1,5 @@
 # coding=utf-8
-from trabajo.models import Rol, ItemPortfolio, Trabajo, Postulacion
+from trabajo.models import Productora, Rol, ItemPortfolio, Trabajo, Postulacion
 from django.contrib import admin
 from django.forms import CheckboxSelectMultiple
 from django.db import models
@@ -10,12 +10,28 @@ from agencia.admin import AgenciadoAdmin
 class PostulacionInline(admin.TabularInline):
   model=Postulacion
   extra=1
+  readonly_fields=['thumbnail_agenciado_link']
+  fields=['thumbnail_agenciado_link', 'agenciado', 'estado']
 
 class RolAdmin(admin.ModelAdmin):
-  readonly_fields=['id']
+  readonly_fields=[
+    'id', 'cantidad_postulados_casting', 'cantidad_seleccionados_casting',
+    'cantidad_seleccionados_trabajo', 'cantidad_trabajos_realizados',
+    'cantidad_trabajos_pagados', 'trabajo_admin_link',
+  ]
   inlines=[PostulacionInline]
+  fieldsets=[
+    (None, {'fields':['id']}),
+    ('Dados do rol procurado', 
+      {'fields':[('descripcion', 'trabajo', 'trabajo_admin_link' ), ('caracteristicas',)]}),
+    ('Dados das postulaçoes', 
+      { 'fields':[ 
+        ('cantidad_postulados_casting', 'cantidad_seleccionados_casting', 
+        'cantidad_seleccionados_trabajo', 'cantidad_trabajos_realizados', 
+        'cantidad_trabajos_pagados')]}),
+  ]
   list_display=[
-    'id', 'descripcion', 'trabajo', 'cantidad', 'cantidad_postulados_casting', 
+    'id', 'descripcion', 'trabajo', 'cantidad_postulados_casting', 
     'cantidad_seleccionados_casting', 'cantidad_seleccionados_trabajo', 
     'cantidad_trabajos_realizados', 'cantidad_trabajos_pagados', 'caracteristicas',
   ]
@@ -26,15 +42,31 @@ class RolAdmin(admin.ModelAdmin):
 class RolInline(admin.TabularInline):
   model=Rol
   extra=1
+  readonly_fields=['rol_admin_link']
+  fields=['rol_admin_link', 'descripcion', 'caracteristicas']
 
 class TrabajoAdmin(admin.ModelAdmin):
   readonly_fields=['id','thumbnail_img_link']
   inlines=[RolInline]
-  list_display=['thumbnail_img','id','titulo', 'estado', 'descripcion', 'fecha_ingreso']
+  list_display=['thumbnail_img','id','titulo', 'estado', 'descripcion', 
+    'fecha_ingreso', 'roles']
   list_display_links = ('thumbnail_img', 'id')
   list_filter=['estado']
   search_fields=['titulo','id']
   date_hierarchy='fecha_ingreso'
+  fieldsets=[
+    (None, {'fields':['id', 'thumbnail_img_link']}),
+    ('Dados do trabalho', 
+      {'fields':['titulo', 'productora', 'estado', 'fecha_ingreso', 'descripcion', 'imagen']}),
+    ('Dados do test', 
+      { 'fields':[ 
+        ('fecha_test', 'estado_test', 'ciudad_test', 
+        'barrio_test', 'direccion_test' )]}),
+    ('Dados do trabalho', 
+      { 'fields':[ 
+        ('fecha_trabajo', 'estado_trabajo', 'ciudad_trabajo', 
+        'barrio_trabajo', 'direccion_trabajo' )]}),
+  ]
 
 class PostulacionAdmin(admin.ModelAdmin):
   readonly_fields=['id']
@@ -56,7 +88,8 @@ if len(AgenciadoAdmin.actions)==0:
 else:
   AgenciadoAdmin.actions+=[add_agenciados_trabajo]
 
+admin.site.register(Productora)
 admin.site.register(Rol,RolAdmin)
 admin.site.register(ItemPortfolio)
 admin.site.register(Trabajo,TrabajoAdmin)
-admin.site.register(Postulacion,PostulacionAdmin)
+#admin.site.register(Postulacion,PostulacionAdmin)
