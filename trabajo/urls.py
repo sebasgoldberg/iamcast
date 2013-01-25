@@ -15,6 +15,8 @@ urlpatterns = patterns('trabajo.views',
 
     # Uncomment the next line to enable the admin:
     #url(r'^$', 'index'),
-    url(r'^seleccionar/y/agregar/agenciados/$', 'seleccionar_y_agregar_agenciados'),
+    url(r'^agregar/agenciados/seleccionados/a/rol/$', 'agregar_agenciados_seleccionados_a_rol'),
+    url(r'^resultados/agregar/agenciados/seleccionados/a/rol/(\d+)/(.*)/$', 'resultados_agregar_agenciados_seleccionados_a_rol'),
+    url(r'^trabajo/enviar/mail/productora/(\d+)/$', 'trabajo_enviar_mail_productora'),
 )
 

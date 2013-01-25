@@ -110,9 +110,9 @@ class PostulacionAdmin(admin.ModelAdmin):
 
 def add_agenciados_trabajo(modeladmin, request, queryset):
   selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
-  return HttpResponseRedirect("/trabajo/seleccionar/y/agregar/agenciados/?ids=%s" %  ",".join(selected))
+  return HttpResponseRedirect("/trabajo/agregar/agenciados/seleccionados/a/rol/?ids=%s" %  ",".join(selected))
 
-add_agenciados_trabajo.short_description='Adicionar agenciados selecionados a trabalho'
+add_agenciados_trabajo.short_description='Adicionar agenciados selecionados a rol procurado em trabalho'
 
 # IMPORTANTE: El agregado de la accion se hace de la siguiente forma porque si solo se hiciese con '+=' y el listado estuviese vacío, entonces la acción se registraría para todos los modelos. Este imagino que debe ser un bug de django. Con append ocurre el mismo error.
 if len(AgenciadoAdmin.actions)==0:

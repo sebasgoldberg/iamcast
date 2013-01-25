@@ -1,0 +1,24 @@
+{% extends "admin/change_form.html" %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+  <a href="/admin/">Início</a>
+  &rsaquo; <a href="/admin/trabajo/">Trabajo</a>
+  &rsaquo; <a href="/admin/trabajo/trabajo/">Trabalhos</a>
+  &rsaquo; <a href="/admin/trabajo/trabajo/{{trabajo.id}}/">{{trabajo}}</a>
+  &rsaquo; Envio de trabalho "{{ trabajo }}" a produtora {{ trabajo.productora }}
+</div>
+{% endblock %}
+
+{% block content %}
+
+<h3>Indique os dados do e-mail a enviar e verifique se o conteudo e correto:</h3>
+<form action="/trabajo/trabajo/enviar/mail/productora/{{ trabajo.id }}/" method="post">{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Enviar" />
+</form>
+
+<h3>Conteudo do e-mail:</h3>
+{% include 'trabajo/trabajo/cuerpo_mail_productora.html' %}
+
+{% endblock %}

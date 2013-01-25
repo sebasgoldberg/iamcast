@@ -1,0 +1,25 @@
+<h3>Rol: {{rol.descripcion}}</h3>
+<ul>
+  <li><strong>Cache:</strong> {{rol.cache}} {{rol.moneda}}</li>
+  <li><strong>Caraterísticas:</strong> {{rol.caracteristicas}}</li>
+  <li><h4>Eventos do rol</h4>
+    <ul>
+      {% for evento in rol.eventorol_set.all %}
+        <li>{{ evento }}</li>
+      {% empty %}
+        <li>Este rol não tem eventos registrados</li>
+      {% endfor %}
+    </ul>
+  </li>
+  <li><h4>Postulações</h4>
+    <ul>
+      {% for postulacion in rol.postulacion_set.all %}
+        <li>
+          {% autoescape off %}{{postulacion.agenciado.thumbnails_absolute_uri}}{%endautoescape%} {{postulacion.agenciado}}
+        </li>
+      {% empty %}
+        <li>Este rol não tem postulações registradas</li>
+      {% endfor %}
+    </ul>
+  </li>
+</ul>

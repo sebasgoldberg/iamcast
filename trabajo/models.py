@@ -15,8 +15,6 @@ class Direccion(models.Model):
   barrio = models.CharField(max_length=60, verbose_name='Barrio', blank=True, null=True)
   direccion = models.CharField(max_length=120, verbose_name='Endereço', blank=True, null=True)
   codigo_postal = models.CharField(max_length=40, verbose_name='CEP', blank=True, null=True)
-  def __unicode__(self):
-    return '%s, %s, %s, %s, %s (%s)' % (self.direccion, self.barrio, self.ciudad, self.estado, self.codigo_postal, self.descripcion)
   class Meta:
     abstract = True
     verbose_name = u"Endereço"
@@ -60,6 +58,8 @@ class Productora(models.Model):
 
 class DireccionProductora(Direccion):
   productora = models.ForeignKey(Productora, verbose_name=u'Produtora')
+  def __unicode__(self):
+    return '%s, %s, %s, %s, %s (%s)' % (self.direccion, self.barrio, self.ciudad, self.estado, self.codigo_postal, self.descripcion)
 
 class TelefonoProductora(Telefono):
   productora = models.ForeignKey(Productora, verbose_name=u'Produtora')
@@ -140,7 +140,7 @@ class Trabajo(models.Model):
 TIPO_EVENTO_TRABAJO=(
   ('C', u'Casting'),
   ('B', u'Callback'),
-  ('P', u'Proba de ropa'),
+  ('P', u'Proba de roupa'),
   ('R', u'Realizaçao do trabalho'),
   ('O', u'Outro'),
 )
@@ -152,6 +152,10 @@ class EventoTrabajo(Evento):
   class Meta(Evento.Meta):
     verbose_name = 'Evento do trabalho'
     verbose_name_plural = 'Eventos do trabalho'
+  def descripcion_tipo(self):
+    return DICT_TIPO_EVENTO_TRABAJO[self.tipo]
+  def __unicode__(self):
+    return '%s | %s | %s | %s, %s, %s, %s, %s' % (EventoTrabajo.descripcion_tipo(self), self.descripcion, self.fecha, self.direccion, self.barrio, self.ciudad, self.estado, self.codigo_postal)
 
 class Rol(models.Model):
     trabajo = models.ForeignKey(Trabajo,on_delete=models.PROTECT)
@@ -198,6 +202,10 @@ class EventoRol(Evento):
   class Meta(Evento.Meta):
     verbose_name = 'Evento do rol'
     verbose_name_plural = 'Eventos do rol'
+  def descripcion_tipo(self):
+    return DICT_TIPO_EVENTO_TRABAJO[self.tipo]
+  def __unicode__(self):
+    return '%s | %s | %s | %s, %s, %s, %s, %s' % (self.descripcion_tipo, self.descripcion, self.fecha, self.direccion, self.barrio, self.ciudad, self.estado, self.codigo_postal)
 
 class Postulacion(models.Model):
     agenciado = models.ForeignKey(Agenciado,on_delete=models.PROTECT)
@@ -241,4 +249,7 @@ class Postulacion(models.Model):
     def rol_admin_link(self):
       return self.rol.admin_link()
     rol_admin_link.allow_tags = True
+
+    def descripcion_estado(self):
+      return Postulacion.DICT_ESTADO_POSTULACION[self.estado]
 

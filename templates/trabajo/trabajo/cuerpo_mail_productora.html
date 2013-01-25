@@ -1,0 +1,19 @@
+<p>Ola {{ trabajo.productora.nombre }},</p>
+
+<p>Estamos enviando os detalhes referentes ao trabalho "{{ trabajo.titulo }}", junto com as postulações dos agenciados para cada rol procurado:</p>
+
+<h2>Dados do trabalho</h2>
+{% include 'trabajo/trabajo/detalles.html'%}
+
+<h2>Dados dos roles e postulações dos agenciados</h2>
+{% for rol in trabajo.rol_set.all %}
+  {% include 'trabajo/rol/detalles.html'%}
+{% endfor %}
+
+<b><i>
+<pre>
+
+
+{%include 'agencia/mail/firma.txt'%}
+</pre>
+</i></b>

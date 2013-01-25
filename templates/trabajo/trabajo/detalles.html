@@ -1,0 +1,13 @@
+<h3>{{ trabajo.titulo }}</h3>
+<ul>
+  <li><strong>Descrição:</strong> {{ trabajo.descripcion }}</li>
+  <li><h4>Eventos do trabalho</h4>
+    <ul>
+      {% for evento in trabajo.eventotrabajo_set.all %}
+        <li>{{evento}}</li>
+      {% empty %}
+        <li>Este trabalho não tem eventos registrados</li>
+      {% endfor %}
+    </ul>
+  </li>
+</ul>

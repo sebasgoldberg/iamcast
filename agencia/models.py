@@ -14,6 +14,7 @@ from datetime import date
 from django.core.exceptions import ValidationError
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill, Adjust
+from django.conf import settings
 
 # @pre Esta rutina se llama desde el metodo clean de una clase que lo redefine y hereda de formset
 def validarUnoIngresado(formset,campo,mensaje):
@@ -217,6 +218,16 @@ class Agenciado(models.Model):
       return html
     thumbnails.allow_tags = True
 
+    def thumbnails_absolute_uri(self):
+      html=''
+      fotos=self.fotoagenciado_set.order_by('id')
+      for foto in fotos:
+        url = "http://%s%s" % (settings.AMBIENTE.dominio, foto.foto.url)
+        url_thumbnail = "http://%s%s" % (settings.AMBIENTE.dominio, foto.thumbnail.url)
+        html = html + "<a href='%s'><img src='%s' height=100 /></a>" % (url,url_thumbnail)
+      return html
+    thumbnails.allow_tags = True
+
     def thumbnail_agenciado_link(self):
       return "<a href='/admin/agencia/agenciado/%s/'>%s</a>" % (str(self.id),self.thumbnail())
     thumbnail_agenciado_link.allow_tags = True
@@ -228,6 +239,12 @@ class Agenciado(models.Model):
       return '<br />'.join(listadoTelefonos)
     telefonos.allow_tags = True
     telefonos.short_description = 'Telefones'
+
+    def admin_link(self):
+      if self is None:
+        return ''
+      return "<a href='/admin/agencia/agenciado/%s/'>%s</a>" % (self.id,self)
+    admin_link.allow_tags=True
 
 
     def descripcion(self):
