@@ -69,10 +69,10 @@ class TelefonoProductora(Telefono):
 
 class ItemPortfolio(models.Model):
     titulo = models.CharField(max_length=100, unique_for_date='fecha')
-    video = models.URLField(unique=True)
-    codigo_video = models.CharField(max_length=30, unique=True)
+    video = models.URLField(unique=True, null=True, blank=True)
+    codigo_video = models.CharField(max_length=30, unique=True, null=True, blank=True)
     # agregar rutas a configuracion del apache, al archivo settings y crear carpetas correspondientes
-    imagen = models.ImageField(upload_to='trabajo/portfolio/')
+    imagen = models.ImageField(upload_to='trabajo/portfolio/', null=True, blank=True)
     thumbnail = ImageSpecField([Adjust(contrast=1.2, sharpness=1.1), ResizeToFill(210,210)], image_field='imagen', format='JPEG', options={'quality': 90})
     fecha = models.DateField(default=date.today(),verbose_name=u'Data')
     def __unicode__(self):
@@ -82,15 +82,43 @@ class ItemPortfolio(models.Model):
       verbose_name = u"Item Portfolio"
       verbose_name_plural = u"Portfolio"
     def get_youtube_iframe_url(self):
-      return 'http://www.youtube.com/embed/%s' % self.codigo_video
+      return (u'http://www.youtube.com/embed/%s' % self.codigo_video)
+    get_youtube_iframe_url.allow_tags = True
+    def html_youtube_iframe(self):
+      return '<iframe width="373" height="210" src="%s" frameborder="0" allowfullscreen></iframe>' % self.get_youtube_iframe_url()
+    html_youtube_iframe.allow_tags = True 
+    def html_small_youtube_iframe(self):
+      return '<iframe width="186" height="105" src="%s" frameborder="0" allowfullscreen></iframe>' % self.get_youtube_iframe_url()
+    html_small_youtube_iframe.allow_tags = True 
+    def html_media(self):
+      if self.codigo_video:
+        return self.html_youtube_iframe()
+      else:
+        return self.html_thumbnail()
+    html_media.allow_tags = True
+    def html_small_media(self):
+      if self.codigo_video:
+        return self.html_small_youtube_iframe()
+      else:
+        return self.html_thumbnail()
+    html_small_media.allow_tags = True
+    def html_thumbnail(self):
+      if not self.imagen:
+        return
+      return "<a href='%s'><img src='%s'/></a>" % (self.imagen.url, self.thumbnail.url)
+
+    def url_to_codigo_video(self):
+      if self.video is None:
+        return
+      if re.search('^.*v=',self.video):
+        self.codigo_video = re.sub('^.*v=','',self.video)
+        self.codigo_video = re.sub('&.*$','',self.codigo_video)
+      elif re.search('[^?]',self.video):
+        self.codigo_video = re.sub('^.*/','',self.video)
 
 @receiver(pre_save, sender=ItemPortfolio)
 def callback_save_item_portfolio(sender, instance, raw, using, **kwargs):
-  if re.search('^.*v=',instance.video):
-    instance.codigo_video = re.sub('^.*v=','',instance.video)
-    instance.codigo_video = re.sub('&.*$','',instance.codigo_video)
-  elif re.search('[^?]',instance.video):
-    instance.codigo_video = re.sub('^.*/','',instance.video)
+  instance.url_to_codigo_video()
 
 class Trabajo(models.Model):
     titulo = models.CharField(max_length=100, unique_for_date='fecha_ingreso')

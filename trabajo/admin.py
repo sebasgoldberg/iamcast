@@ -108,6 +108,18 @@ class PostulacionAdmin(admin.ModelAdmin):
   search_fields=['trabajo__titulo', 'rol__descripcion', 'agenciado__nombre', 'agenciado__apellido', 'id']
   list_editable=['estado']
 
+class ItemPortfolioAdmin(admin.ModelAdmin):
+  readonly_fields=['id','html_media']
+  list_display=['html_small_media', 'titulo', 'id', 'fecha']
+  list_display_links = ('id', 'titulo')
+  search_fields=['titulo']
+  fieldsets=[
+    (None, {'fields':['html_media','id']}),
+    ('Dados do item do portifolio', 
+      {'fields':['titulo', 'fecha', 'video', 'imagen']})
+  ]
+  list_per_page = 10
+
 def add_agenciados_trabajo(modeladmin, request, queryset):
   selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
   return HttpResponseRedirect("/trabajo/agregar/agenciados/seleccionados/a/rol/?ids=%s" %  ",".join(selected))
@@ -124,6 +136,6 @@ AgenciadoAdmin.inlines+=[AgenciadoPostulacionInline]
 
 admin.site.register(Productora,ProductoraAdmin)
 admin.site.register(Rol,RolAdmin)
-admin.site.register(ItemPortfolio)
+admin.site.register(ItemPortfolio,ItemPortfolioAdmin)
 admin.site.register(Trabajo,TrabajoAdmin)
 #admin.site.register(Postulacion,PostulacionAdmin)
