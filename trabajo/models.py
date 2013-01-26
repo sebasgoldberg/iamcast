@@ -7,6 +7,9 @@ from imagekit.processors import ResizeToFill, Adjust
 from datetime import date, datetime
 from agencia.models import Estado, Ciudad, Compania
 from django.contrib.auth.models import User
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+import re
 
 class Direccion(models.Model):
   descripcion = models.CharField(max_length=60, verbose_name=u'Descripçao',blank=True,null=True)
@@ -66,10 +69,11 @@ class TelefonoProductora(Telefono):
 
 class ItemPortfolio(models.Model):
     titulo = models.CharField(max_length=100, unique_for_date='fecha')
-    video = models.URLField()
+    video = models.URLField(unique=True)
+    codigo_video = models.CharField(max_length=30, unique=True)
     # agregar rutas a configuracion del apache, al archivo settings y crear carpetas correspondientes
     imagen = models.ImageField(upload_to='trabajo/portfolio/')
-    thumbnail = ImageSpecField([Adjust(contrast=1.2, sharpness=1.1), ResizeToFill(100,100)], image_field='imagen', format='JPEG', options={'quality': 90})
+    thumbnail = ImageSpecField([Adjust(contrast=1.2, sharpness=1.1), ResizeToFill(210,210)], image_field='imagen', format='JPEG', options={'quality': 90})
     fecha = models.DateField(default=date.today(),verbose_name=u'Data')
     def __unicode__(self):
       return self.titulo
@@ -77,8 +81,17 @@ class ItemPortfolio(models.Model):
       ordering = ['-fecha']
       verbose_name = u"Item Portfolio"
       verbose_name_plural = u"Portfolio"
+    def get_youtube_iframe_url(self):
+      return 'http://www.youtube.com/embed/%s' % self.codigo_video
 
-# @todo Múltiples horarios y direcciones 
+@receiver(pre_save, sender=ItemPortfolio)
+def callback_save_item_portfolio(sender, instance, raw, using, **kwargs):
+  if re.search('^.*v=',instance.video):
+    instance.codigo_video = re.sub('^.*v=','',instance.video)
+    instance.codigo_video = re.sub('&.*$','',instance.codigo_video)
+  elif re.search('[^?]',instance.video):
+    instance.codigo_video = re.sub('^.*/','',instance.video)
+
 class Trabajo(models.Model):
     titulo = models.CharField(max_length=100, unique_for_date='fecha_ingreso')
     productora= models.ForeignKey(Productora,on_delete=models.PROTECT, verbose_name=u'Produtora')

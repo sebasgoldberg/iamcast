@@ -45,10 +45,12 @@ class AgenciadoAdmin(admin.ModelAdmin):
   inlines=[TelefonoInline, FotoAgenciadoInline, VideoAgenciadoInline]
   list_display=['thumbnail','id','apellido','nombre','fecha_nacimiento','descripcion','telefonos','mail', 'responsable']
   list_display_links = ('thumbnail', 'id')
-  list_filter=['activo','sexo','ojos','pelo','piel','fecha_ingreso']
+  list_filter=['activo','sexo','ojos','pelo','piel','deportes','danzas','instrumentos','idiomas','fecha_ingreso']
   search_fields=['nombre','apellido','responsable','mail','id']
   date_hierarchy='fecha_nacimiento'
   filter_horizontal=['deportes','danzas','instrumentos','idiomas']
+  list_per_page = 40
+  actions_on_bottom = True
 
 admin.site.register(Agenciado,AgenciadoAdmin)
 admin.site.register(Ciudad)
