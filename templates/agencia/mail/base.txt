@@ -1,6 +1,4 @@
-{% block mensaje %}
-{% endblock %}
+{% block mensaje %}{% endblock %}
 
-{% block firma %}
-{% include 'agencia/mail/firma.txt'%}
-{% endblock %}
+
+{% block firma %}{% include 'agencia/mail/firma.txt'%}{% endblock %}

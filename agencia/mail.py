@@ -13,15 +13,20 @@ class MailForm(forms.Form):
 class MailAgencia(EmailMultiAlternatives):
 
   def __init__(self,asunto, cuerpo_de_texto, destinatarios):
+    
     _asunto = 'Agencia %s - %s' % (settings.AMBIENTE.agencia.nombre, asunto)
     _headers = {'Reply-To': settings.AMBIENTE.agencia.email}
     
-    super(EmailMultiAlternatives,self).__init__(
+    self.mensaje = EmailMultiAlternatives(
       _asunto,
       cuerpo_de_texto,
       settings.AMBIENTE.email.user,
       destinatarios,
       headers = _headers
     )
+
   def set_html_body(self,html_content):
-    self.attach_alternative(html_content, "text/html")
+    self.mensaje.attach_alternative(html_content, "text/html")
+
+  def send(self):
+    self.mensaje.send()

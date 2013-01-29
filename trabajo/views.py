@@ -106,7 +106,7 @@ def trabajo_enviar_mail_productora(request,trabajo_id):
     form = MailForm(request.POST)
     if form.is_valid():
       template = loader.get_template('trabajo/trabajo/cuerpo_mail_productora.html')
-      context = Context({'trabajo':trabajo})
+      context = Context({'trabajo':trabajo, 'ambiente': settings.AMBIENTE })
       asunto = form.cleaned_data['asunto']
       destinatario = form.cleaned_data['destinatario']
 
@@ -118,7 +118,7 @@ def trabajo_enviar_mail_productora(request,trabajo_id):
       messages.success(request, 'Trabalho enviado com sucesso a %s'%destinatario)
       return redirect('/admin/trabajo/trabajo/%s/'%trabajo_id)
   else:
-    asunto = 'Agencia %s - Detalhe de trabalho "%s"' % (settings.AMBIENTE.agencia.nombre, trabajo.titulo)
+    asunto = 'Detalhe de trabalho "%s"' % (trabajo.titulo,)
     form = MailForm(initial={'destinatario':trabajo.productora.mail, 'asunto': asunto })
 
-  return render(request,'trabajo/trabajo/enviar_mail_productora.html',{'form': form, 'trabajo': trabajo})
+  return render(request,'trabajo/trabajo/enviar_mail_productora.html',{'form': form, 'trabajo': trabajo, 'ambiente': settings.AMBIENTE })
