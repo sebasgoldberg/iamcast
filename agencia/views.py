@@ -34,10 +34,11 @@ def cambio_clave(request):
     form = SetPasswordForm(request.user,request.POST)
     if form.is_valid():
       form.save()
-      #@todo Indicar cambio de password satisfactorio
+      messages.success(request, 'Sua senha foi trocada com sucesso')
       return redirect('/agencia/cambio/clave/')
   else:
     form = SetPasswordForm(request.user)
+
 
   return render(request,'agencia/cambio_clave.html',{'form':form})
 
@@ -52,15 +53,16 @@ def reiniciar_clave(request):
 
       asunto = 'Sua senha ha mudado'
       template = loader.get_template('user/mail/cambio_clave.txt')
-      context = Context({'ambiente':settings.AMBIENTE,'user':instance, 'clave':password})
+      context = Context({'ambiente':settings.AMBIENTE,'user':user, 'clave':password})
       text_content = template.render(context)
       msg = MailAgencia(asunto,text_content,[user.email])
       msg.send()
 
-      messages.information(request, 'Mail com nova senha enviado para %s'%user.mail)
+      messages.success(request, 'Nova senha gerada com sucesso')
+      messages.info(request, 'Mail com nova senha enviado para %s'%user.email)
 
       return redirect('/agencia/reiniciar/clave/')
   else:
     form = PasswordResetForm()
 
-  return render(request,'agencia/reiniciar_clave.html',{'form':form})
+  return render(request,'user/reiniciar_clave.html',{'form':form})

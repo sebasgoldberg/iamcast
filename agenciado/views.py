@@ -15,6 +15,7 @@ from datetime import date
 from django.forms.models import inlineformset_factory
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 class AgenciadoForm(ModelForm):
   class Meta:
@@ -62,7 +63,7 @@ def index(request):
       telefonoFormSet.save()
       fotoAgenciadoFormSet.save()
       videoAgenciadoFormSet.save()
-      #@todo Indicar que los datos se han guardado en forma satisfactoria
+      messages.success(request, 'Dados atualizados com sucesso')
       return redirect('/agenciado/')
   else:
     form = AgenciadoForm(instance=agenciado)
@@ -76,13 +77,13 @@ def registro(request):
     form = UserCreationForm(request.POST)
     if form.is_valid():
       user = form.save()
-      #grupo=Group.objects.get(name='agenciado')
       user = authenticate(username=request.POST['username'], password=request.POST['password1'])
       login(request,user)
-      #@todo Indicar registro satisfactorio y que por favor complete sus datos a ser analizados por la agencia
+      messages.success(request,'Registro realizado com sucesso')
+      messages.info(request,'Por favor atualice os dados de seu perfil a ser analizados por nossa agencia')
       return redirect('/agenciado/')
   else:
     form = UserCreationForm()
 
-  return render(request,'agenciado/registro.html',{'form':form})
+  return render(request,'user/registro.html',{'form':form})
 

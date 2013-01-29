@@ -1,14 +1,20 @@
+# coding=utf-8
+from django import forms
 from django.conf import settings
 from django.template import loader, Context
 from django.core.mail import EmailMultiAlternatives
 from django.contrib import messages
 
+class MailForm(forms.Form):
+  # @todo Agregar múltiples destinatarios.
+  destinatario=forms.EmailField()
+  asunto=forms.CharField()
 
 class MailAgencia(EmailMultiAlternatives):
 
   def __init__(self,asunto, cuerpo_de_texto, destinatarios):
     _asunto = 'Agencia %s - %s' % (settings.AMBIENTE.agencia.nombre, asunto)
-    _headers = {'Reply-To': settings.AMBIENTE.email.reply_to}
+    _headers = {'Reply-To': settings.AMBIENTE.agencia.email}
     
     super(EmailMultiAlternatives,self).__init__(
       _asunto,

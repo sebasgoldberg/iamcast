@@ -8,7 +8,7 @@ from django.http import HttpRequest
 from django.db.utils import IntegrityError
 from django.conf import settings
 from django.template import loader, Context
-from agencia.mail import AgenciaMail
+from agencia.mail import MailAgencia
 from django.contrib import messages
 
 # @todo Ver si va a aplicar lo de la creación automática del usuario por agenciado
@@ -50,7 +50,7 @@ def callback_mail_creacion_usuario(sender, instance, created, raw, using, **kwar
       template = loader.get_template('user/mail/creacion.txt')
       context = Context({'ambiente':settings.AMBIENTE,'user':instance})
       text_content = template.render(context)
-      msg = AgenciaMail(asunto, text_content, [instance.email])
+      msg = MailAgencia(asunto, text_content, [instance.email])
       msg.send()
       messages.information(request, 'Mail com imformação da nova conta enviado para %s'%instance.mail)
 

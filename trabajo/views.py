@@ -9,7 +9,7 @@ from django import forms
 from trabajo.models import Postulacion, Rol, Trabajo
 from agencia.models import Agenciado
 from django.template import loader, Context
-from agencia.mail import AgenciaMail
+from agencia.mail import MailAgencia, MailForm
 from django.conf import settings
 from django.contrib import messages
 
@@ -97,12 +97,6 @@ def resultados_agregar_agenciados_seleccionados_a_rol(request,id_rol,id_estado):
     'rol': rol, 
     'estado': Postulacion.DICT_ESTADO_POSTULACION[id_estado] })
 
-
-class MailForm(forms.Form):
-  # @todo Agregar múltiples destinatarios.
-  destinatario=forms.EmailField()
-  asunto=forms.CharField()
-
 @permission_required('trabajo.mail_productora',raise_exception=True)
 def trabajo_enviar_mail_productora(request,trabajo_id):
   
@@ -118,7 +112,7 @@ def trabajo_enviar_mail_productora(request,trabajo_id):
 
       text_content = 'Este mensagem deve ser visualizado em formato HTML.'
       html_content = template.render(context)
-      msg = AgenciaMail(asunto, text_content, [destinatario])
+      msg = MailAgencia(asunto, text_content, [destinatario])
       msg.set_html_body(html_content)
       msg.send()
       messages.success(request, 'Trabalho enviado com sucesso a %s'%destinatario)
