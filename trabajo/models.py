@@ -165,6 +165,7 @@ class Trabajo(models.Model):
       html += '</ul>'
       return html
     roles.allow_tags = True
+    roles.verbose_name = 'Perfis'
 
     def productora_admin_link(self):
       if self.productora.id is None:
@@ -207,8 +208,8 @@ class Rol(models.Model):
       return '%s (%s)' % (self.descripcion, self.trabajo.titulo)
     class Meta:
       ordering = ['-trabajo__fecha_ingreso','descripcion']
-      verbose_name = u"Rol"
-      verbose_name_plural = u"Roles" 
+      verbose_name = u"Perfil"
+      verbose_name_plural = u"Perfis" 
       unique_together = (("trabajo", "descripcion"),)
 
     def cantidad_postulados_casting(self):
@@ -239,10 +240,10 @@ class Rol(models.Model):
 
 class EventoRol(Evento):
   tipo = models.CharField(max_length=1,choices=TIPO_EVENTO_TRABAJO)
-  rol = models.ForeignKey(Rol,on_delete=models.PROTECT)
+  rol = models.ForeignKey(Rol,on_delete=models.PROTECT,verbose_name = 'Perfil')
   class Meta(Evento.Meta):
-    verbose_name = 'Evento do rol'
-    verbose_name_plural = 'Eventos do rol'
+    verbose_name = 'Evento do perfil'
+    verbose_name_plural = 'Eventos do perfil'
   def descripcion_tipo(self):
     return DICT_TIPO_EVENTO_TRABAJO[self.tipo]
   def __unicode__(self):
@@ -250,7 +251,7 @@ class EventoRol(Evento):
 
 class Postulacion(models.Model):
     agenciado = models.ForeignKey(Agenciado,on_delete=models.PROTECT)
-    rol = models.ForeignKey(Rol,on_delete=models.PROTECT)
+    rol = models.ForeignKey(Rol,on_delete=models.PROTECT, verbose_name = 'Perfil')
     ESTADO_POSTULACION=(
       ('PC', u'Postulado para casting'),
       ('SC', u'Selecionado para casting'),

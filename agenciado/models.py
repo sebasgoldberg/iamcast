@@ -5,9 +5,11 @@ from django.dispatch import receiver
 from agencia.models import Agenciado
 from django.contrib.auth.models import User
 from django.http import HttpRequest
-from django.core.mail import EmailMessage
 from django.db.utils import IntegrityError
 from django.conf import settings
+from django.template import loader, Context
+from agencia.mail import AgenciaMail
+from django.contrib import messages
 
 # @todo Ver si va a aplicar lo de la creación automática del usuario por agenciado
 #@receiver(post_save, sender=Agenciado)
@@ -44,24 +46,11 @@ def callback_mail_creacion_usuario(sender, instance, created, raw, using, **kwar
     return
   if created:
     if instance.email is not None:
-      domain=settings.AMBIENTE.dominio
-      cuerpo=u"\
-Oi %s!\n\
-\n\
-Você tem uma nova conta em http://%s/ com dados de sue perfil.\n\
-\n\
-Se você e um agenciado, então pode carregar informação de seu perfil: http://%s/agenciado/\n\
-\n\
-Se você e um agenciador pode acessar a administração do site: http://%s/admin/\n\
-\n\
-Você poderá ingressar a sua nova conta com seu usuário (%s) e sua chave.\n\
-\n\
-Se você não lembra sua chave, poderá gerá-la de novo aqui: http://%s/agencia/reiniciar/clave/\n\
-\n\
-Por favor, verifique se os dados da sua conta som corretos. Em caso de precisar modifique os dados que correspondam.\n\
-\n\
-Atentamente, o equipe da Alternativa\n\
-agencia.alternativa@gmail.com" % (instance.first_name,domain,domain,domain,instance.username,domain)
-      # @todo enviar al mail correspondiente
-      email = EmailMessage('AgenciaAlternativa[no responder] - Sua conta esta creada', cuerpo, to=[instance.email])
-      email.send()
+      asunto = 'Sua conta esta creada'
+      template = loader.get_template('user/mail/creacion.txt')
+      context = Context({'ambiente':settings.AMBIENTE,'user':instance})
+      text_content = template.render(context)
+      msg = AgenciaMail(asunto, text_content, [instance.email])
+      msg.send()
+      messages.information(request, 'Mail com imformação da nova conta enviado para %s'%instance.mail)
+

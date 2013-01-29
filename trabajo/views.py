@@ -9,7 +9,7 @@ from django import forms
 from trabajo.models import Postulacion, Rol, Trabajo
 from agencia.models import Agenciado
 from django.template import loader, Context
-from django.core.mail import EmailMultiAlternatives
+from agencia.mail import AgenciaMail
 from django.conf import settings
 from django.contrib import messages
 
@@ -118,13 +118,13 @@ def trabajo_enviar_mail_productora(request,trabajo_id):
 
       text_content = 'Este mensagem deve ser visualizado em formato HTML.'
       html_content = template.render(context)
-      msg = EmailMultiAlternatives(asunto, text_content, settings.AMBIENTE.email.user, [destinatario], headers = {'Reply-To': settings.AMBIENTE.email.reply_to})
-      msg.attach_alternative(html_content, "text/html")
+      msg = AgenciaMail(asunto, text_content, [destinatario])
+      msg.set_html_body(html_content)
       msg.send()
       messages.success(request, 'Trabalho enviado com sucesso a %s'%destinatario)
       return redirect('/admin/trabajo/trabajo/%s/'%trabajo_id)
   else:
-    asunto = 'AgenciaAlternativa - Detalhe de trabalho "%s"' % trabajo.titulo
+    asunto = 'Agencia %s - Detalhe de trabalho "%s"' % (settings.AMBIENTE.agencia.nombre, trabajo.titulo)
     form = MailForm(initial={'destinatario':trabajo.productora.mail, 'asunto': asunto })
 
   return render(request,'trabajo/trabajo/enviar_mail_productora.html',{'form': form, 'trabajo': trabajo})

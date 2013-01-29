@@ -1,3 +1,7 @@
+{% extends 'agencia/mail/base.html' %}
+
+{% block mensaje %}
+
 <p>Ola {{ trabajo.productora.nombre }},</p>
 
 <p>Estamos enviando os detalhes referentes ao trabalho "{{ trabajo.titulo }}", junto com as postulações dos agenciados para cada rol procurado:</p>
@@ -10,10 +14,5 @@
   {% include 'trabajo/rol/detalles.html'%}
 {% endfor %}
 
-<b><i>
-<pre>
+{%endblock%}
 
-
-{%include 'agencia/mail/firma.txt'%}
-</pre>
-</i></b>

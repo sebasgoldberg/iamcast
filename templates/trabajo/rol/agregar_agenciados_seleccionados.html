@@ -5,14 +5,14 @@
   <a href="/admin/">Início</a>
   &rsaquo; <a href="/admin/agencia/">Agencia</a>
   &rsaquo; <a href="/admin/agencia/agenciado/">Agenciados</a>
-  &rsaquo; Adicionar agenciados selecionados a rol de trabalho
+  &rsaquo; Adicionar agenciados selecionados a perfil de trabalho
 </div>
 {% endblock %}
 
 
 {% block content %}
 
-<h3>Selecione rol em que deseja adicionar os agenciados selecionados:</h3>
+<h3>Selecione perfil em que deseja adicionar os agenciados selecionados:</h3>
 <form action="/trabajo/agregar/agenciados/seleccionados/a/rol/" method="post">{% csrf_token %}
 {{ form.as_p }}
 <input type="submit" value="Submit" />

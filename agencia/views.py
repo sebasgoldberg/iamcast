@@ -17,6 +17,9 @@ from django.forms.models import inlineformset_factory
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.template import loader, Context
+from agencia.mail import MailAgencia
+from django.contrib import messages
 
 def index(request):
   return render(request,'agencia/index.html')
@@ -46,23 +49,16 @@ def reiniciar_clave(request):
       password = User.objects.make_random_password()
       user.set_password(password)
       user.save()
-      domain=settings.AMBIENTE.dominio
 
-      cuerpo="\
-Oi %s!\n\
-\n\
-Voce tem uma nova senha.\n\
-\n\
-Sua nova senha e (%s). Lembre que seu usuário e (%s).\n\
-\n\
-Voce pode trocar sua senha acessando a http://%s/agencia/cambio/clave/\n\
-\n\
-Atentamente, o equipe da Alternativa" % (user.first_name,password,user.username, domain)
-      from django.core.mail import EmailMessage
-      email = EmailMessage('AgenciaAlternativa - Sua senha ha mudado', cuerpo, to=[user.email])
-      email.send()
+      asunto = 'Sua senha ha mudado'
+      template = loader.get_template('user/mail/cambio_clave.txt')
+      context = Context({'ambiente':settings.AMBIENTE,'user':instance, 'clave':password})
+      text_content = template.render(context)
+      msg = MailAgencia(asunto,text_content,[user.email])
+      msg.send()
 
-      #@todo Indicar cambio de password satisfactorio
+      messages.information(request, 'Mail com nova senha enviado para %s'%user.mail)
+
       return redirect('/agencia/reiniciar/clave/')
   else:
     form = PasswordResetForm()

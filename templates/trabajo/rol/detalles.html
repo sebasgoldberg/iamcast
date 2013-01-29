@@ -1,13 +1,13 @@
-<h3>Rol: {{rol.descripcion}}</h3>
+<h3>Perfil: {{rol.descripcion}}</h3>
 <ul>
   <li><strong>Cache:</strong> {{rol.cache}} {{rol.moneda}}</li>
   <li><strong>Caraterísticas:</strong> {{rol.caracteristicas}}</li>
-  <li><h4>Eventos do rol</h4>
+  <li><h4>Eventos do perfil</h4>
     <ul>
       {% for evento in rol.eventorol_set.all %}
         <li>{{ evento }}</li>
       {% empty %}
-        <li>Este rol não tem eventos registrados</li>
+        <li>Este perfil não tem eventos registrados</li>
       {% endfor %}
     </ul>
   </li>
@@ -18,7 +18,7 @@
           {% autoescape off %}{{postulacion.agenciado.thumbnails_absolute_uri}}{%endautoescape%} {{postulacion.agenciado}}
         </li>
       {% empty %}
-        <li>Este rol não tem postulações registradas</li>
+        <li>Este perfil não tem postulações registradas</li>
       {% endfor %}
     </ul>
   </li>

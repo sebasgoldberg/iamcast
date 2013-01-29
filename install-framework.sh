@@ -114,6 +114,8 @@ echo "Certificado (agencia.pem) y clave (agencia.key) generados en /etc/apache2/
 a2enmod ssl
 service apache restart
 
+apt-get install python-coverage
+
 
 echo ''
 echo 'A continuación debería realizar las siguientes tareas:'

@@ -14,7 +14,7 @@ from django.core.exceptions import ValidationError
 
 class AgenciaTestCase(TestCase):
 
-  fixtures = ['test-data.yaml']
+  fixtures = ['agencia/fixtures/test-data.yaml']
 
   def get_agenciado_default(self):
     """
@@ -41,8 +41,6 @@ class AgenciaTestCase(TestCase):
     agenciado.barrio = u'Barrio de Test'
     agenciado.direccion = u'Direccion de Test'
     agenciado.codigo_postal = u'1234'
-    ## Datos de contacto
-    #nextel: 
     ## Caracteristicas fisicas
     agenciado.sexo = u'M'
     agenciado.ojos = Ojos.objects.get() 
@@ -72,25 +70,6 @@ class AgenciaTestCase(TestCase):
     #recurso_id: 
 
     return agenciado
-
-  def test_creacion_usuario_al_crear_agenciado(self):
-    """
-    Verifica que al crear un agenciado se cree el correspondiente usuario
-    y que los datos del usuario y el agenciado se correspondan.
-    """
-    agenciado = self.get_agenciado_default()
-    #agenciado.mail = u'test@test.com'
-    #agenciado.documento_rg = u'123'
-    #agenciado.documento_cpf = u'123'
-
-    agenciado.save()
-
-    agenciado=Agenciado.objects.get(mail='test@test.com')
-
-    self.assertIsNotNone(agenciado.user)
-    self.assertEqual(agenciado.mail,agenciado.user.email)
-    self.assertEqual(agenciado.nombre,agenciado.user.first_name)
-    self.assertEqual(agenciado.apellido,agenciado.user.last_name)
 
   def test_modificacion_usuario_al_modificar_agenciado(self):
     """
