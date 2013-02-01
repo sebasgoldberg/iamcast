@@ -1,15 +1,63 @@
-<h1><a href=/agencia/>Alternativa</a></h1>
-{%block menu%}
-<ul>
-  <li><a href="/agenciado/">Agenciado</a></li>
-  <li><a href="/admin/">Administração</a></li>
-  {% if user.is_authenticated %}
-    <li><a href="/agencia/cambio/clave/">Trocar Senha</a></li>
-    <li><a href="/agencia/logout/">Sair ({{user.username}})</a></li>
-  {% endif %}
-</ul>
-{%endblock%}
+<html>
 
+<head>
+<link rel="stylesheet" href="/static/css/blueprint/screen.css" type="text/css" media="screen, projection"/>
+<link rel="stylesheet" href="/static/css/blueprint/print.css" type="text/css" media="print"/>
+<!--[if lt IE 8]>
+  <link rel="stylesheet" href="/static/css/blueprint/ie.css" type="text/css" media="screen, projection"/>
+<![endif]-->
+<title>{%block title%}Agencia {{ambiente.agencia.nombre}}{%endblock%}</title>
+</head>
+
+<body>
+<div class='container'>
+
+<div class='span-15'>
+{%block header%}
+<h1><a href=/agencia/>Agencia {{ambiente.agencia.nombre}}</a></h1>
+{%endblock%}
+</div>
+
+<div class='span-9 last'>
+{%block menu_usuario%}
+  <div class='span-3 border' >
+    <a href="/admin/">Administração</a>
+  </div>
+  {% if user.is_authenticated %}
+    <div class='span-3 border' >
+    <a href="/agencia/cambio/clave/">Trocar Senha</a>
+    </div>
+    <div class='span-3 last' >
+    <a href="/agencia/logout/">Sair ({{user.username}})</a>
+    </div>
+  {%else%}
+    <div class='span-3 border' >
+    <a href="/agenciado/registro/">Registro</a>
+    </div>
+    <div class='span-3 last' >
+    <a href="/accounts/login/">Entrar</a>
+    </div>
+  {% endif %}
+{%endblock%}
+</div>
+
+<hr/>
+
+<div class='span-24'>
+{%block menu%}
+  <h3>
+  <div class='span-4 prepend-2 border' > <a href="/">Home</a> </div>
+  <div class='span-4 border' > <a href="/agenciado/">Agenciado</a> </div>
+  <div class='span-4 border' > <a href="/agencia/busquedas/">Pesquisas</a> </div>
+  <div class='span-4 border' > <a href="/agencia/portfolio/">Portifolio</a> </div>
+  <div class='span-4 append-2 last' > <a href="/agencia/contacto/">Contato</a> </div>
+  </h3>
+{%endblock%}
+</div>
+
+<hr/>
+
+<div class='span-24'>
 {% if messages %}
   <ul class="messages">
   {% for message in messages %}
@@ -17,6 +65,23 @@
   {% endfor %}
   </ul>
 {% endif %}
+</div>
 
+<div class='span-24'>
 {% block content %}
 {% endblock %}
+</div>
+
+<hr/>
+
+<div class='span-24'>
+{% block footer %}
+<div class='quiet'>
+Agencia {{ambiente.agencia.nombre}} {% for telefono in ambiente.agencia.telefonos %}|{{telefono}}{% endfor%}| {{ambiente.agencia.email}}<br/>
+{{ambiente.agencia.direccion}}
+{% endblock %}
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %} 
+
+<div class='span-6'>
+{% block menu_busquedas %}
+<div class='box'>
+<h3 class='caps'>Trabalhos Ativos</h3>
+<ul>
+  {% for trabajo in trabajos %}
+  <li><a href='/trabajo/busqueda/{{trabajo.id}}'>{{trabajo.titulo}}</a></li>
+  {% endfor %}
+</ul>
+</div>
+{% endblock %}
+</div>
+
+<div class='span-18 last'>
+{% block contenido_busquedas %}
+{%if trabajos %}
+  Selecione um dos trabalhos ativos.
+{%else%}
+  O sentimos, ainda nao temos trabalhos publicados.
+{%endif%}
+{% endblock %}
+</div>
+{% endblock %}

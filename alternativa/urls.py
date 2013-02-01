@@ -24,6 +24,6 @@ urlpatterns = patterns('',
     url(r'^trabajo/', include('trabajo.urls')),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^accounts/profile/$', 'agenciado.views.index'),
-    url(r'^$', redirect_to, {'url': '/admin/'}),
+    url(r'^$', redirect_to, {'url': '/agencia/'}),
 )
 

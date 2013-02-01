@@ -5,4 +5,5 @@ tags
 agencia-ssl
 alternativa/ambiente.py
 .coverage
+collectedstatic/
 

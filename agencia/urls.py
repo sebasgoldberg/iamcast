@@ -18,5 +18,7 @@ urlpatterns = patterns('agencia.views',
     url(r'^logout/$', 'logout_view'),
     url(r'^cambio/clave/$', 'cambio_clave'),
     url(r'^reiniciar/clave/$', 'reiniciar_clave'),
+    url(r'^busquedas/$', 'busquedas'),
+    url(r'^portfolio/$', 'portfolio'),
 )
 

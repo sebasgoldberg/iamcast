@@ -15,7 +15,7 @@ class AgenciaTestCase(TestCase):
 
   def get_dict_form_agenciado(self):
     return {
-      'mail' : u'sebas.goldberg@gmail.com',
+      'mail' : u'test@gmail.com',
       ## Datos personales
       'nombre' : u'Test',
       'apellido' : u'Test',
@@ -106,7 +106,7 @@ class AgenciaTestCase(TestCase):
     self.assertTrue('user/registro.html' in [t.name for t in response.templates])
 
     # Se registra un nuevo usuario y se verifica se muestre el formulario de agenciado.
-    response = c.post('/agenciado/registro/', {'username': 'test', 'password1': 'test', 'password2': 'test'}, follow = True)
+    response = c.post('/agenciado/registro/', {'username': 'test', 'password1': 'test', 'password2': 'test', 'first_name': 'Test', 'last_name': 'Last', 'email': 'test@gmail.com'}, follow = True)
     self.assertEqual(response.status_code,200)
     self.assertTrue('agenciado/agenciado.html' in [t.name for t in response.templates])
     user=User.objects.get(username='test')
@@ -192,126 +192,24 @@ class AgenciaTestCase(TestCase):
     self.assertTrue(response.context['messages'])
     self.assertEqual(len(mail.outbox), 1)
 
-  def get_agenciado_default(self):
+  #def test_validacion_mail_registro(self):
     """
-    Obtiene un agenciado con datos por default.
-    El agenciado devuelto no contendrá los siguientes datos:
-    mail, rg, cpf
-    Verifica que al crear un agenciado se cree el correspondiente usuario
-    y que los datos del usuario y el agenciado se correspondan.
+    Intento de registro de usuario con email ya existente
     """
-    agenciado=Agenciado()
-    agenciado.mail = u'test100@test.com'
-    ## Datos personales
-    agenciado.nombre = u'Test'
-    agenciado.apellido = u'Test'
-    agenciado.fecha_nacimiento = date(1982,12,20)
-    ## Datos Administrativos
-    agenciado.documento_rg = u'123100'
-    agenciado.documento_cpf = u'123100'
-    agenciado.responsable = u'Responsable de Test'
-    #cuenta_bancaria: 
-    ## Datos de direccion
-    agenciado.estado = Estado.objects.get()
-    agenciado.ciudad = Ciudad.objects.get()
-    agenciado.barrio = u'Barrio de Test'
-    agenciado.direccion = u'Direccion de Test'
-    agenciado.codigo_postal = u'1234'
-    ## Caracteristicas fisicas
-    agenciado.sexo = u'M'
-    agenciado.ojos = Ojos.objects.get() 
-    agenciado.pelo = Pelo.objects.get() 
-    agenciado.piel = Piel.objects.get() 
-    agenciado.altura = 181
-    agenciado.peso = 82
-    agenciado.talle = Talle.objects.get() 
-    agenciado.talle_camisa = u'38'
-    agenciado.talle_pantalon = u'36'
-    agenciado.calzado = u'44'
-    agenciado.estado_dientes = EstadoDientes.objects.get() 
-    ## Habilidades
-    #deportes:
-    #danzas: 
-    #instrumentos: 
-    #idiomas: 
-    agenciado.indicador_maneja = True
-    agenciado.indicador_tiene_registro = False
-    ## Otros datos
-    agenciado.trabaja_como_extra = False
-    agenciado.como_nos_conocio = u'Por Internet'
-    #observaciones: 
-    ## Datos administrativos del sistema 
-    agenciado.activo = True
-    agenciado.fecha_ingreso = date(2013,01,14)
-    #recurso_id: 
+    c=Client()
+    # Se accede a la página de registro.
+    response = c.get('/agenciado/registro/')
+    self.assertEqual(response.status_code,200)
+    self.assertTrue('user/registro.html' in [t.name for t in response.templates])
 
-    return agenciado
+    # Se registra un nuevo usuario y se verifica se muestre el formulario de agenciado.
+    response = c.post('/agenciado/registro/', {'username': 'test2', 'password1': 'test', 'password2': 'test', 'first_name': 'Test', 'last_name': 'Last', 'email': 'test@gmail.com'}, follow = True)
+    self.assertEqual(response.status_code,200)
+    self.assertTrue('agenciado/agenciado.html' not in [t.name for t in response.templates])
+    self.assertRaises(User.DoesNotExist,User.objects.get,username = 'test2')
 
-  def _test_modificacion_usuario_al_modificar_agenciado(self):
+
     """
-    Verifica que al crear un agenciado se cree el correspondiente usuario
-    y que los datos del usuario y el agenciado se correspondan.
+    @todo Implementar test
+    Verificación sincronización al modificar agenciado con usuario.
     """
-    agenciado = self.get_agenciado_default()
-    agenciado.mail = u'test110@test.com'
-    agenciado.documento_rg = u'123110'
-    agenciado.documento_cpf = u'123110'
-
-    agenciado.save()
-
-    agenciado=Agenciado.objects.get(mail='test110@test.com')
-    agenciado.mail = u'test111@test.com'
-    agenciado.documento_rg = u'123111'
-    agenciado.documento_cpf = u'123110'
-    agenciado.save()
-
-    agenciado=Agenciado.objects.get(mail='test111@test.com')
-
-    self.assertEqual(agenciado.mail,agenciado.user.email)
-    self.assertEqual(agenciado.nombre,agenciado.user.first_name)
-    self.assertEqual(agenciado.apellido,agenciado.user.last_name)
-
-  def _test_unicidad(self):
-    """
-    Verifica que se respete la unicidad de los campos mail, RG y CPF del 
-    agenciado.
-    """
-    agenciado = self.get_agenciado_default()
-    agenciado.mail = u'test101@test.com'
-    agenciado.documento_rg = u'123101'
-    agenciado.documento_cpf = u'123101'
-    agenciado.save()
-
-    agenciado = self.get_agenciado_default()
-    agenciado.mail = u'test101@test.com'
-    agenciado.documento_rg = u'123102'
-    agenciado.documento_cpf = u'123102'
-    self.assertRaises(IntegrityError,agenciado.save) 
-
-    agenciado = self.get_agenciado_default()
-    agenciado.mail = u'test102@test.com'
-    agenciado.documento_rg = u'123101'
-    agenciado.documento_cpf = u'123102'
-    self.assertRaises(IntegrityError,agenciado.save) 
-
-    agenciado = self.get_agenciado_default()
-    agenciado.mail = u'test102@test.com'
-    agenciado.documento_rg = u'123102'
-    agenciado.documento_cpf = u'123101'
-    self.assertRaises(IntegrityError,agenciado.save) 
-
-    agenciado = self.get_agenciado_default()
-    agenciado.mail = u'test102@test.com'
-    agenciado.documento_rg = u'123102'
-    agenciado.documento_cpf = u'123102'
-    agenciado.save()
-
-  def _test_fecha_nacimiento_menor_fecha_dia(self):
-    # @todo redefinir test utilizando formularios ya que los validadores no corren a nivel del modelo
-    return
-    agenciado = self.get_agenciado_default()
-    agenciado.mail = u'test120@test.com'
-    agenciado.documento_rg = u'123120'
-    agenciado.documento_cpf = u'123120'
-    agenciado.fecha_nacimiento = date.today() + timedelta(days=1)
-    self.assertRaises(ValidationError,agenciado.save) 

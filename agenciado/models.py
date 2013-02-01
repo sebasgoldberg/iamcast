@@ -11,22 +11,27 @@ from django.template import loader, Context
 from agencia.mail import MailAgencia
 from django.contrib import messages
 
-# @todo Ver si va a aplicar lo de la creación automática del usuario por agenciado
-#@receiver(post_save, sender=Agenciado)
-def callback_creacion_agenciado(sender, instance, created, raw, using, **kwargs):
-  if instance.user is None:
-    if instance.mail is not None:
-      nombre = instance.nombre
-      apellido = instance.apellido
-      username = '%s_%s_%s' % (nombre.replace(' ','')[:11],apellido.replace(' ','')[:11],str(instance.recurso_id))
+def crear_usuario_agenciado(agenciado):
+  if agenciado.user is None:
+    if agenciado.mail is not None:
+      nombre = agenciado.nombre
+      apellido = agenciado.apellido
+      username = '%s_%s_%s' % (nombre.replace(' ','')[:11],apellido.replace(' ','')[:11],str(agenciado.recurso_id))
       password = User.objects.make_random_password()
-      instance.user = User.objects.create_user(username,instance.mail,password)
-      instance.user.first_name = instance.nombre[:30]
-      instance.user.last_name = instance.apellido[:30]
-      instance.user.email = instance.mail 
-      instance.user.save()
-      instance.save()
-  else:
+      agenciado.user = User.objects.create_user(username,agenciado.mail,password)
+      agenciado.user.first_name = agenciado.nombre[:30]
+      agenciado.user.last_name = agenciado.apellido[:30]
+      agenciado.user.email = agenciado.mail 
+      agenciado.user.save()
+      agenciado.save()
+
+# @todo Ver si va a aplicar lo de la creación automática del usuario por agenciado
+@receiver(post_save, sender=Agenciado)
+def callback_creacion_agenciado(sender, instance, created, raw, using, **kwargs):
+  """
+  Si se ha actualizado en el agenciado, el nombre apellido o email, se mantiene sincronizado con el usuario.
+  """
+  if instance.user is not None:
     modificado = False
     if instance.nombre[:30] != instance.user.first_name:
       instance.user.first_name = instance.nombre[:30]
@@ -42,6 +47,9 @@ def callback_creacion_agenciado(sender, instance, created, raw, using, **kwargs)
 
 @receiver(post_save, sender=User)
 def callback_mail_creacion_usuario(sender, instance, created, raw, using, **kwargs):
+  """
+  Si se ha actualizado en el usuario, el nombre apellido o email, se mantiene sincronizado con el agenciado.
+  """
   if not settings.AMBIENTE_PRODUCTIVO:
     return
   if created:
@@ -53,4 +61,18 @@ def callback_mail_creacion_usuario(sender, instance, created, raw, using, **kwar
       msg = MailAgencia(asunto, text_content, [instance.email])
       msg.send()
       messages.information(request, 'Mail com imformação da nova conta enviado para %s'%instance.mail)
+  elif instance.agenciado is not None:
+    modificado = False
+    if instance.agenciado.nombre[:30] != instance.first_name:
+      instance.agenciado.nombre = instance.first_name
+      modificado = True
+    if instance.agenciado.apellido[:30] != instance.last_name:
+      instance.agenciado.apellido = instance.last_name
+      modificado = True
+    if instance.email != '' and instance.email != instance.agenciado.mail:
+      instance.agenciado.mail = instance.email
+      modificado = True
+    if modificado:
+      instance.agenciado.save()
+
 

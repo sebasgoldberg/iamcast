@@ -1,0 +1,18 @@
+{% extends "trabajo/trabajo/busquedas.html" %}
+
+{% block contenido_busquedas %}
+{%if trabajo %}
+  <h3>{{trabajo.titulo}}</h3>
+  <p>{{trabajo.descripcion}}</p>
+  <h3>Perfis procurados</h3>
+  {% for rol in trabajo.rol_set.all %}
+    <h4>{{rol.descripcion}}</h4>
+    <p>Cache: {{rol.cache}}</p>
+    <p>{{rol.caracteristicas}}</p>
+  {% empty %}
+    <p>O trabalho nao registra perfis procurados</p>
+  {% endfor %}
+{%else%}
+  O sentimos, o trabalho selecionado nao se encontra ativo.
+{%endif%}
+{% endblock %}

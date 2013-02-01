@@ -18,5 +18,8 @@ urlpatterns = patterns('trabajo.views',
     url(r'^agregar/agenciados/seleccionados/a/rol/$', 'agregar_agenciados_seleccionados_a_rol'),
     url(r'^resultados/agregar/agenciados/seleccionados/a/rol/(\d+)/(.*)/$', 'resultados_agregar_agenciados_seleccionados_a_rol'),
     url(r'^trabajo/enviar/mail/productora/(\d+)/$', 'trabajo_enviar_mail_productora'),
+    url(r'^busquedas/$', 'busquedas'),
+    url(r'^busqueda/(\d+)/$', 'busqueda'),
+    url(r'^portfolio/$', 'portfolio'),
 )
 

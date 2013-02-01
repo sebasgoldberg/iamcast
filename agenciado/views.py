@@ -16,6 +16,8 @@ from django.forms.models import inlineformset_factory
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django import forms
+from django.conf import settings
 
 class AgenciadoForm(ModelForm):
   class Meta:
@@ -48,10 +50,14 @@ def index(request):
   try:
     agenciado=Agenciado.objects.get(user__id=request.user.id)
   except Agenciado.DoesNotExist:
-    agenciado=Agenciado()
-    agenciado.user=request.user
-    agenciado.fecha_ingreso = date.today()
-    agenciado.activo=False
+    agenciado=Agenciado(
+      user=request.user,
+      nombre = request.user.first_name,
+      apellido = request.user.last_name,
+      mail = request.user.email,
+      fecha_ingreso = date.today(),
+      activo=False,
+    )
 
   if request.method == 'POST':
     form = AgenciadoForm(request.POST,instance=agenciado)
@@ -70,11 +76,25 @@ def index(request):
     telefonoFormSet=TelefonoFormSet(instance=agenciado)
     fotoAgenciadoFormSet=FotoAgenciadoFormSet(instance=agenciado)
     videoAgenciadoFormSet=VideoAgenciadoFormSet(instance=agenciado)
-  return render(request,'agenciado/agenciado.html',{'form':form, 'telefonoFormSet':telefonoFormSet, 'fotoAgenciadoFormSet':fotoAgenciadoFormSet, 'videoAgenciadoFormSet':videoAgenciadoFormSet})
+  return render(request,'agenciado/agenciado.html',{'form':form, 'telefonoFormSet':telefonoFormSet, 'fotoAgenciadoFormSet':fotoAgenciadoFormSet, 'videoAgenciadoFormSet':videoAgenciadoFormSet, 'ambiente': settings.AMBIENTE})
+
+def validate_unique_mail(value):
+  users=User.objects.filter(email=value)
+  if len(users)>0:
+    raise ValidationError('O email ingresado ja existe')
+
+class UserCreateForm(UserCreationForm):
+  email = forms.EmailField(required=True, validators=[validate_unique_mail])
+  first_name = forms.CharField( max_length=30, required=True)
+  last_name = forms.CharField( max_length=30, required=True)
+
+  class Meta:
+    model = User
+    fields = ( "username", 'password1', 'password2', "email", "first_name", 'last_name', )
 
 def registro(request):
   if request.method == 'POST':
-    form = UserCreationForm(request.POST)
+    form = UserCreateForm(request.POST)
     if form.is_valid():
       user = form.save()
       user = authenticate(username=request.POST['username'], password=request.POST['password1'])
@@ -83,7 +103,7 @@ def registro(request):
       messages.info(request,'Por favor atualice os dados de seu perfil a ser analizados por nossa agencia')
       return redirect('/agenciado/')
   else:
-    form = UserCreationForm()
+    form = UserCreateForm()
 
-  return render(request,'user/registro.html',{'form':form})
+  return render(request,'user/registro.html',{'form':form, 'ambiente': settings.AMBIENTE})
 

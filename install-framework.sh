@@ -116,6 +116,9 @@ service apache restart
 
 apt-get install python-coverage
 
+cd "$INSTALL_SCRIPT_DIR"
+mkdir collectedstatic
+
 
 echo ''
 echo 'A continuación debería realizar las siguientes tareas:'

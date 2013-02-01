@@ -122,3 +122,16 @@ def trabajo_enviar_mail_productora(request,trabajo_id):
     form = MailForm(initial={'destinatario':trabajo.productora.mail, 'asunto': asunto })
 
   return render(request,'trabajo/trabajo/enviar_mail_productora.html',{'form': form, 'trabajo': trabajo, 'ambiente': settings.AMBIENTE })
+
+def busquedas(request):
+  trabajos=Trabajo.objects.filter(estado='AT')
+  return render(request,'trabajo/trabajo/busquedas.html',{'trabajos': trabajos, 'ambiente': settings.AMBIENTE })
+
+def busqueda(request,trabajo_id):
+  trabajos = Trabajo.objects.filter(estado='AT')
+  trabajo = Trabajo.objects.get(pk=trabajo_id)
+  return render(request,'trabajo/trabajo/busqueda.html',{'trabajos': trabajos, 'ambiente': settings.AMBIENTE, 'trabajo': trabajo })
+
+def portfolio(request):
+  portfolio=ItemPortfolio.objects.filter()
+  return render(request,'trabajo/portfolio/portfolio.html',{'portfolio': portfolio, 'ambiente': settings.AMBIENTE })
