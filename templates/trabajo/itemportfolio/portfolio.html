@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %} 
+
+<div class='span-18'>
+{% block contenido_portfolio %}
+{%if portfolio %}
+  Selecione um dos items do portifolio.
+{%else%}
+  O sentimos, ainda nao temos publicado os items de nosso portifolio.
+{%endif%}
+{% endblock %}
+</div>
+
+<div class='span-6 last'>
+{% block menu_portfolio %}
+
+{% include 'trabajo/itemportfolio/box_portfolio.html'%}
+
+{% endblock %}
+</div>
+
+{% endblock %}

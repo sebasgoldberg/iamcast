@@ -20,9 +20,12 @@ from django.conf import settings
 from django.template import loader, Context
 from agencia.mail import MailAgencia
 from django.contrib import messages
+from trabajo.models import Trabajo, ItemPortfolio
 
 def index(request):
-  return render(request,'agencia/index.html', {'ambiente': settings.AMBIENTE})
+  trabajos = Trabajo.objects.filter(estado='AT').order_by('-fecha_ingreso')[:5]
+  portfolio = ItemPortfolio.objects.order_by('-fecha')[:5]
+  return render(request,'agencia/index.html', {'ambiente': settings.AMBIENTE, 'trabajos': trabajos, 'portfolio': portfolio})
 
 def logout_view(request):
   logout(request)
@@ -68,15 +71,6 @@ def reiniciar_clave(request):
 
   return render(request,'user/reiniciar_clave.html',{'form':form, 'ambiente':settings.AMBIENTE})
 
-def busquedas(request):
-  if 'trabajo' in settings.INSTALLED_APPS:
-    return redirect('/trabajo/busquedas/')
-  else:
-    return redirect('/')
-
-def portfolio(request):
-  if 'trabajo' in settings.INSTALLED_APPS:
-    return redirect('/trabajo/portfolio/')
-  else:
-    return redirect('/')
+def contacto(request):
+  return render(request,'agencia/contacto.html', {'ambiente': settings.AMBIENTE})
 

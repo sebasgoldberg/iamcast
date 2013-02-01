@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Contato</h2>
+
+  <div class='span-12'>
+  <div class='box'>
+  <a href=mailto:{{ambiente.agencia.email}}>{{ambiente.agencia.email}}</a>
+  <hr/>
+  {% for telefono in ambiente.agencia.telefonos %}
+    {{telefono}}<br/>
+  {% endfor%}
+  <hr/>
+  {{ambiente.agencia.direccion}}
+  </div>
+  </div>
+
+
+  <div class='span-12 last'>
+  <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com.ar/maps?f=q&amp;source=s_q&amp;hl=es-419&amp;geocode=&amp;q=Rua+Dom+Luis+Felipe+de+Orleans,+530+-+Vila+Maria,+S%C3%A3o+Paulo+-+SP+-+02118-000&amp;aq=&amp;sll=-38.341656,-63.28125&amp;sspn=44.819375,101.513672&amp;ie=UTF8&amp;hq=&amp;hnear=R.+Dom+Lu%C3%ADs+Felipe+de+Orleans,+530+-+Vila+Mariana,+S%C3%A3o+Paulo,+02118-000,+Brasil&amp;ll=-23.516529,-46.590799&amp;spn=0.006985,0.012392&amp;t=m&amp;z=14&amp;output=embed"></iframe><br /><small><a href="http://maps.google.com.ar/maps?f=q&amp;source=embed&amp;hl=es-419&amp;geocode=&amp;q=Rua+Dom+Luis+Felipe+de+Orleans,+530+-+Vila+Maria,+S%C3%A3o+Paulo+-+SP+-+02118-000&amp;aq=&amp;sll=-38.341656,-63.28125&amp;sspn=44.819375,101.513672&amp;ie=UTF8&amp;hq=&amp;hnear=R.+Dom+Lu%C3%ADs+Felipe+de+Orleans,+530+-+Vila+Mariana,+S%C3%A3o+Paulo,+02118-000,+Brasil&amp;ll=-23.516529,-46.590799&amp;spn=0.006985,0.012392&amp;t=m&amp;z=14" style="color:#0000FF;text-align:left">Ver mapa m�s grande</a></small>
+  </div>
+
+{% endblock %}

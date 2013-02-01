@@ -1,0 +1,8 @@
+<div class='box'>
+<h3 class='caps'>Items do Portifolio</h3>
+<ul>
+  {% for item in portfolio %}
+  <li><a href='/trabajo/itemportfolio/{{item.id}}'>{{item.titulo}}</a></li>
+  {% endfor %}
+</ul>
+</div>

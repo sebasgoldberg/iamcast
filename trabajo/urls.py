@@ -21,5 +21,6 @@ urlpatterns = patterns('trabajo.views',
     url(r'^busquedas/$', 'busquedas'),
     url(r'^busqueda/(\d+)/$', 'busqueda'),
     url(r'^portfolio/$', 'portfolio'),
+    url(r'^itemportfolio/(\d+)/$', 'itemportfolio'),
 )
 

@@ -1,0 +1,10 @@
+{% extends "trabajo/itemportfolio/portfolio.html" %}
+
+{% block contenido_portfolio %}
+{%if item %}
+  <h3>{{item.titulo}}</h3>
+  {% autoescape off %}{{item.html_media}}{% endautoescape %}
+{%else%}
+  O sentimos, o item selecionado nao foi encontrado.
+{%endif%}
+{% endblock %}

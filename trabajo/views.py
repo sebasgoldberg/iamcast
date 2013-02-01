@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import permission_required
 from django import forms
-from trabajo.models import Postulacion, Rol, Trabajo
+from trabajo.models import Postulacion, Rol, Trabajo, ItemPortfolio
 from agencia.models import Agenciado
 from django.template import loader, Context
 from agencia.mail import MailAgencia, MailForm
@@ -134,4 +134,9 @@ def busqueda(request,trabajo_id):
 
 def portfolio(request):
   portfolio=ItemPortfolio.objects.filter()
-  return render(request,'trabajo/portfolio/portfolio.html',{'portfolio': portfolio, 'ambiente': settings.AMBIENTE })
+  return render(request,'trabajo/itemportfolio/portfolio.html',{'portfolio': portfolio, 'ambiente': settings.AMBIENTE })
+
+def itemportfolio(request,item_id):
+  portfolio = ItemPortfolio.objects.filter()
+  item = ItemPortfolio.objects.get(pk=item_id)
+  return render(request,'trabajo/itemportfolio/itemportfolio.html',{'portfolio': portfolio, 'ambiente': settings.AMBIENTE, 'item': item })
