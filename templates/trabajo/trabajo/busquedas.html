@@ -2,14 +2,21 @@
 
 {% block content %} 
 
+<h2>Pesquisas</h2>
+<hr/>
+
 <div class='span-18'>
-{% block contenido_busquedas %}
-{%if trabajos %}
-  Selecione um dos trabalhos ativos.
-{%else%}
-  O sentimos, ainda nao temos trabalhos publicados.
-{%endif%}
-{% endblock %}
+  {% block contenido_busquedas %}
+    <div class='notice'>
+      <strong>
+    {%if trabajos %}
+      Selecione um dos trabalhos ativos.
+    {%else%}
+      O sentimos, ainda nao temos trabalhos publicados.
+    {%endif%}
+      </strong>
+    </div>
+  {% endblock %}
 </div>
 
 <div class='span-6 last'>

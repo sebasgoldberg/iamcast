@@ -20,18 +20,18 @@
 
 <div class='span-9 last'>
 {%block menu_usuario%}
-  <div class='span-3 border' >
+  <div class='span-2 colborder' >
     <a href="/admin/">Administração</a>
   </div>
   {% if user.is_authenticated %}
-    <div class='span-3 border' >
+    <div class='span-2 colborder' >
     <a href="/agencia/cambio/clave/">Trocar Senha</a>
     </div>
     <div class='span-3 last' >
     <a href="/agencia/logout/">Sair ({{user.username}})</a>
     </div>
   {%else%}
-    <div class='span-3 border' >
+    <div class='span-2 colborder' >
     <a href="/agenciado/registro/">Registro</a>
     </div>
     <div class='span-3 last' >
@@ -46,11 +46,11 @@
 <div class='span-24'>
 {%block menu%}
   <h3>
-  <div class='span-4 prepend-2 border' > <a href="/">Home</a> </div>
-  <div class='span-4 border' > <a href="/agenciado/">Agenciado</a> </div>
-  <div class='span-4 border' > <a href="/trabajo/busquedas/">Pesquisas</a> </div>
-  <div class='span-4 border' > <a href="/trabajo/portfolio/">Portifolio</a> </div>
-  <div class='span-4 append-2 last' > <a href="/agencia/contacto/">Contato</a> </div>
+  <div class='span-2 prepend-4 colborder' > <a href="/">Home</a> </div>
+  <div class='span-2 colborder' > <a href="/agenciado/">Agenciado</a> </div>
+  <div class='span-2 colborder' > <a href="/trabajo/busquedas/">Pesquisas</a> </div>
+  <div class='span-2 colborder' > <a href="/trabajo/portfolio/">Portifolio</a> </div>
+  <div class='span-3 append-5 last' > <a href="/agencia/contacto/">Contato</a> </div>
   </h3>
 {%endblock%}
 </div>
@@ -59,11 +59,9 @@
 
 <div class='span-24'>
 {% if messages %}
-  <ul class="messages">
   {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
   {% endfor %}
-  </ul>
 {% endif %}
 </div>
 

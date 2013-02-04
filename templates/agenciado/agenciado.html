@@ -5,41 +5,106 @@
 <form enctype="multipart/form-data" method="post"  action="/agenciado/">
   {% csrf_token %}
   {% if telefonoFormSet.non_form_errors or fotoAgenciadoFormSet.non_form_errors or videoAgenciadoFormSet.non_form_errors %}
-    <ul class="errorlist"><li>Tem errores por corregir</li></ul>
+    <div class='error'>Tem errores por corregir</div>
   {% endif %}
-  {{ form.as_p }}
 
-  <table>
-    <thead>
-      <h3>Telefonos</h3>
-      {% for error in telefonoFormSet.non_form_errors %}
-        <ul class="errorlist"><li>{{ error }}</li></ul>
-      {% endfor %}
-    </thead>
-    {{ telefonoFormSet }}
-  </table>
+  {% if form.non_form_errors %}<div class='error'>{{ form.non_field_errors }}</div>{%endif%}
 
-  <table>
-    <thead>
-      <h3>Fotos</h3>
-      {% for error in fotoAgenciadoFormSet.non_form_errors %}
-        <ul class="errorlist"><li>{{ error }}</li></ul>
-      {% endfor %}
-    </thead>
-    {{ fotoAgenciadoFormSet }}
-  </table>
+  <div class='span-24 box'>
+    <h3>Dados persoais</h3>
+    <hr/>
+    {%include 'agenciado/form_field.html' with field=form.mail layout='span-8 last'%}
+    {%include 'agenciado/form_field.html' with field=form.nombre layout='span-8'%}
+    {%include 'agenciado/form_field.html' with field=form.apellido layout='span-8'%}
+    {%include 'agenciado/form_field.html' with field=form.fecha_nacimiento layout='span-8 append-16 last'%}
+  </div>
 
-  <table>
-    <thead>
-      <h3>Videos</h3>
-      {% for error in videoAgenciadoFormSet.non_form_errors %}
-        <ul class="errorlist"><li>{{ error }}</li></ul>
-      {% endfor %}
-    </thead>
-    {{ videoAgenciadoFormSet }}
-  </table>
+  <div class='span-24 box'>
+    <h3>Dados administrativos</h3>
+    <hr/>
+    {%include 'agenciado/form_field.html' with field=form.documento_rg layout='span-8'%}
+    {%include 'agenciado/form_field.html' with field=form.documento_cpf layout='span-8'%}
+    {%include 'agenciado/form_field.html' with field=form.responsable layout='span-8 last'%}
+    {%include 'agenciado/form_field.html' with field=form.cuenta_bancaria layout='span-8 append-16 last'%}
+  </div>
 
-  <input type="submit" value="Submit" />
+  <div class='span-24 box'>
+    <h3>Dados de endereço</h3>
+    <hr/>
+    {%include 'agenciado/form_field.html' with field=form.estado layout='span-8'%}
+    {%include 'agenciado/form_field.html' with field=form.ciudad layout='span-8'%}
+    {%include 'agenciado/form_field.html' with field=form.barrio layout='span-8 last'%}
+    {%include 'agenciado/form_field.html' with field=form.direccion layout='span-8'%}
+    {%include 'agenciado/form_field.html' with field=form.codigo_postal layout='span-8 append-8 last'%}
+  </div>
+
+  <div class='span-24 box'>
+    <h3>Telefones</h3>
+    <hr/>
+    {% include 'agenciado/formset.html' with formset=telefonoFormSet forms_by_line='3' columns_by_form='8' %}
+  </div>
+
+  <div class='span-24 box'>
+    <h3>Caracteristicas fisicas</h3>
+    <hr/>
+    {%include 'agenciado/form_field.html' with field=form.sexo layout='span-8'%}
+    {%include 'agenciado/form_field.html' with field=form.ojos layout='span-8'%}
+    {%include 'agenciado/form_field.html' with field=form.pelo layout='span-8 last'%}
+    {%include 'agenciado/form_field.html' with field=form.piel layout='span-8'%}
+    {%include 'agenciado/form_field.html' with field=form.altura layout='span-8'%}
+    {%include 'agenciado/form_field.html' with field=form.peso layout='span-8 last'%}
+    {%include 'agenciado/form_field.html' with field=form.talle layout='span-8'%}
+    {%include 'agenciado/form_field.html' with field=form.talle_camisa layout='span-8'%}
+    {%include 'agenciado/form_field.html' with field=form.talle_pantalon layout='span-8 last'%}
+    {%include 'agenciado/form_field.html' with field=form.calzado layout='span-8'%}
+    {%include 'agenciado/form_field.html' with field=form.estado_dientes layout='span-8 append-8 last'%}
+  </div>
+
+  <div class='span-24 box'>
+    <h3>Habilidades</h3>
+    <hr/>
+    {%include 'agenciado/form_field.html' with field=form.deportes layout='span-24'%}
+    <hr/>
+    {%include 'agenciado/form_field.html' with field=form.danzas layout='span-24'%}
+    <hr/>
+    {%include 'agenciado/form_field.html' with field=form.instrumentos layout='span-24'%}
+    <hr/>
+    {%include 'agenciado/form_field.html' with field=form.idiomas layout='span-24'%}
+  </div>
+
+  <div class='span-24 box'>
+    <h3>Fotos</h3>
+      {% autoescape off %}
+      {{form.instance.thumbnails}}
+      {% endautoescape %}
+    <hr/>
+    {% include 'agenciado/formset.html' with formset=fotoAgenciadoFormSet forms_by_line='2' columns_by_form='12' %}
+  </div>
+
+  <div class='span-24 box'>
+    <h3>Videos</h3>
+      {% autoescape off %}
+      {{form.instance.html_small_youtube_iframes}}
+      {% endautoescape %}
+    <hr/>
+    {% include 'agenciado/formset.html' with formset=videoAgenciadoFormSet forms_by_line='3' columns_by_form='8' %}
+  </div>
+
+  <div class='span-24 box'>
+    <h3>Otros dados</h3>
+    <hr/>
+    {%include 'agenciado/form_field.html' with field=form.indicador_maneja layout='span-8'%}
+    {%include 'agenciado/form_field.html' with field=form.indicador_tiene_registro layout='span-8 last'%}
+    {%include 'agenciado/form_field.html' with field=form.trabaja_como_extra layout='span-8 last'%}
+    <hr/>
+    {%include 'agenciado/form_field.html' with field=form.como_nos_conocio layout='span-12'%}
+    {%include 'agenciado/form_field.html' with field=form.observaciones layout='span-12 last'%}
+  </div>
+
+  <div class='prepend-11 span-2 append-11 last'>
+  <input type="submit" value="Grabar" />
+  </div>
+
 </form>
 
 {% endblock %}

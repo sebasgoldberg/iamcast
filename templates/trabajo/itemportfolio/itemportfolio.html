@@ -2,8 +2,23 @@
 
 {% block contenido_portfolio %}
 {%if item %}
-  <h3>{{item.titulo}}</h3>
-  {% autoescape off %}{{item.html_media}}{% endautoescape %}
+
+  <h2>{{item.titulo}}</h2>
+
+  <hr/>
+
+  {% if item.codigo_video %}
+    <iframe width="700" height="394" src="{{item.get_youtube_iframe_url}}" frameborder="0" allowfullscreen></iframe>
+  {% elif item.imagen %}
+    <a href="item.imagen.url"><img src="{{item.imagen.url}}" width='700'/></a>
+  {% else %}
+    <h4>Nao tem registrado video o imagem para este item.<h4>
+  {% endif %}
+
+  <hr/>
+
+  {{item.comentarios}}
+
 {%else%}
   O sentimos, o item selecionado nao foi encontrado.
 {%endif%}

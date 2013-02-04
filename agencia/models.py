@@ -15,6 +15,9 @@ from django.core.exceptions import ValidationError
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill, Adjust
 from django.conf import settings
+from agencia.video import Video
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 # @pre Esta rutina se llama desde el metodo clean de una clase que lo redefine y hereda de formset
 def validarUnoIngresado(formset,campo,mensaje):
@@ -232,6 +235,13 @@ class Agenciado(models.Model):
       return "<a href='/admin/agencia/agenciado/%s/'>%s</a>" % (str(self.id),self.thumbnail())
     thumbnail_agenciado_link.allow_tags = True
 
+    def html_small_youtube_iframes(self):
+      html=''
+      for video in self.videoagenciado_set.all():
+        html="%s %s"%(html,video.html_small_youtube_iframe())
+      return html
+    html_small_youtube_iframes.allow_tags = True
+
     def telefonos(self):
       listadoTelefonos=[]
       for telefono in self.telefono_set.all():
@@ -266,14 +276,12 @@ class FotoAgenciado(models.Model):
       verbose_name = "Foto"
       verbose_name_plural = "Fotos"
 
-class VideoAgenciado(models.Model):
-    agenciado = models.ForeignKey(Agenciado)
-    url = models.URLField()
-    def __unicode__(self):
-      return self.url
-    class Meta:
-      verbose_name = "Video"
-      verbose_name_plural = "Videos"
+class VideoAgenciado(Video):
+  agenciado = models.ForeignKey(Agenciado)
+
+@receiver(pre_save, sender=VideoAgenciado)
+def callback_pre_save_videoagenciado(sender, instance, raw, using, **kwargs):
+  instance.url_to_codigo_video()
 
 class Compania(models.Model):
     descripcion = models.CharField(max_length=100, unique=True, verbose_name=u'Descripçao')
@@ -288,3 +296,4 @@ class Telefono(models.Model):
     telefono = models.CharField(max_length=60)
     def __unicode__(self):
       return self.telefono
+   

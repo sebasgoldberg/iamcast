@@ -28,6 +28,7 @@ class FotoAgenciadoInline(admin.TabularInline):
 
 class VideoAgenciadoInline(admin.TabularInline):
   model=VideoAgenciado
+  exclude = ['codigo_video']
   extra=1
   max_num=6
 

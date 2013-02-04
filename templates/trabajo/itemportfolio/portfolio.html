@@ -2,14 +2,21 @@
 
 {% block content %} 
 
+<h2>Portifolio</h2>
+<hr/>
+
 <div class='span-18'>
-{% block contenido_portfolio %}
-{%if portfolio %}
-  Selecione um dos items do portifolio.
-{%else%}
-  O sentimos, ainda nao temos publicado os items de nosso portifolio.
-{%endif%}
-{% endblock %}
+  {% block contenido_portfolio %}
+    <div class='notice'>
+    <strong>
+    {%if portfolio %}
+      Selecione um dos items do portifolio.
+    {%else%}
+      O sentimos, ainda nao temos publicado os items de nosso portifolio.
+    {%endif%}
+    </strong>
+    </div>
+  {% endblock %}
 </div>
 
 <div class='span-6 last'>
