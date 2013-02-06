@@ -7,9 +7,6 @@ from django.contrib.auth.models import User
 from django.http import HttpRequest
 from django.db.utils import IntegrityError
 from django.conf import settings
-from django.template import loader, Context
-from agencia.mail import MailAgencia
-from django.contrib import messages
 
 def crear_usuario_agenciado(agenciado):
   if agenciado.user is None:
@@ -50,29 +47,25 @@ def callback_mail_creacion_usuario(sender, instance, created, raw, using, **kwar
   """
   Si se ha actualizado en el usuario, el nombre apellido o email, se mantiene sincronizado con el agenciado.
   """
-  if not settings.AMBIENTE_PRODUCTIVO:
-    return
   if created:
-    if instance.email is not None:
-      asunto = 'Sua conta esta creada'
-      template = loader.get_template('user/mail/creacion.txt')
-      context = Context({'ambiente':settings.AMBIENTE,'user':instance})
-      text_content = template.render(context)
-      msg = MailAgencia(asunto, text_content, [instance.email])
-      msg.send()
-      messages.information(request, 'Mail com imformação da nova conta enviado para %s'%instance.mail)
-  elif instance.agenciado is not None:
-    modificado = False
-    if instance.agenciado.nombre[:30] != instance.first_name:
-      instance.agenciado.nombre = instance.first_name
-      modificado = True
-    if instance.agenciado.apellido[:30] != instance.last_name:
-      instance.agenciado.apellido = instance.last_name
-      modificado = True
-    if instance.email != '' and instance.email != instance.agenciado.mail:
-      instance.agenciado.mail = instance.email
-      modificado = True
-    if modificado:
-      instance.agenciado.save()
+    return
+
+  try:
+    instance.agenciado
+  except Agenciado.DoesNotExist:
+    return
+
+  modificado = False
+  if instance.agenciado.nombre[:30] != instance.first_name:
+    instance.agenciado.nombre = instance.first_name
+    modificado = True
+  if instance.agenciado.apellido[:30] != instance.last_name:
+    instance.agenciado.apellido = instance.last_name
+    modificado = True
+  if instance.email != '' and instance.email != instance.agenciado.mail:
+    instance.agenciado.mail = instance.email
+    modificado = True
+  if modificado:
+    instance.agenciado.save()
 
 

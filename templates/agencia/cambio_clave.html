@@ -1,9 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %} 
+  <h3>Trocar Senha</h3>
+  <hr/>
   <form action="/agencia/cambio/clave/" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit" />
+  <div class='span-9 box'>
+    {% for field in form %}
+      {%include 'agenciado/form_field.html' with field=field layout='span-9 last'%}
+    {% endfor %}
+    <input type="submit" value="Trocar" />
+  </div>
   </form>
 {% endblock %}

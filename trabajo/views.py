@@ -12,6 +12,7 @@ from django.template import loader, Context
 from agencia.mail import MailAgencia, MailForm
 from django.conf import settings
 from django.contrib import messages
+from django.template import RequestContext
 
 class SeleccionarYAgregarAgenciadosForm(forms.ModelForm):
   ids = forms.CharField(widget = forms.HiddenInput(), required = True)
@@ -106,7 +107,7 @@ def trabajo_enviar_mail_productora(request,trabajo_id):
     form = MailForm(request.POST)
     if form.is_valid():
       template = loader.get_template('trabajo/trabajo/cuerpo_mail_productora.html')
-      context = Context({'trabajo':trabajo, 'ambiente': settings.AMBIENTE })
+      context = RequestContext(request, {'trabajo':trabajo, })
       asunto = form.cleaned_data['asunto']
       destinatario = form.cleaned_data['destinatario']
 
@@ -121,22 +122,22 @@ def trabajo_enviar_mail_productora(request,trabajo_id):
     asunto = 'Detalhe de trabalho "%s"' % (trabajo.titulo,)
     form = MailForm(initial={'destinatario':trabajo.productora.mail, 'asunto': asunto })
 
-  return render(request,'trabajo/trabajo/enviar_mail_productora.html',{'form': form, 'trabajo': trabajo, 'ambiente': settings.AMBIENTE })
+  return render(request,'trabajo/trabajo/enviar_mail_productora.html',{'form': form, 'trabajo': trabajo, })
 
 def busquedas(request):
   trabajos=Trabajo.objects.filter(estado='AT')
-  return render(request,'trabajo/trabajo/busquedas.html',{'trabajos': trabajos, 'ambiente': settings.AMBIENTE })
+  return render(request,'trabajo/trabajo/busquedas.html',{'trabajos': trabajos, })
 
 def busqueda(request,trabajo_id):
   trabajos = Trabajo.objects.filter(estado='AT')
   trabajo = Trabajo.objects.get(pk=trabajo_id)
-  return render(request,'trabajo/trabajo/busqueda.html',{'trabajos': trabajos, 'ambiente': settings.AMBIENTE, 'trabajo': trabajo })
+  return render(request,'trabajo/trabajo/busqueda.html',{'trabajos': trabajos, 'trabajo': trabajo })
 
 def portfolio(request):
   portfolio=ItemPortfolio.objects.filter()
-  return render(request,'trabajo/itemportfolio/portfolio.html',{'portfolio': portfolio, 'ambiente': settings.AMBIENTE })
+  return render(request,'trabajo/itemportfolio/portfolio.html',{'portfolio': portfolio,  })
 
 def itemportfolio(request,item_id):
   portfolio = ItemPortfolio.objects.filter()
   item = ItemPortfolio.objects.get(pk=item_id)
-  return render(request,'trabajo/itemportfolio/itemportfolio.html',{'portfolio': portfolio, 'ambiente': settings.AMBIENTE, 'item': item })
+  return render(request,'trabajo/itemportfolio/itemportfolio.html',{'portfolio': portfolio, 'item': item })

@@ -21,11 +21,12 @@ from django.template import loader, Context
 from agencia.mail import MailAgencia
 from django.contrib import messages
 from trabajo.models import Trabajo, ItemPortfolio
+from django.template import RequestContext
 
 def index(request):
   trabajos = Trabajo.objects.filter(estado='AT').order_by('-fecha_ingreso')[:5]
   portfolio = ItemPortfolio.objects.order_by('-fecha')[:5]
-  return render(request,'agencia/index.html', {'ambiente': settings.AMBIENTE, 'trabajos': trabajos, 'portfolio': portfolio})
+  return render(request,'agencia/index.html', { 'trabajos': trabajos, 'portfolio': portfolio})
 
 def logout_view(request):
   logout(request)
@@ -57,7 +58,7 @@ def reiniciar_clave(request):
 
         asunto = 'Sua senha ha mudado'
         template = loader.get_template('user/mail/cambio_clave.txt')
-        context = Context({'ambiente':settings.AMBIENTE,'user':user, 'clave':password})
+        context = RequestContext(request,{'usuario':user, 'clave':password})
         text_content = template.render(context)
         msg = MailAgencia(asunto,text_content,[user.email])
         msg.send()
@@ -69,8 +70,8 @@ def reiniciar_clave(request):
   else:
     form = PasswordResetForm()
 
-  return render(request,'user/reiniciar_clave.html',{'form':form, 'ambiente':settings.AMBIENTE})
+  return render(request,'user/reiniciar_clave.html',{'form':form,})
 
 def contacto(request):
-  return render(request,'agencia/contacto.html', {'ambiente': settings.AMBIENTE})
+  return render(request,'agencia/contacto.html')
 

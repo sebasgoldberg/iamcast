@@ -23,6 +23,9 @@ from django.forms.widgets import CheckboxSelectMultiple, CheckboxInput
 from django.utils.encoding import force_unicode
 from django.utils.html import conditional_escape
 from django.utils.safestring import mark_safe
+from django.template import RequestContext
+from agencia.mail import MailAgencia
+from django.template import loader
 
 class BPCheckboxSelectMultiple(CheckboxSelectMultiple):
 
@@ -111,7 +114,7 @@ def index(request):
     telefonoFormSet=TelefonoFormSet(instance=agenciado)
     fotoAgenciadoFormSet=FotoAgenciadoFormSet(instance=agenciado)
     videoAgenciadoFormSet=VideoAgenciadoFormSet(instance=agenciado)
-  return render(request,'agenciado/agenciado.html',{'form':form, 'telefonoFormSet':telefonoFormSet, 'fotoAgenciadoFormSet':fotoAgenciadoFormSet, 'videoAgenciadoFormSet':videoAgenciadoFormSet, 'ambiente': settings.AMBIENTE})
+  return render(request,'agenciado/agenciado.html',{'form':form, 'telefonoFormSet':telefonoFormSet, 'fotoAgenciadoFormSet':fotoAgenciadoFormSet, 'videoAgenciadoFormSet':videoAgenciadoFormSet, })
 
 def validate_unique_mail(value):
   users=User.objects.filter(email=value)
@@ -134,11 +137,20 @@ def registro(request):
       user = form.save()
       user = authenticate(username=request.POST['username'], password=request.POST['password1'])
       login(request,user)
-      messages.success(request,'Registro realizado com sucesso')
-      messages.info(request,'Por favor atualice os dados de seu perfil a ser analizados por nossa agencia')
+
+      asunto = 'Sua conta esta creada'
+      template = loader.get_template('user/mail/creacion.txt')
+      context = RequestContext(request)
+      text_content = template.render(context)
+      msg = MailAgencia(asunto, text_content, [user.email])
+      msg.send()
+
+      messages.success(request,'Registro realizado com sucesso!')
+      messages.info(request,'Temos enviado para seu email dados da sua nova conta.')
+      messages.info(request,'Por favor atualice os dados de seu perfil a ser analizados por nossa agencia.')
       return redirect('/agenciado/')
   else:
     form = UserCreateForm()
 
-  return render(request,'user/registro.html',{'form':form, 'ambiente': settings.AMBIENTE})
+  return render(request,'user/registro.html',{'form':form, })
 
