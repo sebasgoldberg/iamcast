@@ -116,6 +116,8 @@ service apache restart
 
 apt-get install python-coverage
 
+./install/blueprint.sh
+
 cd "$INSTALL_SCRIPT_DIR"
 mkdir collectedstatic
 

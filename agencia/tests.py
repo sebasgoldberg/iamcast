@@ -190,7 +190,7 @@ class AgenciaTestCase(TestCase):
     self.assertEqual(response.status_code,200)
     self.assertTrue('user/reiniciar_clave.html' in [t.name for t in response.templates])
     self.assertTrue(response.context['messages'])
-    self.assertEqual(len(mail.outbox), 1)
+    self.assertTrue(len(mail.outbox)>0)
 
   #def test_validacion_mail_registro(self):
     """

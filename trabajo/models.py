@@ -27,7 +27,7 @@ class Telefono(models.Model):
   compania = models.ForeignKey(Compania, null=True, blank=True,on_delete=models.PROTECT,related_name='telefono_productora_set')
   telefono = models.CharField(max_length=60)
   def __unicode__(self):
-    return '%s (%s)' % (self.telefono,self.compania)
+    return u'%s (%s)' % (self.telefono,self.compania)
   class Meta:
     abstract = True
     verbose_name = u"Telefone"
@@ -62,7 +62,7 @@ class Productora(models.Model):
 class DireccionProductora(Direccion):
   productora = models.ForeignKey(Productora, verbose_name=u'Produtora')
   def __unicode__(self):
-    return '%s, %s, %s, %s, %s (%s)' % (self.direccion, self.barrio, self.ciudad, self.estado, self.codigo_postal, self.descripcion)
+    return u'%s, %s, %s, %s, %s (%s)' % (self.direccion, self.barrio, self.ciudad, self.estado, self.codigo_postal, self.descripcion)
 
 class TelefonoProductora(Telefono):
   productora = models.ForeignKey(Productora, verbose_name=u'Produtora')
@@ -137,7 +137,7 @@ class Trabajo(models.Model):
     fecha_ingreso = models.DateField(default=date.today(),verbose_name=u'Data ingreso')
 
     def __unicode__(self):
-      return '%s (%s)' % (self.titulo, self.fecha_ingreso)
+      return u'%s (%s)' % (self.titulo, self.fecha_ingreso)
     class Meta:
       verbose_name = u'Trabalho'
       verbose_name_plural = u"Trabalhos" 
@@ -197,7 +197,7 @@ class EventoTrabajo(Evento):
   def descripcion_tipo(self):
     return DICT_TIPO_EVENTO_TRABAJO[self.tipo]
   def __unicode__(self):
-    return '%s | %s | %s | %s, %s, %s, %s, %s' % (EventoTrabajo.descripcion_tipo(self), self.descripcion, self.fecha, self.direccion, self.barrio, self.ciudad, self.estado, self.codigo_postal)
+    return u'%s | %s | %s | %s, %s, %s, %s, %s' % (EventoTrabajo.descripcion_tipo(self), self.descripcion, self.fecha, self.direccion, self.barrio, self.ciudad, self.estado, self.codigo_postal)
 
 class Rol(models.Model):
     trabajo = models.ForeignKey(Trabajo,on_delete=models.PROTECT)
@@ -205,7 +205,7 @@ class Rol(models.Model):
     cache = models.DecimalField(max_digits=15, decimal_places=4, null=True, blank=True)
     caracteristicas = models.TextField(verbose_name=u'Caraterísticas')
     def __unicode__(self):
-      return '%s (%s)' % (self.descripcion, self.trabajo.titulo)
+      return u'%s (%s)' % (self.descripcion, self.trabajo.titulo)
     class Meta:
       ordering = ['-trabajo__fecha_ingreso','descripcion']
       verbose_name = u"Perfil"
@@ -247,7 +247,7 @@ class EventoRol(Evento):
   def descripcion_tipo(self):
     return DICT_TIPO_EVENTO_TRABAJO[self.tipo]
   def __unicode__(self):
-    return '%s | %s | %s | %s, %s, %s, %s, %s' % (self.descripcion_tipo, self.descripcion, self.fecha, self.direccion, self.barrio, self.ciudad, self.estado, self.codigo_postal)
+    return u'%s | %s | %s | %s, %s, %s, %s, %s' % (self.descripcion_tipo, self.descripcion, self.fecha, self.direccion, self.barrio, self.ciudad, self.estado, self.codigo_postal)
 
 class Postulacion(models.Model):
     agenciado = models.ForeignKey(Agenciado,on_delete=models.PROTECT)
@@ -262,7 +262,7 @@ class Postulacion(models.Model):
     DICT_ESTADO_POSTULACION=dict(ESTADO_POSTULACION)
     estado = models.CharField(max_length=2,choices=ESTADO_POSTULACION)
     def __unicode__(self):
-      return '%s | %s | %s' % (self.agenciado,Postulacion.DICT_ESTADO_POSTULACION[self.estado],self.rol)
+      return u'%s | %s | %s' % (self.agenciado,Postulacion.DICT_ESTADO_POSTULACION[self.estado],self.rol)
     class Meta:
       ordering = ['-rol__trabajo__fecha_ingreso', 'rol__descripcion', 'agenciado__nombre', 'agenciado__apellido']
       verbose_name = u'Postulaçao'

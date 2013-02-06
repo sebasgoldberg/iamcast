@@ -202,7 +202,7 @@ class Agenciado(models.Model):
     recurso_id = models.IntegerField(null=True, editable=False) #Clave en aplicacion DELPHI
 
     def __unicode__(self):
-      return '%s %s (%s)' % (self.nombre, self.apellido, self.fecha_nacimiento)
+      return u'%s %s (%s)' % (self.nombre, self.apellido, self.fecha_nacimiento)
 
     def thumbnail(self):
       url = ''
