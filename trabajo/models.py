@@ -59,6 +59,34 @@ class Productora(models.Model):
     verbose_name = u"Produtora"
     verbose_name_plural = u"Produtoras"
 
+  def telefonos(self):
+    html = '<ul>'
+    for telefono in self.telefonoproductora_set.all():
+      html += '<li>%s</li>'%telefono
+    html += '</ul>'
+    return html
+  telefonos.allow_tags = True
+  telefonos.short_description = u'Telefones'
+
+  def trabajos_activos(self):
+    html = '<ul>'
+    for trabajo in Trabajo.filter_activos(self.trabajo_set):
+      html += '<li>%s</li>'%trabajo.admin_link()
+    html += '</ul>'
+    return html
+  trabajos_activos.allow_tags = True
+  trabajos_activos.short_description = u'Trabalhos ativos'
+    
+  def trabajos_iniciados(self):
+    html = '<ul>'
+    for trabajo in Trabajo.filter_iniciados(self.trabajo_set):
+      html += '<li>%s</li>'%trabajo.admin_link()
+    html += '</ul>'
+    return html
+  trabajos_iniciados.allow_tags = True
+  trabajos_iniciados.short_description = u'Trabalhos iniciados'
+    
+
 class DireccionProductora(Direccion):
   productora = models.ForeignKey(Productora, verbose_name=u'Produtora')
   def __unicode__(self):
@@ -87,21 +115,25 @@ class ItemPortfolio(models.Model):
     def html_youtube_iframe(self):
       return '<iframe width="373" height="210" src="%s" frameborder="0" allowfullscreen></iframe>' % self.get_youtube_iframe_url()
     html_youtube_iframe.allow_tags = True 
+    html_youtube_iframe.short_description = u'Video'
     def html_small_youtube_iframe(self):
       return '<iframe width="186" height="105" src="%s" frameborder="0" allowfullscreen></iframe>' % self.get_youtube_iframe_url()
     html_small_youtube_iframe.allow_tags = True 
+    html_small_youtube_iframe.short_description = u'Video'
     def html_media(self):
       if self.codigo_video:
         return self.html_youtube_iframe()
       else:
         return self.html_thumbnail()
     html_media.allow_tags = True
+    html_media.short_description = u'Video ou imagem'
     def html_small_media(self):
       if self.codigo_video:
         return self.html_small_youtube_iframe()
       else:
         return self.html_thumbnail()
     html_small_media.allow_tags = True
+    html_small_media.short_description = u'Video ou imagem'
     def html_thumbnail(self):
       if not self.imagen:
         return
@@ -136,6 +168,14 @@ class Trabajo(models.Model):
 # @todo agregar validación entre secuencia de las distintas fechas
     fecha_ingreso = models.DateField(default=date.today(),verbose_name=u'Data ingreso')
 
+    @staticmethod
+    def filter_iniciados(queryset):
+      return queryset.filter(estado='IN')
+
+    @staticmethod
+    def filter_activos(queryset):
+      return queryset.filter(estado='AT')
+
     def __unicode__(self):
       return u'%s (%s)' % (self.titulo, self.fecha_ingreso)
     class Meta:
@@ -149,6 +189,7 @@ class Trabajo(models.Model):
         url = self.thumbnail.url
       return "<img src='%s' height=100 />" % url
     thumbnail_img.allow_tags = True
+    thumbnail_img.short_description = u'Imagem'
 
     def thumbnail_img_link(self):
       url = ''
@@ -156,6 +197,7 @@ class Trabajo(models.Model):
         url = self.thumbnail.url
       return "<a href='%s'><img src='%s' height=100 /></a>" % (self.imagen.url, url)
     thumbnail_img_link.allow_tags = True
+    thumbnail_img_link.short_description = u'Imagem'
 
     def roles(self):
       roles=self.rol_set.all()
@@ -165,19 +207,21 @@ class Trabajo(models.Model):
       html += '</ul>'
       return html
     roles.allow_tags = True
-    roles.verbose_name = 'Perfis'
+    roles.short_description = u'Perfis'
 
     def productora_admin_link(self):
       if self.productora.id is None:
         return None
       return "<a href='/admin/trabajo/productora/%s/'>%s</a>" % (self.productora.id, str(self.productora))
     productora_admin_link.allow_tags=True
+    productora_admin_link.short_description = u'Link a produtora'
 
     def admin_link(self):
       if self.id is None:
         return None
       return "<a href='/admin/trabajo/trabajo/%s/'>%s</a>" % (self.id, str(self))
     admin_link.allow_tags=True
+    admin_link.short_description = u'Link ao trabalho'
 
 TIPO_EVENTO_TRABAJO=(
   ('C', u'Casting'),
@@ -232,11 +276,13 @@ class Rol(models.Model):
       if self.id is None:
         return None
       return "<a href='/admin/trabajo/rol/%s/'>%s</a>" % (self.id, str(self))
-    admin_link.allow_tags=True
+    admin_link.allow_tags = True
+    admin_link.short_description = u'Link ao perfil'
 
     def trabajo_admin_link(self):
       return self.trabajo.admin_link()
     trabajo_admin_link.allow_tags=True
+    trabajo_admin_link.short_description = u'Link ao trabalho'
 
 class EventoRol(Evento):
   tipo = models.CharField(max_length=1,choices=TIPO_EVENTO_TRABAJO)
@@ -275,6 +321,7 @@ class Postulacion(models.Model):
     def thumbnail_agenciado_link(self):
       return self.agenciado.thumbnail_agenciado_link()
     thumbnail_agenciado_link.allow_tags = True
+    thumbnail_agenciado_link.short_description = u'Link ao agenciado'
 
     def nombre_agenciado(self):
       return self.agenciado.nombre
@@ -287,10 +334,12 @@ class Postulacion(models.Model):
         return ''
       return "<a href='/admin/agencia/agenciado/%s/'>%s</a>" % (self.agenciado.id, self.agenciado)
     agenciado_admin_link.allow_tags = True
+    agenciado_admin_link.short_description = u'Link ao agenciado'
 
     def rol_admin_link(self):
       return self.rol.admin_link()
     rol_admin_link.allow_tags = True
+    rol_admin_link.short_description = u'Link ao perfil'
 
     def descripcion_estado(self):
       return Postulacion.DICT_ESTADO_POSTULACION[self.estado]

@@ -49,6 +49,11 @@ class TrabajoInline(admin.TabularInline):
 
 class ProductoraAdmin(admin.ModelAdmin):
   inlines = [DireccionProductoraInline, TelefonoProductoraInline, TrabajoInline]
+  list_display=[
+    'id', 'nombre', 'mail', 'telefonos', 'trabajos_iniciados', 'trabajos_activos'
+  ]
+  list_display_links = ['id', 'nombre']
+  search_fields=['nombre', 'id']
 
 class RolAdmin(admin.ModelAdmin):
   readonly_fields=[

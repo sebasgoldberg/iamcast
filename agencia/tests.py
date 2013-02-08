@@ -13,16 +13,17 @@ class AgenciaTestCase(TestCase):
 
   fixtures = ['agencia/fixtures/test-data.yaml']
 
-  def get_dict_form_agenciado(self):
+  @staticmethod
+  def get_dict_form_agenciado(mail=u'test@gmail.com',rg=u'123100',cpf=u'123100'):
     return {
-      'mail' : u'test@gmail.com',
+      'mail' : mail,
       ## Datos personales
       'nombre' : u'Test',
       'apellido' : u'Test',
       'fecha_nacimiento' : date(1982,12,20),
       ## Datos Administrativos
-      'documento_rg' : u'123100',
-      'documento_cpf' : u'123100',
+      'documento_rg' : rg,
+      'documento_cpf' : cpf,
       'responsable' : u'Responsable de Test',
       #cuenta_bancaria: 
       ## Datos de direccion
@@ -73,6 +74,13 @@ class AgenciaTestCase(TestCase):
 
       }
 
+  @staticmethod
+  def adjuntar_imagen_y_postear(client,url,dict_form_agenciado,imagen='test-data/burns.jpg'):
+    f=open(imagen)
+    dict_form_agenciado['fotoagenciado_set-0-foto'] = f
+    response = client.post(url, dict_form_agenciado, follow = True)
+    f.close()
+    return response
 
   def test_creacion_agenciado(self):
 
@@ -149,7 +157,7 @@ class AgenciaTestCase(TestCase):
     self.assertEqual(response.status_code,200)
     self.assertTrue('agenciado/agenciado.html' in [t.name for t in response.templates])
 
-    dict_form_agenciado=self.get_dict_form_agenciado()
+    dict_form_agenciado=AgenciaTestCase.get_dict_form_agenciado()
 
     # Se intenta salvar los datos y se verifica que hay un error referente a las fotos del agenciado
     response = c.post('/agenciado/', dict_form_agenciado)
@@ -159,10 +167,7 @@ class AgenciaTestCase(TestCase):
     self.assertFalse(len(response.context['fotoAgenciadoFormSet'].non_form_errors())==0)
 
     # Se agrega la foto y se intenta actualizar el perfil.
-    f=open('test-data/burns.jpg')
-    dict_form_agenciado['fotoagenciado_set-0-foto'] = f
-    response = c.post('/agenciado/', dict_form_agenciado, follow = True)
-    f.close()
+    response = AgenciaTestCase.adjuntar_imagen_y_postear(c,'/agenciado/',dict_form_agenciado)
     self.assertEqual(response.status_code,200)
     self.assertTrue('agenciado/agenciado.html' in [t.name for t in response.templates])
     # Se verifica que no existen errores

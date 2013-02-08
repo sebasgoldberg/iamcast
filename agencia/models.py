@@ -210,6 +210,7 @@ class Agenciado(models.Model):
         url = self.fotoagenciado_set.order_by('id')[:1][0].thumbnail.url
       return "<img src='%s' height=100 />" % url
     thumbnail.allow_tags = True
+    thumbnail.short_description = u'Imagem'
 
     def thumbnails(self):
       html=''
@@ -220,6 +221,7 @@ class Agenciado(models.Model):
         html = html + "<a href='%s'><img src='%s' height=100 /></a>" % (url,url_thumbnail)
       return html
     thumbnails.allow_tags = True
+    thumbnails.short_description = u'Imagems'
 
     def thumbnails_absolute_uri(self):
       html=''
@@ -229,11 +231,13 @@ class Agenciado(models.Model):
         url_thumbnail = "http://%s%s" % (settings.AMBIENTE.dominio, foto.thumbnail.url)
         html = html + "<a href='%s'><img src='%s' height=100 /></a>" % (url,url_thumbnail)
       return html
-    thumbnails.allow_tags = True
+    thumbnails_absolute_uri.allow_tags = True
+    thumbnails_absolute_uri.short_description = u'Imagems'
 
     def thumbnail_agenciado_link(self):
       return "<a href='/admin/agencia/agenciado/%s/'>%s</a>" % (str(self.id),self.thumbnail())
     thumbnail_agenciado_link.allow_tags = True
+    thumbnail_agenciado_link.short_description = u'Link ao agenciado'
 
     def html_small_youtube_iframes(self):
       html=''
@@ -241,6 +245,7 @@ class Agenciado(models.Model):
         html="%s %s"%(html,video.html_small_youtube_iframe())
       return html
     html_small_youtube_iframes.allow_tags = True
+    html_small_youtube_iframes.short_description = u'Video'
 
     def telefonos(self):
       listadoTelefonos=[]
@@ -248,13 +253,14 @@ class Agenciado(models.Model):
         listadoTelefonos.append(telefono.telefono)
       return '<br />'.join(listadoTelefonos)
     telefonos.allow_tags = True
-    telefonos.short_description = 'Telefones'
+    telefonos.short_description = u'Telefones'
 
     def admin_link(self):
       if self is None:
         return ''
       return "<a href='/admin/agencia/agenciado/%s/'>%s</a>" % (self.id,self)
     admin_link.allow_tags=True
+    admin_link.short_description = u'Link ao agenciado'
 
 
     def descripcion(self):

@@ -10,7 +10,7 @@
 
   {% if form.non_form_errors %}<div class='error'>{{ form.non_field_errors }}</div>{%endif%}
 
-  <div class='span-24 box'>
+  <div class='span-24'>
     <h3>Dados persoais</h3>
     <hr/>
     {%include 'agenciado/form_field.html' with field=form.mail layout='span-8 last'%}
@@ -19,7 +19,7 @@
     {%include 'agenciado/form_field.html' with field=form.fecha_nacimiento layout='span-8 append-16 last'%}
   </div>
 
-  <div class='span-24 box'>
+  <div class='span-24'>
     <h3>Dados administrativos</h3>
     <hr/>
     {%include 'agenciado/form_field.html' with field=form.documento_rg layout='span-8'%}
@@ -28,7 +28,7 @@
     {%include 'agenciado/form_field.html' with field=form.cuenta_bancaria layout='span-8 append-16 last'%}
   </div>
 
-  <div class='span-24 box'>
+  <div class='span-24'>
     <h3>Dados de endereço</h3>
     <hr/>
     {%include 'agenciado/form_field.html' with field=form.estado layout='span-8'%}
@@ -38,13 +38,13 @@
     {%include 'agenciado/form_field.html' with field=form.codigo_postal layout='span-8 append-8 last'%}
   </div>
 
-  <div class='span-24 box'>
+  <div class='span-24'>
     <h3>Telefones</h3>
     <hr/>
     {% include 'agenciado/formset.html' with formset=telefonoFormSet forms_by_line='3' columns_by_form='8' %}
   </div>
 
-  <div class='span-24 box'>
+  <div class='span-24'>
     <h3>Caracteristicas fisicas</h3>
     <hr/>
     {%include 'agenciado/form_field.html' with field=form.sexo layout='span-8'%}
@@ -60,7 +60,7 @@
     {%include 'agenciado/form_field.html' with field=form.estado_dientes layout='span-8 append-8 last'%}
   </div>
 
-  <div class='span-24 box'>
+  <div class='span-24 '>
     <h3>Habilidades</h3>
     <hr/>
     {%include 'agenciado/form_field.html' with field=form.deportes layout='span-24'%}
@@ -72,7 +72,7 @@
     {%include 'agenciado/form_field.html' with field=form.idiomas layout='span-24'%}
   </div>
 
-  <div class='span-24 box'>
+  <div class='span-24'>
     <h3>Fotos</h3>
       {% autoescape off %}
       {{form.instance.thumbnails}}
@@ -81,7 +81,7 @@
     {% include 'agenciado/formset.html' with formset=fotoAgenciadoFormSet forms_by_line='2' columns_by_form='12' %}
   </div>
 
-  <div class='span-24 box'>
+  <div class='span-24'>
     <h3>Videos</h3>
       {% autoescape off %}
       {{form.instance.html_small_youtube_iframes}}
@@ -90,7 +90,7 @@
     {% include 'agenciado/formset.html' with formset=videoAgenciadoFormSet forms_by_line='3' columns_by_form='8' %}
   </div>
 
-  <div class='span-24 box'>
+  <div class='span-24'>
     <h3>Otros dados</h3>
     <hr/>
     {%include 'agenciado/form_field.html' with field=form.indicador_maneja layout='span-8'%}
