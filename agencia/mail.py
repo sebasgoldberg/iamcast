@@ -7,12 +7,21 @@ from django.contrib import messages
 
 class MailForm(forms.Form):
   # @todo Agregar múltiples destinatarios.
-  destinatario=forms.EmailField()
+  destinatarios=forms.CharField(widget=forms.Textarea, help_text=u'Adicione os destinatarios separados por ",", ";" ou salto de linea')
   asunto=forms.CharField()
+
+  def get_destinatarios(self):
+    destinatarios_text = self.cleaned_data['destinatarios']
+    destinatarios = []
+    for destinatario in destinatarios_text.replace('\n',',').replace(';',',').replace('\r',',').split(','):
+      if destinatario != '':
+        destinatarios+=[destinatario]
+    return destinatarios
+  
 
 class MailAgencia(EmailMultiAlternatives):
 
-  def __init__(self,asunto, cuerpo_de_texto, destinatarios):
+  def __init__(self,asunto, cuerpo_de_texto, destinatarios,ccs=None):
     
     _asunto = 'Agencia %s - %s' % (settings.AMBIENTE.agencia.nombre, asunto)
     _headers = {'Reply-To': settings.AMBIENTE.agencia.email}
@@ -22,7 +31,8 @@ class MailAgencia(EmailMultiAlternatives):
       cuerpo_de_texto,
       settings.AMBIENTE.email.user,
       destinatarios,
-      headers = _headers
+      headers = _headers,
+      cc=ccs
     )
 
   def set_html_body(self,html_content):

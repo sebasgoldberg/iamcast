@@ -109,18 +109,19 @@ def trabajo_enviar_mail_productora(request,trabajo_id):
       template = loader.get_template('trabajo/trabajo/cuerpo_mail_productora.html')
       context = RequestContext(request, {'trabajo':trabajo, })
       asunto = form.cleaned_data['asunto']
-      destinatario = form.cleaned_data['destinatario']
+      destinatarios = form.get_destinatarios()
+      ccs = [request.user.email,settings.AMBIENTE.agencia.email]
 
       text_content = 'Este mensagem deve ser visualizado em formato HTML.'
       html_content = template.render(context)
-      msg = MailAgencia(asunto, text_content, [destinatario])
+      msg = MailAgencia(asunto, text_content, destinatarios,ccs=ccs)
       msg.set_html_body(html_content)
       msg.send()
-      messages.success(request, 'Trabalho enviado com sucesso a %s'%destinatario)
+      messages.success(request, 'Trabalho enviado com sucesso a os seguintes destinatarios y copias ocultas: %s %s' % (str(destinatarios),str(ccs)))
       return redirect('/admin/trabajo/trabajo/%s/'%trabajo_id)
   else:
     asunto = 'Detalhe de trabalho "%s"' % (trabajo.titulo,)
-    form = MailForm(initial={'destinatario':trabajo.productora.mail, 'asunto': asunto })
+    form = MailForm(initial={'destinatarios':trabajo.productora.mail, 'asunto': asunto })
 
   return render(request,'trabajo/trabajo/enviar_mail_productora.html',{'form': form, 'trabajo': trabajo, })
 
