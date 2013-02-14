@@ -129,7 +129,7 @@ INSTALLED_APPS = (
     'imagekit',
     'agencia',
     'agenciado',
-    #'trabajo',
+    'trabajo',
 )
 
 if not ambiente.productivo:
