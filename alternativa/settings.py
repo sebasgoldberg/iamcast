@@ -133,7 +133,8 @@ INSTALLED_APPS = (
 )
 
 if not ambiente.productivo:
-  INSTALLED_APPS+=ambiente.app_in_dev
+  if ambiente.app_in_dev is not None:
+    INSTALLED_APPS+=ambiente.app_in_dev
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
