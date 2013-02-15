@@ -250,7 +250,10 @@ class Agenciado(models.Model):
     def telefonos(self):
       listadoTelefonos=[]
       for telefono in self.telefono_set.all():
-        listadoTelefonos.append(telefono.telefono)
+        if telefono.compania is not None:
+          listadoTelefonos.append('%s: %s' % (telefono.compania, telefono.telefono))
+        else:
+          listadoTelefonos.append(telefono.telefono)
       return '<br />'.join(listadoTelefonos)
     telefonos.allow_tags = True
     telefonos.short_description = u'Telefones'
