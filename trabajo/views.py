@@ -13,6 +13,7 @@ from agencia.mail import MailAgencia, MailForm
 from django.conf import settings
 from django.contrib import messages
 from django.template import RequestContext
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 class SeleccionarYAgregarAgenciadosForm(forms.ModelForm):
   ids = forms.CharField(widget = forms.HiddenInput(), required = True)
@@ -126,19 +127,31 @@ def trabajo_enviar_mail_productora(request,trabajo_id):
   return render(request,'trabajo/trabajo/enviar_mail_productora.html',{'form': form, 'trabajo': trabajo, })
 
 def busquedas(request):
-  trabajos=Trabajo.objects.filter(estado='AT')
-  return render(request,'trabajo/trabajo/busquedas.html',{'trabajos': trabajos, })
-
-def busqueda(request,trabajo_id):
-  trabajos = Trabajo.objects.filter(estado='AT')
-  trabajo = Trabajo.objects.get(pk=trabajo_id)
-  return render(request,'trabajo/trabajo/busqueda.html',{'trabajos': trabajos, 'trabajo': trabajo })
+  trabajos=Trabajo.objects.filter(estado='AT').order_by('-fecha_ingreso')
+  trabajo = None
+  id=request.GET.get('id')
+  if id is not None:
+    try:
+      trabajo = trabajos.get(pk=id)
+    except Trabajo.DoesNotExist:
+      pass
+  return render(request,'trabajo/trabajo/busquedas.html',{'trabajos': trabajos,'trabajo':trabajo })
 
 def portfolio(request):
-  portfolio=ItemPortfolio.objects.filter()
-  return render(request,'trabajo/itemportfolio/portfolio.html',{'portfolio': portfolio,  })
+  items=ItemPortfolio.objects.order_by('-fecha')
 
-def itemportfolio(request,item_id):
-  portfolio = ItemPortfolio.objects.filter()
-  item = ItemPortfolio.objects.get(pk=item_id)
-  return render(request,'trabajo/itemportfolio/itemportfolio.html',{'portfolio': portfolio, 'item': item })
+  paginator = Paginator(items, 9)
+      
+  page = request.GET.get('page')
+
+  if page is None:
+    page = 1
+
+  try:
+    portfolio = paginator.page(page)
+  except EmptyPage:
+    # If page is out of range (e.g. 9999), deliver last page of results.
+    portfolio = paginator.page(paginator.num_pages)
+                                              
+  return render(request,'trabajo/itemportfolio/portfolio.html',{'portfolio': portfolio,})
+

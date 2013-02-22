@@ -19,6 +19,7 @@ from agencia.video import Video
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
+
 # @pre Esta rutina se llama desde el metodo clean de una clase que lo redefine y hereda de formset
 def validarUnoIngresado(formset,campo,mensaje):
   if any(formset.errors):
@@ -212,6 +213,12 @@ class Agenciado(models.Model):
     thumbnail.allow_tags = True
     thumbnail.short_description = u'Imagem'
 
+    def thumbnail_url(self):
+      url = ''
+      if any(self.fotoagenciado_set.order_by('id')):
+        url = self.fotoagenciado_set.order_by('id')[:1][0].thumbnail.url
+      return url
+
     def thumbnails(self):
       html=''
       fotos=self.fotoagenciado_set.order_by('id')
@@ -265,12 +272,17 @@ class Agenciado(models.Model):
     admin_link.allow_tags=True
     admin_link.short_description = u'Link ao agenciado'
 
-
     def descripcion(self):
       return 'Edad %s, sexo %s, olhos %s, cabelo %s, pele %s, atura %s, peso %s, estado dentes %s.'%(str(self.edad()), Agenciado.DICT_SEXO[self.sexo],self.ojos,self.pelo,self.piel,self.altura,self.peso, self.estado_dientes)
     def edad(self):
       return (date.today()-self.fecha_nacimiento).days/365
     descripcion.short_description = 'Descripçao'
+
+    def ids_roles_postulaciones(self):
+      if self.activo:
+        return [ postulacion.rol.id for postulacion in self.postulacion_set.all() ]
+      else:
+        return []
 
     class Meta:
       ordering = ['nombre', 'apellido']
@@ -279,6 +291,7 @@ class FotoAgenciado(models.Model):
     agenciado = models.ForeignKey(Agenciado)
     foto = models.ImageField(upload_to='agenciados/fotos/')
     thumbnail = ImageSpecField([Adjust(contrast=1.2, sharpness=1.1), ResizeToFill(100,100)], image_field='foto', format='JPEG', options={'quality': 90})
+    mini_thumbnail = ImageSpecField([Adjust(contrast=1.2, sharpness=1.1), ResizeToFill(60,60)], image_field='foto', format='JPEG', options={'quality': 90})
     def __unicode__(self):
       return self.foto.url
     class Meta:

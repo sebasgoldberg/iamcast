@@ -6,5 +6,5 @@ agencia-ssl
 alternativa/ambiente.py
 .coverage
 collectedstatic/
-alternativa/static/css/blueprint/
+alternativa/static/bootstrap/
 

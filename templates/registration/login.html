@@ -1,29 +1,15 @@
 {% extends "base.html" %}
 {% load url from future %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-<h3>Ingresar</h3>
-<hr/>
-<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
-{% csrf_token %}
-  <div class='span-8 box'>
-    {% if form.errors %}
-      <div class='error'>
-        Usuario ou senha invalidos
-      </div>
-    {% endif %}
-    {%include 'agenciado/form_field.html' with field=form.username layout='span-8 last'%}
-    {%include 'agenciado/form_field.html' with field=form.password layout='span-8 last'%}
-    <input type="submit" value="Login" />
-    <hr/>
-    <div class='span-4'>
-      <strong><a href="/agenciado/registro/">Crear nova conta</a></strong>
-    </div>
-    <div class='span-4 last'>
-      <strong><a href="/agencia/reiniciar/clave/">Nao lembro minha senha</a></strong>
-    </div>
-  </div>
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
+
+<legend>Ingresar</legend>
+
+{% crispy form %}
+
+<a class="btn" href="/agenciado/registro/">Crear nova conta</a>
+<a class="btn" href="/agencia/reiniciar/clave/">Nao lembro minha senha</a>
+
 
 {% endblock %}

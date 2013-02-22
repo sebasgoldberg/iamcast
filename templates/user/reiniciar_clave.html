@@ -1,13 +1,7 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %} 
-  <h3>Gerar Senha</h3>
-  <hr/>
-  <form action="/agencia/reiniciar/clave/" method="post">
-    {% csrf_token %}
-    <div class='span-8 box'>
-      {%include 'agenciado/form_field.html' with field=form.email layout='span-8 last'%}
-      <input type="submit" value="Gerar" />
-    </div>
-  </form>
+  <legend>Gerar Senha</legend>
+  {% crispy form %}
 {% endblock %}

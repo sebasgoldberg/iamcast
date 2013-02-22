@@ -16,5 +16,6 @@ urlpatterns = patterns('agenciado.views',
     # Uncomment the next line to enable the admin:
     url(r'^$', 'index'),
     url(r'^registro/$', 'registro'),
+    url(r'^postular/$', 'postular'),
 )
 

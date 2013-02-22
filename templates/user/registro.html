@@ -1,25 +1,9 @@
 {% extends "base.html" %}
 
-{% block content %} 
-  <h3>Registro</h3>
-  <hr/>
-  <form action="/agenciado/registro/" method="post">
-    {% csrf_token %}
-    <div class='span-8 box'>
-    {%include 'agenciado/form_field.html' with field=form.username layout='span-8 last'%}
-    {%include 'agenciado/form_field.html' with field=form.password1 layout='span-8 last'%}
-    {%include 'agenciado/form_field.html' with field=form.password2 layout='span-8 last'%}
-    {%include 'agenciado/form_field.html' with field=form.email layout='span-8 last'%}
+{% load crispy_forms_tags %}
 
-    <div class="span-8 last">
-      {% if form.first_name.errors %}<div class='error'>{{ form.first_name.errors }}</div>{% endif %}
-      <label for="id_first_name">Nome</label>: {{ form.first_name }}
-    </div>
-    <div class="span-8 last">
-      {% if form.last_name.errors %}<div class='error'>{{ form.last_name.errors }}</div>{% endif %}
-      <label for="id_last_name">Sobrenome</label>: {{ form.last_name }}
-    </div>
-    <input type="submit" value="Registrar" />
-    </div>
-  </form>
+{% block content %} 
+
+  {% crispy form form.helper %}
+
 {% endblock %}

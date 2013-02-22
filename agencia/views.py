@@ -4,7 +4,6 @@
 from django.shortcuts import render_to_response, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from django.contrib.auth.forms import UserCreationForm, SetPasswordForm, PasswordResetForm
 from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate, login
 from django.forms import ModelForm
@@ -22,10 +21,11 @@ from agencia.mail import MailAgencia
 from django.contrib import messages
 from trabajo.models import Trabajo, ItemPortfolio
 from django.template import RequestContext
+from agencia.forms import AgenciaSetPasswordForm, AgenciaPasswordResetForm
 
 def index(request):
-  trabajos = Trabajo.objects.filter(estado='AT').order_by('-fecha_ingreso')[:5]
-  portfolio = ItemPortfolio.objects.order_by('-fecha')[:5]
+  trabajos = Trabajo.objects.filter(estado='AT').order_by('-fecha_ingreso')[:3]
+  portfolio = ItemPortfolio.objects.order_by('-fecha')[:3]
   return render(request,'agencia/index.html', { 'trabajos': trabajos, 'portfolio': portfolio})
 
 def logout_view(request):
@@ -35,20 +35,21 @@ def logout_view(request):
 @login_required
 def cambio_clave(request):
   if request.method == 'POST':
-    form = SetPasswordForm(request.user,request.POST)
+    form = AgenciaSetPasswordForm(request.user,request.POST)
+
     if form.is_valid():
       form.save()
       messages.success(request, 'Sua senha foi trocada com sucesso')
       return redirect('/agencia/cambio/clave/')
   else:
-    form = SetPasswordForm(request.user)
+    form = AgenciaSetPasswordForm(request.user)
 
 
   return render(request,'agencia/cambio_clave.html',{'form':form})
 
 def reiniciar_clave(request):
   if request.method == 'POST':
-    form = PasswordResetForm(request.POST)
+    form = AgenciaPasswordResetForm(request.POST)
     if form.is_valid():
       users=User.objects.filter(email=request.POST['email'])
       for user in users:
@@ -68,7 +69,7 @@ def reiniciar_clave(request):
 
       return redirect('/agencia/reiniciar/clave/')
   else:
-    form = PasswordResetForm()
+    form = AgenciaPasswordResetForm()
 
   return render(request,'user/reiniciar_clave.html',{'form':form,})
 

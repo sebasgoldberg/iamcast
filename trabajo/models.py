@@ -113,7 +113,7 @@ class ItemPortfolio(models.Model):
       return (u'http://www.youtube.com/embed/%s' % self.codigo_video)
     get_youtube_iframe_url.allow_tags = True
     def html_youtube_iframe(self):
-      return '<iframe width="373" height="210" src="%s" frameborder="0" allowfullscreen></iframe>' % self.get_youtube_iframe_url()
+      return '<iframe width="358" height="202" src="%s" frameborder="0" allowfullscreen></iframe>' % self.get_youtube_iframe_url()
     html_youtube_iframe.allow_tags = True 
     html_youtube_iframe.short_description = u'Video'
     def html_small_youtube_iframe(self):
@@ -299,6 +299,7 @@ class Postulacion(models.Model):
     agenciado = models.ForeignKey(Agenciado,on_delete=models.PROTECT)
     rol = models.ForeignKey(Rol,on_delete=models.PROTECT, verbose_name = 'Perfil')
     ESTADO_POSTULACION=(
+      ('PA', u'PostulaCao feita pelo agenciado'),
       ('PC', u'Postulado para casting'),
       ('SC', u'Selecionado para casting'),
       ('ST', u'Selecionado para trabalho'),

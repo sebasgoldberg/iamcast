@@ -1,15 +1,7 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %} 
-  <h3>Trocar Senha</h3>
-  <hr/>
-  <form action="/agencia/cambio/clave/" method="post">
-    {% csrf_token %}
-  <div class='span-9 box'>
-    {% for field in form %}
-      {%include 'agenciado/form_field.html' with field=field layout='span-9 last'%}
-    {% endfor %}
-    <input type="submit" value="Trocar" />
-  </div>
-  </form>
+  <legend>Trocar Senha</legend>
+  {% crispy form %}
 {% endblock %}

@@ -1,15 +1,37 @@
 {% extends "base.html" %}
 
+{%block home_active%}active{%endblock%}
+
 {% block content %}
+  {% block imagenes_agenciados_arriba %}
+    {% include 'agenciado/mini_thumbnails.html' with thumbnails_urls=thumbnails_urls %}
+  {% endblock %}
 
-<h2>Home</h2>
-<hr/>
+  <div class='row'>
+      {% block hero %}
+        <div class="hero-unit">
+          {% include 'agencia/conf/hero.html'%}
+          <p><a href="/agenciado/registro/" class="btn btn-primary btn-large">Cadastre-se &raquo;</a></p>
+        </div>
+      {% endblock %}
+  </div>
 
-<div class='span-17 colborder'>
-  {% include 'agencia/presentacion.html' %}
-</div>
-<div class='span-6 last'>
-  {% include 'trabajo/trabajo/box_busquedas.html'%}
-  {% include 'trabajo/itemportfolio/box_portfolio.html'%}
-</div>
+  {%block imagenes_agenciados_abajo %}
+    {% include 'agenciado/mini_thumbnails.html' with thumbnails_urls=thumbnails_urls %}
+  {%endblock%}
+
+
+  {% if trabajos %}
+    <hr/>
+    <h2>Trabalhos Ativos Recentes</h2>
+    {% include 'trabajo/trabajo/thumbnails.html' with trabajo=trabajo %}
+  {% endif %}
+
+  {% if portfolio %}
+    <hr/>
+    <h2>Items do Portifolio Recentes</h2>
+    {% include 'trabajo/itemportfolio/thumbnails.html' with portfolio=portfolio %}
+  {% endif %}
+
+
 {% endblock %}

@@ -7,6 +7,9 @@ AMBIENTE_PRODUCTIVO = ambiente.productivo
 
 DEBUG = (not ambiente.productivo)
 TEMPLATE_DEBUG = DEBUG
+CRISPY_FAIL_SILENTLY = not DEBUG
+
+CRISPY_TEMPLATE_PACK = 'bootstrap'
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -127,6 +130,8 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'imagekit',
+    'crispy_forms',
+    # Aplicaciones de la agencia
     'agencia',
     'agenciado',
     'trabajo',
@@ -179,5 +184,8 @@ TEMPLATE_CONTEXT_PROCESSORS=(
   "django.core.context_processors.static",
   "django.core.context_processors.tz",
   "django.contrib.messages.context_processors.messages",
+# La linea que sigue se agrego por uni-form
+  'django.core.context_processors.request',
   'agencia.context_processors.add_ambiente',
+  'agencia.context_processors.add_thumbnails_urls',
 )

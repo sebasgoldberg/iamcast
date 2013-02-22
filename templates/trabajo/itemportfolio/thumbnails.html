@@ -1,0 +1,16 @@
+<ul class="thumbnails">
+  <div class='row'>
+    {% for item in portfolio %}
+        <li class="span4">
+          <div class='thumbnail'>
+            <p>{%autoescape off%}{{item.html_media}}{%endautoescape%}</p>
+            <p>{{item.titulo}} ({{item.fecha}})</h5>
+          </div>
+        </li>
+      {% if forloop.counter|divisibleby:3 %}
+        </div>
+        <div class='row'>
+      {%endif%}
+    {% endfor %}
+  </div>
+</ul>
