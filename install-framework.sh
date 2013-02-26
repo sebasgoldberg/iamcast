@@ -116,7 +116,9 @@ service apache restart
 
 apt-get install python-coverage
 
-./install/blueprint.sh
+./install/bootstrap.sh
+
+./install/django-crispy-forms.sh
 
 cd "$INSTALL_SCRIPT_DIR"
 mkdir collectedstatic

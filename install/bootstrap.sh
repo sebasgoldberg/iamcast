@@ -12,35 +12,27 @@ then
   exit 1
 fi
 
-wget https://github.com/twitter/bootstrap/zipball/master
+wget http://twitter.github.com/bootstrap/assets/bootstrap.zip
 
 if [ $? -ne 0 ]
 then
-  echo "ERROR: No se ha podido descargar https://github.com/twitter/bootstrap/zipball/master"
+  echo "ERROR: No se ha podido descargar http://twitter.github.com/bootstrap/assets/bootstrap.zip"
   exit 1
 fi
 
-unzip master
+unzip bootstrap.zip
 
 if [ $? -ne 0 ]
 then
-  echo "ERROR: No se ha podido descomprimir master"
+  echo "ERROR: No se ha podido descomprimir bootstrap.zip"
   exit 1
 fi
 
-rm master
+rm bootstrap.zip
 
 if [ $? -ne 0 ]
 then
-  echo "ERROR: No se ha podido borrar master"
-  exit 1
-fi
-
-mv twitter-bootstrap-8c7f9c6 bootstrap
-
-if [ $? -ne 0 ]
-then
-  echo "ERROR: No se ha podido realizar 'mv twitter-bootstrap-8c7f9c6 bootstrap'"
+  echo "ERROR: No se ha podido borrar bootstrap.zip"
   exit 1
 fi
 
