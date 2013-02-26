@@ -144,7 +144,7 @@ class Agenciado(models.Model):
 
     # @todo Ver si se puede quitar null luego de migrar, agregar validacion de que si ya existe que tenga asignado responsable
     # @todo Agregar validación de obligatoriedad cuando no es editado por un agenciador
-    mail = models.EmailField(verbose_name='e-mail', null=True, blank=True)
+    mail = models.EmailField(verbose_name='e-mail', null=True, blank=False)
 
     # Datos personales
     nombre = models.CharField(max_length=60, verbose_name='Nome')
@@ -279,10 +279,7 @@ class Agenciado(models.Model):
     descripcion.short_description = 'Descripçao'
 
     def ids_roles_postulaciones(self):
-      if self.activo:
-        return [ postulacion.rol.id for postulacion in self.postulacion_set.all() ]
-      else:
-        return []
+      return [ postulacion.rol.id for postulacion in self.postulacion_set.all() ]
 
     class Meta:
       ordering = ['nombre', 'apellido']

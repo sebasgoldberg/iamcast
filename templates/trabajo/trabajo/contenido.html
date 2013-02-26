@@ -14,7 +14,7 @@
     {% if user.agenciado and rol.id in user.agenciado.ids_roles_postulaciones %}
       <span class="badge badge-success">Voce já está postulado para este perfil</span>
     {% else %}
-      <a href="/agenciado/postular/?rol_id={{rol.id}}&next={{request.build_absolute_uri}}" class="btn btn-primary btn-large">Aplicar ao perfil &raquo;</a>
+      <a href="/agenciado/postular/?rol_id={{rol.id}}" class="btn btn-primary btn-large">Aplicar ao perfil &raquo;</a>
     {% endif %}
   {% empty %}
     <li>O trabalho nao registra perfis procurados</li>

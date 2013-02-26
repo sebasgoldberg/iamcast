@@ -1,3 +1,4 @@
+# coding=utf-8
 # Create your views here.
 
 from django.shortcuts import render_to_response, render, redirect
@@ -19,7 +20,7 @@ from django import forms
 from django.conf import settings
 
 from itertools import chain
-from django.forms.widgets import CheckboxSelectMultiple, CheckboxInput
+from django.forms.widgets import CheckboxSelectMultiple, CheckboxInput, HiddenInput
 from django.utils.encoding import force_unicode
 from django.utils.html import conditional_escape
 from django.utils.safestring import mark_safe
@@ -29,7 +30,6 @@ from django.template import loader
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
-from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Div
 
 from trabajo.models import Postulacion, Rol
 
@@ -39,7 +39,7 @@ class BPCheckboxSelectMultiple(CheckboxSelectMultiple):
     if value is None: value = []
     has_id = attrs and 'id' in attrs
     final_attrs = self.build_attrs(attrs, name=name)
-    output = [u'<div class="span-18 last">']
+    output = [u'<div class="row">']
     # Normalize to strings
     str_values = set([force_unicode(v) for v in value])
     for i, (option_value, option_label) in enumerate(chain(self.choices, choices)):
@@ -55,19 +55,18 @@ class BPCheckboxSelectMultiple(CheckboxSelectMultiple):
       option_value = force_unicode(option_value)
       rendered_cb = cb.render(name, option_value)
       option_label = conditional_escape(force_unicode(option_label))
-      if ((i+1) % 6) == 0:
-        indicador_ultimo_linea = u'last'
-      else:
-        indicador_ultimo_linea = u''
-      output.append(u'<div class="span-3 %s"><label%s>%s %s</label></div>' % (indicador_ultimo_linea, label_for, rendered_cb, option_label))
-      if indicador_ultimo_linea != '':
+      output.append(u'<div class="span2"><label%s>%s %s</label></div>' % (label_for, rendered_cb, option_label))
+      ultimo_fila=(((i+1) % 6) == 0)
+      if ultimo_fila:
         output.append(u'</div>')
-        output.append(u'<div class="span-18 last">')
+        output.append(u'<div class="row">')
     # Normalize to strings
     output.append(u'</div>')
     return mark_safe(u'\n'.join(output))
 
 class AgenciadoForm(ModelForm):
+  next_page = forms.CharField(widget=forms.HiddenInput,required=False)
+  
   class Meta:
     model = Agenciado
     exclude = ('activo', 'fecha_ingreso')
@@ -79,31 +78,12 @@ class AgenciadoForm(ModelForm):
       'idiomas': BPCheckboxSelectMultiple,
       }
 
-  def __init__(self, *args, **kwargs):
-    self.helper = FormHelper()
-    self.helper.form_class = 'uniForm'
-    self.helper.form_method = 'post'
-    self.helper.form_action = '/agenciado/'
-    self.helper.layout = Layout(
-      Fieldset(
-        'Dados pessoais',
-        'mail',
-        'nombre',
-        'apellido',
-        'fecha_nacimiento',
-      ),
-      ButtonHolder(
-        Submit('submit', 'Grabar')
-      )
-    )
-    #self.helper.add_input(Submit('submit','Grabar'))
-    return super(AgenciadoForm,self).__init__(*args, **kwargs)
-
 BaseTelefonoFormSet = inlineformset_factory(Agenciado, Telefono, extra=6, max_num=6)
 BaseFotoAgenciadoFormSet = inlineformset_factory(Agenciado, FotoAgenciado, extra=6, max_num=6)
 VideoAgenciadoFormSet = inlineformset_factory(Agenciado, VideoAgenciado, extra=6, max_num=6, exclude=['codigo_video'])
 
 class TelefonoFormSet(BaseTelefonoFormSet):
+
   def clean(self):
     super(TelefonoFormSet,self).clean()
     validarTelefonoIngresado(self)
@@ -138,9 +118,13 @@ def index(request):
       fotoAgenciadoFormSet.save()
       videoAgenciadoFormSet.save()
       messages.success(request, 'Dados atualizados com sucesso')
-      return redirect('/agenciado/')
+      next_page = form.cleaned_data['next_page']
+      if not next_page:
+        next_page = '/agenciado/'
+      return redirect(next_page)
   else:
-    form = AgenciadoForm(instance=agenciado)
+    next_page = request.GET.get('next')
+    form = AgenciadoForm(instance=agenciado,initial={'next_page':next_page})
     telefonoFormSet=TelefonoFormSet(instance=agenciado)
     fotoAgenciadoFormSet=FotoAgenciadoFormSet(instance=agenciado)
     videoAgenciadoFormSet=VideoAgenciadoFormSet(instance=agenciado)
@@ -155,6 +139,7 @@ class UserCreateForm(UserCreationForm):
   email = forms.EmailField(required=True, validators=[validate_unique_mail])
   first_name = forms.CharField( max_length=30, required=True, label='Nome')
   last_name = forms.CharField( max_length=30, required=True, label='Sobrenome')
+  next_page = forms.CharField(widget=forms.HiddenInput,required=False)
 
   class Meta:
     model = User
@@ -186,31 +171,39 @@ def registro(request):
       messages.success(request,'Registro realizado com sucesso!')
       messages.info(request,'Temos enviado para seu email dados da sua nova conta.')
       messages.info(request,'Por favor atualice os dados de seu perfil a ser analizados por nossa agencia.')
-      return redirect('/agenciado/')
+
+      next_page = form.cleaned_data['next_page']
+      if not next_page:
+        next_page = '/agenciado/'
+
+      return redirect(next_page)
   else:
-    form = UserCreateForm()
+    next_page = request.GET.get('next')
+    form = UserCreateForm(initial={'next_page':next_page})
 
   return render(request,'user/registro.html',{'form':form, })
 
 @login_required
 def postular(request):
-  next_page = request.GET.get('next')
+  """next_page = request.GET.get('next')
   if next_page is None:
-    next_page = '/'
-  try:
-    request.user.agenciado
-  except Agenciado.DoesNotExist:
-    messages.info(request,'Para aplicar a um perfil de um trabalho tem que completar seus dados de Agenciado')
-    return redirect('/agenciado/')
-  if not request.user.agenciado.activo:
-    messages.info(request,'Voce ainda nao esta ativo para aplicar aos perfis dos trabalhos publicados')
-    return redirect(next_page)
+    next_page = '/'"""
+  # Se obtiene el rol de la postulación
   rol_id = request.GET.get('rol_id')
   try:
     rol = Rol.objects.get(pk=rol_id,trabajo__estado='AT')
   except Rol.DoesNotExist:
     messages.error(request,'O perfil do trabalho para o qual quer aplicar nao foi encontrado')
-    return redirect(next_page)
+    return redirect('/trabajo/busquedas/')
+  # Se verifica que el usuario tenga cargado su perfil
+  try:
+    request.user.agenciado
+  except Agenciado.DoesNotExist:
+    messages.info(request,
+      'Para aplicar ao perfil %s do trabalho <a href=%s>%s</a> tem que completar seus dados de Agenciado'%(
+        rol.descripcion,'/trabajo/busquedas/?id=%s'%rol.trabajo.id,rol.trabajo.titulo))
+    return redirect('/agenciado/?next=%s'%request.get_full_path())
+  # Se realiza la postulación
   try:
     postulacion=Postulacion.objects.get(agenciado=request.user.agenciado,rol=rol)
   except Postulacion.DoesNotExist:
@@ -219,4 +212,4 @@ def postular(request):
 
   messages.success(request,'AplicaCao para o perfil "%s" realizada com sucesso.'%rol.descripcion)
   messages.info(request,'A aplicaCao vai ser analizada por nosso equipe, muito obrigado por sua postulaCao.')
-  return redirect(next_page)
+  return redirect('/trabajo/busquedas/?id=%s'%rol.trabajo.id)

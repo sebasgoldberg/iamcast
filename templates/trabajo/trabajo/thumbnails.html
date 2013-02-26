@@ -1,18 +1,16 @@
 <ul class="thumbnails">
-  <div class='row'>
-    {% for trabajo in trabajos %}
-        <li class="span4">
-          <div class='thumbnail'>
-            <h3>{{trabajo.titulo}}</h3>
-            <p><span class="badge badge-info">{{trabajo.fecha_ingreso}}</span></p>
-            <p><strong>Descriçao:</strong> {{trabajo.descripcion|truncatechars:75}}</p>
-            <a class="btn" href="/trabajo/busquedas/?id={{trabajo.id}}">Ver detalhes &raquo;</a>
-          </div>
-        </li>
-      {% if forloop.counter|divisibleby:3 %}
-        </div>
-        <div class='row'>
-      {%endif%}
-    {% endfor %}
-  </div>
+  {% for trabajo in trabajos %}
+    <li class="span4">
+      <div class='thumbnail'>
+        <h3>{{trabajo.titulo}}</h3>
+        <p><span class="badge badge-info">{{trabajo.fecha_ingreso}}</span></p>
+        <p><strong>Descriçao:</strong> {{trabajo.descripcion|truncatechars:75}}</p>
+        <a class="btn" href="/trabajo/busquedas/?id={{trabajo.id}}">Ver detalhes &raquo;</a>
+      </div>
+    </li>
+    {% if forloop.counter|divisibleby:3 %}
+      </ul>
+      <ul class="thumbnails">
+    {%endif%}
+  {% endfor %}
 </ul>

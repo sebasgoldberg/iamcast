@@ -67,9 +67,12 @@ def reiniciar_clave(request):
         messages.success(request, 'Nova senha gerada com sucesso')
         messages.info(request, 'Mail com nova senha enviado para %s'%user.email)
 
-      return redirect('/agencia/reiniciar/clave/')
+      next_page = form.cleaned_data['next_page']
+      if not next_page:
+        next_page = '/agencia/cambio/clave/'
+      return redirect(next_page)
   else:
-    form = AgenciaPasswordResetForm()
+    form = AgenciaPasswordResetForm(initial={'next_page':request.GET.get('next')})
 
   return render(request,'user/reiniciar_clave.html',{'form':form,})
 

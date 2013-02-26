@@ -8,8 +8,7 @@
 
 {% crispy form %}
 
-<a class="btn" href="/agenciado/registro/">Crear nova conta</a>
-<a class="btn" href="/agencia/reiniciar/clave/">Nao lembro minha senha</a>
-
+<a class="btn" href="/agenciado/registro/{%if next%}?next={{next}}{%endif%}">Crear nova conta</a>
+<a class="btn" href="/agencia/reiniciar/clave/{%if next%}?next={{next}}{%endif%}">Nao lembro minha senha</a>
 
 {% endblock %}

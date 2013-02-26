@@ -2,6 +2,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Hidden
 from django.contrib.auth.forms import SetPasswordForm, PasswordResetForm
+from django import forms
 
 class AgenciaAuthenticationForm(AuthenticationForm):
 
@@ -30,6 +31,7 @@ class AgenciaSetPasswordForm(SetPasswordForm):
     super(AgenciaSetPasswordForm, self).__init__(*args, **kwargs)
 
 class AgenciaPasswordResetForm(PasswordResetForm):
+  next_page = forms.CharField(widget=forms.HiddenInput,required=False)
   def __init__(self, *args, **kwargs):
     self.helper = FormHelper()
     self.helper.form_class = 'uniForm'

@@ -5,14 +5,11 @@
 {% block content %} 
 
 {% if trabajo %}
-  <div class='row'>
-      {% block hero %}
-        <div class="hero-unit">
-          {% include 'trabajo/trabajo/contenido.html' with trabajo=trabajo %}
-        </div>
-      {% endblock %}
-  </div>
-  <hr/>
+  {% block hero %}
+    <div class="hero-unit">
+      {% include 'trabajo/trabajo/contenido.html' with trabajo=trabajo %}
+    </div>
+  {% endblock %}
 {% endif %}
 
 

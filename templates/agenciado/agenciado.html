@@ -6,114 +6,114 @@
 
 {% block content %}
 
-<div class='prepend-3 span-18 last'>
-
-{%comment%}
-<form class='formee' enctype="multipart/form-data" method="post"  action="/agenciado/">
+{%with clase_espacio_celda='span3'%}
+<form class='uniForm' enctype="multipart/form-data" method="post"  action="/agenciado/">
   {% csrf_token %}
-  {% if telefonoFormSet.non_form_errors or fotoAgenciadoFormSet.non_form_errors or videoAgenciadoFormSet.non_form_errors %}
-    <div class='error'>Tem errores por corregir</div>
+
+  {% if form.errors or telefonoFormSet.non_form_errors or telefonoFormSet.errors or fotoAgenciadoFormSet.non_form_errors or fotoAgenciadoFormSet.errors or videoAgenciadoFormSet.non_form_errors or videoAgenciadoFormSet.errors %}
+    <div class='alert alert-error'>Tem errores por corregir</div>
   {% endif %}
 
-  {% if form.non_form_errors %}<div class='error'>{{ form.non_field_errors }}</div>{%endif%}
+  {% if form.non_form_errors %}<div class='alert alert-error'>{{ form.non_field_errors }}</div>{%endif%}
 
-  <div class='span-18'>
+  <fieldset>
     <legend>Dados persoais</legend>
-    {%include 'agenciado/form_field.html' with field=form.mail layout='span-6 last'%}
-    {%include 'agenciado/form_field.html' with field=form.nombre layout='span-6'%}
-    {%include 'agenciado/form_field.html' with field=form.apellido layout='span-6'%}
-    {%include 'agenciado/form_field.html' with field=form.fecha_nacimiento layout='span-6 last'%}
-  </div>
+    <div class='row'>
+      <div class='{{clase_espacio_celda}}'>{{form.mail|as_crispy_field}}</div>
+      <div class='{{clase_espacio_celda}}'>{{form.nombre|as_crispy_field}}</div>
+      <div class='{{clase_espacio_celda}}'>{{form.apellido|as_crispy_field}}</div>
+      <div class='{{clase_espacio_celda}}'>{{form.fecha_nacimiento|as_crispy_field}}</div>
+    </div>
+  </fieldset>
 
-  <div class='span-18'>
+  <fieldset>
     <legend>Dados administrativos</legend>
-    {%include 'agenciado/form_field.html' with field=form.documento_rg layout='span-6'%}
-    {%include 'agenciado/form_field.html' with field=form.documento_cpf layout='span-6'%}
-    {%include 'agenciado/form_field.html' with field=form.responsable layout='span-6 last'%}
-    {%include 'agenciado/form_field.html' with field=form.cuenta_bancaria layout='span-6 last'%}
-  </div>
+    <div class='row'>
+    <div class='{{clase_espacio_celda}}'>{{form.documento_rg|as_crispy_field}}</div>
+    <div class='{{clase_espacio_celda}}'>{{form.documento_cpf|as_crispy_field}}</div>
+    <div class='{{clase_espacio_celda}}'>{{form.responsable|as_crispy_field}}</div>
+    <div class='{{clase_espacio_celda}}'>{{form.cuenta_bancaria|as_crispy_field}}</div>
+    </div>
+  </fieldset>
 
-  <div class='span-18'>
+  <fieldset>
     <legend>Dados de endereço</legend>
-    {%include 'agenciado/form_field.html' with field=form.estado layout='span-6'%}
-    {%include 'agenciado/form_field.html' with field=form.ciudad layout='span-6'%}
-    {%include 'agenciado/form_field.html' with field=form.barrio layout='span-6 last'%}
-    {%include 'agenciado/form_field.html' with field=form.direccion layout='span-6'%}
-    {%include 'agenciado/form_field.html' with field=form.codigo_postal layout='span-6 last'%}
-  </div>
+    <div class='row'>
+      <div class='{{clase_espacio_celda}}'>{{form.estado|as_crispy_field}}</div>
+      <div class='{{clase_espacio_celda}}'>{{form.ciudad|as_crispy_field}}</div>
+      <div class='{{clase_espacio_celda}}'>{{form.barrio|as_crispy_field}}</div>
+      <div class='{{clase_espacio_celda}}'>{{form.direccion|as_crispy_field}}</div>
+      <div class='{{clase_espacio_celda}}'>{{form.codigo_postal|as_crispy_field}}</div>
+    </div>
+  </fieldset>
 
-  <div class='span-18'>
+  <fieldset>
     <legend>Telefones</legend>
-    {% include 'agenciado/formset.html' with formset=telefonoFormSet forms_by_line='3' columns_by_form='6' %}
-  </div>
+    {% include 'agenciado/formset.html' with formset=telefonoFormSet forms_by_line='3' columns_by_form='4' %}
+  </fieldset>
 
-  <div class='span-18'>
+  <fieldset>
     <legend>Caracteristicas fisicas</legend>
-    {%include 'agenciado/form_field.html' with field=form.sexo layout='span-6'%}
-    {%include 'agenciado/form_field.html' with field=form.ojos layout='span-6'%}
-    {%include 'agenciado/form_field.html' with field=form.pelo layout='span-6 last'%}
-    {%include 'agenciado/form_field.html' with field=form.piel layout='span-6'%}
-    {%include 'agenciado/form_field.html' with field=form.altura layout='span-6'%}
-    {%include 'agenciado/form_field.html' with field=form.peso layout='span-6 last'%}
-    {%include 'agenciado/form_field.html' with field=form.talle layout='span-6'%}
-    {%include 'agenciado/form_field.html' with field=form.talle_camisa layout='span-6'%}
-    {%include 'agenciado/form_field.html' with field=form.talle_pantalon layout='span-6 last'%}
-    {%include 'agenciado/form_field.html' with field=form.calzado layout='span-6'%}
-    {%include 'agenciado/form_field.html' with field=form.estado_dientes layout='span-6 append-8 last'%}
-  </div>
+    <div class='row'>
+      <div class='{{clase_espacio_celda}}'>{{form.sexo|as_crispy_field}}</div>
+      <div class='{{clase_espacio_celda}}'>{{form.ojos|as_crispy_field}}</div>
+      <div class='{{clase_espacio_celda}}'>{{form.pelo|as_crispy_field}}</div>
+      <div class='{{clase_espacio_celda}}'>{{form.piel|as_crispy_field}}</div>
+      <div class='{{clase_espacio_celda}}'>{{form.altura|as_crispy_field}}</div>
+      <div class='{{clase_espacio_celda}}'>{{form.peso|as_crispy_field}}</div>
+      <div class='{{clase_espacio_celda}}'>{{form.talle|as_crispy_field}}</div>
+      <div class='{{clase_espacio_celda}}'>{{form.talle_camisa|as_crispy_field}}</div>
+      <div class='{{clase_espacio_celda}}'>{{form.talle_pantalon|as_crispy_field}}</div>
+      <div class='{{clase_espacio_celda}}'>{{form.calzado|as_crispy_field}}</div>
+      <div class='{{clase_espacio_celda}}'>{{form.estado_dientes|as_crispy_field}}</div>
+    </div>
+  </fieldset>
 
-  <div class='span-18 last'>
+  <fieldset>
     <legend>Habilidades</legend>
-    {%include 'agenciado/form_field.html' with field=form.deportes layout='span-18'%}
+    {{form.deportes|as_crispy_field}}
     <hr/>
-    {%include 'agenciado/form_field.html' with field=form.danzas layout='span-18'%}
+    {{form.danzas|as_crispy_field}}
     <hr/>
-    {%include 'agenciado/form_field.html' with field=form.instrumentos layout='span-18'%}
+    {{form.instrumentos|as_crispy_field}}
     <hr/>
-    {%include 'agenciado/form_field.html' with field=form.idiomas layout='span-18'%}
-  </div>
+    {{form.idiomas|as_crispy_field}}
+  </fieldset>
 
-  <div class='span-18'>
+  <fieldset>
     <legend>Fotos</legend>
-    <div class='span-18'>
-      {% autoescape off %}
-      {{form.instance.thumbnails}}
-      {% endautoescape %}
-    </div>
-    <div class='span-18'>
-    {% include 'agenciado/formset.html' with formset=fotoAgenciadoFormSet forms_by_line='2' columns_by_form='9' %}
-    </div>
-  </div>
+    {% autoescape off %}
+    {{form.instance.thumbnails}}
+    {% endautoescape %}
+    {% include 'agenciado/formset.html' with formset=fotoAgenciadoFormSet forms_by_line='3' columns_by_form='4' %}
+  </fieldset>
 
-  <div class='span-18'>
+  <fieldset>
     <legend>Videos</legend>
-    <div class='span-18'>
-      {% autoescape off %}
-      {{form.instance.html_small_youtube_iframes}}
-      {% endautoescape %}
-    </div>
-    <div class='span-18'>
-    {% include 'agenciado/formset.html' with formset=videoAgenciadoFormSet forms_by_line='3' columns_by_form='6' %}
-    </div>
-  </div>
+    {% autoescape off %}
+    {{form.instance.html_small_youtube_iframes}}
+    {% endautoescape %}
+    {% include 'agenciado/formset.html' with formset=videoAgenciadoFormSet forms_by_line='3' columns_by_form='4' %}
+  </fieldset>
 
-  <div class='span-18'>
+  <fieldset>
     <legend>Otros dados</legend>
-    {%include 'agenciado/form_field.html' with field=form.indicador_maneja layout='span-6'%}
-    {%include 'agenciado/form_field.html' with field=form.indicador_tiene_registro layout='span-6 last'%}
-    {%include 'agenciado/form_field.html' with field=form.trabaja_como_extra layout='span-6 last'%}
-    {%include 'agenciado/form_field.html' with field=form.como_nos_conocio layout='span-9'%}
-    {%include 'agenciado/form_field.html' with field=form.observaciones layout='span-9 last'%}
-  </div>
+    <div class='row'>
+      <div class='span2'>{{form.indicador_maneja|as_crispy_field}}</div>
+      <div class='span2'>{{form.indicador_tiene_registro|as_crispy_field}}</div>
+      <div class='span2'>{{form.trabaja_como_extra|as_crispy_field}}</div>
+      <div class='{{clase_espacio_celda}}'>{{form.como_nos_conocio|as_crispy_field}}</div>
+      <div class='{{clase_espacio_celda}}'>{{form.observaciones|as_crispy_field}}</div>
+    </div>
+  </fieldset>
 
-  <div class='span-18 last'>
-  <input class='right' type="submit" value="Grabar" />
+  {{form.next_page|as_crispy_field}}
+
+  <div class="form-actions">
+    <input type="submit" name="submit" value="Grabar" class="btn btn-primary" id="submit-id-submit" />
   </div>
 
 </form>
-{%endcomment%}
-
-  {% crispy form form.helper %}
-</div>
+{%endwith%}
 
 {% endblock %}

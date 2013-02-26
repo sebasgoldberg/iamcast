@@ -101,7 +101,7 @@ class ItemPortfolio(models.Model):
     codigo_video = models.CharField(max_length=30, unique=True, null=True, blank=True)
     # agregar rutas a configuracion del apache, al archivo settings y crear carpetas correspondientes
     imagen = models.ImageField(upload_to='trabajo/portfolio/', null=True, blank=True)
-    thumbnail = ImageSpecField([Adjust(contrast=1.2, sharpness=1.1), ResizeToFill(210,210)], image_field='imagen', format='JPEG', options={'quality': 90})
+    thumbnail = ImageSpecField([Adjust(contrast=1.2, sharpness=1.1), ResizeToFill(358,202)], image_field='imagen', format='JPEG', options={'quality': 90})
     fecha = models.DateField(default=date.today(),verbose_name=u'Data')
     def __unicode__(self):
       return self.titulo

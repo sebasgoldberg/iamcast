@@ -49,7 +49,7 @@
         <a class='brand' href=/agencia/> <img src='/static/images/small_logo.png' alt=Agencia {{ambiente.agencia.nombre}}/> </a> 
         <div class="nav-collapse collapse">
           <ul class="nav">
-            <li class='{%block agenciado_active%}{%endblock%}'><a href="/agenciado/"><span>Agenciado</span></a> </li>
+            <li class='{%block agenciado_active%}{%endblock%}'><a href="/agenciado/"><span>Meu Perfil</span></a> </li>
             <li class='{%block busquedas_active%}{%endblock%}'><a href="/trabajo/busquedas/"><span>Pesquisas</span></a> </li>
             <li class='{%block portfolio_active%}{%endblock%}'><a href="/trabajo/portfolio/"><span>Portifolio</span></a> </li>
             <li class='{%block contacto_active%}{%endblock%}'><a href="/agencia/contacto/"><span>Contato</span></a> </li>
@@ -80,13 +80,11 @@
   <div class='container'>
 
 
-      <div class='row'>
       {% if messages %}
         {% for message in messages %}
-          <div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
+          <div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{%autoescape off%}{{ message }}{%endautoescape%}</div>
         {% endfor %}
       {% endif %}
-      </div>
 
       {% block content %}
       {% endblock %}
