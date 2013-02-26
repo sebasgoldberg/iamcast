@@ -12,7 +12,7 @@ from django.dispatch import receiver
 import re
 
 class Direccion(models.Model):
-  descripcion = models.CharField(max_length=60, verbose_name=u'Descripçao',blank=True,null=True)
+  descripcion = models.CharField(max_length=60, verbose_name=u'Descripção',blank=True,null=True)
   estado = models.ForeignKey(Estado,on_delete=models.PROTECT,null=True, blank=True, verbose_name=u'Estado')
   ciudad = models.ForeignKey(Ciudad,on_delete=models.PROTECT, verbose_name='Cidade',null=True, blank=True)
   barrio = models.CharField(max_length=60, verbose_name='Barrio', blank=True, null=True)
@@ -155,7 +155,7 @@ def callback_save_item_portfolio(sender, instance, raw, using, **kwargs):
 class Trabajo(models.Model):
     titulo = models.CharField(max_length=100, unique_for_date='fecha_ingreso')
     productora= models.ForeignKey(Productora,on_delete=models.PROTECT, verbose_name=u'Produtora')
-    descripcion = models.TextField(verbose_name=u'Descripçao')
+    descripcion = models.TextField(verbose_name=u'Descripção')
     imagen = models.ImageField(upload_to='trabajo/trabajo/',blank=True)
     thumbnail = ImageSpecField([Adjust(contrast=1.2, sharpness=1.1), ResizeToFill(100,100)], image_field='imagen', format='JPEG', options={'quality': 90})
     ESTADO_TRABAJO=(
@@ -227,7 +227,7 @@ TIPO_EVENTO_TRABAJO=(
   ('C', u'Casting'),
   ('B', u'Callback'),
   ('P', u'Proba de roupa'),
-  ('R', u'Realizaçao do trabalho'),
+  ('R', u'Realização do trabalho'),
   ('O', u'Outro'),
 )
 DICT_TIPO_EVENTO_TRABAJO=dict(TIPO_EVENTO_TRABAJO)
@@ -245,7 +245,7 @@ class EventoTrabajo(Evento):
 
 class Rol(models.Model):
     trabajo = models.ForeignKey(Trabajo,on_delete=models.PROTECT)
-    descripcion = models.CharField(max_length=60, verbose_name=u'Descripçao')
+    descripcion = models.CharField(max_length=60, verbose_name=u'Descripção')
     cache = models.DecimalField(max_digits=15, decimal_places=4, null=True, blank=True)
     caracteristicas = models.TextField(verbose_name=u'Caraterísticas')
     def __unicode__(self):
@@ -299,7 +299,7 @@ class Postulacion(models.Model):
     agenciado = models.ForeignKey(Agenciado,on_delete=models.PROTECT)
     rol = models.ForeignKey(Rol,on_delete=models.PROTECT, verbose_name = 'Perfil')
     ESTADO_POSTULACION=(
-      ('PA', u'PostulaCao feita pelo agenciado'),
+      ('PA', u'Postulação feita pelo agenciado'),
       ('PC', u'Postulado para casting'),
       ('SC', u'Selecionado para casting'),
       ('ST', u'Selecionado para trabalho'),
@@ -312,7 +312,7 @@ class Postulacion(models.Model):
       return u'%s | %s | %s' % (self.agenciado,Postulacion.DICT_ESTADO_POSTULACION[self.estado],self.rol)
     class Meta:
       ordering = ['-rol__trabajo__fecha_ingreso', 'rol__descripcion', 'agenciado__nombre', 'agenciado__apellido']
-      verbose_name = u'Postulaçao'
+      verbose_name = u'Postulação'
       verbose_name_plural = u"Postulaçoes" 
       unique_together = (("agenciado", "rol"),)
 

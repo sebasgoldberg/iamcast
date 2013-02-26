@@ -210,6 +210,6 @@ def postular(request):
     postulacion=Postulacion(agenciado=request.user.agenciado,rol=rol,estado='PA')
     postulacion.save()
 
-  messages.success(request,'AplicaCao para o perfil "%s" realizada com sucesso.'%rol.descripcion)
-  messages.info(request,'A aplicaCao vai ser analizada por nosso equipe, muito obrigado por sua postulaCao.')
+  messages.success(request,'Aplicação para o perfil "%s" realizada com sucesso.'%rol.descripcion)
+  messages.info(request,'A aplicação vai ser analizada por nosso equipe, muito obrigado por sua postulação.')
   return redirect('/trabajo/busquedas/?id=%s'%rol.trabajo.id)

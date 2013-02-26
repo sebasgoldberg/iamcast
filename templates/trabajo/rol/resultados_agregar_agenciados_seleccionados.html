@@ -27,7 +27,7 @@
 
 {% if postulaciones_ya_existentes %}
   {% autoescape off %}
-  <h3>Agenciados ja existentes em perfil "{{rol.admin_link}}" (se indica o estado atual para cada postulaCao existente):</h3>
+  <h3>Agenciados ja existentes em perfil "{{rol.admin_link}}" (se indica o estado atual para cada postulação existente):</h3>
   <ul>
     {% for postulacion in postulaciones_ya_existentes %}
       <li>{{ postulacion.agenciado.admin_link }} ({{postulacion.descripcion_estado}})</li>
