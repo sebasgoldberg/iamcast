@@ -37,6 +37,14 @@ TIME_ZONE = 'America/Sao_Paulo'
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'pt-BR'
+#LANGUAGE_CODE = 'es-AR'
+
+gettext = lambda s: s
+
+LANGUAGES = (
+  ('pt-br', gettext('Portugues')),
+  ('es', gettext('Spanish')),
+)
 
 SITE_ID = 1
 
@@ -53,7 +61,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ambiente.media_root
+MEDIA_ROOT = ambiente.project_directory+'uploads/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -102,6 +110,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -115,7 +124,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    ambiente.template_dir,
+    ambiente.project_directory+'templates',
 )
 
 INSTALLED_APPS = (
@@ -189,3 +198,5 @@ TEMPLATE_CONTEXT_PROCESSORS=(
   'agencia.context_processors.add_ambiente',
   'agencia.context_processors.add_thumbnails_urls',
 )
+
+LOCALE_PATHS=(ambiente.project_directory+'locale',)

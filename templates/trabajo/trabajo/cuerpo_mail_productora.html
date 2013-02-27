@@ -1,15 +1,17 @@
+{% load i18n %}
+
 {% extends 'agencia/mail/base.html' %}
 
 {% block mensaje %}
 
-<p>Ola {{ trabajo.productora.nombre }},</p>
+<p>{% trans "Ola" %} {{ trabajo.productora.nombre }},</p>
 
-<p>Estamos enviando os detalhes referentes ao trabalho "{{ trabajo.titulo }}", junto com as postulações dos agenciados para cada rol procurado:</p>
+<p>{%blocktrans%}Estamos enviando os detalhes referentes ao trabalho "{{ trabajo.titulo }}", junto com as postulações dos agenciados para cada rol procurado:{%endblocktrans%}</p>
 
-<h2>Dados do trabalho</h2>
+<h2>{% trans "Dados do trabalho" %}</h2>
 {% include 'trabajo/trabajo/detalles.html'%}
 
-<h2>Dados dos roles e postulações dos agenciados</h2>
+<h2>{% trans "Dados dos roles e postulações dos agenciados" %}</h2>
 {% for rol in trabajo.rol_set.all %}
   {% include 'trabajo/rol/detalles.html'%}
 {% endfor %}

@@ -1,13 +1,14 @@
 {% extends "admin/change_form.html" %}
+{% load i18n %}
 
-{% block title %} Resultado de adicionar agenciados selecionados a perfil {{ rol.descripcion }} de trabalho {{ trabajo.titulo }} | {{ ambiente.agencia.nombre }}{% endblock %}
+{% block title %} {%blocktrans%}Resultado de adicionar agenciados selecionados a perfil {{ rol.descripcion }} de trabalho {{ trabajo.titulo }}{%endblocktrans%} | {{ ambiente.agencia.nombre }}{% endblock %}
 
 {% block breadcrumbs %}
 <div class="breadcrumbs">
-  <a href="/admin/">Início</a>
-  &rsaquo; <a href="/admin/agencia/">Agencia</a>
-  &rsaquo; <a href="/admin/agencia/agenciado/">Agenciados</a>
-  &rsaquo; Resultado de adicionar agenciados selecionados a perfil {{ rol.descripcion }} de trabalho {{ trabajo.titulo }}
+  <a href="/admin/">{% trans "Início" %}</a>
+  &rsaquo; <a href="/admin/agencia/">{% trans "Agencia" %}</a>
+  &rsaquo; <a href="/admin/agencia/agenciado/">{% trans "Agenciados" %}</a>
+  &rsaquo; {%blocktrans%}Resultado de adicionar agenciados selecionados a perfil {{ rol.descripcion }} de trabalho {{ trabajo.titulo }}{%endblocktrans%}
 </div>
 {% endblock %}
 
@@ -15,19 +16,19 @@
 {% block content %}
 
 {% autoescape off %}
-<h3>Agenciados adicionados com exito ao perfil "{{rol.admin_link}}" com estado "{{estado}}":</h3>
+<h3>{%blocktrans%}Agenciados adicionados com exito ao perfil "{{rol.admin_link}}" com estado "{{estado}}"{%endblocktrans%}:</h3>
 <ul>
   {% for postulacion in postulaciones_realizadas_con_exito %}
     <li>{{ postulacion.agenciado.admin_link }}</li>
   {% empty %}
-    <li>Nao foi posibel adicionar nenhum agenciado</li>
+    <li>{% trans "Nao foi posibel adicionar nenhum agenciado" %}</li>
   {% endfor %}
 </ul>
 {% endautoescape %}
 
 {% if postulaciones_ya_existentes %}
   {% autoescape off %}
-  <h3>Agenciados ja existentes em perfil "{{rol.admin_link}}" (se indica o estado atual para cada postulação existente):</h3>
+  <h3>{%blocktrans%}Agenciados ja existentes em perfil "{{rol.admin_link}}" (se indica o estado atual para cada postulação existente){%endblocktrans%}:</h3>
   <ul>
     {% for postulacion in postulaciones_ya_existentes %}
       <li>{{ postulacion.agenciado.admin_link }} ({{postulacion.descripcion_estado}})</li>

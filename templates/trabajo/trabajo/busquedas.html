@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {%block busquedas_active%}active{%endblock%}
 
@@ -13,7 +14,7 @@
 {% endif %}
 
 
-<h1>Trabalhos Ativos</h1>
+<h1>{% trans "Trabalhos Ativos" %}</h1>
 {% include 'trabajo/trabajo/thumbnails.html' with trabajos=trabajos %}
 
 {% endblock %}

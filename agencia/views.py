@@ -22,6 +22,8 @@ from django.contrib import messages
 from trabajo.models import Trabajo, ItemPortfolio
 from django.template import RequestContext
 from agencia.forms import AgenciaSetPasswordForm, AgenciaPasswordResetForm
+from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy
 
 def index(request):
   trabajos = Trabajo.objects.filter(estado='AT').order_by('-fecha_ingreso')[:3]
@@ -39,13 +41,13 @@ def cambio_clave(request):
 
     if form.is_valid():
       form.save()
-      messages.success(request, 'Sua senha foi trocada com sucesso')
+      messages.success(request, _(u'Sua senha foi trocada com sucesso'))
       return redirect('/agencia/cambio/clave/')
   else:
     form = AgenciaSetPasswordForm(request.user)
 
 
-  return render(request,'agencia/cambio_clave.html',{'form':form})
+  return render(request,'user/cambio_clave.html',{'form':form})
 
 def reiniciar_clave(request):
   if request.method == 'POST':
@@ -57,15 +59,15 @@ def reiniciar_clave(request):
         user.set_password(password)
         user.save()
 
-        asunto = 'Sua senha ha mudado'
+        asunto = _(u'Sua senha ha mudado')
         template = loader.get_template('user/mail/cambio_clave.txt')
         context = RequestContext(request,{'usuario':user, 'clave':password})
         text_content = template.render(context)
         msg = MailAgencia(asunto,text_content,[user.email])
         msg.send()
 
-        messages.success(request, 'Nova senha gerada com sucesso')
-        messages.info(request, 'Mail com nova senha enviado para %s'%user.email)
+        messages.success(request, _(u'Nova senha gerada com sucesso'))
+        messages.info(request, _(u'Mail com nova senha enviado para %s')%user.email)
 
       next_page = form.cleaned_data['next_page']
       if not next_page:

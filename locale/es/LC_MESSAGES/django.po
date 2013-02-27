@@ -1,0 +1,1014 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-02-27 16:21-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: agencia/admin.py:42
+msgid "Dados Pessoales"
+msgstr "Datos Personales"
+
+#: agencia/admin.py:43
+msgid "Dados Administrativos"
+msgstr "Datos Administrativos"
+
+#: agencia/admin.py:44 templates/agenciado/agenciado.html:41
+msgid "Dados de endereço"
+msgstr "Datos de Dirección"
+
+#: agencia/admin.py:45
+msgid "Carateristicas fisicas"
+msgstr "Características Físicas"
+
+#: agencia/admin.py:46 templates/agenciado/agenciado.html:74
+#, fuzzy
+msgid "Habilidades"
+msgstr "Habilidades"
+
+#: agencia/admin.py:47 templates/agenciado/agenciado.html:101
+msgid "Otros dados"
+msgstr "Otros Datos"
+
+#: agencia/forms.py:17 templates/base.html:70
+#: templates/registration/login.html:8
+msgid "Ingresar"
+msgstr "Ingresar"
+
+#: agencia/forms.py:32
+msgid "Trocar"
+msgstr "Cambiar"
+
+#: agencia/forms.py:42
+msgid "Gerar"
+msgstr "Generar"
+
+#: agencia/mail.py:12
+msgid "Adicione os destinatarios separados por \",\", \";\" ou salto de linea"
+msgstr "Agregue los destinatarios separados por \",\", \";\" o salto de línea"
+
+#: agencia/mail.py:28
+#, python-format
+msgid "Agencia %(nombre)s - %(asunto)s"
+msgstr "Agencia %(nombre)s - %(asunto)s"
+
+#: agencia/models.py:36
+msgid "Tem que informar um telefone"
+msgstr "Tiene que informar un teléfono"
+
+#: agencia/models.py:39
+msgid "Tem que subir uma foto"
+msgstr "Tiene que subir una foto"
+
+#: agencia/models.py:42 agencia/models.py:51 agencia/models.py:60
+#: agencia/models.py:69 agencia/models.py:76 agencia/models.py:85
+#: agencia/models.py:92 agencia/models.py:99 agencia/models.py:108
+#: agencia/models.py:117 agencia/models.py:126 agencia/models.py:280
+#: agencia/models.py:307 trabajo/models.py:17 trabajo/models.py:159
+#: trabajo/models.py:257
+msgid "Descripção"
+msgstr "Descripción"
+
+#: agencia/models.py:47 agencia/models.py:165 trabajo/models.py:19
+msgid "Cidade"
+msgstr "Ciudad"
+
+#: agencia/models.py:48
+msgid "Cidades"
+msgstr "Ciudades"
+
+#: agencia/models.py:56
+msgid "Dança"
+msgstr "Danza"
+
+#: agencia/models.py:57 agencia/models.py:190
+msgid "Danças"
+msgstr "Danzas"
+
+#: agencia/models.py:65
+msgid "Esporte"
+msgstr "Deporte"
+
+#: agencia/models.py:66 agencia/models.py:189
+msgid "Esportes"
+msgstr "Deportes"
+
+#: agencia/models.py:81 agencia/models.py:186
+msgid "Estado Dentes"
+msgstr "Estado Dientes"
+
+#: agencia/models.py:82
+msgid "Estados Dentes"
+msgstr "Estado Dientes"
+
+#: agencia/models.py:104 agencia/models.py:105 agencia/models.py:177
+msgid "Olhos"
+msgstr "Ojos"
+
+#: agencia/models.py:113 agencia/models.py:178
+msgid "Cabelo"
+msgstr "Pelo"
+
+#: agencia/models.py:114
+msgid "Cabelos"
+msgstr "Pelos"
+
+#: agencia/models.py:122 agencia/models.py:179
+msgid "Pele"
+msgstr "Piel"
+
+#: agencia/models.py:123
+msgid "Peles"
+msgstr "Pieles"
+
+#: agencia/models.py:131 agencia/models.py:182
+msgid "Manequem"
+msgstr "Tamaño"
+
+#: agencia/models.py:132
+msgid "Manequems"
+msgstr "Tamaños"
+
+#: agencia/models.py:136
+msgid "A data de nascimento nao pode ser maior que a data do dia"
+msgstr "La fecha de nacimiento no puede ser mayor que la fecha del día"
+
+#: agencia/models.py:140
+msgid "A atura debe ser informada em centimetros"
+msgstr "La altura debe ser informada en centimetros"
+
+#: agencia/models.py:148 trabajo/models.py:50
+msgid "e-mail"
+msgstr "e-mail"
+
+#: agencia/models.py:151 agenciado/views.py:142 trabajo/models.py:49
+msgid "Nome"
+msgstr "Nombre"
+
+#: agencia/models.py:152 agenciado/views.py:143
+msgid "Sobrenome"
+msgstr "Apellido"
+
+#: agencia/models.py:153
+msgid "Data nascimento"
+msgstr "Fecha de Nacimiento"
+
+#: agencia/models.py:157
+msgid "RG"
+msgstr "DNI"
+
+#: agencia/models.py:159
+msgid "CPF"
+msgstr "CUIT"
+
+#: agencia/models.py:160
+msgid "Responsabel"
+msgstr "Responsable"
+
+#: agencia/models.py:161
+msgid "Conta bancaria"
+msgstr "Cuenta Bancaria"
+
+#: agencia/models.py:164 trabajo/models.py:18
+msgid "Estado"
+msgstr "Estado"
+
+#: agencia/models.py:166 trabajo/models.py:20
+msgid "Barrio"
+msgstr "Barrio"
+
+#: agencia/models.py:167 trabajo/models.py:21 trabajo/models.py:25
+msgid "Endereço"
+msgstr "Dirección"
+
+#: agencia/models.py:168 trabajo/models.py:22
+msgid "CEP"
+msgstr "Código Postal"
+
+#: agencia/models.py:172
+msgid "Masculino"
+msgstr "Masculino"
+
+#: agencia/models.py:173
+msgid "Femenino"
+msgstr "Femenino"
+
+#: agencia/models.py:176
+msgid "Sexo"
+msgstr "Sexo"
+
+#: agencia/models.py:180
+msgid "Atura"
+msgstr "Altura"
+
+#: agencia/models.py:181
+msgid "Peso"
+msgstr "Peso"
+
+#: agencia/models.py:183
+msgid "Camisa"
+msgstr "Camisa"
+
+#: agencia/models.py:184
+msgid "Calça"
+msgstr "Pantalón"
+
+#: agencia/models.py:185
+msgid "Calçado"
+msgstr "Calzado"
+
+#: agencia/models.py:191
+msgid "Instrumentos"
+msgstr "Instrumentos"
+
+#: agencia/models.py:192
+msgid "Idiomas"
+msgstr "Idiomas"
+
+#: agencia/models.py:193
+msgid "Dirige"
+msgstr "Maneja"
+
+#: agencia/models.py:194
+msgid "Habilitação"
+msgstr "Registro de conducir"
+
+#: agencia/models.py:197
+msgid "Figuração"
+msgstr "Extra"
+
+#: agencia/models.py:198
+msgid "Como nos conheceu"
+msgstr "Cómo nos conoció"
+
+#: agencia/models.py:199
+msgid "Observaçoes"
+msgstr "Observaciones"
+
+#: agencia/models.py:202 trabajo/models.py:164
+msgid "Ativo"
+msgstr "Activo"
+
+#: agencia/models.py:203
+msgid "Data de agenciamento"
+msgstr "Fecha de agenciamiento"
+
+#: agencia/models.py:215 trabajo/models.py:193 trabajo/models.py:201
+msgid "Imagem"
+msgstr "Imagen"
+
+#: agencia/models.py:232 agencia/models.py:243
+msgid "Imagems"
+msgstr "Imagenes"
+
+#: agencia/models.py:248 agencia/models.py:274 trabajo/models.py:342
+#: trabajo/models.py:355
+msgid "Link ao agenciado"
+msgstr "Link al agenciado"
+
+#: agencia/models.py:256 agencia/video.py:24 trabajo/models.py:119
+#: trabajo/models.py:123
+msgid "Video"
+msgstr "Video"
+
+#: agencia/models.py:267 templates/agenciado/agenciado.html:52
+#: trabajo/models.py:36 trabajo/models.py:71
+msgid "Telefones"
+msgstr "Telefonos"
+
+#: agencia/models.py:277
+#, python-format
+msgid ""
+"Edad %(edad)s, sexo %(sexo)s, olhos %(ojos)s, cabelo %(pelo)s, pele "
+"%(piel)s, atura %(altura)s, peso %(peso)s, estado dentes %(estado_dientes)s."
+msgstr ""
+"Edad %(edad)s, sexo %(sexo)s, ojos %(ojos)s, pelo %(pelo)s, piel %(piel)s, "
+"altura %(altura)s, peso %(peso)s, estado dientes %(estado_dientes)s."
+
+#: agencia/models.py:296
+msgid "Foto"
+msgstr "Foto"
+
+#: agencia/models.py:297 templates/agenciado/agenciado.html:85
+msgid "Fotos"
+msgstr "Fotos"
+
+#: agencia/models.py:314 trabajo/models.py:29
+msgid "Compania"
+msgstr "Compañia"
+
+#: agencia/video.py:25 templates/agenciado/agenciado.html:93
+#, fuzzy
+msgid "Videos"
+msgstr "Videos"
+
+#: agencia/views.py:44
+msgid "Sua senha foi trocada com sucesso"
+msgstr "Su clave fue modificada con éxito"
+
+#: agencia/views.py:62
+msgid "Sua senha ha mudado"
+msgstr "Su clave a cambiado"
+
+#: agencia/views.py:69
+msgid "Nova senha gerada com sucesso"
+msgstr "Nueva clave generada con éxito"
+
+#: agencia/views.py:70
+#, python-format
+msgid "Mail com nova senha enviado para %s"
+msgstr "Mail con nueva clave enviada para %s"
+
+#: agenciado/views.py:122
+msgid "Dados atualizados com sucesso"
+msgstr "Datos actualizados con éxito"
+
+#: agenciado/views.py:138
+msgid "O email ingresado ja existe"
+msgstr "El e-mail ingresado ya existe"
+
+#: agenciado/views.py:155
+msgid "Registrar"
+msgstr "Registrar"
+
+#: agenciado/views.py:166
+msgid "Sua conta esta creada"
+msgstr "Su cuenta se encuentra creada"
+
+#: agenciado/views.py:173
+msgid "Registro realizado com sucesso!"
+msgstr "Registro realizado con éxito!"
+
+#: agenciado/views.py:174
+msgid "Temos enviado para seu email dados da sua nova conta."
+msgstr "Hemos enviado para su e-mail datos de su nueva cuenta."
+
+#: agenciado/views.py:175
+msgid ""
+"Por favor atualice os dados de seu perfil a ser analizados por nossa agencia."
+msgstr ""
+"Por favor actualice los datos de su perfil a ser analizados por nuestra "
+"agencia."
+
+#: agenciado/views.py:195
+msgid "O perfil do trabalho para o qual quer aplicar nao foi encontrado"
+msgstr "El perfil del trabajo para el cual quiere aplicar no fue encontrado"
+
+#: agenciado/views.py:202
+#, python-format
+msgid ""
+"Para aplicar ao perfil %(rol)s do trabalho <a href=%(url)s>%(trabajo)s</a> "
+"tem que completar seus dados de Agenciado"
+msgstr ""
+"Para aplicar al perfil %(rol)s del trabajo <a href=%(url)s>%(trabajo)s</a> "
+"tiene que completar los datos de su perfil"
+
+#: agenciado/views.py:212
+#, python-format
+msgid "Aplicação para o perfil \"%s\" realizada com sucesso."
+msgstr "Aplicación para el perfil \"%s\" realizada con éxito."
+
+#: agenciado/views.py:213
+msgid ""
+"A aplicação vai ser analizada por nosso equipe, muito obrigado por sua "
+"postulação."
+msgstr ""
+"La aplicación va a ser analizada por nuestro equipo, muchas gracias por su "
+"postulación"
+
+#: alternativa/settings.py:45
+msgid "Portugues"
+msgstr "Portugues"
+
+#: alternativa/settings.py:46
+msgid "Spanish"
+msgstr "Español"
+
+#: templates/base.html:37 templates/base.html.py:104
+#: templates/admin/base_site.html:7
+#: templates/trabajo/rol/agregar_agenciados_seleccionados.html:11
+#: templates/trabajo/rol/resultados_agregar_agenciados_seleccionados.html:9
+msgid "Agencia"
+msgstr "Agencia"
+
+#: templates/base.html:54
+msgid "Meu Perfil"
+msgstr "Mi Perfil"
+
+#: templates/base.html:55
+msgid "Pesquisas"
+msgstr "Búsquedas"
+
+#: templates/base.html:56
+msgid "Portifolio"
+msgstr "Portfolio"
+
+#: templates/base.html:57
+msgid "Contato"
+msgstr "Contacto"
+
+#: templates/base.html:64
+msgid "Administração"
+msgstr "Administración"
+
+#: templates/base.html:66 templates/user/cambio_clave.html:6
+msgid "Trocar Senha"
+msgstr "Modificar Clave"
+
+#: templates/base.html:67
+msgid "Sair"
+msgstr "Salir"
+
+#: templates/base.html:69
+msgid "Registro"
+msgstr "Registro"
+
+#: templates/admin/trabajo/trabajo/change_form.html:5
+msgid "e-mail Produtora"
+msgstr "e-mail Productora"
+
+#: templates/admin/trabajo/trabajo/change_form.html:6
+msgid "Historial"
+msgstr "Historial"
+
+#: templates/admin/trabajo/trabajo/change_form.html:7
+msgid "Ver no site"
+msgstr "Ver en el sitio"
+
+#: templates/agencia/index.html:17
+msgid "Cadastre-se"
+msgstr "Registrese"
+
+#: templates/agencia/index.html:19
+msgid "Complete seu cadastro"
+msgstr "Complete su perfil"
+
+#: templates/agencia/index.html:21
+msgid "Veja os perfis procurados"
+msgstr "Vea los perfiles buscados"
+
+#: templates/agencia/index.html:34
+msgid "Trabalhos Ativos Recentes"
+msgstr "Trabajos Activos Recientes"
+
+#: templates/agencia/index.html:40
+msgid "Itens do Portifolio Recentes"
+msgstr "Items del Portfolio Recientes"
+
+#: templates/agencia/conf/hero.html:2
+msgid "Somos a alternativa para a realização do seu sonho"
+msgstr "Somos la alternativa para la realización de su sueño"
+
+#: templates/agencia/conf/hero.html:3
+msgid ""
+"A agência ALTERNATIVA busca atingir sua missão: Atuar no mercado "
+"publicitário com excelência e alcançar a maior visibilidade possível através "
+"do sucesso de seus agenciados. Para alcançar isso, a agência trabalha "
+"selecionando o melhor casting, dando oportunidade para pessoas de todo o "
+"Brasil, sempre buscando novos talentos."
+msgstr ""
+"La agencia ALTERNATIVA busca lograr su misión: Actuar en el mercado "
+"publicitario con exelencia y alcanzar la mayor visibilidad posible a través "
+"del éxito de sus agenciados. Para alcanzar esto, la agencia trabaja "
+"seleccionando el mejor casting, dando oportunidad para personas de todo "
+"Brasil, siempre buscando nuevos talentos."
+
+#: templates/agencia/conf/mapa.html:2
+msgid "Ver mapa maior"
+msgstr "Ampliar mapa"
+
+#: templates/agencia/mail/firma.txt:2
+msgid "O equipe da agencia"
+msgstr "El equipo de la agencia"
+
+#: templates/agenciado/agenciado.html:15
+msgid "Tem erros por corregir"
+msgstr "Tiene errores por corregir"
+
+#: templates/agenciado/agenciado.html:21
+msgid "Dados persoais"
+msgstr "Datos personales"
+
+#: templates/agenciado/agenciado.html:31
+msgid "Dados administrativos"
+msgstr "Datos administrativos"
+
+#: templates/agenciado/agenciado.html:57
+msgid "Caracteristicas fisicas"
+msgstr "Características físicas"
+
+#: templates/agenciado/agenciado.html:114
+msgid "Grabar"
+msgstr "Grabar"
+
+#: templates/locale/select_form_language.html:11
+msgid "Ir"
+msgstr "Ir"
+
+#: templates/registration/login.html:12
+msgid "Crear nova conta"
+msgstr "Crear nueva cuenta"
+
+#: templates/registration/login.html:13
+msgid "Nao lembro minha senha"
+msgstr "No recuerdo mi clave"
+
+#: templates/trabajo/itemportfolio/portfolio.html:16
+#, python-format
+msgid "Pagina %(portfolio.number)s de %(portfolio.paginator.num_pages)s"
+msgstr "Pagina %(portfolio.number)s de %(portfolio.paginator.num_pages)s"
+
+#: templates/trabajo/rol/agregar_agenciados_seleccionados.html:4
+msgid "Adicionar agenciados selecionados a perfil de trabalho"
+msgstr "Agregar agenciados seleccionados al perfil del trabajo"
+
+#: templates/trabajo/rol/agregar_agenciados_seleccionados.html:10
+#: templates/trabajo/rol/resultados_agregar_agenciados_seleccionados.html:8
+#: templates/trabajo/trabajo/enviar_mail_productora.html:8
+msgid "Início"
+msgstr "Inicio"
+
+#: templates/trabajo/rol/agregar_agenciados_seleccionados.html:12
+#: templates/trabajo/rol/resultados_agregar_agenciados_seleccionados.html:10
+msgid "Agenciados"
+msgstr "Agenciados"
+
+#: templates/trabajo/rol/agregar_agenciados_seleccionados.html:20
+msgid "Selecione perfil em que deseja adicionar os agenciados selecionados:"
+msgstr ""
+"Selecciones el perfil en que desea agregar los agenciados seleccionados"
+
+#: templates/trabajo/rol/agregar_agenciados_seleccionados.html:23
+msgid "Adicionar agenciados"
+msgstr "Agregar agenciado"
+
+#: templates/trabajo/rol/agregar_agenciados_seleccionados.html:26
+msgid "Agenciados selecionados"
+msgstr "Agenciados seleccionados"
+
+#: templates/trabajo/rol/detalles.html:2 trabajo/models.py:264
+#: trabajo/models.py:298 trabajo/models.py:317
+msgid "Perfil"
+msgstr "Perfil"
+
+#: templates/trabajo/rol/detalles.html:4
+#: templates/trabajo/trabajo/contenido.html:13
+msgid "Cache"
+msgstr "Cache"
+
+#: templates/trabajo/rol/detalles.html:5 trabajo/models.py:259
+msgid "Caraterísticas"
+msgstr "Características"
+
+#: templates/trabajo/rol/detalles.html:6 trabajo/models.py:301
+msgid "Eventos do perfil"
+msgstr "Eventos del perfil"
+
+#: templates/trabajo/rol/detalles.html:11
+msgid "Este perfil não tem eventos registrados"
+msgstr "Este perfil no tiene eventos registrados"
+
+#: templates/trabajo/rol/detalles.html:15
+msgid "Postulações"
+msgstr "Postulaciones"
+
+#: templates/trabajo/rol/detalles.html:22
+msgid "Este perfil não tem postulações registradas"
+msgstr "Este perfil no tiene postulaciones registradas"
+
+#: templates/trabajo/rol/resultados_agregar_agenciados_seleccionados.html:4
+#: templates/trabajo/rol/resultados_agregar_agenciados_seleccionados.html:11
+#, python-format
+msgid ""
+"Resultado de adicionar agenciados selecionados a perfil %(rol.descripcion)s "
+"de trabalho %(trabajo.titulo)s"
+msgstr ""
+"Resultado de agregar agenciados selecionados al perfil %(rol.descripcion)s "
+"del trabajo %(trabajo.titulo)s"
+
+#: templates/trabajo/rol/resultados_agregar_agenciados_seleccionados.html:19
+#, python-format
+msgid ""
+"Agenciados adicionados com exito ao perfil \"%(rol.admin_link)s\" com estado "
+"\"%(estado)s\""
+msgstr ""
+"Agenciados agregados con éxito al perfil \"%(rol.admin_link)s\" con estado "
+"\"%(estado)s\""
+
+#: templates/trabajo/rol/resultados_agregar_agenciados_seleccionados.html:24
+msgid "Nao foi posibel adicionar nenhum agenciado"
+msgstr "No fue posible agregar ningún agenciado"
+
+#: templates/trabajo/rol/resultados_agregar_agenciados_seleccionados.html:31
+#, python-format
+msgid ""
+"Agenciados ja existentes em perfil \"%(rol.admin_link)s\" (se indica o "
+"estado atual para cada postulação existente)"
+msgstr ""
+"Agenciados ya existentes en perfil \"%(rol.admin_link)s\" (se indica el "
+"estado actual para cada postulación existente)"
+
+#: templates/trabajo/trabajo/busquedas.html:17
+msgid "Trabalhos Ativos"
+msgstr "Trabajos Activos"
+
+#: templates/trabajo/trabajo/contenido.html:3
+#: templates/trabajo/trabajo/enviar_mail_productora.html:9
+#: trabajo/models.py:183
+msgid "Trabalho"
+msgstr "Trabajo"
+
+#: templates/trabajo/trabajo/contenido.html:5
+#: templates/trabajo/trabajo/detalles.html:5
+#: templates/trabajo/trabajo/thumbnails.html:9
+msgid "Descrição"
+msgstr "Descripción"
+
+#: templates/trabajo/trabajo/contenido.html:7
+msgid "Perfis procurados"
+msgstr "Perfiles buscados"
+
+#: templates/trabajo/trabajo/contenido.html:13
+msgid "Sem informação"
+msgstr "Sin información"
+
+#: templates/trabajo/trabajo/contenido.html:14
+msgid "Carateristicas"
+msgstr "Características"
+
+#: templates/trabajo/trabajo/contenido.html:17
+msgid "Voce já está postulado para este perfil"
+msgstr "Usted ya se encuentra postulado para este perfil"
+
+#: templates/trabajo/trabajo/contenido.html:19
+msgid "Aplicar ao perfil"
+msgstr "Aplicar al perfil"
+
+#: templates/trabajo/trabajo/contenido.html:22
+msgid "O trabalho nao registra perfis procurados"
+msgstr "El trabajo no registra perfiles buscados"
+
+#: templates/trabajo/trabajo/cuerpo_mail_productora.html:7
+msgid "Ola"
+msgstr "Hola"
+
+#: templates/trabajo/trabajo/cuerpo_mail_productora.html:9
+#, python-format
+msgid ""
+"Estamos enviando os detalhes referentes ao trabalho \"%(trabajo.titulo)s\", "
+"junto com as postulações dos agenciados para cada rol procurado:"
+msgstr ""
+"Estamos enviando los detalles referentes al trabajo \"%(trabajo.titulo)s\", "
+"junto con las postulaciones de los agenciados para cada perfil buscado:"
+
+#: templates/trabajo/trabajo/cuerpo_mail_productora.html:11
+#: trabajo/admin.py:106
+msgid "Dados do trabalho"
+msgstr "Datos del trabajo"
+
+#: templates/trabajo/trabajo/cuerpo_mail_productora.html:14
+msgid "Dados dos roles e postulações dos agenciados"
+msgstr "Datos de los perfiles y postulaciones de los agenciados"
+
+#: templates/trabajo/trabajo/detalles.html:6 trabajo/models.py:241
+msgid "Eventos do trabalho"
+msgstr "Eventos del trabajo"
+
+#: templates/trabajo/trabajo/detalles.html:11
+msgid "Este trabalho não tem eventos registrados"
+msgstr "Este trabajo no tiene eventos registrados"
+
+#: templates/trabajo/trabajo/enviar_mail_productora.html:4
+#: templates/trabajo/trabajo/enviar_mail_productora.html:12
+#, python-format
+msgid "Envio de trabalho \"%(trabajo)s\" a produtora %(trabajo.productora)s"
+msgstr ""
+"Envio de trabajo \"%(trabajo)s\" a la productora %(trabajo.productora)s"
+
+#: templates/trabajo/trabajo/enviar_mail_productora.html:10
+#: trabajo/models.py:184
+msgid "Trabalhos"
+msgstr "Trabajos"
+
+#: templates/trabajo/trabajo/enviar_mail_productora.html:18
+msgid "Indique os dados do e-mail a enviar e verifique se o conteudo e correto"
+msgstr ""
+"Indique los datos del e-mail a enviar y verifique si el contenido es correcto"
+
+#: templates/trabajo/trabajo/enviar_mail_productora.html:21
+msgid "Enviar"
+msgstr "Enviar"
+
+#: templates/trabajo/trabajo/enviar_mail_productora.html:24
+msgid "Conteudo do e-mail"
+msgstr "Contenido del e-mail"
+
+#: templates/trabajo/trabajo/thumbnails.html:10
+msgid "Ver detalhes"
+msgstr "Ver detalles"
+
+#: templates/user/reiniciar_clave.html:6
+msgid "Gerar Senha"
+msgstr "Generar Clave"
+
+#: templates/user/mail/cambio_clave.txt:3
+#, python-format
+msgid ""
+"Oi %(usuario.first_name)s!\n"
+"\n"
+"Voce tem uma nova senha.\n"
+"\n"
+"Sua nova senha e (%(clave)s). Lembre que seu usuário e "
+"(%(usuario.username)s).\n"
+"\n"
+"Voce pode trocar sua senha acessando a http://%(ambiente.dominio)s/agencia/"
+"cambio/clave/"
+msgstr ""
+"Hola %(usuario.first_name)s!\n"
+"\n"
+"Tienes una nueva clave.\n"
+"\n"
+"Su nueva clave es (%(clave)s). Recuerde que su usuario es "
+"(%(usuario.username)s).\n"
+"\n"
+"Usted puede cambiar su clave ingresando a http://%(ambiente.dominio)s/"
+"agencia/cambio/clave/"
+
+#: templates/user/mail/creacion.txt:5
+#, python-format
+msgid ""
+"Oi %(user.first_name)s!\n"
+"\n"
+"Você tem uma nova conta em http://%(ambiente.dominio)s/ com dados de sue "
+"perfil.\n"
+"\n"
+"Se você e um agenciado, então pode carregar informação de seu perfil: http://"
+"%(ambiente.dominio)s/agenciado/\n"
+"\n"
+"Se você e um agenciador pode acessar a administração do site: http://"
+"%(ambiente.dominio)s/admin/\n"
+"\n"
+"Você poderá ingressar a sua nova conta com seu usuário (%(user.username)s) e "
+"sua chave.\n"
+"\n"
+"Se você não lembra sua chave, poderá gerá-la de novo aqui: http://"
+"%(ambiente.dominio)s/agencia/reiniciar/clave/\n"
+"\n"
+"Por favor, verifique se os dados da sua conta som corretos. Em caso de "
+"precisar modifique os dados que correspondam."
+msgstr ""
+"Hola %(user.first_name)s!\n"
+"\n"
+"Usted tiene una nueva cuenta en http://%(ambiente.dominio)s/ con datos de su "
+"perfil.\n"
+"\n"
+"Si usted es un agenciado, entonces puede completar su perfil: http://"
+"%(ambiente.dominio)s/agenciado/\n"
+"\n"
+"Si usted es un agenciador puede acceder a la administración: http://"
+"%(ambiente.dominio)s/admin/\n"
+"\n"
+"Usted podrá ingresar a su nueva cuenta con su usuario (%(user.username)s) y "
+"su clave.\n"
+"\n"
+"Si usted no recuerda su clave, podra generarla de nuevo aqui: http://"
+"%(ambiente.dominio)s/agencia/reiniciar/clave/\n"
+"\n"
+"Por favor, verifique si los datos de su perfil son correctos. En caso de ser "
+"necesario, modifique los datos que correspondan."
+
+#: trabajo/admin.py:69
+msgid "Dados do rol procurado"
+msgstr "Datos del perfil buscado"
+
+#: trabajo/admin.py:71
+msgid "Dados das postulaçoes"
+msgstr "Datos de las postulaciones"
+
+#: trabajo/admin.py:134
+msgid "Adicionar agenciados selecionados a perfil procurado em trabalho"
+msgstr "Agregar agenciados seleccionados a un perfil buscado en un trabajo"
+
+#: trabajo/models.py:26
+msgid "Endereços"
+msgstr "Direcciones"
+
+#: trabajo/models.py:32
+#, python-format
+msgid "%(telefono)s (%(compania)s)"
+msgstr "%(telefono)s (%(compania)s)"
+
+#: trabajo/models.py:35
+msgid "Telefone"
+msgstr "Teléfono"
+
+#: trabajo/models.py:39
+msgid "Data do evento"
+msgstr "Fecha del Evento"
+
+#: trabajo/models.py:42
+msgid "Evento"
+msgstr "Evento"
+
+#: trabajo/models.py:43
+msgid "Eventos"
+msgstr "Eventos"
+
+#: trabajo/models.py:61 trabajo/models.py:92 trabajo/models.py:97
+#: trabajo/models.py:158
+msgid "Produtora"
+msgstr "Productora"
+
+#: trabajo/models.py:62
+msgid "Produtoras"
+msgstr "Produtoras"
+
+#: trabajo/models.py:80
+msgid "Trabalhos ativos"
+msgstr "Trabajos activos"
+
+#: trabajo/models.py:89
+msgid "Trabalhos iniciados"
+msgstr "Trabajos iniciados"
+
+#: trabajo/models.py:94
+#, python-format
+msgid ""
+"%(direccion)s, %(barrio)s, %(ciudad)s, %(estado)s, %(codigo_postal)s "
+"(%(descripcion)s)"
+msgstr ""
+"%(direccion)s, %(barrio)s, %(ciudad)s, %(estado)s, %(codigo_postal)s "
+"(%(descripcion)s)"
+
+#: trabajo/models.py:106
+msgid "Data"
+msgstr "Fecha"
+
+#: trabajo/models.py:111
+msgid "Item Portfolio"
+msgstr "Item Portfolio"
+
+#: trabajo/models.py:112
+msgid "Portfolio"
+msgstr "Portfolio"
+
+#: trabajo/models.py:130 trabajo/models.py:137
+msgid "Video ou imagem"
+msgstr "Video o Imagen"
+
+#: trabajo/models.py:163
+msgid "Inicial"
+msgstr "Inicial"
+
+#: trabajo/models.py:165
+msgid "Pendente de cobrar"
+msgstr "Pendiente de cobrar"
+
+#: trabajo/models.py:166
+msgid "Finalizado"
+msgstr "Finalizado"
+
+#: trabajo/models.py:170
+msgid "Data ingreso"
+msgstr "Fecha de ingreso"
+
+#: trabajo/models.py:181
+#, python-format
+msgid "%(titulo)s (%(fecha_ingreso)s)"
+msgstr "%(titulo)s (%(fecha_ingreso)s)"
+
+#: trabajo/models.py:211 trabajo/models.py:265
+msgid "Perfis"
+msgstr "Perfiles"
+
+#: trabajo/models.py:218
+msgid "Link a produtora"
+msgstr "Link a la productora"
+
+#: trabajo/models.py:225 trabajo/models.py:294
+msgid "Link ao trabalho"
+msgstr "Link al trabajo"
+
+#: trabajo/models.py:228
+msgid "Casting"
+msgstr "Casting"
+
+#: trabajo/models.py:229
+msgid "Callback"
+msgstr "Callback"
+
+#: trabajo/models.py:230
+msgid "Proba de roupa"
+msgstr "Prueba de ropa"
+
+#: trabajo/models.py:231
+msgid "Realização do trabalho"
+msgstr "Realización del trabajo"
+
+#: trabajo/models.py:232
+msgid "Outro"
+msgstr "Otro"
+
+#: trabajo/models.py:240
+msgid "Evento do trabalho"
+msgstr "Evento del trabajo"
+
+#: trabajo/models.py:245
+#, python-format
+msgid ""
+"%(tipo)s | %(descripcion)s | %(fecha)s | %(direccion)s, %(barrio)s, "
+"%(ciudad)s, %(estado)s, %(codigo_postal)s"
+msgstr ""
+"%(tipo)s | %(descripcion)s | %(fecha)s | %(direccion)s, %(barrio)s, "
+"%(ciudad)s, %(estado)s, %(codigo_postal)s"
+
+#: trabajo/models.py:270
+msgid "Postulados casting"
+msgstr "Postulados casting"
+
+#: trabajo/models.py:273
+msgid "Selecionados casting"
+msgstr "Seleccionados casting"
+
+#: trabajo/models.py:276
+msgid "Selecionados trabalho"
+msgstr "Seleccionados trabajo"
+
+#: trabajo/models.py:279
+msgid "Trabalhos realizados"
+msgstr "Trabajos realizados"
+
+#: trabajo/models.py:282
+msgid "Trabalhos pagados"
+msgstr "Trabajos pagados"
+
+#: trabajo/models.py:289 trabajo/models.py:360
+msgid "Link ao perfil"
+msgstr "Link al perfil"
+
+#: trabajo/models.py:300
+msgid "Evento do perfil"
+msgstr "Evento del perfil"
+
+#: trabajo/models.py:319
+msgid "Postulação feita pelo agenciado"
+msgstr "Postulación hecha por el agenciado"
+
+#: trabajo/models.py:320
+msgid "Postulado para casting"
+msgstr "Postulado para casting"
+
+#: trabajo/models.py:321
+msgid "Selecionado para casting"
+msgstr "Seleccionado para casting"
+
+#: trabajo/models.py:322
+msgid "Selecionado para trabalho"
+msgstr "Seleccionado para trabajo"
+
+#: trabajo/models.py:323
+msgid "Trabalho realisado"
+msgstr "Trabajo realizado"
+
+#: trabajo/models.py:324
+msgid "Trabalho pagado"
+msgstr "Trabajo pagado"
+
+#: trabajo/models.py:332
+msgid "Postulação"
+msgstr "Postulación"
+
+#: trabajo/models.py:333
+msgid "Postulaçoes"
+msgstr "Postulaciones"
+
+#: trabajo/views.py:118
+msgid "Este mensagem deve ser visualizado em formato HTML."
+msgstr "Este mensaje debe ser visualizado en formato HTML."
+
+#: trabajo/views.py:123
+#, python-format
+msgid ""
+"Trabalho enviado com sucesso a os seguintes destinatarios y copias: "
+"%(destinatarios)s %(copias)s"
+msgstr ""
+"Trabajo enviado com éxito a los siguientes destinatarios y copias: "
+"%(destinatarios)s %(copias)s"
+
+#: trabajo/views.py:126
+#, python-format
+msgid "Detalhe de trabalho \"%s\""
+msgstr "Detalle del trabajo \"%s\""

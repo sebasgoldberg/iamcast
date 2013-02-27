@@ -14,6 +14,8 @@ from django.conf import settings
 from django.contrib import messages
 from django.template import RequestContext
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy
 
 class SeleccionarYAgregarAgenciadosForm(forms.ModelForm):
   ids = forms.CharField(widget = forms.HiddenInput(), required = True)
@@ -113,15 +115,15 @@ def trabajo_enviar_mail_productora(request,trabajo_id):
       destinatarios = form.get_destinatarios()
       ccs = [request.user.email,settings.AMBIENTE.agencia.email]
 
-      text_content = 'Este mensagem deve ser visualizado em formato HTML.'
+      text_content = _(u'Este mensagem deve ser visualizado em formato HTML.')
       html_content = template.render(context)
       msg = MailAgencia(asunto, text_content, destinatarios,ccs=ccs)
       msg.set_html_body(html_content)
       msg.send()
-      messages.success(request, 'Trabalho enviado com sucesso a os seguintes destinatarios y copias ocultas: %s %s' % (str(destinatarios),str(ccs)))
+      messages.success(request, _(u'Trabalho enviado com sucesso a os seguintes destinatarios y copias: %(destinatarios)s %(copias)s') % {'destinatarios':str(destinatarios),'copias':str(ccs)})
       return redirect('/admin/trabajo/trabajo/%s/'%trabajo_id)
   else:
-    asunto = 'Detalhe de trabalho "%s"' % (trabajo.titulo,)
+    asunto = _(u'Detalhe de trabalho "%s"') % (trabajo.titulo,)
     form = MailForm(initial={'destinatarios':trabajo.productora.mail, 'asunto': asunto })
 
   return render(request,'trabajo/trabajo/enviar_mail_productora.html',{'form': form, 'trabajo': trabajo, })

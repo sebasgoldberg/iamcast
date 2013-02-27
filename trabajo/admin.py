@@ -7,6 +7,8 @@ from django.forms.models import BaseInlineFormSet
 from django.http import HttpResponseRedirect
 from agencia.admin import AgenciadoAdmin
 from django.forms.widgets import Textarea
+from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy
 
 class PostulacionInline(admin.TabularInline):
   model=Postulacion
@@ -64,9 +66,9 @@ class RolAdmin(admin.ModelAdmin):
   inlines=[EventoRolInline, PostulacionInline]
   fieldsets=[
     (None, {'fields':['id']}),
-    ('Dados do rol procurado', 
+    (_(u'Dados do rol procurado'), 
       {'fields':[('descripcion', 'trabajo', 'trabajo_admin_link' ), 'cache', ('caracteristicas',)]}),
-    ('Dados das postulaçoes', 
+    (_(u'Dados das postulaçoes'), 
       { 'fields':[ 
         ('cantidad_postulados_casting', 'cantidad_seleccionados_casting', 
         'cantidad_seleccionados_trabajo', 'cantidad_trabajos_realizados', 
@@ -101,7 +103,7 @@ class TrabajoAdmin(admin.ModelAdmin):
   date_hierarchy='fecha_ingreso'
   fieldsets=[
     (None, {'fields':['id', 'thumbnail_img_link']}),
-    ('Dados do trabalho', 
+    (_(u'Dados do trabalho'), 
       {'fields':['titulo', ('productora', 'productora_admin_link'), 'estado', 'fecha_ingreso', 'descripcion', 'imagen']}),
   ]
 
@@ -129,7 +131,7 @@ def add_agenciados_trabajo(modeladmin, request, queryset):
   selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
   return HttpResponseRedirect("/trabajo/agregar/agenciados/seleccionados/a/rol/?ids=%s" %  ",".join(selected))
 
-add_agenciados_trabajo.short_description='Adicionar agenciados selecionados a perfil procurado em trabalho'
+add_agenciados_trabajo.short_description=_(u'Adicionar agenciados selecionados a perfil procurado em trabalho')
 
 # IMPORTANTE: El agregado de la accion se hace de la siguiente forma porque si solo se hiciese con '+=' y el listado estuviese vacío, entonces la acción se registraría para todos los modelos. Este imagino que debe ser un bug de django. Con append ocurre el mismo error.
 if len(AgenciadoAdmin.actions)==0:

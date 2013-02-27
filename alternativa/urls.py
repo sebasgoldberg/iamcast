@@ -26,5 +26,6 @@ urlpatterns = patterns('',
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'authentication_form':AgenciaAuthenticationForm}),
     url(r'^accounts/profile/$', 'agenciado.views.index'),
     url(r'^$', redirect_to, {'url': '/agencia/'}),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
 )
 

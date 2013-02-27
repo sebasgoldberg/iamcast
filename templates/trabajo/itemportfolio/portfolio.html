@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {%block portfolio_active%}active{%endblock%}
 
@@ -12,7 +13,7 @@
       {% with ''|center:portfolio.paginator.num_pages as range %}
         {% for _ in range %}
           {% if forloop.counter == portfolio.number %}
-            <a class='btn' href='#'>Pagina {{ portfolio.number }} de {{ portfolio.paginator.num_pages }}</a>
+            <a class='btn' href='#'>{%blocktrans%}Pagina {{ portfolio.number }} de {{ portfolio.paginator.num_pages }}{%endblocktrans%}</a>
           {% else %}
             <a class='btn' href='?page={{forloop.counter}}'>{{forloop.counter}}</a>
           {% endif %}

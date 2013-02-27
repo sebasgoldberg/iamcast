@@ -4,7 +4,7 @@
 {% block title %}{{ title }} | {{ ambiente.agencia.nombre }}{% endblock %}
 
 {% block branding %}
-<a href="/"><h1 id="site-name">Agencia {{ ambiente.agencia.nombre }}</h1></a>
+<a href="/"><h1 id="site-name">{% trans "Agencia" %} {{ ambiente.agencia.nombre }}</h1></a>
 {% endblock %}
 
 {% block nav-global %}{% endblock %}

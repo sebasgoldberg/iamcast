@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 {% load url from future %}
 {% load crispy_forms_tags %}
+{% load i18n %}
 
 {% block content %}
 
-<legend>Ingresar</legend>
+<legend>{% trans "Ingresar" %}</legend>
 
 {% crispy form %}
 
-<a class="btn" href="/agenciado/registro/{%if next%}?next={{next}}{%endif%}">Crear nova conta</a>
-<a class="btn" href="/agencia/reiniciar/clave/{%if next%}?next={{next}}{%endif%}">Nao lembro minha senha</a>
+<a class="btn" href="/agenciado/registro/{%if next%}?next={{next}}{%endif%}">{% trans "Crear nova conta" %}</a>
+<a class="btn" href="/agencia/reiniciar/clave/{%if next%}?next={{next}}{%endif%}">{% trans "Nao lembro minha senha" %}</a>
 
 {% endblock %}

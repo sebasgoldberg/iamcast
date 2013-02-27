@@ -3,6 +3,8 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Hidden
 from django.contrib.auth.forms import SetPasswordForm, PasswordResetForm
 from django import forms
+from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy
 
 class AgenciaAuthenticationForm(AuthenticationForm):
 
@@ -12,7 +14,7 @@ class AgenciaAuthenticationForm(AuthenticationForm):
     self.helper.form_class = 'uniForm'
     self.helper.form_method = 'post'
     self.helper.form_action = 'django.contrib.auth.views.login'
-    self.helper.add_input(Submit('submit','Ingresar'))
+    self.helper.add_input(Submit('submit',_('Ingresar')))
 
     if request: 
       next_page = request.GET.get('next')
@@ -27,7 +29,7 @@ class AgenciaSetPasswordForm(SetPasswordForm):
     self.helper.form_class = 'uniForm'
     self.helper.form_method = 'post'
     self.helper.form_action = '/agencia/cambio/clave/'
-    self.helper.add_input(Submit('submit','Trocar'))
+    self.helper.add_input(Submit('submit',_('Trocar')))
     super(AgenciaSetPasswordForm, self).__init__(*args, **kwargs)
 
 class AgenciaPasswordResetForm(PasswordResetForm):
@@ -37,5 +39,5 @@ class AgenciaPasswordResetForm(PasswordResetForm):
     self.helper.form_class = 'uniForm'
     self.helper.form_method = 'post'
     self.helper.form_action = '/agencia/reiniciar/clave/'
-    self.helper.add_input(Submit('submit','Gerar'))
+    self.helper.add_input(Submit('submit',_('Gerar')))
     super(AgenciaPasswordResetForm, self).__init__(*args, **kwargs)

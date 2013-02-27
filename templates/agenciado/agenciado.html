@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% load crispy_forms_tags %}
 
@@ -11,13 +12,13 @@
   {% csrf_token %}
 
   {% if form.errors or telefonoFormSet.non_form_errors or telefonoFormSet.errors or fotoAgenciadoFormSet.non_form_errors or fotoAgenciadoFormSet.errors or videoAgenciadoFormSet.non_form_errors or videoAgenciadoFormSet.errors %}
-    <div class='alert alert-error'>Tem errores por corregir</div>
+    <div class='alert alert-error'>{% trans "Tem erros por corregir" %}</div>
   {% endif %}
 
   {% if form.non_form_errors %}<div class='alert alert-error'>{{ form.non_field_errors }}</div>{%endif%}
 
   <fieldset>
-    <legend>Dados persoais</legend>
+    <legend>{% trans "Dados persoais" %}</legend>
     <div class='row'>
       <div class='{{clase_espacio_celda}}'>{{form.mail|as_crispy_field}}</div>
       <div class='{{clase_espacio_celda}}'>{{form.nombre|as_crispy_field}}</div>
@@ -27,7 +28,7 @@
   </fieldset>
 
   <fieldset>
-    <legend>Dados administrativos</legend>
+    <legend>{% trans "Dados administrativos" %}</legend>
     <div class='row'>
     <div class='{{clase_espacio_celda}}'>{{form.documento_rg|as_crispy_field}}</div>
     <div class='{{clase_espacio_celda}}'>{{form.documento_cpf|as_crispy_field}}</div>
@@ -37,7 +38,7 @@
   </fieldset>
 
   <fieldset>
-    <legend>Dados de endereço</legend>
+    <legend>{% trans "Dados de endereço" %}</legend>
     <div class='row'>
       <div class='{{clase_espacio_celda}}'>{{form.estado|as_crispy_field}}</div>
       <div class='{{clase_espacio_celda}}'>{{form.ciudad|as_crispy_field}}</div>
@@ -48,12 +49,12 @@
   </fieldset>
 
   <fieldset>
-    <legend>Telefones</legend>
+    <legend>{% trans "Telefones" %}</legend>
     {% include 'agenciado/formset.html' with formset=telefonoFormSet forms_by_line='3' columns_by_form='4' %}
   </fieldset>
 
   <fieldset>
-    <legend>Caracteristicas fisicas</legend>
+    <legend>{% trans "Caracteristicas fisicas" %}</legend>
     <div class='row'>
       <div class='{{clase_espacio_celda}}'>{{form.sexo|as_crispy_field}}</div>
       <div class='{{clase_espacio_celda}}'>{{form.ojos|as_crispy_field}}</div>
@@ -70,7 +71,7 @@
   </fieldset>
 
   <fieldset>
-    <legend>Habilidades</legend>
+    <legend>{% trans "Habilidades" %}</legend>
     {{form.deportes|as_crispy_field}}
     <hr/>
     {{form.danzas|as_crispy_field}}
@@ -81,7 +82,7 @@
   </fieldset>
 
   <fieldset>
-    <legend>Fotos</legend>
+    <legend>{% trans "Fotos" %}</legend>
     {% autoescape off %}
     {{form.instance.thumbnails}}
     {% endautoescape %}
@@ -89,7 +90,7 @@
   </fieldset>
 
   <fieldset>
-    <legend>Videos</legend>
+    <legend>{% trans "Videos" %}</legend>
     {% autoescape off %}
     {{form.instance.html_small_youtube_iframes}}
     {% endautoescape %}
@@ -97,7 +98,7 @@
   </fieldset>
 
   <fieldset>
-    <legend>Otros dados</legend>
+    <legend>{% trans "Otros dados" %}</legend>
     <div class='row'>
       <div class='span2'>{{form.indicador_maneja|as_crispy_field}}</div>
       <div class='span2'>{{form.indicador_tiene_registro|as_crispy_field}}</div>
@@ -110,7 +111,7 @@
   {{form.next_page|as_crispy_field}}
 
   <div class="form-actions">
-    <input type="submit" name="submit" value="Grabar" class="btn btn-primary" id="submit-id-submit" />
+    <input type="submit" name="submit" value="{% trans "Grabar" %}" class="btn btn-primary" id="submit-id-submit" />
   </div>
 
 </form>

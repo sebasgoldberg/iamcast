@@ -9,6 +9,8 @@ apt-get install libapache2-mod-wsgi
 apt-get install python-mysqldb
 apt-get install python-imaging
 apt-get install mercurial #necesario para hacer el pull de algunos pagetes a ser instalados
+apt-get install unzip
+apt-get install gettext
 
 #Instalacion del modulo python para SQL Server
 

@@ -1,8 +1,11 @@
+# coding=utf-8
 from agencia.models import Ciudad, Danza, Deporte, Estado, EstadoDientes, Idioma, Instrumento, Ojos, Pelo, Piel, Talle, Agenciado, FotoAgenciado, VideoAgenciado, Compania, Telefono, validarTelefonoIngresado, validarFotoIngresada
 from django.contrib import admin
 from django.forms import CheckboxSelectMultiple
 from django.db import models
 from django.forms.models import BaseInlineFormSet
+from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy
 
 class TelefonoFormSet(BaseInlineFormSet):
   def clean(self):
@@ -36,12 +39,12 @@ class AgenciadoAdmin(admin.ModelAdmin):
   readonly_fields=['id','thumbnails']
   fieldsets=[
     (None, {'fields':['thumbnails','id','mail']}),
-    ('Datos personales', {'fields':[('nombre', 'apellido', 'fecha_nacimiento')]}),
-    ('Datos Administrativos', { 'fields':[ ('documento_rg', 'documento_cpf'), 'responsable', 'cuenta_bancaria']}),
-    ('Datos de direccion', { 'fields':[ ('estado', 'ciudad', 'barrio'), ('direccion', 'codigo_postal')]}),
-    ('Caracteristicas fisicas', { 'fields':[ 'sexo', ('ojos', 'pelo', 'piel', 'estado_dientes'), ('altura', 'peso', 'talle', 'talle_camisa', 'talle_pantalon', 'calzado')]}),
-    ('Habilidades', { 'fields':[ ('deportes', 'danzas'), ('instrumentos', 'idiomas'), ('indicador_maneja', 'indicador_tiene_registro')]}),
-    ('Otros datos', { 'fields':[ 'trabaja_como_extra', 'como_nos_conocio', 'observaciones', 'activo', 'fecha_ingreso']}),
+    (_(u'Dados Pessoales'), {'fields':[('nombre', 'apellido', 'fecha_nacimiento')]}),
+    (_(u'Dados Administrativos'), { 'fields':[ ('documento_rg', 'documento_cpf'), 'responsable', 'cuenta_bancaria']}),
+    (_(u'Dados de endereço'), { 'fields':[ ('estado', 'ciudad', 'barrio'), ('direccion', 'codigo_postal')]}),
+    (_(u'Carateristicas fisicas'), { 'fields':[ 'sexo', ('ojos', 'pelo', 'piel', 'estado_dientes'), ('altura', 'peso', 'talle', 'talle_camisa', 'talle_pantalon', 'calzado')]}),
+    (_(u'Habilidades'), { 'fields':[ ('deportes', 'danzas'), ('instrumentos', 'idiomas'), ('indicador_maneja', 'indicador_tiene_registro')]}),
+    (_(u'Otros dados'), { 'fields':[ 'trabaja_como_extra', 'como_nos_conocio', 'observaciones', 'activo', 'fecha_ingreso']}),
   ]
   inlines=[TelefonoInline, FotoAgenciadoInline, VideoAgenciadoInline]
   list_display=['thumbnail','id','apellido','nombre','fecha_nacimiento','descripcion','telefonos','mail', 'responsable']

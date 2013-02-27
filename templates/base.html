@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load i18n %}
 <html>
 
 <head>
@@ -32,7 +33,7 @@
     <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
   {%endblock%}
 
-  <title>{%block title%}Agencia {{ambiente.agencia.nombre}}{%endblock%}</title>
+  <title>{%block title%}{% trans "Agencia" %} {{ambiente.agencia.nombre}}{%endblock%}</title>
 
 </head>
 
@@ -49,24 +50,27 @@
         <a class='brand' href=/agencia/> <img src='/static/images/small_logo.png' alt=Agencia {{ambiente.agencia.nombre}}/> </a> 
         <div class="nav-collapse collapse">
           <ul class="nav">
-            <li class='{%block agenciado_active%}{%endblock%}'><a href="/agenciado/"><span>Meu Perfil</span></a> </li>
-            <li class='{%block busquedas_active%}{%endblock%}'><a href="/trabajo/busquedas/"><span>Pesquisas</span></a> </li>
-            <li class='{%block portfolio_active%}{%endblock%}'><a href="/trabajo/portfolio/"><span>Portifolio</span></a> </li>
-            <li class='{%block contacto_active%}{%endblock%}'><a href="/agencia/contacto/"><span>Contato</span></a> </li>
+            <li class='{%block agenciado_active%}{%endblock%}'><a href="/agenciado/"><span>{% trans "Meu Perfil" %}</span></a> </li>
+            <li class='{%block busquedas_active%}{%endblock%}'><a href="/trabajo/busquedas/"><span>{% trans "Pesquisas" %}</span></a> </li>
+            <li class='{%block portfolio_active%}{%endblock%}'><a href="/trabajo/portfolio/"><span>{% trans "Portifolio" %}</span></a> </li>
+            <li class='{%block contacto_active%}{%endblock%}'><a href="/agencia/contacto/"><span>{% trans "Contato" %}</span></a> </li>
           </ul>
 
 
           <div class="pull-right">
           <ul class="nav">
             {%block menu_usuario%}
-                 <li> <a href="/admin/">Administração</a></li>
+                 <li> <a href="/admin/">{% trans "Administração" %}</a></li>
                 {% if user.is_authenticated %}
-                  <li><a href="/agencia/cambio/clave/">Trocar Senha</a></li>
-                  <li><a href="/agencia/logout/">Sair ({{user.username}})</a></li>
+                  <li><a href="/agencia/cambio/clave/">{% trans "Trocar Senha" %}</a></li>
+                  <li><a href="/agencia/logout/">{% trans "Sair" %} ({{user.username}})</a></li>
                 {%else%}
-                  <li><a href="/agenciado/registro/">Registro</a></li>
-                  <li><a href="/accounts/login/">Ingresar</a></li>
+                  <li><a href="/agenciado/registro/">{% trans "Registro" %}</a></li>
+                  <li><a href="/accounts/login/">{% trans "Ingresar" %}</a></li>
                 {% endif %}
+                <li>
+                  {% include 'locale/select_form_language.html' %}
+                </li>
             {%endblock%}
             </ul>
           </div>
@@ -96,7 +100,7 @@
   {% block footer %}
     <div id="footer">
       <div class="container">
-        <p class="muted credit">Agencia {{ambiente.agencia.nombre}} {% for telefono in ambiente.agencia.telefonos %}|{{telefono}}{% endfor%}| {{ambiente.agencia.email}}</p><p class="muted credit"> {{ambiente.agencia.direccion}}</p>
+        <p class="muted credit">{% trans "Agencia" %} {{ambiente.agencia.nombre}} {% for telefono in ambiente.agencia.telefonos %}|{{telefono}}{% endfor%}| {{ambiente.agencia.email}}</p><p class="muted credit"> {{ambiente.agencia.direccion}}</p>
       </div>
     </div>
   {% endblock %}

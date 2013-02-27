@@ -1,4 +1,5 @@
-O equipe da agencia {{ambiente.agencia.nombre}}
+{% load i18n %}
+{% trans "O equipe da agencia" %} {{ambiente.agencia.nombre}}
 {{ambiente.agencia.email}}
 {% for telefono in ambiente.agencia.telefonos %}{{telefono}}
 {% endfor %}{{ambiente.agencia.direccion}}

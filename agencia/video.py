@@ -2,6 +2,8 @@ from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 import re
+from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy
 
 class Video(models.Model):
   video = models.URLField(unique=True, null=True, blank=True)
@@ -19,8 +21,8 @@ class Video(models.Model):
 
   class Meta:
     abstract = True
-    verbose_name = u"Video"
-    verbose_name_plural = u"Videos"
+    verbose_name = ugettext_lazy(u"Video")
+    verbose_name_plural = ugettext_lazy(u"Videos")
 
   def get_youtube_iframe_url(self):
     return (u'http://www.youtube.com/embed/%s' % self.codigo_video)

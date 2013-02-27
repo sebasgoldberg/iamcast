@@ -32,6 +32,8 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
 from trabajo.models import Postulacion, Rol
+from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy
 
 class BPCheckboxSelectMultiple(CheckboxSelectMultiple):
 
@@ -117,7 +119,7 @@ def index(request):
       telefonoFormSet.save()
       fotoAgenciadoFormSet.save()
       videoAgenciadoFormSet.save()
-      messages.success(request, 'Dados atualizados com sucesso')
+      messages.success(request, _(u'Dados atualizados com sucesso'))
       next_page = form.cleaned_data['next_page']
       if not next_page:
         next_page = '/agenciado/'
@@ -133,12 +135,12 @@ def index(request):
 def validate_unique_mail(value):
   users=User.objects.filter(email=value)
   if len(users)>0:
-    raise ValidationError('O email ingresado ja existe')
+    raise ValidationError(_(u'O email ingresado ja existe'))
 
 class UserCreateForm(UserCreationForm):
   email = forms.EmailField(required=True, validators=[validate_unique_mail])
-  first_name = forms.CharField( max_length=30, required=True, label='Nome')
-  last_name = forms.CharField( max_length=30, required=True, label='Sobrenome')
+  first_name = forms.CharField( max_length=30, required=True, label=_('Nome'))
+  last_name = forms.CharField( max_length=30, required=True, label=_('Sobrenome'))
   next_page = forms.CharField(widget=forms.HiddenInput,required=False)
 
   class Meta:
@@ -150,7 +152,7 @@ class UserCreateForm(UserCreationForm):
     self.helper.form_class = 'uniForm'
     self.helper.form_method = 'post'
     self.helper.form_action = '/agenciado/registro/'
-    self.helper.add_input(Submit('submit','Registrar'))
+    self.helper.add_input(Submit('submit',_('Registrar')))
     return super(UserCreateForm,self).__init__(*args, **kwargs)
 
 def registro(request):
@@ -161,16 +163,16 @@ def registro(request):
       user = authenticate(username=request.POST['username'], password=request.POST['password1'])
       login(request,user)
 
-      asunto = 'Sua conta esta creada'
+      asunto = _(u'Sua conta esta creada')
       template = loader.get_template('user/mail/creacion.txt')
       context = RequestContext(request)
       text_content = template.render(context)
       msg = MailAgencia(asunto, text_content, [user.email])
       msg.send()
 
-      messages.success(request,'Registro realizado com sucesso!')
-      messages.info(request,'Temos enviado para seu email dados da sua nova conta.')
-      messages.info(request,'Por favor atualice os dados de seu perfil a ser analizados por nossa agencia.')
+      messages.success(request,_(u'Registro realizado com sucesso!'))
+      messages.info(request,_(u'Temos enviado para seu email dados da sua nova conta.'))
+      messages.info(request,_(u'Por favor atualice os dados de seu perfil a ser analizados por nossa agencia.'))
 
       next_page = form.cleaned_data['next_page']
       if not next_page:
@@ -185,23 +187,20 @@ def registro(request):
 
 @login_required
 def postular(request):
-  """next_page = request.GET.get('next')
-  if next_page is None:
-    next_page = '/'"""
   # Se obtiene el rol de la postulación
   rol_id = request.GET.get('rol_id')
   try:
     rol = Rol.objects.get(pk=rol_id,trabajo__estado='AT')
   except Rol.DoesNotExist:
-    messages.error(request,'O perfil do trabalho para o qual quer aplicar nao foi encontrado')
+    messages.error(request,_(u'O perfil do trabalho para o qual quer aplicar nao foi encontrado'))
     return redirect('/trabajo/busquedas/')
   # Se verifica que el usuario tenga cargado su perfil
   try:
     request.user.agenciado
   except Agenciado.DoesNotExist:
     messages.info(request,
-      'Para aplicar ao perfil %s do trabalho <a href=%s>%s</a> tem que completar seus dados de Agenciado'%(
-        rol.descripcion,'/trabajo/busquedas/?id=%s'%rol.trabajo.id,rol.trabajo.titulo))
+      _(u'Para aplicar ao perfil %(rol)s do trabalho <a href=%(url)s>%(trabajo)s</a> tem que completar seus dados de Agenciado')%{
+        'rol':rol.descripcion,'url':'/trabajo/busquedas/?id=%s'%rol.trabajo.id,'trabajo':rol.trabajo.titulo})
     return redirect('/agenciado/?next=%s'%request.get_full_path())
   # Se realiza la postulación
   try:
@@ -210,6 +209,6 @@ def postular(request):
     postulacion=Postulacion(agenciado=request.user.agenciado,rol=rol,estado='PA')
     postulacion.save()
 
-  messages.success(request,'Aplicação para o perfil "%s" realizada com sucesso.'%rol.descripcion)
-  messages.info(request,'A aplicação vai ser analizada por nosso equipe, muito obrigado por sua postulação.')
+  messages.success(request,_(u'Aplicação para o perfil "%s" realizada com sucesso.')%rol.descripcion)
+  messages.info(request,_(u'A aplicação vai ser analizada por nosso equipe, muito obrigado por sua postulação.'))
   return redirect('/trabajo/busquedas/?id=%s'%rol.trabajo.id)

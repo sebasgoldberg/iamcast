@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {%block home_active%}active{%endblock%}
 
@@ -13,11 +14,11 @@
           {% include 'agencia/conf/hero.html'%}
           <p>
             {% if user.is_anonymous %}
-              <a href="/agenciado/registro/" class="btn btn-primary btn-large">Cadastre-se &raquo;</a>
+              <a href="/agenciado/registro/" class="btn btn-primary btn-large">{% trans "Cadastre-se" %} &raquo;</a>
             {% elif not user.agenciado %}
-              <a href="/agenciado/" class="btn btn-primary btn-large">Complete seu cadastro &raquo;</a>
+              <a href="/agenciado/" class="btn btn-primary btn-large">{% trans "Complete seu cadastro" %} &raquo;</a>
             {% endif %}
-            <a href="/trabajo/busquedas/" class="btn btn-success btn-large">Veja os perfis procurados &raquo;</a>
+            <a href="/trabajo/busquedas/" class="btn btn-success btn-large">{% trans "Veja os perfis procurados" %} &raquo;</a>
           </p>
         </div>
       {% endblock %}
@@ -30,13 +31,13 @@
 
   {% if trabajos %}
     <hr/>
-    <h2>Trabalhos Ativos Recentes</h2>
+    <h2>{% trans "Trabalhos Ativos Recentes" %}</h2>
     {% include 'trabajo/trabajo/thumbnails.html' with trabajo=trabajo %}
   {% endif %}
 
   {% if portfolio %}
     <hr/>
-    <h2>Itens do Portifolio Recentes</h2>
+    <h2>{% trans "Itens do Portifolio Recentes" %}</h2>
     {% include 'trabajo/itemportfolio/thumbnails.html' with portfolio=portfolio %}
   {% endif %}
 

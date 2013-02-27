@@ -1,26 +1,29 @@
 {% extends "admin/change_form.html" %}
+{% load i18n %}
 
-{% block title %} Adicionar agenciados selecionados a perfil de trabalho | {{ ambiente.agencia.nombre }}{% endblock %}
+{% trans "Adicionar agenciados selecionados a perfil de trabalho" as titulo_accion %}
+
+{% block title %} {{titulo_accion}} | {{ ambiente.agencia.nombre }}{% endblock %}
 
 {% block breadcrumbs %}
 <div class="breadcrumbs">
-  <a href="/admin/">Início</a>
-  &rsaquo; <a href="/admin/agencia/">Agencia</a>
-  &rsaquo; <a href="/admin/agencia/agenciado/">Agenciados</a>
-  &rsaquo; Adicionar agenciados selecionados a perfil de trabalho
+  <a href="/admin/">{% trans "Início" %}</a>
+  &rsaquo; <a href="/admin/agencia/">{% trans "Agencia" %}</a>
+  &rsaquo; <a href="/admin/agencia/agenciado/">{% trans "Agenciados" %}</a>
+  &rsaquo; {{titulo_accion}}
 </div>
 {% endblock %}
 
 
 {% block content %}
 
-<h3>Selecione perfil em que deseja adicionar os agenciados selecionados:</h3>
+<h3>{% trans "Selecione perfil em que deseja adicionar os agenciados selecionados:" %}</h3>
 <form action="/trabajo/agregar/agenciados/seleccionados/a/rol/" method="post">{% csrf_token %}
 {{ form.as_p }}
-<input type="submit" value="Submit" />
+<input type="submit" value="{% trans "Adicionar agenciados" %}" />
 </form>
 
-<h3>Agenciados selecionados</h3>
+<h3>{% trans "Agenciados selecionados" %}</h3>
 <ul>
   {% autoescape off %}
   {% for agenciado in agenciados %}
