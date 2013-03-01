@@ -140,10 +140,14 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'imagekit',
     'crispy_forms',
+    'south',
+    'cities_light',
+    'smart_selects',
     # Aplicaciones de la agencia
     'agencia',
     'agenciado',
     'trabajo',
+    'direccion',
 )
 
 if not ambiente.productivo:

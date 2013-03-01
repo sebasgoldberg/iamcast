@@ -32,7 +32,7 @@ class TelefonoProductoraInline(admin.TabularInline):
 
 class EventoInline(admin.TabularInline):
   extra = 0
-  fields = ['tipo', 'descripcion', 'fecha', 'estado', 'ciudad', 'barrio', 'direccion']
+  fields = ['tipo', 'descripcion', 'fecha', 'pais', 'estado', 'ciudad', 'barrio', 'direccion']
   
 class EventoTrabajoInline(EventoInline):
   model=EventoTrabajo
@@ -49,6 +49,20 @@ class TrabajoInline(admin.TabularInline):
     models.TextField: {'widget': Textarea(attrs={'rows':4})},
   }
 
+from direccion.admin import PaisDireccionModelListFilter, EstadoDireccionModelListFilter, CiudadDireccionModelListFilter
+
+class PaisDireccionProductoraListFilter(PaisDireccionModelListFilter):
+  direccion_model = DireccionProductora
+  fk_field_model = 'productora'
+
+class EstadoDireccionProductoraListFilter(EstadoDireccionModelListFilter):
+  direccion_model = DireccionProductora
+  fk_field_model = 'productora'
+
+class CiudadDireccionProductoraListFilter(CiudadDireccionModelListFilter):
+  direccion_model = DireccionProductora
+  fk_field_model = 'productora'
+
 class ProductoraAdmin(admin.ModelAdmin):
   inlines = [DireccionProductoraInline, TelefonoProductoraInline, TrabajoInline]
   list_display=[
@@ -56,6 +70,7 @@ class ProductoraAdmin(admin.ModelAdmin):
   ]
   list_display_links = ['id', 'nombre']
   search_fields=['nombre', 'id']
+  list_filter = (PaisDireccionProductoraListFilter, EstadoDireccionProductoraListFilter, CiudadDireccionProductoraListFilter)
 
 class RolAdmin(admin.ModelAdmin):
   readonly_fields=[

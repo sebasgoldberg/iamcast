@@ -20,6 +20,7 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
+from direccion.models import Direccion
 
 # @pre Esta rutina se llama desde el metodo clean de una clase que lo redefine y hereda de formset
 def validarUnoIngresado(formset,campo,mensaje):
@@ -284,6 +285,9 @@ class Agenciado(models.Model):
 
     class Meta:
       ordering = ['nombre', 'apellido']
+
+class DireccionAgenciado(Direccion):
+  agenciado = models.ForeignKey(Agenciado, verbose_name=ugettext_lazy(u'Agenciado'))
 
 class FotoAgenciado(models.Model):
     agenciado = models.ForeignKey(Agenciado)

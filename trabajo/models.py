@@ -12,8 +12,9 @@ from django.dispatch import receiver
 import re
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
+from direccion.models import Direccion
 
-class Direccion(models.Model):
+"""class Direccion(models.Model):
   descripcion = models.CharField(max_length=60, verbose_name=ugettext_lazy(u'Descripção'),blank=True,null=True)
   estado = models.ForeignKey(Estado,on_delete=models.PROTECT,null=True, blank=True, verbose_name=ugettext_lazy(u'Estado'))
   ciudad = models.ForeignKey(Ciudad,on_delete=models.PROTECT, verbose_name=ugettext_lazy(u'Cidade'),null=True, blank=True)
@@ -23,7 +24,7 @@ class Direccion(models.Model):
   class Meta:
     abstract = True
     verbose_name = ugettext_lazy(u"Endereço")
-    verbose_name_plural = ugettext_lazy(u"Endereços")
+    verbose_name_plural = ugettext_lazy(u"Endereços")"""
 
 class Telefono(models.Model):
   compania = models.ForeignKey(Compania, null=True, blank=True,on_delete=models.PROTECT,related_name='telefono_productora_set', verbose_name=ugettext_lazy(u'Compania'))

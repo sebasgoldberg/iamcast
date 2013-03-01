@@ -1,5 +1,5 @@
 # coding=utf-8
-from agencia.models import Ciudad, Danza, Deporte, Estado, EstadoDientes, Idioma, Instrumento, Ojos, Pelo, Piel, Talle, Agenciado, FotoAgenciado, VideoAgenciado, Compania, Telefono, validarTelefonoIngresado, validarFotoIngresada
+from agencia.models import Ciudad, Danza, Deporte, Estado, EstadoDientes, Idioma, Instrumento, Ojos, Pelo, Piel, Talle, Agenciado, FotoAgenciado, VideoAgenciado, Compania, Telefono, validarTelefonoIngresado, validarFotoIngresada, DireccionAgenciado
 from django.contrib import admin
 from django.forms import CheckboxSelectMultiple
 from django.db import models
@@ -16,6 +16,11 @@ class FotoAgenciadoFormSet(BaseInlineFormSet):
   def clean(self):
     super(FotoAgenciadoFormSet,self).clean()
     validarFotoIngresada(self)
+
+class DireccionAgenciadoInline(admin.StackedInline):
+  model=DireccionAgenciado
+  extra = 1
+  max_num = 1
 
 class TelefonoInline(admin.TabularInline):
   model=Telefono
@@ -35,6 +40,20 @@ class VideoAgenciadoInline(admin.TabularInline):
   extra=1
   max_num=6
 
+from direccion.admin import PaisDireccionModelListFilter, EstadoDireccionModelListFilter, CiudadDireccionModelListFilter
+
+class PaisDireccionAgenciadoListFilter(PaisDireccionModelListFilter):
+  direccion_model = DireccionAgenciado
+  fk_field_model = 'agenciado'
+
+class EstadoDireccionAgenciadoListFilter(EstadoDireccionModelListFilter):
+  direccion_model = DireccionAgenciado
+  fk_field_model = 'agenciado'
+
+class CiudadDireccionAgenciadoListFilter(CiudadDireccionModelListFilter):
+  direccion_model = DireccionAgenciado
+  fk_field_model = 'agenciado'
+
 class AgenciadoAdmin(admin.ModelAdmin):
   readonly_fields=['id','thumbnails']
   fieldsets=[
@@ -46,10 +65,12 @@ class AgenciadoAdmin(admin.ModelAdmin):
     (_(u'Habilidades'), { 'fields':[ ('deportes', 'danzas'), ('instrumentos', 'idiomas'), ('indicador_maneja', 'indicador_tiene_registro')]}),
     (_(u'Otros dados'), { 'fields':[ 'trabaja_como_extra', 'como_nos_conocio', 'observaciones', 'activo', 'fecha_ingreso']}),
   ]
+  #inlines=[DireccionAgenciadoInline, TelefonoInline, FotoAgenciadoInline, VideoAgenciadoInline]
   inlines=[TelefonoInline, FotoAgenciadoInline, VideoAgenciadoInline]
   list_display=['thumbnail','id','apellido','nombre','fecha_nacimiento','descripcion','telefonos','mail', 'responsable']
   list_display_links = ('thumbnail', 'id')
-  list_filter=['activo','sexo','ojos','pelo','piel','deportes','danzas','instrumentos','idiomas','fecha_ingreso','estado','ciudad']
+  #list_filter=['activo','sexo','ojos','pelo','piel','deportes','danzas','instrumentos','idiomas','fecha_ingreso',PaisDireccionAgenciadoListFilter, EstadoDireccionAgenciadoListFilter, CiudadDireccionAgenciadoListFilter, 'estado','ciudad']
+  list_filter=['activo','sexo','ojos','pelo','piel','deportes','danzas','instrumentos','idiomas','fecha_ingreso', 'estado','ciudad']
   search_fields=['nombre','apellido','responsable','mail','id']
   date_hierarchy='fecha_nacimiento'
   filter_horizontal=['deportes','danzas','instrumentos','idiomas']
