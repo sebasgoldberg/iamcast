@@ -11,7 +11,7 @@
 <form class='uniForm' enctype="multipart/form-data" method="post"  action="/agenciado/">
   {% csrf_token %}
 
-  {% if form.errors or telefonoFormSet.non_form_errors or telefonoFormSet.errors or fotoAgenciadoFormSet.non_form_errors or fotoAgenciadoFormSet.errors or videoAgenciadoFormSet.non_form_errors or videoAgenciadoFormSet.errors %}
+  {% if form.errors or direccionFormSet.non_form_errors or direccionFormSet.errors or telefonoFormSet.non_form_errors or telefonoFormSet.errors or fotoAgenciadoFormSet.non_form_errors or fotoAgenciadoFormSet.errors or videoAgenciadoFormSet.non_form_errors or videoAgenciadoFormSet.errors %}
     <div class='alert alert-error'>{% trans "Tem erros por corregir" %}</div>
   {% endif %}
 
@@ -49,7 +49,32 @@
   </fieldset>
 
   <fieldset>
+    <legend>{% trans "Dados de endereço" %}</legend>
+    {%comment%}
+    {% include 'agenciado/formset.html' with formset=direccionFormSet forms_by_line='1' columns_by_form='12' %}
+    {%endcomment%}
+    {% with direccionFormSet as formset %}
+      {{ formset.management_form }}
+      {% for error in formset.non_form_errors %}
+        <div class='alert alert-error'>{{ error }}</div>
+      {% endfor %}
+      <div class='row'>
+        {% for form in formset %}
+          {% for field in form %}
+            {% if field.name != 'descripcion' %}
+              <div class='{{clase_espacio_celda}}'>{{field|as_crispy_field}}</div>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </div>
+    {% endwith %}
+  </fieldset>
+
+  <fieldset>
     <legend>{% trans "Telefones" %}</legend>
+    {%comment%}
+    {{telefonoFormSet|crispy}}
+    {%endcomment%}
     {% include 'agenciado/formset.html' with formset=telefonoFormSet forms_by_line='3' columns_by_form='4' %}
   </fieldset>
 

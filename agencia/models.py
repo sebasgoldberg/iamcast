@@ -21,6 +21,7 @@ from django.dispatch import receiver
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
 from direccion.models import Direccion
+from telefono.models import Telefono as BaseTelefono
 
 # @pre Esta rutina se llama desde el metodo clean de una clase que lo redefine y hereda de formset
 def validarUnoIngresado(formset,campo,mensaje):
@@ -29,15 +30,43 @@ def validarUnoIngresado(formset,campo,mensaje):
   for form in formset.forms:
     if not campo in form.cleaned_data:
       continue
-    if form.cleaned_data[campo] != "" and not form.cleaned_data['DELETE']:
-      return
+    if form.cleaned_data[campo] != "":
+      if not formset.can_delete: 
+        return
+      if not form.cleaned_data['DELETE']:
+        return
   raise ValidationError(mensaje)
+
+def validarDireccionIngresada(formset):
+  validarUnoIngresado(formset,'direccion',_(u'Tem que informar o endereço'))
 
 def validarTelefonoIngresado(formset):
   validarUnoIngresado(formset,'telefono',_(u'Tem que informar um telefone'))
 
 def validarFotoIngresada(formset):
   validarUnoIngresado(formset,'foto',_(u'Tem que subir uma foto'))
+
+"""
+class Agencia(models.Model):
+  nombre = models.CharField(max_length=60, unique=True, verbose_name=ugettext_lazy(u'Nome'), null=False, blank=False)
+  email = models.EmailField(verbose_name=ugettext_lazy(u'e-mail'), null=False, blank=False)
+  class Meta:
+    ordering = ['nombre']
+    verbose_name = ugettext_lazy(u"Agencia")
+    verbose_name_plural = ugettext_lazy(u"Agencias")
+
+class TelefonoAgencia(BaseTelefono):
+  agencia = models.ForeignKey(Agencia,on_delete=models.PROTECT,null=False, blank=False, verbose_name=ugettext_lazy(u'Agencia'))
+  class Meta:
+    verbose_name = ugettext_lazy(u"Telefone da Agencia")
+    verbose_name_plural = ugettext_lazy(u"Telefones da Agencia")
+
+class DireccionAgencia(Direccion):
+  agencia = models.ForeignKey(Agencia,on_delete=models.PROTECT,null=False, blank=False, verbose_name=ugettext_lazy(u'Agencia'))
+  class Meta:
+    verbose_name = ugettext_lazy(u"Endereço da Agencia")
+    verbose_name_plural = ugettext_lazy(u"Endereços da Agencia")
+"""
 
 class Ciudad(models.Model):
     descripcion = models.CharField(max_length=60, unique=True, verbose_name=ugettext_lazy(u'Descripção'))
@@ -307,17 +336,17 @@ class VideoAgenciado(Video):
 def callback_pre_save_videoagenciado(sender, instance, raw, using, **kwargs):
   instance.url_to_codigo_video()
 
-class Compania(models.Model):
+"""class Compania(models.Model):
     descripcion = models.CharField(max_length=100, unique=True, verbose_name=ugettext_lazy(u'Descripção'))
     def __unicode__(self):
       return self.descripcion
     class Meta:
-      ordering = ['descripcion']
+      ordering = ['descripcion']"""
 
-class Telefono(models.Model):
-    compania = models.ForeignKey(Compania, null=True, blank=True,on_delete=models.PROTECT, verbose_name=ugettext_lazy(u'Compania'))
+class Telefono(BaseTelefono):
+    #compania = models.ForeignKey(Compania, null=True, blank=True,on_delete=models.PROTECT, verbose_name=ugettext_lazy(u'Compania'))
     agenciado = models.ForeignKey(Agenciado)
-    telefono = models.CharField(max_length=60)
-    def __unicode__(self):
-      return self.telefono
+    #telefono = models.CharField(max_length=60)
+    #def __unicode__(self):
+      #return self.telefono
    

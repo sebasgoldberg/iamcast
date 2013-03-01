@@ -144,10 +144,11 @@ INSTALLED_APPS = (
     'cities_light',
     'smart_selects',
     # Aplicaciones de la agencia
+    'direccion',
+    'telefono',
     'agencia',
     'agenciado',
     'trabajo',
-    'direccion',
 )
 
 if not ambiente.productivo:

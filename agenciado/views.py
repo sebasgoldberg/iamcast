@@ -9,8 +9,8 @@ from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate, login
 from django.forms import ModelForm
 from django.forms.extras.widgets import SelectDateWidget
-from agencia.models import Agenciado, Telefono, FotoAgenciado, VideoAgenciado
-from agencia.models import validarTelefonoIngresado, validarFotoIngresada
+from agencia.models import Agenciado, DireccionAgenciado, Telefono, FotoAgenciado, VideoAgenciado
+from agencia.models import validarDireccionIngresada, validarTelefonoIngresado, validarFotoIngresada
 from datetime import date
 from django.forms.models import inlineformset_factory
 from django.core.exceptions import ValidationError
@@ -80,9 +80,16 @@ class AgenciadoForm(ModelForm):
       'idiomas': BPCheckboxSelectMultiple,
       }
 
+BaseDireccionFormSet = inlineformset_factory(Agenciado, DireccionAgenciado, extra=1, max_num=1, can_delete=False)
 BaseTelefonoFormSet = inlineformset_factory(Agenciado, Telefono, extra=6, max_num=6)
 BaseFotoAgenciadoFormSet = inlineformset_factory(Agenciado, FotoAgenciado, extra=6, max_num=6)
 VideoAgenciadoFormSet = inlineformset_factory(Agenciado, VideoAgenciado, extra=6, max_num=6, exclude=['codigo_video'])
+
+class DireccionFormSet(BaseDireccionFormSet):
+
+  def clean(self):
+    super(DireccionFormSet,self).clean()
+    validarDireccionIngresada(self)
 
 class TelefonoFormSet(BaseTelefonoFormSet):
 
@@ -111,11 +118,13 @@ def index(request):
 
   if request.method == 'POST':
     form = AgenciadoForm(request.POST,instance=agenciado)
+    direccionFormSet = DireccionFormSet(request.POST,request.FILES,instance=agenciado)
     telefonoFormSet=TelefonoFormSet(request.POST,request.FILES,instance=agenciado)
     fotoAgenciadoFormSet=FotoAgenciadoFormSet(request.POST,request.FILES,instance=agenciado)
     videoAgenciadoFormSet=VideoAgenciadoFormSet(request.POST,request.FILES,instance=agenciado)
-    if form.is_valid() and telefonoFormSet.is_valid() and fotoAgenciadoFormSet.is_valid() and videoAgenciadoFormSet.is_valid():
+    if form.is_valid() and direccionFormSet.is_valid() and telefonoFormSet.is_valid() and fotoAgenciadoFormSet.is_valid() and videoAgenciadoFormSet.is_valid():
       form.save()
+      direccionFormSet.save()
       telefonoFormSet.save()
       fotoAgenciadoFormSet.save()
       videoAgenciadoFormSet.save()
@@ -127,10 +136,11 @@ def index(request):
   else:
     next_page = request.GET.get('next')
     form = AgenciadoForm(instance=agenciado,initial={'next_page':next_page})
+    direccionFormSet = DireccionFormSet(instance=agenciado)
     telefonoFormSet=TelefonoFormSet(instance=agenciado)
     fotoAgenciadoFormSet=FotoAgenciadoFormSet(instance=agenciado)
     videoAgenciadoFormSet=VideoAgenciadoFormSet(instance=agenciado)
-  return render(request,'agenciado/agenciado.html',{'form':form, 'telefonoFormSet':telefonoFormSet, 'fotoAgenciadoFormSet':fotoAgenciadoFormSet, 'videoAgenciadoFormSet':videoAgenciadoFormSet, })
+  return render(request,'agenciado/agenciado.html',{'form':form, 'direccionFormSet':direccionFormSet, 'telefonoFormSet':telefonoFormSet, 'fotoAgenciadoFormSet':fotoAgenciadoFormSet, 'videoAgenciadoFormSet':videoAgenciadoFormSet, })
 
 def validate_unique_mail(value):
   users=User.objects.filter(email=value)

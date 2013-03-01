@@ -1,5 +1,5 @@
 - fields: {descripcion: Nextel}
-  model: agencia.compania
+  model: telefono.compania
   pk: 1
 
 - fields:

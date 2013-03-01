@@ -1,5 +1,5 @@
 # coding=utf-8
-from agencia.models import Ciudad, Danza, Deporte, Estado, EstadoDientes, Idioma, Instrumento, Ojos, Pelo, Piel, Talle, Agenciado, FotoAgenciado, VideoAgenciado, Compania, Telefono, validarTelefonoIngresado, validarFotoIngresada, DireccionAgenciado
+from agencia.models import Ciudad, Danza, Deporte, Estado, EstadoDientes, Idioma, Instrumento, Ojos, Pelo, Piel, Talle, Agenciado, FotoAgenciado, VideoAgenciado, Telefono, validarTelefonoIngresado, validarFotoIngresada, DireccionAgenciado
 from django.contrib import admin
 from django.forms import CheckboxSelectMultiple
 from django.db import models
@@ -21,6 +21,7 @@ class DireccionAgenciadoInline(admin.StackedInline):
   model=DireccionAgenciado
   extra = 1
   max_num = 1
+  can_delete=False
 
 class TelefonoInline(admin.TabularInline):
   model=Telefono
@@ -89,4 +90,3 @@ admin.site.register(Ojos)
 admin.site.register(Pelo)
 admin.site.register(Piel)
 admin.site.register(Talle)
-admin.site.register(Compania)

@@ -29,7 +29,7 @@
     <![endif]-->
     <!-- Fav and touch icons -->
 
-    <script src="http://code.jquery.com/jquery.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}admin/js/jquery.js"></script>
     <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
   {%endblock%}
 
@@ -50,10 +50,10 @@
         <a class='brand' href=/agencia/> <img src='/static/images/small_logo.png' alt=Agencia {{ambiente.agencia.nombre}}/> </a> 
         <div class="nav-collapse collapse">
           <ul class="nav">
-            <li class='{%block agenciado_active%}{%endblock%}'><a href="/agenciado/"><span>{% trans "Meu Perfil" %}</span></a> </li>
-            <li class='{%block busquedas_active%}{%endblock%}'><a href="/trabajo/busquedas/"><span>{% trans "Pesquisas" %}</span></a> </li>
-            <li class='{%block portfolio_active%}{%endblock%}'><a href="/trabajo/portfolio/"><span>{% trans "Portifolio" %}</span></a> </li>
-            <li class='{%block contacto_active%}{%endblock%}'><a href="/agencia/contacto/"><span>{% trans "Contato" %}</span></a> </li>
+            <li class='{%block agenciado_active%}{%endblock%}'><a href="/agenciado/"><span><i class='icon-user icon-white'></i> {% trans "Meu Perfil" %}</span></a> </li>
+            <li class='{%block busquedas_active%}{%endblock%}'><a href="/trabajo/busquedas/"><span><i class='icon-search icon-white'></i> {% trans "Pesquisas" %}</span></a> </li>
+            <li class='{%block portfolio_active%}{%endblock%}'><a href="/trabajo/portfolio/"><span><i class='icon-book icon-white'></i> {% trans "Portifolio" %}</span></a> </li>
+            <li class='{%block contacto_active%}{%endblock%}'><a href="/agencia/contacto/"><span><i class='icon-envelope icon-white'></i> {% trans "Contato" %}</span></a> </li>
           </ul>
 
 
