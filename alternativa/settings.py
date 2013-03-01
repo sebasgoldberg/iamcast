@@ -204,3 +204,5 @@ TEMPLATE_CONTEXT_PROCESSORS=(
 )
 
 LOCALE_PATHS=(ambiente.project_directory+'locale',)
+
+CITIES_LIGHT_CITY_SOURCES = ['http://download.geonames.org/export/dump/BR.zip','http://download.geonames.org/export/dump/AR.zip']
