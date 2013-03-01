@@ -31,7 +31,7 @@ class TelefonoProductoraInline(admin.TabularInline):
   extra = 1
 
 class EventoInline(admin.TabularInline):
-  extra = 0
+  extra=1
   fields = ['tipo', 'descripcion', 'fecha', 'pais', 'estado', 'ciudad', 'barrio', 'direccion']
   
 class EventoTrabajoInline(EventoInline):

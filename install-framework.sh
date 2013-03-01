@@ -128,6 +128,9 @@ mkdir collectedstatic
 ./install/cities_light.sh
 ./install/smart_selects.sh
 
+echo "Se inicia la instalación de datos para la aplicación"
+./install/data/cities_light.sh
+
 echo ''
 echo 'A continuación debería realizar las siguientes tareas:'
 echo '+ Crear la base de datos y usuario según ha definido en alternativa/ambiente.py'
