@@ -33,7 +33,7 @@
     <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
   {%endblock%}
 
-  <title>{%block title%}{% trans "Agencia" %} {{ambiente.agencia.nombre}}{%endblock%}</title>
+  <title>{%block title%}{% trans "Agencia" %} {{agencia.nombre}}{%endblock%}</title>
 
 </head>
 
@@ -47,7 +47,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class='brand' href=/agencia/> <img src='/static/images/small_logo.png' alt=Agencia {{ambiente.agencia.nombre}}/> </a> 
+        <a class='brand' href=/agencia/> <img src='/static/images/small_logo.png' alt=Agencia {{agencia.nombre}}/> </a> 
         <div class="nav-collapse collapse">
           <ul class="nav">
             <li class='{%block agenciado_active%}{%endblock%}'><a href="/agenciado/"><span><i class='icon-user icon-white'></i> {% trans "Meu Perfil" %}</span></a> </li>
@@ -100,7 +100,7 @@
   {% block footer %}
     <div id="footer">
       <div class="container">
-        <p class="muted credit">{% trans "Agencia" %} {{ambiente.agencia.nombre}} {% for telefono in ambiente.agencia.telefonos %}|{{telefono}}{% endfor%}| {{ambiente.agencia.email}}</p><p class="muted credit"> {{ambiente.agencia.direccion}}</p>
+        <p class="muted credit">{% trans "Agencia" %} {{agencia.nombre}} {% for telefono in agencia.telefonos %}|{{telefono}}{% endfor%}| {{agencia.email}}</p><p class="muted credit"> {{agencia.direccion}}</p>
       </div>
     </div>
   {% endblock %}

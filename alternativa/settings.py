@@ -202,6 +202,7 @@ TEMPLATE_CONTEXT_PROCESSORS=(
   'django.core.context_processors.request',
   'agencia.context_processors.add_ambiente',
   'agencia.context_processors.add_thumbnails_urls',
+  'agencia.context_processors.add_agencia',
 )
 
 LOCALE_PATHS=(ambiente.project_directory+'locale',)

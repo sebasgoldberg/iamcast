@@ -5,7 +5,6 @@ from agencia.models import Agenciado
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill, Adjust
 from datetime import date, datetime
-"""from agencia.models import Compania"""
 from django.contrib.auth.models import User
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
@@ -14,16 +13,6 @@ from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
 from direccion.models import Direccion
 from telefono.models import Telefono
-
-"""class Telefono(models.Model):
-  compania = models.ForeignKey(Compania, null=True, blank=True,on_delete=models.PROTECT,related_name='telefono_productora_set', verbose_name=ugettext_lazy(u'Compania'))
-  telefono = models.CharField(max_length=60)
-  def __unicode__(self):
-    return ugettext_lazy(u'%(telefono)s (%(compania)s)') % {'telefono':self.telefono,'compania':self.compania}
-  class Meta:
-    abstract = True
-    verbose_name = ugettext_lazy(ugettext_lazy(u"Telefone"))
-    verbose_name_plural = ugettext_lazy(u"Telefones")"""
 
 class Evento(Direccion):
   fecha = models.DateTimeField(default=datetime.today(),verbose_name=ugettext_lazy(u'Data do evento'), blank=True, null=True)

@@ -37,6 +37,9 @@
     </div>
   </fieldset>
 
+  {%comment%}
+  @todo Borrar el bloque de direccion que está de más
+  {%endcomment%}
   <fieldset>
     <legend>{% trans "Dados de endereço" %}</legend>
     <div class='row'>
@@ -50,9 +53,6 @@
 
   <fieldset>
     <legend>{% trans "Dados de endereço" %}</legend>
-    {%comment%}
-    {% include 'agenciado/formset.html' with formset=direccionFormSet forms_by_line='1' columns_by_form='12' %}
-    {%endcomment%}
     {% with direccionFormSet as formset %}
       {{ formset.management_form }}
       {% for error in formset.non_form_errors %}

@@ -1,0 +1,17 @@
+- fields: {activa: true, email: agencia.test@gmail.com, nombre: Alternativa}
+  model: agencia.agencia
+  pk: 2
+- fields: {agencia: 2, compania: null, telefono: +55 (11) 2636-5777}
+  model: agencia.telefonoagencia
+  pk: 1
+- fields: {agencia: 2, compania: null, telefono: +55 (11) 2837-3033}
+  model: agencia.telefonoagencia
+  pk: 2
+- fields: {agencia: 2, compania: null, telefono: +55 (11) 9188-0048}
+  model: agencia.telefonoagencia
+  pk: 3
+- fields: {agencia: 2, barrio: Vila Maria, ciudad: 1973, codigo_postal: 02118-000,
+    descripcion: '', direccion: "Rua Dom Lu\xEDs Felipe de Orleans, 530", estado: 86,
+    pais: 283}
+  model: agencia.direccionagencia
+  pk: 1

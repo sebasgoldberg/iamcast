@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import permission_required
 from django import forms
 from trabajo.models import Postulacion, Rol, Trabajo, ItemPortfolio
-from agencia.models import Agenciado
+from agencia.models import Agenciado, Agencia
 from django.template import loader, Context
 from agencia.mail import MailAgencia, MailForm
 from django.conf import settings
@@ -113,7 +113,8 @@ def trabajo_enviar_mail_productora(request,trabajo_id):
       context = RequestContext(request, {'trabajo':trabajo, })
       asunto = form.cleaned_data['asunto']
       destinatarios = form.get_destinatarios()
-      ccs = [request.user.email,settings.AMBIENTE.agencia.email]
+      agencia=Agencia.get_activa()
+      ccs = [request.user.email,agencia.email]
 
       text_content = _(u'Este mensagem deve ser visualizado em formato HTML.')
       html_content = template.render(context)

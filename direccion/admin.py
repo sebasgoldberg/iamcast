@@ -18,7 +18,16 @@ class FieldDireccionModelListFilter(SimpleListFilter):
   
     from direccion.admin import CiudadDireccionModelListFilter
     class ProductoraAdmin(admin.ModelAdmin):
-      list_filter = (CiudadDireccionProductoraListFilter,)
+      list_filter = (CiudadDireccionProductoraListFilter,
+        EstadoDireccionProductoraListFilter, CiudadDireccionProductoraListFilter)
+
+  Donde XxxxxxDireccionProductoraListFilter hereda de XxxxxxDireccionModelListFilter
+  y define los atributos direccion_model y fk_field_model. Un ejemplo para una
+  de las clases herederas sería:
+
+    class PaisDireccionProductoraListFilter(PaisDireccionModelListFilter):
+      direccion_model = DireccionProductora
+      fk_field_model = 'productora'
 
   De esta forma se mostrarán los filtros para país, región y ciudad con
   valores que estén contenidos en las instancias DireccionProductora
@@ -71,10 +80,11 @@ class FieldDireccionModelListFilter(SimpleListFilter):
     kwargs=self.filtros_adicionales_valores
     for valor in self.direccion_model.objects.filter(**kwargs).values(self.direccion_field):
       id = valor[self.direccion_field]
-      if id not in ids:
-        ids += (id,)
-        instance = self.field_model.objects.get(pk=id)
-        valores+=((str(instance.id),instance.name),)
+      if id:
+        if id not in ids:
+          ids += (id,)
+          instance = self.field_model.objects.get(pk=id)
+          valores+=((str(instance.id),instance.name),)
 
     return valores
 

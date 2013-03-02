@@ -33,3 +33,6 @@ class Direccion(models.Model):
     verbose_name = ugettext_lazy(u"Endereço")
     verbose_name_plural = ugettext_lazy(u"Endereços")
 
+  def __unicode__(self):
+    return "%s, %s, %s, %s" % (self.direccion, self.barrio, self.ciudad, self.codigo_postal)
+

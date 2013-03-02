@@ -6,6 +6,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.contrib import messages
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
+from agencia.models import Agencia
 
 class MailForm(forms.Form):
   # @todo Agregar múltiples destinatarios.
@@ -25,8 +26,9 @@ class MailAgencia(EmailMultiAlternatives):
 
   def __init__(self,asunto, cuerpo_de_texto, destinatarios,ccs=None):
     
-    _asunto = ugettext_lazy(u'Agencia %(nombre)s - %(asunto)s') % {'nombre':settings.AMBIENTE.agencia.nombre, 'asunto':asunto}
-    _headers = {'Reply-To': settings.AMBIENTE.agencia.email}
+    agencia = Agencia.get_activa()
+    _asunto = ugettext_lazy(u'Agencia %(nombre)s - %(asunto)s') % {'nombre':agencia.nombre, 'asunto':asunto}
+    _headers = {'Reply-To': agencia.email}
     
     self.mensaje = EmailMultiAlternatives(
       _asunto,

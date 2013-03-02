@@ -9,13 +9,13 @@
   </div>
 
   <div class='span4'>
-    <a href=mailto:{{ambiente.agencia.email}}>{{ambiente.agencia.email}}</a>
+    <a href=mailto:{{agencia.email}}>{{agencia.email}}</a>
     <hr/>
-    {% for telefono in ambiente.agencia.telefonos %}
+    {% for telefono in agencia.telefonos %}
       {{telefono}}<br/>
     {% endfor%}
     <hr/>
-    {{ambiente.agencia.direccion}}
+    {{agencia.direccion}}
   </div>
 
 {% endblock %}

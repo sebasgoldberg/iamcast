@@ -1,13 +1,4 @@
 # coding=utf-8
-# This is an auto-generated Django model module.
-# You'll have to do the following manually to clean this up:
-#     * Rearrange models' order
-#     * Make sure each model has one field with primary_key=True
-# Feel free to rename the models, but don't rename db_table values or field names.
-#
-# Also note: You'll have to insert the output of 'django-admin.py sqlcustom [appname]'
-# into your database.
-
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import date
@@ -46,27 +37,46 @@ def validarTelefonoIngresado(formset):
 def validarFotoIngresada(formset):
   validarUnoIngresado(formset,'foto',_(u'Tem que subir uma foto'))
 
-"""
 class Agencia(models.Model):
   nombre = models.CharField(max_length=60, unique=True, verbose_name=ugettext_lazy(u'Nome'), null=False, blank=False)
   email = models.EmailField(verbose_name=ugettext_lazy(u'e-mail'), null=False, blank=False)
+  activa = models.BooleanField(default=True, verbose_name=ugettext_lazy(u'Ativa'),help_text=ugettext_lazy(u'Só debería ter uma unica agencia ativa'))
   class Meta:
     ordering = ['nombre']
     verbose_name = ugettext_lazy(u"Agencia")
     verbose_name_plural = ugettext_lazy(u"Agencias")
+  
+  def telefonos(self):
+    listado_telefonos = []
+    for telefono in self.telefonoagencia_set.all():
+      listado_telefonos += [telefono.telefono]
+    return listado_telefonos
+
+  def direccion(self):
+    direcciones = self.direccionagencia_set.all()
+    if direcciones:
+      return str(direcciones[0])
+    return ''
+
+  @staticmethod
+  def get_activa():
+    agencia = Agencia.objects.filter(activa=True).orderby('-id')[0]
+    if not agencia:
+      raise Exception('No se ha encontrado una agencia activa. Debe crear una agencia activa en la administración del sitio.')
+    return agencia
+
 
 class TelefonoAgencia(BaseTelefono):
-  agencia = models.ForeignKey(Agencia,on_delete=models.PROTECT,null=False, blank=False, verbose_name=ugettext_lazy(u'Agencia'))
+  agencia = models.ForeignKey(Agencia,null=False, blank=False, verbose_name=ugettext_lazy(u'Agencia'))
   class Meta:
     verbose_name = ugettext_lazy(u"Telefone da Agencia")
     verbose_name_plural = ugettext_lazy(u"Telefones da Agencia")
 
 class DireccionAgencia(Direccion):
-  agencia = models.ForeignKey(Agencia,on_delete=models.PROTECT,null=False, blank=False, verbose_name=ugettext_lazy(u'Agencia'))
+  agencia = models.ForeignKey(Agencia,null=False, blank=False, verbose_name=ugettext_lazy(u'Agencia'))
   class Meta:
     verbose_name = ugettext_lazy(u"Endereço da Agencia")
     verbose_name_plural = ugettext_lazy(u"Endereços da Agencia")
-"""
 
 class Ciudad(models.Model):
     descripcion = models.CharField(max_length=60, unique=True, verbose_name=ugettext_lazy(u'Descripção'))
@@ -336,17 +346,5 @@ class VideoAgenciado(Video):
 def callback_pre_save_videoagenciado(sender, instance, raw, using, **kwargs):
   instance.url_to_codigo_video()
 
-"""class Compania(models.Model):
-    descripcion = models.CharField(max_length=100, unique=True, verbose_name=ugettext_lazy(u'Descripção'))
-    def __unicode__(self):
-      return self.descripcion
-    class Meta:
-      ordering = ['descripcion']"""
-
 class Telefono(BaseTelefono):
-    #compania = models.ForeignKey(Compania, null=True, blank=True,on_delete=models.PROTECT, verbose_name=ugettext_lazy(u'Compania'))
     agenciado = models.ForeignKey(Agenciado)
-    #telefono = models.CharField(max_length=60)
-    #def __unicode__(self):
-      #return self.telefono
-   

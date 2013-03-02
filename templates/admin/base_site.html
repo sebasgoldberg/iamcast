@@ -4,10 +4,10 @@
 {%block extrahead %}
   <link rel="shortcut icon" href="/static/images/favicon.ico" />
 {%endblock%}
-{% block title %}{{ title }} | {{ ambiente.agencia.nombre }}{% endblock %}
+{% block title %}{{ title }} | {{ agencia.nombre }}{% endblock %}
 
 {% block branding %}
-<a href="/"><h1 id="site-name">{% trans "Agencia" %} {{ ambiente.agencia.nombre }}</h1></a>
+<a href="/"><h1 id="site-name">{% trans "Agencia" %} {{ agencia.nombre }}</h1></a>
 {% endblock %}
 
 {% block nav-global %}{% endblock %}

@@ -1,5 +1,5 @@
 from alternativa.ambiente import ambiente
-from agencia.models import FotoAgenciado
+from agencia.models import FotoAgenciado, Agencia
 
 
 def add_ambiente(request):
@@ -23,3 +23,9 @@ def add_thumbnails_urls(request):
       break
 
   return {'thumbnails_urls': thumbnails_urls}
+
+def add_agencia(request):
+  """
+  Devuelve la agencia activa
+  """
+  return {'agencia':Agencia.get_activa()}
