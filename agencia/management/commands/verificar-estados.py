@@ -14,7 +14,16 @@ class Command(BaseCommand):
 
     for estado in Estado.objects.all():
       if not Region.objects.filter(country__code2='BR',name=estado.descripcion):
-        self.stdout.write(u'%s\n'%estado.descripcion)
+        self.stdout.write(u'%s. Ciudades relacionadas: \n'%estado.descripcion)
+        ciudades = []
+        ids_ciudades = []
+        for agenciado in estado.agenciado_set.all():
+          if agenciado.ciudad.id not in ids_ciudades:
+            ids_ciudades += [agenciado.ciudad.id]
+            ciudades += [agenciado.ciudad]
+        for ciudad in ciudades:
+          self.stdout.write(u'\t%s\n'%ciudad.descripcion)
+
         cantidad_estados_no_encontrados+=1
         
     self.stdout.write('No se han encontrado %s estados.\n'%cantidad_estados_no_encontrados)
