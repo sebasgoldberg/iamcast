@@ -29,23 +29,19 @@ class Command(BaseCommand):
               city = City.objects.get(region=region,name=agenciado.ciudad.descripcion)
             else:
               city = City.objects.get(region__country=brasil,name=agenciado.ciudad.descripcion)
+              region = city.region
           except City.DoesNotExist:
             pass
 
-        if city or ( region and not agenciado.ciudad ):
-          direccion=DireccionAgenciado(
-            agenciado=agenciado,
-            pais=brasil,
-            estado=region,
-            ciudad=city,
-            barrio=agenciado.barrio,
-            direccion=agenciado.direccion,
-            codigo_postal=agenciado.codigo_postal
-            )
-          direccion.save()
-        else:
-          self.stdout.write('No se ha podido migrar la direccion del agenciado %s con estado %s y ciudad %s.\n' % (agenciado, agenciado.estado, agenciado.ciudad))
-          cantidad_agenciados_sin_migrar+=1
-
+        direccion=DireccionAgenciado(
+          agenciado=agenciado,
+          pais=brasil,
+          estado=region,
+          ciudad=city,
+          barrio=agenciado.barrio,
+          direccion=agenciado.direccion,
+          codigo_postal=agenciado.codigo_postal
+          )
+        direccion.save()
         
     self.stdout.write('No se han podido migrar %s agenciado.\n'%cantidad_agenciados_sin_migrar)
