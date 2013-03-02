@@ -19,9 +19,10 @@ class Command(BaseCommand):
         estados = []
         ids_estados= []
         for agenciado in ciudad.agenciado_set.all():
-          if agenciado.estado.id not in ids_estados:
-            ids_estados += [agenciado.estado.id]
-            estados += [agenciado.estado]
+          if agenciado.estado:
+            if agenciado.estado.id not in ids_estados:
+              ids_estados += [agenciado.estado.id]
+              estados += [agenciado.estado]
         for estado in estados:
           self.stdout.write(u'\t%s\n'%estado.descripcion)
 
