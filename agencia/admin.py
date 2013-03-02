@@ -72,7 +72,8 @@ class AgenciadoAdmin(admin.ModelAdmin):
     (None, {'fields':['thumbnails','id','mail']}),
     (_(u'Dados Pessoales'), {'fields':[('nombre', 'apellido', 'fecha_nacimiento')]}),
     (_(u'Dados Administrativos'), { 'fields':[ ('documento_rg', 'documento_cpf'), 'responsable', 'cuenta_bancaria']}),
-    #(_(u'Dados de endereço'), { 'fields':[ ('estado', 'ciudad', 'barrio'), ('direccion', 'codigo_postal')]}),
+    # @todo comentar
+    (_(u'Dados de endereço'), { 'fields':[ ('estado', 'ciudad', 'barrio'), ('direccion', 'codigo_postal')]}),
     (_(u'Carateristicas fisicas'), { 'fields':[ 'sexo', ('ojos', 'pelo', 'piel', 'estado_dientes'), ('altura', 'peso', 'talle', 'talle_camisa', 'talle_pantalon', 'calzado')]}),
     (_(u'Habilidades'), { 'fields':[ ('deportes', 'danzas'), ('instrumentos', 'idiomas'), ('indicador_maneja', 'indicador_tiene_registro')]}),
     (_(u'Otros dados'), { 'fields':[ 'trabaja_como_extra', 'como_nos_conocio', 'observaciones', 'activo', 'fecha_ingreso']}),
