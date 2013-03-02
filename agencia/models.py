@@ -60,7 +60,7 @@ class Agencia(models.Model):
 
   @staticmethod
   def get_activa():
-    agencia = Agencia.objects.filter(activa=True).orderby('-id')[0]
+    agencia = Agencia.objects.filter(activa=True).order_by('-id')[0]
     if not agencia:
       raise Exception('No se ha encontrado una agencia activa. Debe crear una agencia activa en la administración del sitio.')
     return agencia
