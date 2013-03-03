@@ -92,10 +92,10 @@ class AgenciadoAdmin(admin.ModelAdmin):
   actions_on_bottom = True
 
 admin.site.register(Agenciado,AgenciadoAdmin)
-admin.site.register(Ciudad)
+#admin.site.register(Ciudad)
 admin.site.register(Danza)
 admin.site.register(Deporte)
-admin.site.register(Estado)
+#admin.site.register(Estado)
 admin.site.register(EstadoDientes)
 admin.site.register(Idioma)
 admin.site.register(Instrumento)

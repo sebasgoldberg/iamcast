@@ -1,6 +1,7 @@
 /uploads/*
 tags
 *.swp
+*.swo
 *.pyc
 agencia-ssl
 alternativa/ambiente.py
