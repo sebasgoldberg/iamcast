@@ -200,12 +200,14 @@ class Agenciado(models.Model):
     responsable = models.CharField(max_length=60, blank=True, verbose_name=ugettext_lazy(u'Responsabel'))
     cuenta_bancaria = models.CharField(max_length=100, blank=True, verbose_name=ugettext_lazy(u'Conta bancaria'))
 
+    """
     # Datos de direccion
     estado = models.ForeignKey(Estado,on_delete=models.PROTECT,null=True, blank=False, verbose_name=ugettext_lazy(u'Estado'))
     ciudad = models.ForeignKey(Ciudad,on_delete=models.PROTECT, verbose_name=ugettext_lazy(u'Cidade'),null=True, blank=False)
     barrio = models.CharField(max_length=60, verbose_name=ugettext_lazy(u'Barrio'))
     direccion = models.CharField(max_length=120, verbose_name=ugettext_lazy(u'Endereço'))
     codigo_postal = models.CharField(max_length=40, verbose_name=ugettext_lazy(u'CEP'))
+    """
 
     # Caracteristicas fisicas
     SEXO=(
