@@ -8,21 +8,29 @@ def add_ambiente(request):
     """
     return {'ambiente': ambiente }
 
+class ThumbnailsUrls(object):
+
+
+  def __init__(self, max_cantidad_thumbnails = 17):
+    self.arriba = []
+    self.abajo = []
+    todos = FotoAgenciado.objects.filter(agenciado__activo=True).order_by('?')
+    for imagen_agenciado in todos:
+      try:
+        if len(self.arriba)<max_cantidad_thumbnails:
+          self.arriba.append(imagen_agenciado.mini_thumbnail.url)
+        else:
+          self.abajo.append(imagen_agenciado.mini_thumbnail.url)
+      except:
+        pass
+      if len(self.abajo)==max_cantidad_thumbnails:
+        break
+
 def add_thumbnails_urls(request):
   """
   Devuelve 10 agenciados al azar que contengan al menos un thumbnai
   """
-  todos = FotoAgenciado.objects.filter(agenciado__activo=True).order_by('?')
-  thumbnails_urls = []
-  for imagen_agenciado in todos:
-    try:
-      thumbnails_urls.append(imagen_agenciado.mini_thumbnail.url)
-    except:
-      continue
-    if len(thumbnails_urls)==17:
-      break
-
-  return {'thumbnails_urls': thumbnails_urls}
+  return {'thumbnails_urls': ThumbnailsUrls()}
 
 def add_agencia(request):
   """

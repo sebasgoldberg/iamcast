@@ -9,6 +9,7 @@ from agencia.admin import AgenciadoAdmin
 from django.forms.widgets import Textarea
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
+from direccion.admin import PaisDireccionModelListFilter, EstadoDireccionModelListFilter, CiudadDireccionModelListFilter, BaseDireccionInline
 
 class PostulacionInline(admin.TabularInline):
   model=Postulacion
@@ -22,7 +23,7 @@ class AgenciadoPostulacionInline(admin.TabularInline):
   readonly_fields=['rol_admin_link']
   fields=['rol_admin_link', 'rol', 'estado']
 
-class DireccionProductoraInline(admin.TabularInline):
+class DireccionProductoraInline(BaseDireccionInline):
   model=DireccionProductora
   extra = 1
 
@@ -30,9 +31,15 @@ class TelefonoProductoraInline(admin.TabularInline):
   model=TelefonoProductora
   extra = 1
 
-class EventoInline(admin.TabularInline):
+class EventoInline(admin.StackedInline):
   extra=1
-  fields = ['tipo', 'descripcion', 'fecha', 'pais', 'estado', 'ciudad', 'barrio', 'direccion']
+  fieldsets=[
+    (None, 
+      {'fields':[
+        ('tipo', 'descripcion', 'fecha'),
+        ('pais', 'estado', 'ciudad', ), 
+        ('barrio', 'direccion', 'codigo_postal')]}),
+  ]
   
 class EventoTrabajoInline(EventoInline):
   model=EventoTrabajo
@@ -48,8 +55,6 @@ class TrabajoInline(admin.TabularInline):
   formfield_overrides = {
     models.TextField: {'widget': Textarea(attrs={'rows':4})},
   }
-
-from direccion.admin import PaisDireccionModelListFilter, EstadoDireccionModelListFilter, CiudadDireccionModelListFilter
 
 class PaisDireccionProductoraListFilter(PaisDireccionModelListFilter):
   direccion_model = DireccionProductora

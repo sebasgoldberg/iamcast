@@ -161,4 +161,8 @@ class CiudadDireccionModelListFilter(FieldDireccionModelListFilter):
       return super(CiudadDireccionModelListFilter,self).lookups(request,model_admin)
     return None
 
-#admin.site.register(Direccion)
+
+class BaseDireccionInline(admin.StackedInline):
+  fieldsets=[
+    (None, { 'fields':[ ('descripcion'), ('pais', 'estado', 'ciudad', ), ('barrio', 'direccion', 'codigo_postal')]}),
+    ]

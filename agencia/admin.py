@@ -6,8 +6,9 @@ from django.db import models
 from django.forms.models import BaseInlineFormSet
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
+from direccion.admin import PaisDireccionModelListFilter, EstadoDireccionModelListFilter, CiudadDireccionModelListFilter, BaseDireccionInline
 
-class DireccionAgenciaInline(admin.StackedInline):
+class DireccionAgenciaInline(BaseDireccionInline):
   model=DireccionAgencia
   extra = 1
 
@@ -28,7 +29,7 @@ class FotoAgenciadoFormSet(BaseInlineFormSet):
     super(FotoAgenciadoFormSet,self).clean()
     validarFotoIngresada(self)
 
-class DireccionAgenciadoInline(admin.StackedInline):
+class DireccionAgenciadoInline(BaseDireccionInline):
   model=DireccionAgenciado
   extra = 1
   max_num = 1
@@ -52,7 +53,6 @@ class VideoAgenciadoInline(admin.TabularInline):
   extra=1
   max_num=6
 
-from direccion.admin import PaisDireccionModelListFilter, EstadoDireccionModelListFilter, CiudadDireccionModelListFilter
 
 class PaisDireccionAgenciadoListFilter(PaisDireccionModelListFilter):
   direccion_model = DireccionAgenciado

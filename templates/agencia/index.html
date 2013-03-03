@@ -5,7 +5,7 @@
 
 {% block content %}
   {% block imagenes_agenciados_arriba %}
-    {% include 'agenciado/mini_thumbnails.html' with thumbnails_urls=thumbnails_urls %}
+    {% include 'agenciado/mini_thumbnails.html' with thumbnails_urls=thumbnails_urls.arriba %}
   {% endblock %}
 
   <div class='row'>
@@ -25,7 +25,7 @@
   </div>
 
   {%block imagenes_agenciados_abajo %}
-    {% include 'agenciado/mini_thumbnails.html' with thumbnails_urls=thumbnails_urls %}
+    {% include 'agenciado/mini_thumbnails.html' with thumbnails_urls=thumbnails_urls.abajo %}
   {%endblock%}
 
 

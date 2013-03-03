@@ -1,9 +1,9 @@
 {% extends 'agencia/mail/base.txt' %}
 {% load i18n %}
-{% block mensaje %}{%blocktrans%}Oi {{usuario.first_name}}!
+{% block mensaje %}{%blocktrans with firstname=usuario.first_name username=usuario.username dominio=ambiente.dominio %}Oi {{firstname}}!
 
 Voce tem uma nova senha.
 
-Sua nova senha e ({{clave}}). Lembre que seu usuário e ({{usuario.username}}).
+Sua nova senha e ({{clave}}). Lembre que seu usuário e ({{username}}).
 
-Voce pode trocar sua senha acessando a http://{{ambiente.dominio}}/agencia/cambio/clave/{%endblocktrans%}{% endblock %}
+Voce pode trocar sua senha acessando a http://{{dominio}}/agencia/cambio/clave/ {%endblocktrans%} {% endblock %}

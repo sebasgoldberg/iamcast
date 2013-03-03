@@ -5,7 +5,7 @@
 
 <p>{% trans "Ola" %} {{ trabajo.productora.nombre }},</p>
 
-<p>{%blocktrans%}Estamos enviando os detalhes referentes ao trabalho "{{ trabajo.titulo }}", junto com as postulações dos agenciados para cada rol procurado:{%endblocktrans%}</p>
+<p>{%blocktrans with trabajo=trabajo.titulo%}Estamos enviando os detalhes referentes ao trabalho "{{ trabajo }}", junto com as postulações dos agenciados para cada rol procurado:{%endblocktrans%}</p>
 
 <h2>{% trans "Dados do trabalho" %}</h2>
 {% include 'trabajo/trabajo/detalles.html'%}

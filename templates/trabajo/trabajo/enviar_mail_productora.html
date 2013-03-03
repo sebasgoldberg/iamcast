@@ -1,7 +1,7 @@
 {% extends "admin/change_form.html" %}
 {% load i18n %}
 
-{% block title %}  {%blocktrans%}Envio de trabalho "{{trabajo}}" a produtora {{trabajo.productora}}{%endblocktrans%} | {{ agencia.nombre }}{% endblock %}
+{% block title %}{%blocktrans with productora=trabajo.productora%}Envio de trabalho "{{trabajo}}" a produtora {{productora}}{%endblocktrans%}} | {{ agencia.nombre }}{% endblock %}
 
 {% block breadcrumbs %}
 <div class="breadcrumbs">
@@ -9,7 +9,7 @@
   &rsaquo; <a href="/admin/trabajo/">{% trans "Trabalho" %}</a>
   &rsaquo; <a href="/admin/trabajo/trabajo/">{% trans "Trabalhos" %}</a>
   &rsaquo; <a href="/admin/trabajo/trabajo/{{trabajo.id}}/">{{trabajo}}</a>
-  &rsaquo; {%blocktrans%}Envio de trabalho "{{ trabajo }}" a produtora {{ trabajo.productora }}{%endblocktrans%}
+  &rsaquo; {%blocktrans with productora=trabajo.productora%}Envio de trabalho "{{ trabajo }}" a produtora {{ productora }}{%endblocktrans%}
 </div>
 {% endblock %}
 
