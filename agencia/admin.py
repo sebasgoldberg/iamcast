@@ -7,8 +7,15 @@ from django.forms.models import BaseInlineFormSet
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
 from direccion.admin import PaisDireccionModelListFilter, EstadoDireccionModelListFilter, CiudadDireccionModelListFilter, BaseDireccionInline
+from direccion.forms import BaseDireccionForm
+
+class DireccionAgenciaForm(BaseDireccionForm):
+
+  class Meta:
+    model = DireccionAgencia
 
 class DireccionAgenciaInline(BaseDireccionInline):
+  form = DireccionAgenciaForm
   model=DireccionAgencia
   extra = 1
 

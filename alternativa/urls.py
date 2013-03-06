@@ -28,5 +28,6 @@ urlpatterns = patterns('',
     url(r'^$', redirect_to, {'url': '/agencia/'}),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^chaining/', include('smart_selects.urls')),
+    url(r'^direccion/', include('direccion.urls')),
 )
 

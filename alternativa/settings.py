@@ -84,6 +84,7 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     ambiente.project_directory+'alternativa/static',
+    ambiente.project_directory+'direccion/static',
 )
 
 # List of finder classes that know how to find static files in
@@ -142,7 +143,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'south',
     'cities_light',
-    'smart_selects',
+    #'smart_selects',
     # Aplicaciones de la agencia
     'direccion',
     'telefono',
