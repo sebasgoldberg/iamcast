@@ -9,6 +9,7 @@
   <meta name="author" content="">
 
   {%block assets%}
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="shortcut icon" href="/static/images/favicon.ico" />
     {%comment%}
     <link rel="stylesheet" href="/static/css/main.css" type="text/css" />
@@ -29,7 +30,6 @@
     <![endif]-->
     <!-- Fav and touch icons -->
 
-    <script type="text/javascript" src="{{STATIC_URL}}admin/js/jquery.js"></script>
     <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
     {%block extraassets%}
     {%endblock%}
@@ -56,25 +56,42 @@
             <li class='{%block busquedas_active%}{%endblock%}'><a href="/trabajo/busquedas/"><span><i class='icon-search icon-white'></i> {% trans "Pesquisas" %}</span></a> </li>
             <li class='{%block portfolio_active%}{%endblock%}'><a href="/trabajo/portfolio/"><span><i class='icon-book icon-white'></i> {% trans "Portfolio" %}</span></a> </li>
             <li class='{%block contacto_active%}{%endblock%}'><a href="/agencia/contacto/"><span><i class='icon-envelope icon-white'></i> {% trans "Contato" %}</span></a> </li>
+
+
+
           </ul>
 
 
           <div class="pull-right">
           <ul class="nav">
             {%block menu_usuario%}
-                 <li> <a href="/admin/">{% trans "Administração" %}</a></li>
-                {% if user.is_authenticated %}
-                  <li><a href="/agencia/cambio/clave/">{% trans "Trocar Senha" %}</a></li>
-                  <li><a href="/agencia/logout/">{% trans "Sair" %} ({{user.username}})</a></li>
-                {%else%}
-                  <li><a href="/agenciado/registro/">{% trans "Registro" %}</a></li>
-                  <li><a href="/accounts/login/">{% trans "Entrar" %}</a></li>
-                {% endif %}
-                <li>
-                  {% include 'locale/select_form_language.html' %}
-                </li>
+              <li> <a href="/admin/">{% trans "Administração" %}</a></li>
+
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Conta " %}<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+
+
+                  {% if user.is_authenticated %}
+                    <li><a href="/agencia/cambio/clave/">{% trans "Trocar Senha" %}</a></li>
+                    <li><a href="/agencia/logout/">{% trans "Sair" %} ({{user.username}})</a></li>
+                  {%else%}
+                    <li><a href="/agenciado/registro/">{% trans "Registro" %}</a></li>
+                    <li><a href="/accounts/login/">{% trans "Entrar" %}</a></li>
+                  {% endif %}
+
+                </ul>
+              </li>
+
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Idioma " %}<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+
+
+                {% include 'locale/select_form_language.html' %}
+              </li>
             {%endblock%}
-            </ul>
+          </ul>
           </div>
 
         </div><!--/.nav-collapse -->

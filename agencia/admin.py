@@ -20,6 +20,11 @@ class TelefonoAgenciaInline(admin.TabularInline):
 
 class AgenciaAdmin(admin.ModelAdmin):
   inlines=[DireccionAgenciaInline, TelefonoAgenciaInline]
+  list_display=['id','nombre','email','activa']
+  list_display_links = ('id', 'nombre')
+  list_filter=['activa']
+  search_fields=['nombre']
+  list_per_page = 40
 
 class TelefonoFormSet(BaseInlineFormSet):
   def clean(self):
