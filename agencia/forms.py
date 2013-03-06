@@ -5,6 +5,8 @@ from django.contrib.auth.forms import SetPasswordForm, PasswordResetForm
 from django import forms
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
+from direccion.forms import BaseDireccionForm
+from agencia.models import DireccionAgencia, DireccionAgenciado
 
 class AgenciaAuthenticationForm(AuthenticationForm):
 
@@ -41,3 +43,11 @@ class AgenciaPasswordResetForm(PasswordResetForm):
     self.helper.form_action = '/agencia/reiniciar/clave/'
     self.helper.add_input(Submit('submit',_('Gerar')))
     super(AgenciaPasswordResetForm, self).__init__(*args, **kwargs)
+
+class DireccionAgenciaForm(BaseDireccionForm):
+  class Meta:
+    model = DireccionAgencia
+
+class DireccionAgenciadoForm(BaseDireccionForm):
+  class Meta:
+    model = DireccionAgenciado

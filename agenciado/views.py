@@ -34,6 +34,7 @@ from crispy_forms.layout import Submit
 from trabajo.models import Postulacion, Rol
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
+from agencia.forms import DireccionAgenciadoForm
 
 class BPCheckboxSelectMultiple(CheckboxSelectMultiple):
 
@@ -80,13 +81,12 @@ class AgenciadoForm(ModelForm):
       'idiomas': BPCheckboxSelectMultiple,
       }
 
-BaseDireccionFormSet = inlineformset_factory(Agenciado, DireccionAgenciado, extra=1, max_num=1, can_delete=False)
+BaseDireccionFormSet = inlineformset_factory(Agenciado, DireccionAgenciado, extra=1, max_num=1, can_delete=False, form = DireccionAgenciadoForm)
 BaseTelefonoFormSet = inlineformset_factory(Agenciado, Telefono, extra=6, max_num=6)
 BaseFotoAgenciadoFormSet = inlineformset_factory(Agenciado, FotoAgenciado, extra=6, max_num=6)
 VideoAgenciadoFormSet = inlineformset_factory(Agenciado, VideoAgenciado, extra=6, max_num=6, exclude=['codigo_video'])
 
 class DireccionFormSet(BaseDireccionFormSet):
-
   def clean(self):
     super(DireccionFormSet,self).clean()
     validarDireccionIngresada(self)

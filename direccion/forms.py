@@ -37,4 +37,4 @@ class BaseDireccionForm(ModelForm):
     self.fields['ciudad'] = ModelChoiceField(queryset=queryset_ciudad)
 
   class Media:
-    js = ('direccion/js/direccion.js',)
+    js = ('direccion/js/direccion.js','admin/js/jquery.js','admin/js/jquery.init.js')

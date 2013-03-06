@@ -7,12 +7,7 @@ from django.forms.models import BaseInlineFormSet
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
 from direccion.admin import PaisDireccionModelListFilter, EstadoDireccionModelListFilter, CiudadDireccionModelListFilter, BaseDireccionInline
-from direccion.forms import BaseDireccionForm
-
-class DireccionAgenciaForm(BaseDireccionForm):
-
-  class Meta:
-    model = DireccionAgencia
+from agencia.forms import DireccionAgenciaForm, DireccionAgenciadoForm
 
 class DireccionAgenciaInline(BaseDireccionInline):
   form = DireccionAgenciaForm
@@ -37,6 +32,7 @@ class FotoAgenciadoFormSet(BaseInlineFormSet):
     validarFotoIngresada(self)
 
 class DireccionAgenciadoInline(BaseDireccionInline):
+  form = DireccionAgenciadoForm
   model=DireccionAgenciado
   extra = 1
   max_num = 1
@@ -90,8 +86,6 @@ class AgenciadoAdmin(admin.ModelAdmin):
   list_display=['thumbnail','id','apellido','nombre','fecha_nacimiento','descripcion','telefonos','mail', 'responsable']
   list_display_links = ('thumbnail', 'id')
   list_filter=['activo','sexo','ojos','pelo','piel','deportes','danzas','instrumentos','idiomas','fecha_ingreso',PaisDireccionAgenciadoListFilter, EstadoDireccionAgenciadoListFilter, CiudadDireccionAgenciadoListFilter]
-  #list_filter=['activo','sexo','ojos','pelo','piel','deportes','danzas','instrumentos','idiomas','fecha_ingreso',PaisDireccionAgenciadoListFilter, EstadoDireccionAgenciadoListFilter, CiudadDireccionAgenciadoListFilter, 'estado','ciudad']
-  #list_filter=['activo','sexo','ojos','pelo','piel','deportes','danzas','instrumentos','idiomas','fecha_ingreso', 'estado','ciudad']
   search_fields=['nombre','apellido','responsable','mail','id']
   date_hierarchy='fecha_nacimiento'
   filter_horizontal=['deportes','danzas','instrumentos','idiomas']
@@ -99,10 +93,8 @@ class AgenciadoAdmin(admin.ModelAdmin):
   actions_on_bottom = True
 
 admin.site.register(Agenciado,AgenciadoAdmin)
-#admin.site.register(Ciudad)
 admin.site.register(Danza)
 admin.site.register(Deporte)
-#admin.site.register(Estado)
 admin.site.register(EstadoDientes)
 admin.site.register(Idioma)
 admin.site.register(Instrumento)

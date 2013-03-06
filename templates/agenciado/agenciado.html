@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 {% load i18n %}
-
 {% load crispy_forms_tags %}
+
+{%block extraassets%}
+  {{direccionFormSet.media}}
+{%endblock%}
 
 {%block agenciado_active%}active{%endblock%}
 

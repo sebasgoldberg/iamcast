@@ -10,6 +10,7 @@ from django.forms.widgets import Textarea
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
 from direccion.admin import PaisDireccionModelListFilter, EstadoDireccionModelListFilter, CiudadDireccionModelListFilter, BaseDireccionInline
+from direccion.forms import BaseDireccionForm
 
 class PostulacionInline(admin.TabularInline):
   model=Postulacion
@@ -23,7 +24,12 @@ class AgenciadoPostulacionInline(admin.TabularInline):
   readonly_fields=['rol_admin_link']
   fields=['rol_admin_link', 'rol', 'estado']
 
+class DireccionProductoraForm(BaseDireccionForm):
+  class Meta:
+    model=DireccionProductora
+
 class DireccionProductoraInline(BaseDireccionInline):
+  form=DireccionProductoraForm
   model=DireccionProductora
   extra = 1
 
@@ -32,7 +38,7 @@ class TelefonoProductoraInline(admin.TabularInline):
   extra = 1
 
 class EventoInline(admin.StackedInline):
-  extra=1
+  extra=0
   fieldsets=[
     (None, 
       {'fields':[
@@ -41,10 +47,20 @@ class EventoInline(admin.StackedInline):
         ('barrio', 'direccion', 'codigo_postal')]}),
   ]
   
+class EventoTrabajoForm(BaseDireccionForm):
+  class Meta:
+    model=EventoTrabajo
+
 class EventoTrabajoInline(EventoInline):
+  form=EventoTrabajoForm
   model=EventoTrabajo
 
+class EventodRolForm(BaseDireccionForm):
+  class Meta:
+    model=EventoRol
+
 class EventoRolInline(EventoInline):
+  form=EventodRolForm
   model=EventoRol
 
 class TrabajoInline(admin.TabularInline):

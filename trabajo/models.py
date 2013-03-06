@@ -222,7 +222,7 @@ class EventoTrabajo(Evento):
     return DICT_TIPO_EVENTO_TRABAJO[self.tipo]
   def __unicode__(self):
     return _('%(tipo)s | %(descripcion)s | %(fecha)s | %(direccion)s, %(barrio)s, %(ciudad)s, %(estado)s, %(codigo_postal)s') % {
-      'tipo':EventoTrabajo.descripcion_tipo(self), 
+      'tipo':self.descripcion_tipo(), 
       'descripcion':self.descripcion,
       'fecha':self.fecha,
       'direccion':self.direccion,
@@ -281,8 +281,8 @@ class EventoRol(Evento):
   def descripcion_tipo(self):
     return DICT_TIPO_EVENTO_TRABAJO[self.tipo]
   def __unicode__(self):
-    return '%(tipo)s | %(descripcion)s | %(fecha)s | %(direccion)s, %(barrio)s, %(ciudad)s, %(estado)s, %(codigo_postal)s' % {
-      'tipo':self.descripcion_tipo, 
+    return u'%(tipo)s | %(descripcion)s | %(fecha)s | %(direccion)s, %(barrio)s, %(ciudad)s, %(estado)s, %(codigo_postal)s' % {
+      'tipo':self.descripcion_tipo(), 
       'descripcion':self.descripcion, 
       'fecha':self.fecha, 
       'direccion':self.direccion, 
