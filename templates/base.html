@@ -68,13 +68,14 @@
               <li> <a href="/admin/">{% trans "Administração" %}</a></li>
 
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Conta " %}<b class="caret"></b></a>
-                <ul class="dropdown-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Conta " %}{%if user.is_authenticated%}({{user.username}}) {%endif%}<b class="caret"></b></a>
+                <ul class="dropdown-menu pull-right">
 
 
                   {% if user.is_authenticated %}
-                    <li><a href="/agencia/cambio/clave/">{% trans "Trocar Senha" %}</a></li>
-                    <li><a href="/agencia/logout/">{% trans "Sair" %} ({{user.username}})</a></li>
+                    <li><a href="/agenciado/"><i class='icon-user'></i> {% trans "Meu Perfil" %}</a> </li>
+                    <li><a href="/agencia/cambio/clave/"><i class='icon-retweet'></i> {% trans "Trocar Senha" %}</a></li>
+                    <li><a href="/agencia/logout/"><i class='icon-off'></i> {% trans "Sair" %}</a></li>
                   {%else%}
                     <li><a href="/agenciado/registro/">{% trans "Registro" %}</a></li>
                     <li><a href="/accounts/login/">{% trans "Entrar" %}</a></li>
@@ -83,13 +84,7 @@
                 </ul>
               </li>
 
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Idioma " %}<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-
-
-                {% include 'locale/select_form_language.html' %}
-              </li>
+              {% include 'locale/language_menu.html' %}
             {%endblock%}
           </ul>
           </div>
@@ -99,6 +94,7 @@
     </div>
   </div>
 
+  {% include 'locale/language_form.html' %}
 
   <div class='container'>
 
