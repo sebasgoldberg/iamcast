@@ -15,9 +15,6 @@ urlpatterns = patterns('agencia.views',
 
     # Uncomment the next line to enable the admin:
     url(r'^$', 'index'),
-    url(r'^logout/$', 'logout_view'),
-    url(r'^cambio/clave/$', 'cambio_clave'),
-    url(r'^reiniciar/clave/$', 'reiniciar_clave'),
     url(r'^contacto/$', 'contacto'),
 )
 

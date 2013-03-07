@@ -14,7 +14,7 @@
           {% include 'agencia/conf/hero.html'%}
           <p>
             {% if user.is_anonymous %}
-              <a href="/agenciado/registro/" class="btn btn-primary btn-large">{% trans "Cadastre-se" %} &raquo;</a>
+              <a href="/usuario/registro/" class="btn btn-primary btn-large">{% trans "Cadastre-se" %} &raquo;</a>
             {% elif not user.agenciado %}
               <a href="/agenciado/" class="btn btn-primary btn-large">{% trans "Complete seu cadastro" %} &raquo;</a>
             {% endif %}

@@ -1,36 +1,21 @@
 # coding=utf-8
 # Create your views here.
 
-from django.shortcuts import render_to_response, render, redirect
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
-from django.contrib.auth.forms import UserCreationForm, SetPasswordForm, PasswordResetForm
-from django.contrib.auth.models import Group
-from django.contrib.auth import authenticate, login
 from django.forms import ModelForm
 from django.forms.extras.widgets import SelectDateWidget
 from agencia.models import Agenciado, DireccionAgenciado, Telefono, FotoAgenciado, VideoAgenciado
 from agencia.models import validarDireccionIngresada, validarTelefonoIngresado, validarFotoIngresada
 from datetime import date
 from django.forms.models import inlineformset_factory
-from django.core.exceptions import ValidationError
-from django.contrib.auth.models import User
 from django.contrib import messages
 from django import forms
-from django.conf import settings
-
 from itertools import chain
 from django.forms.widgets import CheckboxSelectMultiple, CheckboxInput, HiddenInput
 from django.utils.encoding import force_unicode
 from django.utils.html import conditional_escape
 from django.utils.safestring import mark_safe
-from django.template import RequestContext
-from agencia.mail import MailAgencia
-from django.template import loader
-
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
-
 from trabajo.models import Postulacion, Rol
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
@@ -141,59 +126,6 @@ def index(request):
     fotoAgenciadoFormSet=FotoAgenciadoFormSet(instance=agenciado)
     videoAgenciadoFormSet=VideoAgenciadoFormSet(instance=agenciado)
   return render(request,'agenciado/agenciado.html',{'form':form, 'direccionFormSet':direccionFormSet, 'telefonoFormSet':telefonoFormSet, 'fotoAgenciadoFormSet':fotoAgenciadoFormSet, 'videoAgenciadoFormSet':videoAgenciadoFormSet, })
-
-def validate_unique_mail(value):
-  users=User.objects.filter(email=value)
-  if len(users)>0:
-    raise ValidationError(_(u'O email ingresado ja existe'))
-
-class UserCreateForm(UserCreationForm):
-  email = forms.EmailField(required=True, validators=[validate_unique_mail])
-  first_name = forms.CharField( max_length=30, required=True, label=_('Nome'))
-  last_name = forms.CharField( max_length=30, required=True, label=_('Sobrenome'))
-  next_page = forms.CharField(widget=forms.HiddenInput,required=False)
-
-  class Meta:
-    model = User
-    fields = ( "username", 'password1', 'password2', "email", "first_name", 'last_name', )
-
-  def __init__(self, *args, **kwargs):
-    self.helper = FormHelper()
-    self.helper.form_class = 'uniForm'
-    self.helper.form_method = 'post'
-    self.helper.form_action = '/agenciado/registro/'
-    self.helper.add_input(Submit('submit',_('Registrar')))
-    return super(UserCreateForm,self).__init__(*args, **kwargs)
-
-def registro(request):
-  if request.method == 'POST':
-    form = UserCreateForm(request.POST)
-    if form.is_valid():
-      user = form.save()
-      user = authenticate(username=request.POST['username'], password=request.POST['password1'])
-      login(request,user)
-
-      asunto = _(u'Sua conta esta creada')
-      template = loader.get_template('usuario/mail/creacion.txt')
-      context = RequestContext(request)
-      text_content = template.render(context)
-      msg = MailAgencia(asunto, text_content, [user.email])
-      msg.send()
-
-      messages.success(request,_(u'Registro realizado com sucesso!'))
-      messages.info(request,_(u'Temos enviado para seu email dados da sua nova conta.'))
-      messages.info(request,_(u'Por favor atualice os dados de seu perfil a ser analizados por nossa agencia.'))
-
-      next_page = form.cleaned_data['next_page']
-      if not next_page:
-        next_page = '/agenciado/'
-
-      return redirect(next_page)
-  else:
-    next_page = request.GET.get('next')
-    form = UserCreateForm(initial={'next_page':next_page})
-
-  return render(request,'usuario/registro.html',{'form':form, })
 
 @login_required
 def postular(request):

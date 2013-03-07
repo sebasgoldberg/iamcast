@@ -74,10 +74,10 @@
 
                   {% if user.is_authenticated %}
                     <li><a href="/agenciado/"><i class='icon-user'></i> {% trans "Meu Perfil" %}</a> </li>
-                    <li><a href="/agencia/cambio/clave/"><i class='icon-retweet'></i> {% trans "Trocar Senha" %}</a></li>
-                    <li><a href="/agencia/logout/"><i class='icon-off'></i> {% trans "Sair" %}</a></li>
+                    <li><a href="/usuario/cambio/clave/"><i class='icon-retweet'></i> {% trans "Trocar Senha" %}</a></li>
+                    <li><a href="/usuario/logout/"><i class='icon-off'></i> {% trans "Sair" %}</a></li>
                   {%else%}
-                    <li><a href="/agenciado/registro/">{% trans "Registro" %}</a></li>
+                    <li><a href="/usuario/registro/?next=/agenciado/">{% trans "Registro" %}</a></li>
                     <li><a href="/accounts/login/">{% trans "Entrar" %}</a></li>
                   {% endif %}
 

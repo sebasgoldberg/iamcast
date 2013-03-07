@@ -109,19 +109,19 @@ class AgenciaTestCase(TestCase):
     Registro de usuario
     """
     # Se accede a la página de registro.
-    response = c.get('/agenciado/registro/')
+    response = c.get('/usuario/registro/')
     self.assertEqual(response.status_code,200)
     self.assertTrue('usuario/registro.html' in [t.name for t in response.templates])
 
     # Se registra un nuevo usuario y se verifica se muestre el formulario de agenciado.
-    response = c.post('/agenciado/registro/', {'username': 'test', 'password1': 'test', 'password2': 'test', 'first_name': 'Test', 'last_name': 'Last', 'email': 'test@gmail.com'}, follow = True)
+    response = c.post('/usuario/registro/', {'username': 'test', 'password1': 'test', 'password2': 'test', 'first_name': 'Test', 'last_name': 'Last', 'email': 'test@gmail.com'}, follow = True)
     self.assertEqual(response.status_code,200)
     self.assertTrue('agenciado/agenciado.html' in [t.name for t in response.templates])
     user=User.objects.get(username='test')
     self.assertIsInstance(user,User)
 
     # Se realiza un logout del agenciado registrado y 
-    response = c.get('/agencia/logout/',follow=True)
+    response = c.get('/usuario/logout/',follow=True)
     self.assertEqual(response.status_code,200)
     self.assertTrue('agencia/index.html' in [t.name for t in response.templates])
 
@@ -187,11 +187,11 @@ class AgenciaTestCase(TestCase):
     Reseteo de clave
     """
     c=Client()
-    response = c.get('/agencia/reiniciar/clave/')
+    response = c.get('/usuario/reiniciar/clave/')
     self.assertEqual(response.status_code,200)
     self.assertTrue('usuario/reiniciar_clave.html' in [t.name for t in response.templates])
 
-    response = c.post('/agencia/reiniciar/clave/',{'email': agenciado.mail}, follow = True)
+    response = c.post('/usuario/reiniciar/clave/',{'email': agenciado.mail}, follow = True)
     self.assertEqual(response.status_code,200)
     self.assertTrue('usuario/reiniciar_clave.html' in [t.name for t in response.templates])
     self.assertTrue(response.context['messages'])
@@ -203,12 +203,12 @@ class AgenciaTestCase(TestCase):
     """
     c=Client()
     # Se accede a la página de registro.
-    response = c.get('/agenciado/registro/')
+    response = c.get('/usuario/registro/')
     self.assertEqual(response.status_code,200)
     self.assertTrue('usuario/registro.html' in [t.name for t in response.templates])
 
     # Se registra un nuevo usuario y se verifica se muestre el formulario de agenciado.
-    response = c.post('/agenciado/registro/', {'username': 'test2', 'password1': 'test', 'password2': 'test', 'first_name': 'Test', 'last_name': 'Last', 'email': 'test@gmail.com'}, follow = True)
+    response = c.post('/usuario/registro/', {'username': 'test2', 'password1': 'test', 'password2': 'test', 'first_name': 'Test', 'last_name': 'Last', 'email': 'test@gmail.com'}, follow = True)
     self.assertEqual(response.status_code,200)
     self.assertTrue('agenciado/agenciado.html' not in [t.name for t in response.templates])
     self.assertRaises(User.DoesNotExist,User.objects.get,username = 'test2')

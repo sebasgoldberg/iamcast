@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.views.generic.simple import redirect_to
-from agencia.forms import AgenciaAuthenticationForm
+from usuario.forms import UsuarioAuthenticationForm
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -23,11 +23,12 @@ urlpatterns = patterns('',
     url(r'^agencia/', include('agencia.urls')),
     url(r'^agenciado/', include('agenciado.urls')),
     url(r'^trabajo/', include('trabajo.urls')),
-    url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'authentication_form':AgenciaAuthenticationForm}),
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'authentication_form':UsuarioAuthenticationForm}),
     url(r'^accounts/profile/$', 'agenciado.views.index'),
     url(r'^$', redirect_to, {'url': '/agencia/'}),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^chaining/', include('smart_selects.urls')),
     url(r'^direccion/', include('direccion.urls')),
+    url(r'^usuario/', include('usuario.urls')),
 )
 

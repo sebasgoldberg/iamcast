@@ -5,7 +5,7 @@ from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('agenciado.views',
+urlpatterns = patterns('usuario.views',
     # Examples:
     # url(r'^$', 'alternativa.views.home', name='home'),
     # url(r'^alternativa/', include('alternativa.foo.urls')),
@@ -14,7 +14,9 @@ urlpatterns = patterns('agenciado.views',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    url(r'^$', 'index'),
-    url(r'^postular/$', 'postular'),
+    url(r'^cambio/clave/$', 'cambio_clave'),
+    url(r'^reiniciar/clave/$', 'reiniciar_clave'),
+    url(r'^logout/$', 'logout_view'),
+    url(r'^registro/$', 'registro'),
 )
 
