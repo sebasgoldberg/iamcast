@@ -174,7 +174,7 @@ def registro(request):
       login(request,user)
 
       asunto = _(u'Sua conta esta creada')
-      template = loader.get_template('user/mail/creacion.txt')
+      template = loader.get_template('usuario/mail/creacion.txt')
       context = RequestContext(request)
       text_content = template.render(context)
       msg = MailAgencia(asunto, text_content, [user.email])
@@ -193,7 +193,7 @@ def registro(request):
     next_page = request.GET.get('next')
     form = UserCreateForm(initial={'next_page':next_page})
 
-  return render(request,'user/registro.html',{'form':form, })
+  return render(request,'usuario/registro.html',{'form':form, })
 
 @login_required
 def postular(request):

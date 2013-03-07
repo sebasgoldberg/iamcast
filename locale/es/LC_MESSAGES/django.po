@@ -475,7 +475,7 @@ msgstr "Contacto"
 msgid "Administração"
 msgstr "Administración"
 
-#: templates/base.html:66 templates/user/cambio_clave.html:6
+#: templates/base.html:66 templates/usuario/cambio_clave.html:6
 msgid "Trocar Senha"
 msgstr "Modificar Clave"
 
@@ -569,7 +569,7 @@ msgstr "Características físicas"
 msgid "Grabar"
 msgstr "Grabar"
 
-#: templates/locale/select_form_language.html:11
+#: templates/idioma/select_form_language.html:11
 msgid "Ir"
 msgstr "Ir"
 
@@ -774,11 +774,11 @@ msgstr "Contenido del e-mail"
 msgid "Ver detalhes"
 msgstr "Ver detalles"
 
-#: templates/user/reiniciar_clave.html:6
+#: templates/usuario/reiniciar_clave.html:6
 msgid "Gerar Senha"
 msgstr "Generar Clave"
 
-#: templates/user/mail/cambio_clave.txt:3
+#: templates/usuario/mail/cambio_clave.txt:3
 #, python-format
 msgid ""
 "Oi %(firstname)s!\n"
@@ -799,7 +799,7 @@ msgstr ""
 "Usted puede cambiar su clave ingresando a http://%(dominio)s/agencia/cambio/"
 "clave/"
 
-#: templates/user/mail/creacion.txt:5
+#: templates/usuario/mail/creacion.txt:5
 #, python-format
 msgid ""
 "Oi %(first_name)s!\n"

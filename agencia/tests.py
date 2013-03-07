@@ -111,7 +111,7 @@ class AgenciaTestCase(TestCase):
     # Se accede a la página de registro.
     response = c.get('/agenciado/registro/')
     self.assertEqual(response.status_code,200)
-    self.assertTrue('user/registro.html' in [t.name for t in response.templates])
+    self.assertTrue('usuario/registro.html' in [t.name for t in response.templates])
 
     # Se registra un nuevo usuario y se verifica se muestre el formulario de agenciado.
     response = c.post('/agenciado/registro/', {'username': 'test', 'password1': 'test', 'password2': 'test', 'first_name': 'Test', 'last_name': 'Last', 'email': 'test@gmail.com'}, follow = True)
@@ -189,11 +189,11 @@ class AgenciaTestCase(TestCase):
     c=Client()
     response = c.get('/agencia/reiniciar/clave/')
     self.assertEqual(response.status_code,200)
-    self.assertTrue('user/reiniciar_clave.html' in [t.name for t in response.templates])
+    self.assertTrue('usuario/reiniciar_clave.html' in [t.name for t in response.templates])
 
     response = c.post('/agencia/reiniciar/clave/',{'email': agenciado.mail}, follow = True)
     self.assertEqual(response.status_code,200)
-    self.assertTrue('user/reiniciar_clave.html' in [t.name for t in response.templates])
+    self.assertTrue('usuario/reiniciar_clave.html' in [t.name for t in response.templates])
     self.assertTrue(response.context['messages'])
     self.assertTrue(len(mail.outbox)>0)
 
@@ -205,7 +205,7 @@ class AgenciaTestCase(TestCase):
     # Se accede a la página de registro.
     response = c.get('/agenciado/registro/')
     self.assertEqual(response.status_code,200)
-    self.assertTrue('user/registro.html' in [t.name for t in response.templates])
+    self.assertTrue('usuario/registro.html' in [t.name for t in response.templates])
 
     # Se registra un nuevo usuario y se verifica se muestre el formulario de agenciado.
     response = c.post('/agenciado/registro/', {'username': 'test2', 'password1': 'test', 'password2': 'test', 'first_name': 'Test', 'last_name': 'Last', 'email': 'test@gmail.com'}, follow = True)

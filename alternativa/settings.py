@@ -147,6 +147,8 @@ INSTALLED_APPS = (
     # Aplicaciones de la agencia
     'direccion',
     'telefono',
+    'usuario',
+    'idioma',
     'agencia',
     'agenciado',
     'trabajo',

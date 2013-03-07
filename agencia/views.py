@@ -47,7 +47,7 @@ def cambio_clave(request):
     form = AgenciaSetPasswordForm(request.user)
 
 
-  return render(request,'user/cambio_clave.html',{'form':form})
+  return render(request,'usuario/cambio_clave.html',{'form':form})
 
 def reiniciar_clave(request):
   if request.method == 'POST':
@@ -60,7 +60,7 @@ def reiniciar_clave(request):
         user.save()
 
         asunto = _(u'Sua senha ha mudado')
-        template = loader.get_template('user/mail/cambio_clave.txt')
+        template = loader.get_template('usuario/mail/cambio_clave.txt')
         context = RequestContext(request,{'usuario':user, 'clave':password})
         text_content = template.render(context)
         msg = MailAgencia(asunto,text_content,[user.email])
@@ -76,7 +76,7 @@ def reiniciar_clave(request):
   else:
     form = AgenciaPasswordResetForm(initial={'next_page':request.GET.get('next')})
 
-  return render(request,'user/reiniciar_clave.html',{'form':form,})
+  return render(request,'usuario/reiniciar_clave.html',{'form':form,})
 
 def contacto(request):
   return render(request,'agencia/contacto.html')
