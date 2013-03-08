@@ -13,6 +13,7 @@ from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
 from direccion.models import Direccion
 from telefono.models import Telefono as BaseTelefono
+from perfil.models import Danza, Deporte, EstadoDientes, Idioma, Instrumento, Ojos, Pelo, Piel, Talle
 
 # @pre Esta rutina se llama desde el metodo clean de una clase que lo redefine y hereda de formset
 def validarUnoIngresado(formset,campo,mensaje):
@@ -65,7 +66,6 @@ class Agencia(models.Model):
       raise Exception('No se ha encontrado una agencia activa. Debe crear una agencia activa en la administración del sitio.')
     return agencia
 
-
 class TelefonoAgencia(BaseTelefono):
   agencia = models.ForeignKey(Agencia,null=False, blank=False, verbose_name=ugettext_lazy(u'Agencia'))
   class Meta:
@@ -77,99 +77,6 @@ class DireccionAgencia(Direccion):
   class Meta:
     verbose_name = ugettext_lazy(u"Endereço da Agencia")
     verbose_name_plural = ugettext_lazy(u"Endereços da Agencia")
-
-class Ciudad(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True, verbose_name=ugettext_lazy(u'Descripção'))
-    def __unicode__(self):
-      return self.descripcion
-    class Meta:
-      ordering = ['descripcion']
-      verbose_name = ugettext_lazy(u"Cidade")
-      verbose_name_plural = ugettext_lazy(u"Cidades")
-
-class Danza(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True, verbose_name=ugettext_lazy(u'Descripção'))
-    def __unicode__(self):
-      return self.descripcion
-    class Meta:
-      ordering = ['descripcion']
-      verbose_name = ugettext_lazy(u"Dança")
-      verbose_name_plural = ugettext_lazy(u"Danças")
-
-class Deporte(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True, verbose_name=ugettext_lazy(u'Descripção'))
-    def __unicode__(self):
-      return self.descripcion
-    class Meta:
-      ordering = ['descripcion']
-      verbose_name = ugettext_lazy(u"Esporte")
-      verbose_name_plural = ugettext_lazy(u"Esportes")
-
-class Estado(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True, verbose_name=ugettext_lazy(u'Descripção'))
-    def __unicode__(self):
-      return self.descripcion
-    class Meta:
-      ordering = ['descripcion']
-
-class EstadoDientes(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True, verbose_name=ugettext_lazy(u'Descripção'))
-    def __unicode__(self):
-      return self.descripcion
-    class Meta:
-      ordering = ['descripcion']
-      verbose_name = ugettext_lazy(u"Estado Dentes")
-      verbose_name_plural = ugettext_lazy(u"Estados Dentes")
-
-class Idioma(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True, verbose_name=ugettext_lazy(u'Descripção'))
-    def __unicode__(self):
-      return self.descripcion
-    class Meta:
-      ordering = ['descripcion']
-
-class Instrumento(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True, verbose_name=ugettext_lazy(u'Descripção'))
-    def __unicode__(self):
-      return self.descripcion
-    class Meta:
-      ordering = ['descripcion']
-
-class Ojos(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True, verbose_name=ugettext_lazy(u'Descripção'))
-    def __unicode__(self):
-      return self.descripcion
-    class Meta:
-      ordering = ['descripcion']
-      verbose_name = ugettext_lazy(u"Olhos")
-      verbose_name_plural = ugettext_lazy(u"Olhos")
-
-class Pelo(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True, verbose_name=ugettext_lazy(u'Descripção'))
-    def __unicode__(self):
-      return self.descripcion
-    class Meta:
-      ordering = ['descripcion']
-      verbose_name = ugettext_lazy(u"Cabelo")
-      verbose_name_plural = ugettext_lazy(u"Cabelos")
-
-class Piel(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True, verbose_name=ugettext_lazy(u'Descripção'))
-    def __unicode__(self):
-      return self.descripcion
-    class Meta:
-      ordering = ['descripcion']
-      verbose_name = ugettext_lazy(u"Pele")
-      verbose_name_plural = ugettext_lazy(u"Peles")
-
-class Talle(models.Model):
-    descripcion = models.CharField(max_length=60, unique=True, verbose_name=ugettext_lazy(u'Descripção'))
-    def __unicode__(self):
-      return self.descripcion
-    class Meta:
-      ordering = ['descripcion']
-      verbose_name = ugettext_lazy(u"Manequem")
-      verbose_name_plural = ugettext_lazy(u"Manequems")
 
 def validate_fecha_nacimiento(value):
   if value > date.today():

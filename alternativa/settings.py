@@ -148,6 +148,7 @@ INSTALLED_APPS = (
     'direccion',
     'telefono',
     'usuario',
+    'perfil',
     'idioma',
     'agencia',
     'agenciado',

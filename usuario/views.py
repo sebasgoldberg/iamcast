@@ -13,6 +13,7 @@ from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
 from django.contrib.auth import logout
 from django.contrib.auth import authenticate, login
+from usuario.signals import usuario_after_register_before_redirect 
 
 @login_required
 def cambio_clave(request):
@@ -62,6 +63,7 @@ def logout_view(request):
   logout(request)
   return redirect('/')
 
+
 def registro(request):
   if request.method == 'POST':
     form = UserCreateForm(request.POST)
@@ -79,7 +81,7 @@ def registro(request):
 
       messages.success(request,_(u'Registro realizado com sucesso!'))
       messages.info(request,_(u'Temos enviado para seu email dados da sua nova conta.'))
-      messages.info(request,_(u'Por favor atualice os dados de seu perfil a ser analizados por nossa agencia.'))
+      usuario_after_register_before_redirect.send_robust(sender=user, request=request)
 
       next_page = form.cleaned_data['next_page']
       if not next_page:

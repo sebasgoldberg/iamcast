@@ -131,9 +131,9 @@ class RolInline(admin.TabularInline):
 class TrabajoAdmin(admin.ModelAdmin):
   readonly_fields=['id','thumbnail_img_link', 'productora_admin_link']
   inlines=[EventoTrabajoInline,RolInline]
-  list_display=['thumbnail_img','id','titulo', 'estado', 'descripcion', 
+  list_display=['id','titulo', 'estado', 'descripcion', 
     'fecha_ingreso', 'roles']
-  list_display_links = ('thumbnail_img', 'id')
+  list_display_links = ('id', 'titulo')
   list_filter=['estado']
   search_fields=['titulo','id']
   date_hierarchy='fecha_ingreso'

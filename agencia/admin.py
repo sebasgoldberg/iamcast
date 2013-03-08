@@ -1,5 +1,5 @@
 # coding=utf-8
-from agencia.models import Ciudad, Danza, Deporte, Estado, EstadoDientes, Idioma, Instrumento, Ojos, Pelo, Piel, Talle, Agenciado, FotoAgenciado, VideoAgenciado, Telefono, validarTelefonoIngresado, validarFotoIngresada, DireccionAgenciado, Agencia, TelefonoAgencia, DireccionAgencia
+from agencia.models import Agenciado, FotoAgenciado, VideoAgenciado, Telefono, validarTelefonoIngresado, validarFotoIngresada, DireccionAgenciado, Agencia, TelefonoAgencia, DireccionAgencia
 from django.contrib import admin
 from django.forms import CheckboxSelectMultiple
 from django.db import models
@@ -98,13 +98,4 @@ class AgenciadoAdmin(admin.ModelAdmin):
   actions_on_bottom = True
 
 admin.site.register(Agenciado,AgenciadoAdmin)
-admin.site.register(Danza)
-admin.site.register(Deporte)
-admin.site.register(EstadoDientes)
-admin.site.register(Idioma)
-admin.site.register(Instrumento)
-admin.site.register(Ojos)
-admin.site.register(Pelo)
-admin.site.register(Piel)
-admin.site.register(Talle)
 admin.site.register(Agencia,AgenciaAdmin)

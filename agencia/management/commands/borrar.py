@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
-from agencia.models import Ciudad, Danza, Deporte, Estado, EstadoDientes, Idioma, Instrumento, Ojos, Pelo, Piel, Talle, Agenciado, FotoAgenciado, VideoAgenciado, Compania, Telefono
+from agencia.models import Agenciado, FotoAgenciado, VideoAgenciado, Compania, Telefono
+from perfil.models import Danza, Deporte, EstadoDientes, Idioma, Instrumento, Ojos, Pelo, Piel, Talle
 
 class Command(BaseCommand):
 

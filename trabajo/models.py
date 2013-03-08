@@ -305,7 +305,7 @@ class Postulacion(models.Model):
     DICT_ESTADO_POSTULACION=dict(ESTADO_POSTULACION)
     estado = models.CharField(max_length=2,choices=ESTADO_POSTULACION)
     def __unicode__(self):
-      return '%s | %s | %s' % (self.agenciado,Postulacion.DICT_ESTADO_POSTULACION[self.estado],self.rol)
+      return u'%s | %s | %s' % (self.agenciado,Postulacion.DICT_ESTADO_POSTULACION[self.estado],self.rol)
     class Meta:
       ordering = ['-rol__trabajo__fecha_ingreso', 'rol__descripcion', 'agenciado__nombre', 'agenciado__apellido']
       verbose_name = ugettext_lazy(u'Postulação')
