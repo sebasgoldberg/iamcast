@@ -14,6 +14,7 @@ from django.utils.translation import ugettext_lazy
 from direccion.models import Direccion
 from telefono.models import Telefono as BaseTelefono
 from perfil.models import Danza, Deporte, EstadoDientes, Idioma, Instrumento, Ojos, Pelo, Piel, Talle
+from django.contrib import messages
 
 # @pre Esta rutina se llama desde el metodo clean de una clase que lo redefine y hereda de formset
 def validarUnoIngresado(formset,campo,mensaje):
@@ -42,6 +43,8 @@ class Agencia(models.Model):
   nombre = models.CharField(max_length=60, unique=True, verbose_name=ugettext_lazy(u'Nome'), null=False, blank=False)
   email = models.EmailField(verbose_name=ugettext_lazy(u'e-mail'), null=False, blank=False)
   activa = models.BooleanField(default=True, verbose_name=ugettext_lazy(u'Ativa'),help_text=ugettext_lazy(u'Só debería ter uma unica agencia ativa'))
+  logo = models.ImageField(upload_to='agencias/logos/', verbose_name=ugettext_lazy(u'Logo'), help_text = ugettext_lazy(u'Logo a ser visualizado no site da agencia'), null=True, blank=True)
+  favicon = models.ImageField(upload_to='agencias/logos/', verbose_name=ugettext_lazy(u'Favicon'), help_text=ugettext_lazy(u'Imagem com extenção ico de 48x48 pixels'), null=True, blank=True)
   class Meta:
     ordering = ['nombre']
     verbose_name = ugettext_lazy(u"Agencia")
@@ -60,11 +63,15 @@ class Agencia(models.Model):
     return ''
 
   @staticmethod
-  def get_activa():
-    agencia = Agencia.objects.filter(activa=True).order_by('-id')[0]
-    if not agencia:
-      raise Exception('No se ha encontrado una agencia activa. Debe crear una agencia activa en la administración del sitio.')
-    return agencia
+  def get_activa(request=None):
+    agencias = Agencia.objects.filter(activa=True).order_by('-id')
+    if not agencias:
+      mensaje=_(u'Não tem registrada uma agencia ativa. Tem que ser creada una agencia ativa na administracão do site.')
+      if not request:
+        raise Exception(mensaje)
+      messages.warning(request,mensaje)
+      return Agencia(nombre='',email='')
+    return agencias[0]
 
 class TelefonoAgencia(BaseTelefono):
   agencia = models.ForeignKey(Agencia,null=False, blank=False, verbose_name=ugettext_lazy(u'Agencia'))

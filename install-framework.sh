@@ -61,6 +61,7 @@ pip install django-imagekit
 # Se crean las carpetas que no están incluidas en el repo
 mkdir -p uploads/agenciados/fotos
 mkdir -p uploads/cache/agenciados/fotos
+mkdir -p uploads/agencias/logos
 chmod 777 -R uploads
 
 INSTALL_SCRIPT_DIR=$(pwd)

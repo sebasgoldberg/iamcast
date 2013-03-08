@@ -36,4 +36,4 @@ def add_agencia(request):
   """
   Devuelve la agencia activa
   """
-  return {'agencia':Agencia.get_activa()}
+  return {'agencia':Agencia.get_activa(request)}

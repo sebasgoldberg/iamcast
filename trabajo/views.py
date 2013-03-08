@@ -113,7 +113,7 @@ def trabajo_enviar_mail_productora(request,trabajo_id):
       context = RequestContext(request, {'trabajo':trabajo, })
       asunto = form.cleaned_data['asunto']
       destinatarios = form.get_destinatarios()
-      agencia=Agencia.get_activa()
+      agencia=Agencia.get_activa(request)
       ccs = [request.user.email,agencia.email]
 
       text_content = _(u'Este mensagem deve ser visualizado em formato HTML.')

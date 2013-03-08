@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {%block extrahead %}
-  <link rel="shortcut icon" href="/static/images/favicon.ico" />
+  {% include 'agencia/agencia/favicon.html' %}
 {%endblock%}
 {% block title %}{{ title }} | {{ agencia.nombre }}{% endblock %}
 
