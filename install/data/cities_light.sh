@@ -5,5 +5,5 @@ echo "En caso de no existir ninguna señal serán importados todos los datos."
 ./manage.py syncdb
 ./manage.py migrate
 ./manage.py cities_light
-./manage.py cities_light --force-import BR
-./manage.py cities_light --force-import AR
+#./manage.py cities_light --force-import BR
+#./manage.py cities_light --force-import AR

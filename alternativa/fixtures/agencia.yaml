@@ -1,4 +1,16 @@
-- fields: {activa: true, email: agencia.test@gmail.com, nombre: Alternativa}
+- fields: {activa: true, email: agenciaalternativa@gmail.com, favicon: agencias/logos/favicon.ico,
+    logo: agencias/logos/logo_1.png, mapa_contacto: "<iframe width=\"425\" height=\"\
+      350\" frameborder=\"0\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\"\
+      \ src=\"https://maps.google.com.ar/maps?f=q&amp;source=s_q&amp;hl=es&amp;geocode=&amp;q=Rua+Dom+Lu%C3%ADs+Felipe+de+Orleans,+530,+Vila+Maria,+S%C3%A3o+Paulo,+S%C3%A3o+Paulo,+Brazil&amp;aq=&amp;sll=-34.607136,-58.414706&amp;sspn=0.011921,0.026157&amp;ie=UTF8&amp;hq=&amp;hnear=R.+Dom+Lu%C3%ADs+Felipe+de+Orleans,+530+-+Vila+Mariana,+S%C3%A3o+Paulo,+02118-000,+Brasil&amp;t=m&amp;z=14&amp;iwloc=A&amp;ll=-23.516521,-46.590771&amp;output=embed\"\
+      ></iframe><br /><small><a href=\"https://maps.google.com.ar/maps?f=q&amp;source=embed&amp;hl=es&amp;geocode=&amp;q=Rua+Dom+Lu%C3%ADs+Felipe+de+Orleans,+530,+Vila+Maria,+S%C3%A3o+Paulo,+S%C3%A3o+Paulo,+Brazil&amp;aq=&amp;sll=-34.607136,-58.414706&amp;sspn=0.011921,0.026157&amp;ie=UTF8&amp;hq=&amp;hnear=R.+Dom+Lu%C3%ADs+Felipe+de+Orleans,+530+-+Vila+Mariana,+S%C3%A3o+Paulo,+02118-000,+Brasil&amp;t=m&amp;z=14&amp;iwloc=A&amp;ll=-23.516521,-46.590771\"\
+      \ style=\"color:#0000FF;text-align:left\">Ver mapa m\xE1s grande</a></small>",
+    nombre: Agencia Alternativa, presentacion_home: "A ag\xEAncia ALTERNATIVA busca\
+      \ atingir sua miss\xE3o: Atuar no mercado publicit\xE1rio com excel\xEAncia\
+      \ e alcan\xE7ar a maior visibilidade poss\xEDvel atrav\xE9s do sucesso de seus\
+      \ agenciados. Para alcan\xE7ar isso, a ag\xEAncia trabalha selecionando o melhor\
+      \ casting, dando oportunidade para pessoas de todo o Brasil, sempre buscando\
+      \ novos talentos.", titulo_home: "\"Somos a alternativa para a realiza\xE7\xE3\
+      o do seu sonho\""}
   model: agencia.agencia
   pk: 2
 - fields: {agencia: 2, compania: null, telefono: +55 (11) 2636-5777}
@@ -10,7 +22,8 @@
 - fields: {agencia: 2, compania: null, telefono: +55 (11) 9188-0048}
   model: agencia.telefonoagencia
   pk: 3
-- fields: {agencia: 2, barrio: '', ciudad: 1901, codigo_postal: '', descripcion: '',
-    direccion: Dom Luis Felipe 123, estado: 86, pais: 283}
+- fields: {agencia: 2, barrio: Vila Maria, ciudad: 1973, codigo_postal: 02118-000,
+    descripcion: '', direccion: "Rua Dom Lu\xEDs Felipe de Orleans, 530", estado: 86,
+    pais: 283}
   model: agencia.direccionagencia
   pk: 3

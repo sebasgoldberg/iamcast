@@ -27,7 +27,7 @@ class MailAgencia(EmailMultiAlternatives):
   def __init__(self,asunto, cuerpo_de_texto, destinatarios,ccs=None):
     
     agencia = Agencia.get_activa()
-    _asunto = ugettext_lazy(u'Agencia %(nombre)s - %(asunto)s') % {'nombre':agencia.nombre, 'asunto':asunto}
+    _asunto = ugettext_lazy(u'%(nombre)s - %(asunto)s') % {'nombre':agencia.nombre, 'asunto':asunto}
     _headers = {'Reply-To': agencia.email}
     
     self.mensaje = EmailMultiAlternatives(

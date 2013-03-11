@@ -14,6 +14,7 @@ framework.
 
 """
 import os, sys
+import ambiente
 
 sys.path.append('/home/cerebro/django-projects/alternativa')
 

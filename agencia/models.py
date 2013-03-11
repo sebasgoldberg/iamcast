@@ -45,11 +45,17 @@ class Agencia(models.Model):
   activa = models.BooleanField(default=True, verbose_name=ugettext_lazy(u'Ativa'),help_text=ugettext_lazy(u'Só debería ter uma unica agencia ativa'))
   logo = models.ImageField(upload_to='agencias/logos/', verbose_name=ugettext_lazy(u'Logo'), help_text = ugettext_lazy(u'Logo a ser visualizado no site da agencia'), null=True, blank=True)
   favicon = models.ImageField(upload_to='agencias/logos/', verbose_name=ugettext_lazy(u'Favicon'), help_text=ugettext_lazy(u'Imagem com extenção ico de 48x48 pixels'), null=True, blank=True)
+  titulo_home = models.CharField(max_length=100, verbose_name=ugettext_lazy(u'Titulo pagina inicial'), null=True, blank=True)
+  presentacion_home = models.TextField(null=True, blank=True, verbose_name=ugettext_lazy(u'Presentação pagina inicial'))
+  mapa_contacto = models.TextField(null=True, blank=True, verbose_name=ugettext_lazy(u'Mapa pagina contato'), help_text=ugettext_lazy(u'Aqui tem que colar o HTML gerado no google maps a partir de seu endereço'))
   class Meta:
     ordering = ['nombre']
     verbose_name = ugettext_lazy(u"Agencia")
     verbose_name_plural = ugettext_lazy(u"Agencias")
-  
+
+  def __unicode__(self):
+    return self.nombre
+
   def telefonos(self):
     listado_telefonos = []
     for telefono in self.telefonoagencia_set.all():
@@ -70,7 +76,7 @@ class Agencia(models.Model):
       if not request:
         raise Exception(mensaje)
       messages.warning(request,mensaje)
-      return Agencia(nombre='',email='')
+      return Agencia(nombre='Agencia',email='mail@agencia.com')
     return agencias[0]
 
 class TelefonoAgencia(BaseTelefono):

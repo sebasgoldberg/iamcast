@@ -13,6 +13,7 @@ class DireccionAgenciaInline(BaseDireccionInline):
   form = DireccionAgenciaForm
   model=DireccionAgencia
   extra = 1
+  max_num = 1
 
 class TelefonoAgenciaInline(admin.TabularInline):
   model=TelefonoAgencia
@@ -20,11 +21,12 @@ class TelefonoAgenciaInline(admin.TabularInline):
 
 class AgenciaAdmin(admin.ModelAdmin):
   inlines=[DireccionAgenciaInline, TelefonoAgenciaInline]
-  list_display=['id','nombre','email','activa','logo','favicon']
+  list_display=['id','nombre','email','activa']
   list_display_links = ('id', 'nombre')
   list_filter=['activa']
   search_fields=['nombre']
   list_per_page = 40
+  exclude=['logo']
 
 class TelefonoFormSet(BaseInlineFormSet):
   def clean(self):

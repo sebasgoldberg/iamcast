@@ -17,7 +17,7 @@
     <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
     <style type="text/css">
       body {
-        padding-top: 120px;
+        padding-top: 60px;
         padding-bottom: 40px;
       }
     </style>
@@ -35,7 +35,7 @@
     {%endblock%}
   {%endblock%}
 
-  <title>{%block title%}{% trans "Agencia" %} {{agencia.nombre}}{%endblock%}</title>
+  <title>{%block title%}{{agencia.nombre}}{%endblock%}</title>
 
 </head>
 
@@ -50,12 +50,14 @@
           <span class="icon-bar"></span>
         </button>
         <a class='brand' href=/agencia/>
-          {%comment%}<img src='/static/images/small_logo.png' alt=Agencia {{agencia.nombre}}/>{%endcomment%}
+          {%comment%}
           {%if agencia.logo%}
-            <img src='{{agencia.logo.url}}' alt=Agencia {{agencia.nombre}}/>
+            <img src='{{agencia.logo.url}}' alt="{{agencia.nombre}}"/>
           {%else%}
-            Agencia {{agencia.nombre}}
+            {{agencia.nombre}}
           {%endif%}
+          {%endcomment%}
+          {{agencia.nombre}}
         </a> 
         <div class="nav-collapse collapse">
           <ul class="nav">
@@ -122,7 +124,7 @@
   {% block footer %}
     <div id="footer">
       <div class="container">
-        <p class="muted credit">{% trans "Agencia" %} {{agencia.nombre}} {% for telefono in agencia.telefonos %}|{{telefono}}{% endfor%}| {{agencia.email}}</p><p class="muted credit"> {{agencia.direccion}}</p>
+        <p class="muted credit">{{agencia.nombre}} {% for telefono in agencia.telefonos %}|{{telefono}}{% endfor%}| {{agencia.email}}</p><p class="muted credit"> {{agencia.direccion}}</p>
       </div>
     </div>
   {% endblock %}

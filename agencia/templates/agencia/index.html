@@ -11,15 +11,23 @@
   <div class='row'>
       {% block hero %}
         <div class="hero-unit">
-          {% include 'agencia/conf/hero.html'%}
-          <p>
-            {% if user.is_anonymous %}
-              <a href="/usuario/registro/" class="btn btn-primary btn-large">{% trans "Cadastre-se" %} &raquo;</a>
-            {% elif not user.agenciado %}
-              <a href="/agenciado/" class="btn btn-primary btn-large">{% trans "Complete seu cadastro" %} &raquo;</a>
-            {% endif %}
-            <a href="/trabajo/busquedas/" class="btn btn-success btn-large">{% trans "Veja os perfis procurados" %} &raquo;</a>
-          </p>
+          {%comment%}
+          <div class='row'>
+          <div class='thumbnail span2'>
+            <img src='{{agencia.logo.url}}'/>
+          </div>
+          <div class='span9'>
+          {%endcomment%}
+            {% include 'agencia/conf/hero.html'%}
+            <p>
+              {% if user.is_anonymous %}
+                <a href="/usuario/registro/" class="btn btn-primary btn-large">{% trans "Cadastre-se" %} &raquo;</a>
+              {% elif not user.agenciado %}
+                <a href="/agenciado/" class="btn btn-primary btn-large">{% trans "Complete seu cadastro" %} &raquo;</a>
+              {% endif %}
+              <a href="/trabajo/busquedas/" class="btn btn-success btn-large">{% trans "Veja os perfis procurados" %} &raquo;</a>
+            </p>
+          {%comment%}</div>{%endcomment%}
         </div>
       {% endblock %}
   </div>

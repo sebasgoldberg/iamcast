@@ -1,5 +1,5 @@
 {% load i18n %}
-{% trans "O equipe da agencia" %} {{agencia.nombre}}
+{% trans "O equipe da" %} {{agencia.nombre}}
 {{agencia.email}}
 {% for telefono in agencia.telefonos %}{{telefono}}
 {% endfor %}{{agencia.direccion}}
