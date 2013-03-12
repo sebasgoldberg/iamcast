@@ -25,8 +25,18 @@ DATABASES = {
         'PASSWORD': ambiente.db.password,                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    },
+    'ciudades': {
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': ambiente.ciudades.db.name,                      # Or path to database file if using sqlite3.
+        'USER': ambiente.ciudades.db.user,                      # Not used with sqlite3.
+        'PASSWORD': ambiente.ciudades.db.password,                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+
+DATABASE_ROUTERS = ['direccion.routers.CitiesLightRouter']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -141,7 +151,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'imagekit',
     'crispy_forms',
-    'south',
+    #'south', # No se usa south porque cities_light no se sincroniza
     'cities_light',
     #'smart_selects',
     # Aplicaciones de la agencia

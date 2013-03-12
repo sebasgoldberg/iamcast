@@ -166,3 +166,7 @@ class BaseDireccionInline(admin.StackedInline):
   fieldsets=[
     (None, { 'fields':[ ('descripcion'), ('pais', 'estado', 'ciudad', ), ('barrio', 'direccion', 'codigo_postal')]}),
     ]
+
+admin.site.unregister(Country)
+admin.site.unregister(Region)
+admin.site.unregister(City)
