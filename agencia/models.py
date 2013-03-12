@@ -74,8 +74,7 @@ class Agencia(models.Model):
     if not agencias:
       mensaje=_(u'Não tem registrada uma agencia ativa. Tem que ser creada una agencia ativa na administracão do site.')
       if not request:
-        raise Exception(mensaje)
-      messages.warning(request,mensaje)
+        messages.warning(request,mensaje)
       return Agencia(nombre='Agencia',email='mail@agencia.com')
     return agencias[0]
 
