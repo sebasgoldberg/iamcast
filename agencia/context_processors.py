@@ -25,6 +25,8 @@ class ThumbnailsUrls(object):
         pass
       if len(self.abajo)==max_cantidad_thumbnails:
         break
+    if len(self.abajo)<max_cantidad_thumbnails:
+      self.abajo=self.arriba
 
 def add_thumbnails_urls(request):
   """

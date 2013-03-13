@@ -22,11 +22,6 @@ from django.utils.translation import ugettext_lazy
 from agencia.forms import DireccionAgenciadoForm
 from usuario.signals import usuario_after_register_before_redirect 
 
-def show_message_after_register(sender,request,**kwargs):
-  messages.info(request,_(u'Por favor atualice os dados de seu perfil a ser analizados por nossa agencia.'))
-
-usuario_after_register_before_redirect.connect(show_message_after_register)
-
 class BPCheckboxSelectMultiple(CheckboxSelectMultiple):
 
   def render(self, name, value, attrs=None, choices=()):
