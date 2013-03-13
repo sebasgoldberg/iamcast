@@ -20,7 +20,6 @@ from trabajo.models import Postulacion, Rol
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
 from agencia.forms import DireccionAgenciadoForm
-from usuario.signals import usuario_after_register_before_redirect 
 
 class BPCheckboxSelectMultiple(CheckboxSelectMultiple):
 

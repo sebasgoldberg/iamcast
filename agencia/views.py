@@ -5,6 +5,7 @@ from django.shortcuts import render
 from trabajo.models import Trabajo, ItemPortfolio
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
+from usuario.signals import usuario_after_register_before_redirect 
 
 def notify_register(sender,request,**kwargs):
   messages.info(request,_(u'Por favor atualice os dados de seu perfil a ser analizados por nossa agencia.'))
