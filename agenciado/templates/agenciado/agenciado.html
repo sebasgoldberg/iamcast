@@ -40,20 +40,6 @@
     </div>
   </fieldset>
 
-  {%comment%}
-  @todo Borrar el bloque de direccion que está de más
-  <fieldset>
-    <legend>{% trans "Dados de endereço" %}</legend>
-    <div class='row'>
-      <div class='{{clase_espacio_celda}}'>{{form.estado|as_crispy_field}}</div>
-      <div class='{{clase_espacio_celda}}'>{{form.ciudad|as_crispy_field}}</div>
-      <div class='{{clase_espacio_celda}}'>{{form.barrio|as_crispy_field}}</div>
-      <div class='{{clase_espacio_celda}}'>{{form.direccion|as_crispy_field}}</div>
-      <div class='{{clase_espacio_celda}}'>{{form.codigo_postal|as_crispy_field}}</div>
-    </div>
-  </fieldset>
-  {%endcomment%}
-
   <fieldset>
     <legend>{% trans "Dados de endereço" %}</legend>
     {% with direccionFormSet as formset %}

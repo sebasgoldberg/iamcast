@@ -11,8 +11,8 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
-from direccion.models import Direccion
-from telefono.models import Telefono as BaseTelefono
+from iamsoft.cross.direccion.models import Direccion
+from iamsoft.cross.telefono.models import Telefono as BaseTelefono
 from perfil.models import Danza, Deporte, EstadoDientes, Idioma, Instrumento, Ojos, Pelo, Piel, Talle
 from django.contrib import messages
 

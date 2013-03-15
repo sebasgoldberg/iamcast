@@ -6,7 +6,7 @@ from django.db import models
 from django.forms.models import BaseInlineFormSet
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
-from direccion.admin import PaisDireccionModelListFilter, EstadoDireccionModelListFilter, CiudadDireccionModelListFilter, BaseDireccionInline
+from iamsoft.cross.direccion.admin import PaisDireccionModelListFilter, EstadoDireccionModelListFilter, CiudadDireccionModelListFilter, BaseDireccionInline
 from agencia.forms import DireccionAgenciaForm, DireccionAgenciadoForm
 
 class DireccionAgenciaInline(BaseDireccionInline):

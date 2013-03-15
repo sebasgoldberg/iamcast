@@ -11,8 +11,8 @@ from django.dispatch import receiver
 import re
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
-from direccion.models import Direccion
-from telefono.models import Telefono
+from iamsoft.cross.direccion.models import Direccion
+from iamsoft.cross.telefono.models import Telefono
 
 class Evento(Direccion):
   fecha = models.DateTimeField(default=datetime.today(),verbose_name=ugettext_lazy(u'Data do evento'), blank=True, null=True)
@@ -147,6 +147,7 @@ class Trabajo(models.Model):
     estado = models.CharField(max_length=2,choices=ESTADO_TRABAJO,null=False)
 # @todo agregar validación entre secuencia de las distintas fechas
     fecha_ingreso = models.DateField(default=date.today(),verbose_name=ugettext_lazy(u'Data ingreso'))
+    publicado = models.BooleanField(null=True,blank=True,verbose_name=ugettext_lazy(u'Publicado'),help_text=ugettext_lazy(u'Indica se o trabalho debe ser publicado no site da agencia'))
 
     @staticmethod
     def filter_iniciados(queryset):

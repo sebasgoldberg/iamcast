@@ -9,8 +9,8 @@ from agencia.admin import AgenciadoAdmin
 from django.forms.widgets import Textarea
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
-from direccion.admin import PaisDireccionModelListFilter, EstadoDireccionModelListFilter, CiudadDireccionModelListFilter, BaseDireccionInline
-from direccion.forms import BaseDireccionForm
+from iamsoft.cross.direccion.admin import PaisDireccionModelListFilter, EstadoDireccionModelListFilter, CiudadDireccionModelListFilter, BaseDireccionInline
+from iamsoft.cross.direccion.forms import BaseDireccionForm
 
 class PostulacionInline(admin.TabularInline):
   model=Postulacion
@@ -131,16 +131,16 @@ class RolInline(admin.TabularInline):
 class TrabajoAdmin(admin.ModelAdmin):
   readonly_fields=['id','thumbnail_img_link', 'productora_admin_link']
   inlines=[EventoTrabajoInline,RolInline]
-  list_display=['id','titulo', 'estado', 'descripcion', 
+  list_display=['id','titulo', 'estado', 'publicado', 'descripcion', 
     'fecha_ingreso', 'roles']
   list_display_links = ('id', 'titulo')
-  list_filter=['estado']
+  list_filter=['estado', 'publicado']
   search_fields=['titulo','id']
   date_hierarchy='fecha_ingreso'
   fieldsets=[
     (None, {'fields':['id', 'thumbnail_img_link']}),
     (_(u'Dados do trabalho'), 
-      {'fields':['titulo', ('productora', 'productora_admin_link'), 'estado', 'fecha_ingreso', 'descripcion', 'imagen']}),
+      {'fields':['titulo', ('productora', 'productora_admin_link'), 'estado', 'fecha_ingreso', 'publicado', 'descripcion', 'imagen']}),
   ]
 
 class PostulacionAdmin(admin.ModelAdmin):

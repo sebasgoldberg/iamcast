@@ -9,7 +9,8 @@ from django import forms
 from trabajo.models import Postulacion, Rol, Trabajo, ItemPortfolio
 from agencia.models import Agenciado, Agencia
 from django.template import loader, Context
-from agencia.mail import MailAgencia, MailForm
+from agencia.mail import MailAgencia
+from iamsoft.cross.correo.forms import MailForm
 from django.conf import settings
 from django.contrib import messages
 from django.template import RequestContext
@@ -130,7 +131,7 @@ def trabajo_enviar_mail_productora(request,trabajo_id):
   return render(request,'trabajo/trabajo/enviar_mail_productora.html',{'form': form, 'trabajo': trabajo, })
 
 def busquedas(request):
-  trabajos=Trabajo.objects.filter(estado='AT').order_by('-fecha_ingreso')
+  trabajos=Trabajo.objects.filter(publicado=True).order_by('-fecha_ingreso')
   trabajo = None
   id=request.GET.get('id')
   if id is not None:

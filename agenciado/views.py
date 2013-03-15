@@ -132,7 +132,7 @@ def postular(request):
   # Se obtiene el rol de la postulación
   rol_id = request.GET.get('rol_id')
   try:
-    rol = Rol.objects.get(pk=rol_id,trabajo__estado='AT')
+    rol = Rol.objects.get(pk=rol_id,trabajo__publicado=True)
   except Rol.DoesNotExist:
     messages.error(request,_(u'O perfil do trabalho para o qual quer aplicar nao foi encontrado'))
     return redirect('/trabajo/busquedas/')

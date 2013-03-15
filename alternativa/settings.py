@@ -147,11 +147,12 @@ INSTALLED_APPS = (
     'cities_light',
     #'smart_selects',
     # Aplicaciones de la agencia
-    'direccion',
-    'telefono',
-    'usuario',
+    'iamsoft.cross.direccion',
+    'iamsoft.cross.telefono',
+    'iamsoft.cross.correo',
+    'iamsoft.cross.usuario',
+    'iamsoft.cross.idioma',
     'perfil',
-    'idioma',
     'agencia',
     'agenciado',
     'trabajo',
@@ -215,3 +216,5 @@ LOCALE_PATHS=(ambiente.project_directory+'locale',)
 
 #CITIES_LIGHT_CITY_SOURCES = ['http://download.geonames.org/export/dump/BR.zip','http://download.geonames.org/export/dump/AR.zip']
 #CITIES_LIGHT_CITY_SOURCES = ['http://download.geonames.org/export/dump/cities5000.zip']
+
+CORREO_CLASS='agencia.mail.MailAgencia'

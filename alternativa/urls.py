@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.views.generic.simple import redirect_to
-from usuario.forms import UsuarioAuthenticationForm
+from iamsoft.cross.usuario.forms import UsuarioAuthenticationForm
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -28,7 +28,7 @@ urlpatterns = patterns('',
     url(r'^$', redirect_to, {'url': '/agencia/'}),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^chaining/', include('smart_selects.urls')),
-    url(r'^direccion/', include('direccion.urls')),
-    url(r'^usuario/', include('usuario.urls')),
+    url(r'^direccion/', include('iamsoft.cross.direccion.urls')),
+    url(r'^usuario/', include('iamsoft.cross.usuario.urls')),
 )
 
