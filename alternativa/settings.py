@@ -3,8 +3,6 @@ from ambiente import ambiente
 
 AMBIENTE=ambiente
 
-AMBIENTE_PRODUCTIVO = ambiente.productivo
-
 DEBUG = (not ambiente.productivo)
 TEMPLATE_DEBUG = DEBUG
 CRISPY_FAIL_SILENTLY = not DEBUG
@@ -152,10 +150,10 @@ INSTALLED_APPS = (
     'iamsoft.cross.correo',
     'iamsoft.cross.usuario',
     'iamsoft.cross.idioma',
-    'perfil',
-    'agencia',
-    'agenciado',
-    'trabajo',
+    'iamsoft.agencia.perfil',
+    'iamsoft.agencia.agencia',
+    'iamsoft.agencia.agenciado',
+    'iamsoft.agencia.trabajo',
 )
 
 if not ambiente.productivo:
@@ -207,9 +205,9 @@ TEMPLATE_CONTEXT_PROCESSORS=(
   "django.contrib.messages.context_processors.messages",
 # La linea que sigue se agrego por uni-form
   'django.core.context_processors.request',
-  'agencia.context_processors.add_ambiente',
-  'agencia.context_processors.add_thumbnails_urls',
-  'agencia.context_processors.add_agencia',
+  'iamsoft.agencia.agencia.context_processors.add_ambiente',
+  'iamsoft.agencia.agencia.context_processors.add_thumbnails_urls',
+  'iamsoft.agencia.agencia.context_processors.add_agencia',
 )
 
 LOCALE_PATHS=(ambiente.project_directory+'locale',)
@@ -217,4 +215,4 @@ LOCALE_PATHS=(ambiente.project_directory+'locale',)
 #CITIES_LIGHT_CITY_SOURCES = ['http://download.geonames.org/export/dump/BR.zip','http://download.geonames.org/export/dump/AR.zip']
 #CITIES_LIGHT_CITY_SOURCES = ['http://download.geonames.org/export/dump/cities5000.zip']
 
-CORREO_CLASS='agencia.mail.MailAgencia'
+CORREO_CLASS='iamsoft.agencia.agencia.mail.MailAgencia'

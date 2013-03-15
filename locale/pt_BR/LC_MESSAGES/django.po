@@ -8,27 +8,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-15 14:47-0300\n"
+"POT-Creation-Date: 2013-03-15 15:44-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: es\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: alternativa/settings.py:47
+#: alternativa/settings.py:45
 msgid "Portugues"
-msgstr "Portugues"
+msgstr ""
 
-#: alternativa/settings.py:48
+#: alternativa/settings.py:46
 msgid "Spanish"
-msgstr "Español"
+msgstr "Espanhol"
 
 #: templates/correo/firma.txt:2
 msgid "O equipe de"
-msgstr "El equipo de"
+msgstr ""
 
 #: templates/usuario/mail/creacion.txt:5
 #, python-format
@@ -52,21 +52,3 @@ msgid ""
 "Por favor, verifique se os dados da sua conta som corretos. Em caso de "
 "precisar modifique os dados que correspondam."
 msgstr ""
-"Hola %(first_name)s!\n"
-"\n"
-"Usted tiene una nueva cuenta en http://%(dominio)s/ con datos de su perfil.\n"
-"\n"
-"Si usted es un agenciado, entonces puede completar su perfil: http://"
-"%(dominio)s/agenciado/\n"
-"\n"
-"Si usted es un agenciador puede acceder a la administración: http://"
-"%(dominio)s/admin/\n"
-"\n"
-"Usted podrá ingresar a su nueva cuenta con su usuario (%(username)s) y su "
-"clave.\n"
-"\n"
-"Si usted no recuerda su clave, podra generarla de nuevo aqui: http://"
-"%(dominio)s/usuario/reiniciar/clave/\n"
-"\n"
-"Por favor, verifique si los datos de su perfil son correctos. En caso de ser "
-"necesario, modifique los datos que correspondan."
