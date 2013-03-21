@@ -1,6 +1,6 @@
 # Django settings for alternativa project.
 from ambiente import ambiente
-
+###
 AMBIENTE=ambiente
 
 DEBUG = (not ambiente.productivo)
