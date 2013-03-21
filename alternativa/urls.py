@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.views.generic.simple import redirect_to
-from iamsoft.cross.usuario.forms import UsuarioAuthenticationForm
+from iampacks.cross.usuario.forms import UsuarioAuthenticationForm
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -20,15 +20,15 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^uploads/(?P<path>.*)$', 'django.views.static.serve',
       {'document_root': settings.MEDIA_ROOT}),
-    url(r'^agencia/', include('iamsoft.agencia.agencia.urls')),
-    url(r'^agenciado/', include('iamsoft.agencia.agenciado.urls')),
-    url(r'^trabajo/', include('iamsoft.agencia.trabajo.urls')),
+    url(r'^agencia/', include('iampacks.agencia.agencia.urls')),
+    url(r'^agenciado/', include('iampacks.agencia.agenciado.urls')),
+    url(r'^trabajo/', include('iampacks.agencia.trabajo.urls')),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'authentication_form':UsuarioAuthenticationForm}),
-    url(r'^accounts/profile/$', 'iamsoft.agencia.agenciado.views.index'),
+    url(r'^accounts/profile/$', 'iampacks.agencia.agenciado.views.index'),
     url(r'^$', redirect_to, {'url': '/agencia/'}),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^chaining/', include('smart_selects.urls')),
-    url(r'^direccion/', include('iamsoft.cross.direccion.urls')),
-    url(r'^usuario/', include('iamsoft.cross.usuario.urls')),
+    url(r'^direccion/', include('iampacks.cross.direccion.urls')),
+    url(r'^usuario/', include('iampacks.cross.usuario.urls')),
 )
 

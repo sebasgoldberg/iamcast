@@ -1,8 +1,16 @@
-cd alternativa/static
+if [ $# -eq 0 ]
+then
+  MAIN_APP='alternativa'
+  echo "Se asigna por default la aplicación principal $MAIN_APP"
+else
+  MAIN_APP="$1"
+fi
+
+cd "$MAIN_APP/static"
 
 if [ $? -ne 0 ]
 then
-  echo "ERROR: No se ha podido acceder a alternativa/static"
+  echo "ERROR: No se ha podido acceder a $MAIN_APP/static"
   exit 1
 fi
 

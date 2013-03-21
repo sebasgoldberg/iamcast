@@ -145,15 +145,15 @@ INSTALLED_APPS = (
     'cities_light',
     #'smart_selects',
     # Aplicaciones de la agencia
-    'iamsoft.cross.direccion',
-    'iamsoft.cross.telefono',
-    'iamsoft.cross.correo',
-    'iamsoft.cross.usuario',
-    'iamsoft.cross.idioma',
-    'iamsoft.agencia.perfil',
-    'iamsoft.agencia.agencia',
-    'iamsoft.agencia.agenciado',
-    'iamsoft.agencia.trabajo',
+    'iampacks.cross.direccion',
+    'iampacks.cross.telefono',
+    'iampacks.cross.correo',
+    'iampacks.cross.usuario',
+    'iampacks.cross.idioma',
+    'iampacks.agencia.perfil',
+    'iampacks.agencia.agencia',
+    'iampacks.agencia.agenciado',
+    'iampacks.agencia.trabajo',
 )
 
 if not ambiente.productivo:
@@ -205,9 +205,9 @@ TEMPLATE_CONTEXT_PROCESSORS=(
   "django.contrib.messages.context_processors.messages",
 # La linea que sigue se agrego por uni-form
   'django.core.context_processors.request',
-  'iamsoft.agencia.agencia.context_processors.add_ambiente',
-  'iamsoft.agencia.agencia.context_processors.add_thumbnails_urls',
-  'iamsoft.agencia.agencia.context_processors.add_agencia',
+  'iampacks.agencia.agencia.context_processors.add_ambiente',
+  'iampacks.agencia.agencia.context_processors.add_thumbnails_urls',
+  'iampacks.agencia.agencia.context_processors.add_agencia',
 )
 
 LOCALE_PATHS=(ambiente.project_directory+'locale',)
@@ -215,4 +215,4 @@ LOCALE_PATHS=(ambiente.project_directory+'locale',)
 #CITIES_LIGHT_CITY_SOURCES = ['http://download.geonames.org/export/dump/BR.zip','http://download.geonames.org/export/dump/AR.zip']
 #CITIES_LIGHT_CITY_SOURCES = ['http://download.geonames.org/export/dump/cities5000.zip']
 
-CORREO_CLASS='iamsoft.agencia.agencia.mail.MailAgencia'
+CORREO_CLASS='iampacks.agencia.agencia.mail.MailAgencia'
