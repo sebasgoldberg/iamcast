@@ -14,5 +14,5 @@ Você poderá ingressar a sua nova conta com seu usuário ({{username}}) e sua c
 
 Se você não lembra sua chave, poderá gerá-la de novo aqui: http://{{dominio}}/usuario/reiniciar/clave/
 
-Por favor, verifique se os dados da sua conta som corretos. Em caso de precisar modifique os dados que correspondam.{%endblocktrans%}
+Por favor, verifique se os dados da sua conta estão corretos. Em caso de precisar modifique os dados que correspondam.{%endblocktrans%}
 {% endblock %}
