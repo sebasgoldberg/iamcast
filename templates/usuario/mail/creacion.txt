@@ -2,17 +2,17 @@
 {% load i18n %}
 
 {% block mensaje %}
-{%blocktrans with first_name=user.first_name dominio=ambiente.dominio username=user.username%}Oi {{first_name}}!
+{%blocktrans with first_name=user.first_name base_url=ambiente.get_base_url username=user.username%}Oi {{first_name}}!
 
-Você tem uma nova conta em http://{{dominio}}/ com dados de sue perfil.
+Você tem uma nova conta em {{base_url}}/ com dados de sue perfil.
 
-Se você e um agenciado, então pode carregar informação de seu perfil: http://{{dominio}}/agenciado/
+Se você e um agenciado, então pode carregar informação de seu perfil: {{base_url}}/agenciado/
 
-Se você e um agenciador pode acessar a administração do site: http://{{dominio}}/admin/
+Se você e um agenciador pode acessar a administração do site: {{base_url}}/admin/
 
 Você poderá ingressar a sua nova conta com seu usuário ({{username}}) e sua chave.
 
-Se você não lembra sua chave, poderá gerá-la de novo aqui: http://{{dominio}}/usuario/reiniciar/clave/
+Se você não lembra sua chave, poderá gerá-la de novo aqui: {{base_url}}/usuario/reiniciar/clave/
 
 Por favor, verifique se os dados da sua conta estão corretos. Em caso de precisar modifique os dados que correspondam.{%endblocktrans%}
 {% endblock %}
