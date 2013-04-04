@@ -1,9 +1,0 @@
-rename table agencia_danza to perfil_danza;
-rename table agencia_deporte to perfil_deporte;
-rename table agencia_estadodientes to perfil_estadodientes;
-rename table agencia_idioma to perfil_idioma;
-rename table agencia_instrumento to perfil_instrumento;
-rename table agencia_ojos to perfil_ojos;
-rename table agencia_pelo to perfil_pelo;
-rename table agencia_piel to perfil_piel;
-rename table agencia_talle to perfil_talle;

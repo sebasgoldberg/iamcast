@@ -145,6 +145,7 @@ INSTALLED_APPS = (
     'cities_light',
     #'smart_selects',
     # Aplicaciones de la agencia
+    'iampacks.cross.estatico',
     'iampacks.cross.direccion',
     'iampacks.cross.telefono',
     'iampacks.cross.correo',
