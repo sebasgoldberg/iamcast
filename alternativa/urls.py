@@ -27,7 +27,7 @@ urlpatterns = patterns('',
     url(r'^accounts/profile/$', 'iampacks.agencia.agenciado.views.index'),
     url(r'^$', redirect_to, {'url': '/agencia/'}),
     url(r'^i18n/', include('django.conf.urls.i18n')),
-    url(r'^chaining/', include('smart_selects.urls')),
+    #url(r'^chaining/', include('smart_selects.urls')),
     url(r'^direccion/', include('iampacks.cross.direccion.urls')),
     url(r'^usuario/', include('iampacks.cross.usuario.urls')),
 )
