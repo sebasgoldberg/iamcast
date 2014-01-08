@@ -1,5 +1,6 @@
 # coding=utf-8
 from base_ambiente import BaseAmbiente
+import os
 
 class Ambiente(BaseAmbiente):
   productivo=False
