@@ -2,13 +2,15 @@
 from base_ambiente import BaseAmbiente
 import os
 
+id_agencia='iamcast'
+
 class Ambiente(BaseAmbiente):
   productivo=False
   app_in_dev=None
 
-  id_agencia='iamcast'
+  id_agencia=id_agencia
 
-  dominio='dev.iamcast.com.ar'
+  dominio='%s.com.ar'%id_agencia
   puerto_http='8080'
   puerto_https='8081'
 
@@ -20,8 +22,6 @@ class Ambiente(BaseAmbiente):
   class ciudades:
     class db:
       name='ciudades'
-      user='ciudades'
-      password='ciudades'
 
   project_directory = '%s/' % os.path.abspath('%s/..' % os.path.split(os.path.abspath(__file__))[0])
 
