@@ -6,14 +6,22 @@ class Ambiente(BaseAmbiente):
   productivo=False
   app_in_dev=None
 
+  id_agencia='iamcast'
+
   dominio='dev.iamcast.com.ar'
   puerto_http='8080'
   puerto_https='8081'
 
   class db:
-    name='agencia'
-    user='agencia'
+    name=id_agencia
+    user=id_agencia
     password='password'
+
+  class ciudades:
+    class db:
+      name='ciudades'
+      user='ciudades'
+      password='ciudades'
 
   project_directory = '%s/' % os.path.abspath('%s/..' % os.path.split(os.path.abspath(__file__))[0])
 
@@ -22,5 +30,8 @@ class Ambiente(BaseAmbiente):
     user = 'user@gmail.com'
     password = 'password'
     port = 587
+
+  class zonomi:
+    api_key = None
 
 ambiente=Ambiente()
