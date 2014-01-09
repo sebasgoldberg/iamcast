@@ -2,6 +2,6 @@ INSTALL
 -------
 
 1) Install the package ciudades.
-2) cp alternativa/ambiente.default.py alternativa/ambiente.py and apply your configuration.
+2) Run ./config.sh and apply your configuration.
 2) Run ./install.sh (for iamcast).
 3) Verify that ports for apache2 are configured correctly.
