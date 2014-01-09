@@ -11,8 +11,8 @@ class Ambiente(BaseAmbiente):
   id_agencia=id_agencia
 
   dominio='%s.com.ar'%id_agencia
-  puerto_http='8080'
-  puerto_https='8081'
+  puerto_http='80'
+  puerto_https='443'
 
   class db:
     name=id_agencia
