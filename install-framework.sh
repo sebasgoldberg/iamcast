@@ -96,6 +96,8 @@ function install_standard_framework
 
   easy_install South
   pip install django-cities-light
+
+  pip install django-grappelli==2.4.8
 }
 
 function install_iampacks
