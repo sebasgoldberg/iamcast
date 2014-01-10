@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
-from django.views.generic.simple import redirect_to
+from django.views.generic import RedirectView
 from iampacks.cross.usuario.forms import UsuarioAuthenticationForm
 
 # Uncomment the next two lines to enable the admin:
@@ -25,7 +25,7 @@ urlpatterns = patterns('',
     url(r'^trabajo/', include('iampacks.agencia.trabajo.urls')),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'authentication_form':UsuarioAuthenticationForm}),
     url(r'^accounts/profile/$', 'iampacks.agencia.agenciado.views.index'),
-    url(r'^$', redirect_to, {'url': '/agencia/'}),
+    url(r'^$', RedirectView.as_view(url='/agencia/')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     #url(r'^chaining/', include('smart_selects.urls')),
     url(r'^direccion/', include('iampacks.cross.direccion.urls')),

@@ -65,7 +65,7 @@ function install_standard_framework
   apt-get -y install curl
   apt-get -y install build-essential
 
-  pip install Django==1.4.3
+  pip install Django==1.6.1
 
 # Instalacion de paquete para manejo de thumbnails
   pip install django-imagekit==2.0.4
