@@ -3,9 +3,32 @@
 ### Variables globales
 WD="$(readlink -f "$(dirname "$0")")"
 
-INSTALL_FRAMEWORK='X'
-INSTALL_IAMPACKS='X'
-INSTALL_CIUDADES='X'
+INSTALL_FRAMEWORK=' '
+INSTALL_IAMPACKS=' '
+INSTALL_NOIP=' '
+
+if [ $# -eq 0 ]
+then
+  INSTALL_FRAMEWORK='X'
+  INSTALL_IAMPACKS='X'
+  INSTALL_NOIP='X'
+elif [ $1 = '-f' ]
+then
+  INSTALL_FRAMEWORK='X'
+elif [ $1 = '-i' ]
+then
+  INSTALL_IAMPACKS='X'
+elif [ $1 = '-n' ]
+then
+  INSTALL_NOIP='X'
+elif [ $1 = '-h' ]
+then
+  echo "$0 [option]"
+  echo "no option installs all."
+  echo "-f Installs only framework."
+  echo "-i Installs only iampacks"
+  echo "-n Installs only no-ip"
+fi
 
 function install_django_crispy_forms
 {
@@ -40,6 +63,7 @@ function install_standard_framework
   apt-get -y install gettext
   apt-get -y install python-pip
   apt-get -y install curl
+  apt-get -y install build-essential
 
   pip install Django==1.4.3
 
@@ -169,9 +193,85 @@ function create_ambient_dir
   fi
 }
 
+function install_no_ip
+{
+  #http://www.noip.com/support/knowledgebase/installing-the-linux-dynamic-update-client-on-ubuntu/
+  #How to install No-IP Linux Dynamic Update Client (DUC) on your Ubuntu 12.04 LTS.
+
+  if [ "$INSTALL_NOIP" = ' ' ]
+  then
+    return 0
+  fi
+
+  echo "Se procede con la instalación no-ip."
+
+  cd /usr/local/src/
+
+  if [ $? -ne 0 ]
+  then
+    echo "Error al intentar acceder a /usr/local/src/."
+    exit 1
+  fi
+  
+  if [ -d 'noip-2.1.9-1' ]
+  then
+    echo "Error: Parecería ser que no-ip ya se encuentra instalado."
+    exit 1
+  fi
+
+  wget http://www.no-ip.com/client/linux/noip-duc-linux.tar.gz
+  
+  if [ $? -ne 0 ]
+  then
+    echo "Error al intentar descargar la aplicación."
+    exit 1
+  fi
+  
+  tar xf noip-duc-linux.tar.gz
+  
+  if [ $? -ne 0 ]
+  then
+    echo "Error al intentar descomprimir la aplicación."
+    exit 1
+  fi
+  
+  cd noip-2.1.9-1/
+  
+  if [ $? -ne 0 ]
+  then
+    echo "Error al intentar acceder a noip-2.1.9-1."
+    exit 1
+  fi
+  
+  make install
+
+  if [ $? -ne 0 ]
+  then
+    echo "Error al intentar instalar la aplicación."
+    exit 1
+  fi
+
+  noip2
+  
+  if [ $? -ne 0 ]
+  then
+    echo "Error al intentar ejecutar el servicio."
+    exit 1
+  fi
+
+  # To Configure the Client:
+  # As root again (or with sudo) issue the below command:
+  # /usr/local/bin/noip2 -C (dash capital C, this will create the default config file)
+  # You will then be prompted for your username and password for No-IP, as well as which host names you wish to update. Be careful, one of the questions is “Do you wish to update all hosts”. If answered incorrectly this could effect host names in your account that are pointing at other locations.
+  # Now the client is installed and configured, you just need to launch it. Simply issue this final command to launch the client in the background:
+  # /usr/local/bin/noip2
+}
+
 install_standard_framework
 
 install_iampacks
+
+install_no_ip
 
 exit 0
 
