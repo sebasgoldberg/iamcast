@@ -107,6 +107,9 @@ function install_iampacks
   git clone https://github.com/sebasgoldberg/cross.git
   git clone https://github.com/sebasgoldberg/agencia.git
 
+  ./cross/compile_messages.sh
+  ./agencia/compile_messages.sh
+
 }
 
 function get_ambient_parameter
