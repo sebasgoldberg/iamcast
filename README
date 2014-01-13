@@ -10,6 +10,7 @@ INSTALL
 UPGRADE (desde v1.0)
 --------------------
 
+- sudo apt-get update && sudo apt-get upgrade
 - pull de iamcast
 - pull de agencia
 - pull de cross
@@ -18,6 +19,7 @@ UPGRADE (desde v1.0)
     sudo pip install Django==1.6.1
 - install Grappelli:
     pip install django-grappelli==2.5.1
+- <iamcast-folder> $ sudo ./install-framework.sh
 - cambiar configuración del sitio http y https:
     ...
     WSGIDaemonProcess iamcast[_ssl] python-path=/home/cerebro/iamcast/
@@ -29,8 +31,7 @@ UPGRADE (desde v1.0)
 - actualizar alternativa/ambiente.py a nueva versión.
 - swap the orther between admin and grappelli app in settings.py
 - update static files:
-    cd collectedstatic
-    rm -rf *
-    ./manage.py collectstatic (from root folder)
+    <iamcast-folder>/collectedstatic $ rm -rf *
+    <iamcast-folder> $ ./manage.py collectstatic (from root folder)
 - restore the orther between admin and grappelli app in settings.py
 - sudo service apache2 restart
