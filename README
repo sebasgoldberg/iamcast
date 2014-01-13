@@ -6,3 +6,31 @@ INSTALL
 2) Run ./config.sh and apply your configuration.
 3) Run ./install.sh (for iamcast).
 4) Verify that /etc/apache2/ports.conf is configured correctly (remember to add 'NameVirtualHost *:<port>' for each used por in case that has multiple server on the same port).
+
+UPGRADE (desde v1.0)
+--------------------
+
+- pull de iamcast
+- pull de agencia
+- pull de cross
+- unninstall django and install django 1.6.1: 
+    sudo pip uninstall Django
+    sudo pip install Django==1.6.1
+- install Grappelli:
+    pip install django-grappelli==2.5.1
+- cambiar configuración del sitio http y https:
+    ...
+    WSGIDaemonProcess iamcast[_ssl] python-path=/home/cerebro/iamcast/
+    WSGIProcessGroup iamcast[_ssl]
+    WSGIScriptAlias / /home/cerebro/iamcast//alternativa/wsgi.py
+    ...
+    Alias /static/admin/ /usr/local/lib/python2.7/dist-packages/grappelli/static/admin/
+    ...
+- actualizar alternativa/ambiente.py a nueva versión.
+- swap the orther between admin and grappelli app in settings.py
+- update static files:
+    cd collectedstatic
+    rm -rf *
+    ./manage.py collectstatic (from root folder)
+- restore the orther between admin and grappelli app in settings.py
+- sudo service apache2 restart
