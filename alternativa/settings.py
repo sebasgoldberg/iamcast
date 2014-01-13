@@ -218,3 +218,6 @@ LOCALE_PATHS=(ambiente.project_directory+'locale',)
 #CITIES_LIGHT_CITY_SOURCES = ['http://download.geonames.org/export/dump/cities5000.zip']
 
 CORREO_CLASS='iampacks.agencia.agencia.mail.MailAgencia'
+
+GRAPPELLI_ADMIN_TITLE = ambiente.id_agencia
+GRAPPELLI_AUTOCOMPLETE_LIMIT = 10
