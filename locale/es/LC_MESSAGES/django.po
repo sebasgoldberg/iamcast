@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-14 22:34-0200\n"
+"POT-Creation-Date: 2014-01-15 15:30-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,41 +18,45 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: alternativa/dashboard.py:32
+#: alternativa/dashboard.py:53
+msgid "Eventos del Dia"
+msgstr "Eventos del Día"
+
+#: alternativa/dashboard.py:84
+msgid "Proximos Eventos"
+msgstr "Próximos Eventos"
+
+#: alternativa/dashboard.py:99
 msgid "Ultimos Trabajos"
 msgstr "Últimos Trabajos"
 
-#: alternativa/dashboard.py:42
+#: alternativa/dashboard.py:109
 msgid "Aplicaciones Principales"
 msgstr "Aplicaciones Principales"
 
-#: alternativa/dashboard.py:70
+#: alternativa/dashboard.py:137
 msgid "Diccionario de datos"
 msgstr "Diccionario de datos"
 
-#: alternativa/dashboard.py:78
+#: alternativa/dashboard.py:145
 msgid "Administracion de usuarios y permisos"
 msgstr "Administracion de usuarios y permisos"
 
-#: alternativa/dashboard.py:88
+#: alternativa/dashboard.py:155
 msgid "Recent Actions"
 msgstr "Acciones Recientes"
 
-#: alternativa/dashboard.py:96
+#: alternativa/dashboard.py:166
 msgid "Links"
 msgstr "Links"
 
-#: alternativa/dashboard.py:105
+#: alternativa/dashboard.py:175
 msgid "facebook"
 msgstr "facebook"
 
-#: alternativa/dashboard.py:110
+#: alternativa/dashboard.py:180
 msgid "Proponer una mejora"
 msgstr "Proponer una mejora"
-
-#: alternativa/dashboard.py:118
-msgid "Ultimas novedades de la aplicacion"
-msgstr "Ultimas novedades de la aplicación"
 
 #: alternativa/settings.py:45
 msgid "Portugues"
@@ -106,3 +110,6 @@ msgstr ""
 "\n"
 "Por favor, verifique si los datos de su perfil son correctos. En caso de ser "
 "necesario, modifique los datos que correspondan."
+
+#~ msgid "Ultimas novedades de la aplicacion"
+#~ msgstr "Ultimas novedades de la aplicación"
