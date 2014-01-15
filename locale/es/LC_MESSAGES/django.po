@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-01 11:36-0300\n"
+"POT-Creation-Date: 2014-01-14 22:34-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,9 +18,45 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
+#: alternativa/dashboard.py:32
+msgid "Ultimos Trabajos"
+msgstr "Últimos Trabajos"
+
+#: alternativa/dashboard.py:42
+msgid "Aplicaciones Principales"
+msgstr "Aplicaciones Principales"
+
+#: alternativa/dashboard.py:70
+msgid "Diccionario de datos"
+msgstr "Diccionario de datos"
+
+#: alternativa/dashboard.py:78
+msgid "Administracion de usuarios y permisos"
+msgstr "Administracion de usuarios y permisos"
+
+#: alternativa/dashboard.py:88
+msgid "Recent Actions"
+msgstr "Acciones Recientes"
+
+#: alternativa/dashboard.py:96
+msgid "Links"
+msgstr "Links"
+
+#: alternativa/dashboard.py:105
+msgid "facebook"
+msgstr "facebook"
+
+#: alternativa/dashboard.py:110
+msgid "Proponer una mejora"
+msgstr "Proponer una mejora"
+
+#: alternativa/dashboard.py:118
+msgid "Ultimas novedades de la aplicacion"
+msgstr "Ultimas novedades de la aplicación"
+
 #: alternativa/settings.py:45
 msgid "Portugues"
-msgstr "Portugues"
+msgstr "Portugués"
 
 #: alternativa/settings.py:46
 msgid "Spanish"

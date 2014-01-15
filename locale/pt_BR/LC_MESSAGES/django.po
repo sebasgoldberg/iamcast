@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-01 11:18-0300\n"
+"POT-Creation-Date: 2014-01-14 22:34-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,9 +18,45 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
+#: alternativa/dashboard.py:32
+msgid "Ultimos Trabajos"
+msgstr "Ultimos Trabalhos"
+
+#: alternativa/dashboard.py:42
+msgid "Aplicaciones Principales"
+msgstr "Aplicaçoes Principais"
+
+#: alternativa/dashboard.py:70
+msgid "Diccionario de datos"
+msgstr "Dicionário de Dados"
+
+#: alternativa/dashboard.py:78
+msgid "Administracion de usuarios y permisos"
+msgstr "Gerenciamento de Usuários e Permissões"
+
+#: alternativa/dashboard.py:88
+msgid "Recent Actions"
+msgstr "Ações Recentes"
+
+#: alternativa/dashboard.py:96
+msgid "Links"
+msgstr "Links"
+
+#: alternativa/dashboard.py:105
+msgid "facebook"
+msgstr "facebook"
+
+#: alternativa/dashboard.py:110
+msgid "Proponer una mejora"
+msgstr "Sugerir uma Melhoria"
+
+#: alternativa/dashboard.py:118
+msgid "Ultimas novedades de la aplicacion"
+msgstr "Recentes Desenvolvimentos na Aplicação"
+
 #: alternativa/settings.py:45
 msgid "Portugues"
-msgstr ""
+msgstr "Português"
 
 #: alternativa/settings.py:46
 msgid "Spanish"
@@ -28,7 +64,7 @@ msgstr "Espanhol"
 
 #: templates/correo/firma.txt:2
 msgid "O equipe de"
-msgstr ""
+msgstr "O equipe de"
 
 #: templates/usuario/mail/creacion.txt:5
 #, python-format
@@ -52,3 +88,21 @@ msgid ""
 "Por favor, verifique se os dados da sua conta estão corretos. Em caso de "
 "precisar modifique os dados que correspondam."
 msgstr ""
+"Oi %(first_name)s!\n"
+"\n"
+"Você tem uma nova conta em %(base_url)s/ com dados de sue perfil.\n"
+"\n"
+"Se você e um agenciado, então pode carregar informação de seu perfil: "
+"%(base_url)s/agenciado/\n"
+"\n"
+"Se você e um agenciador pode acessar a administração do site: %(base_url)s/"
+"admin/\n"
+"\n"
+"Você poderá ingressar a sua nova conta com seu usuário (%(username)s) e sua "
+"chave.\n"
+"\n"
+"Se você não lembra sua chave, poderá gerá-la de novo aqui: %(base_url)s/"
+"usuario/reiniciar/clave/\n"
+"\n"
+"Por favor, verifique se os dados da sua conta estão corretos. Em caso de "
+"precisar modifique os dados que correspondam."

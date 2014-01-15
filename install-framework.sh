@@ -98,6 +98,7 @@ function install_standard_framework
   pip install django-cities-light
 
   pip install django-grappelli==2.5.1
+  pip install feedparser==5.1.3
 }
 
 function install_iampacks

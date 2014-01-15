@@ -136,6 +136,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
+    'grappelli.dashboard',
     'grappelli',
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -221,3 +222,5 @@ CORREO_CLASS='iampacks.agencia.agencia.mail.MailAgencia'
 
 GRAPPELLI_ADMIN_TITLE = ambiente.id_agencia
 GRAPPELLI_AUTOCOMPLETE_LIMIT = 10
+
+GRAPPELLI_INDEX_DASHBOARD = 'alternativa.dashboard.CustomIndexDashboard'
