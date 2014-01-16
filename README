@@ -7,6 +7,13 @@ INSTALL
 3) Run ./install.sh (for iamcast).
 4) Verify that /etc/apache2/ports.conf is configured correctly (remember to add 'NameVirtualHost *:<port>' for each used por in case that has multiple server on the same port).
 
+UPGRADE (desde version 1.1)
+---------------------------
+
+- pull de iamcast
+- pull de agencia
+- <iamcast-folder> $ ./update.sh
+
 UPGRADE (desde v1.0)
 --------------------
 
