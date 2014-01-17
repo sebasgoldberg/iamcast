@@ -145,6 +145,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'south', 
     'cities_light',
+    'formadmin',
     #'smart_selects',
     # Aplicaciones de la agencia
     'iampacks.cross.estatico',
