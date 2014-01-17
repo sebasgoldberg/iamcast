@@ -1,0 +1,18 @@
+{% load crispy_forms_tags %}
+
+{{ formset.management_form }}
+{% for error in formset.non_form_errors %}
+  <div class='alert alert-error'>{{ error }}</div>
+{% endfor %}
+<div class='row'>
+{% for form in formset %}
+  <div class='span{{columns_by_form}}'> 
+  {{form|crispy}}
+  </div>
+  {% if forloop.counter|divisibleby:forms_by_line  %}
+    </div>
+    <hr/>
+    <div class='row'>
+  {% endif %}
+{% endfor %}
+</div>
