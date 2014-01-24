@@ -11,5 +11,5 @@ cd "$WD"
 ./manage.py migrate
 ./manage.py syncdb --all
 echo "Tareas pendientes:"
-echo "- Agregar permiso de envío de mail a agenciados, a grupo de agenciadores."
+echo "- Agregar permiso para edición de MailAgenciado a agenciadores"
 
