@@ -10,6 +10,4 @@ git pull origin master
 cd "$WD"
 ./manage.py migrate
 ./manage.py syncdb --all
-echo "Tareas pendientes:"
-echo "- Agregar permiso para edición de MailAgenciado a agenciadores"
 
