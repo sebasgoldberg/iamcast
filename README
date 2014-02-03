@@ -7,38 +7,11 @@ INSTALL
 3) Run ./install.sh (for iamcast).
 4) Verify that /etc/apache2/ports.conf is configured correctly (remember to add 'NameVirtualHost *:<port>' for each used por in case that has multiple server on the same port).
 
-UPGRADE (desde version 1.1)
----------------------------
+COPY
+----
 
-- pull de iamcast
-- pull de agencia
-- <iamcast-folder> $ ./update.sh
-
-UPGRADE (desde v1.0)
---------------------
-
-- sudo apt-get update && sudo apt-get upgrade
-- pull de iamcast
-- pull de agencia
-- pull de cross
-- unninstall django and install django 1.6.1: 
-    sudo pip uninstall Django
-    sudo pip install Django==1.6.1
-- install Grappelli:
-    pip install django-grappelli==2.5.1
-- <iamcast-folder> $ sudo ./install-framework.sh
-- cambiar configuración del sitio http y https:
-    ...
-    WSGIDaemonProcess iamcast[_ssl] python-path=/home/cerebro/iamcast/
-    WSGIProcessGroup iamcast[_ssl]
-    WSGIScriptAlias / /home/cerebro/iamcast//alternativa/wsgi.py
-    ...
-    Alias /static/admin/ /usr/local/lib/python2.7/dist-packages/grappelli/static/admin/
-    ...
-- actualizar alternativa/ambiente.py a nueva versión.
-- swap the orther between admin and grappelli app in settings.py
-- update static files:
-    <iamcast-folder>/collectedstatic $ rm -rf *
-    <iamcast-folder> $ ./manage.py collectstatic (from root folder)
-- restore the orther between admin and grappelli app in settings.py
-- sudo service apache2 restart
+1) Copy project folder.
+2) Modify site_id in ambiente.py
+3) ./manage.py dbcreate
+4) mysqldump -u usersource -ppasssource dbsource | mysql -u userdest -ppassdest dbdest
+5) ./install.py
