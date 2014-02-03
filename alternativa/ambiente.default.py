@@ -1,5 +1,5 @@
 # coding=utf-8
-from base_ambiente import BaseAmbiente
+from iampacks.cross.ambiente.models import BaseAmbiente
 import os
 
 id_agencia='iamcast'
@@ -9,6 +9,7 @@ class Ambiente(BaseAmbiente):
   app_in_dev=None
 
   id_agencia=id_agencia
+  site_id=id_agencia
 
   dominio='%s.com.ar'%id_agencia
   puerto_http='80'
@@ -24,6 +25,7 @@ class Ambiente(BaseAmbiente):
       name='ciudades'
 
   project_directory = '%s/' % os.path.abspath('%s/..' % os.path.split(os.path.abspath(__file__))[0])
+  wsgi_dir = os.path.dirname(__file__)
 
   class email:
     host = 'smtp.gmail.com'

@@ -94,7 +94,7 @@ function install_standard_framework
 
   install_django_crispy_forms
 
-  easy_install South
+  pip install south==0.8.4
   pip install django-cities-light
 
   pip install django-grappelli==2.5.1
