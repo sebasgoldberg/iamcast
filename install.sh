@@ -1,37 +1,14 @@
 #!/bin/bash
 
-WD="$(dirname "$(readlink -f "$0")")"
-
-cd "$WD/alternativa"
-
-DB_USER="$(python -c "from ambiente import ambiente; print ambiente.db.user")"
-if [ $? -ne 0 ]
-then
-  echo "No se ha podido obtener usuario de BD del ambiente"
-  exit 1
-fi
-
-DB_NAME="$(python -c "from ambiente import ambiente; print ambiente.db.name")"
-if [ $? -ne 0 ]
-then
-  echo "No se ha podido obtener nombre de BD del ambiente"
-  exit 1
-fi
-
-DB_PASS="$(python -c "from ambiente import ambiente; print ambiente.db.password")"
-if [ $? -ne 0 ]
-then
-  echo "No se ha podido obtener password de BD del ambiente"
-  exit 1
-fi
-
-echo "Se procede a crear base de datos y usuario de base de datos (introduzca la contraseña del usuario root de mysql)."
-
-(echo "create database $DB_NAME character set utf8;"
-echo "create user '$DB_USER'@'localhost' identified by '$DB_PASS';"
-echo "grant all on $DB_NAME.* to $DB_USER;"
-) | mysql -u root -p
-
-cd "$WD"
-
-./manage.py install-agencia
+./manage.py dbcreate # Solucionar problema en syncdb --all
+./manage.py syncdb --all # Necesario para cargar permisos
+./manage.py loadciudades
+mkdir -p uploads/agenciados/fotos
+mkdir -p uploads/cache/agenciados/fotos
+mkdir -p uploads/agencias/logos
+./manage.py setpermissions
+./manage.py collectstatic
+./manage.py loadperfil # Lleva como parámetro el idioma aplicar traducciones correspondientes
+./manage.py loadgroups
+./manage.py a2create
+./manage.py domainupdate
