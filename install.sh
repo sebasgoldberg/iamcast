@@ -1,6 +1,8 @@
 #!/bin/bash
 
 ./manage.py dbcreate # Solucionar problema en syncdb --all
+./manage.py syncdb
+./manage.py migrate
 ./manage.py syncdb --all # Necesario para cargar permisos
 ./manage.py loadciudades
 mkdir -p uploads/agenciados/fotos
