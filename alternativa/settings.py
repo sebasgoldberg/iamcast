@@ -159,6 +159,7 @@ INSTALLED_APPS = (
     'iampacks.agencia.agenciado',
     'iampacks.agencia.trabajo',
     'iampacks.cross.install',
+    'iampacks.cross.backup',
 )
 
 if not ambiente.productivo:

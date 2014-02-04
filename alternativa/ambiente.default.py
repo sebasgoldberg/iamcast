@@ -36,4 +36,9 @@ class Ambiente(BaseAmbiente):
   class zonomi:
     api_key = None
 
+  class backup:
+    user = None
+    host = None
+    destination = None
+
 ambiente=Ambiente()

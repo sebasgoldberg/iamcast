@@ -8,3 +8,4 @@ alternativa/ambiente.py
 .coverage
 collectedstatic/
 alternativa/static/bootstrap/
+mysql.backup
