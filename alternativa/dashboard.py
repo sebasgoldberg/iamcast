@@ -172,11 +172,6 @@ class CustomIndexDashboard(Dashboard):
                     'external': False,
                 },
                 {
-                    'title': _(u'facebook'),
-                    'url': 'https://www.facebook.com/AgenciaAlternativa',
-                    'external': True,
-                },
-                {
                     'title': _(u'Proponer una mejora'),
                     'url': 'https://github.com/sebasgoldberg/iamcast/issues/new#',
                     'external': True,
