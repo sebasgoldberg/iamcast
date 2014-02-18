@@ -8,6 +8,7 @@
 mkdir -p uploads/agenciados/fotos
 mkdir -p uploads/cache/agenciados/fotos
 mkdir -p uploads/agencias/logos
+mkdir -p uploads/tmp
 ./manage.py setpermissions
 ./manage.py collectstatic
 ./manage.py loadperfil # Lleva como parámetro el idioma aplicar traducciones correspondientes

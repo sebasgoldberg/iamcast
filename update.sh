@@ -12,3 +12,12 @@ cd "$WD"
 ./manage.py syncdb --all
 ./manage.py collectstatic
 
+mkdir -p uploads/tmp
+./manage.py setpermissions
+
+
+pip uninstall django
+pip uninstall django-imagekit
+
+pip install Django==1.6.2
+pip install django-imagekit==3.2.0
