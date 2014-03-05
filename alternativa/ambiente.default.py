@@ -15,6 +15,12 @@ class Ambiente(BaseAmbiente):
   puerto_http='80'
   puerto_https='443'
 
+  class sitio:
+    class externo:
+      url = None
+    class estandar:
+      activo = True
+
   class db:
     name=id_agencia
     user=id_agencia
