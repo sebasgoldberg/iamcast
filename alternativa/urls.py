@@ -32,5 +32,6 @@ urlpatterns = patterns('',
     #url(r'^chaining/', include('smart_selects.urls')),
     url(r'^direccion/', include('iampacks.cross.direccion.urls')),
     url(r'^usuario/', include('iampacks.cross.usuario.urls')),
+    url(r'^reliquia/', include('iampacks.agencia.reliquia.urls')),
 )
 

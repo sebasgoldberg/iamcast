@@ -155,6 +155,7 @@ INSTALLED_APPS = (
     'iampacks.cross.usuario',
     'iampacks.cross.idioma',
     'iampacks.agencia.perfil',
+    'iampacks.agencia.reliquia',
     'iampacks.agencia.agencia',
     'iampacks.agencia.agenciado',
     'iampacks.agencia.trabajo',
