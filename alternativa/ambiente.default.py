@@ -18,8 +18,6 @@ class Ambiente(BaseAmbiente):
   class sitio:
     class externo:
       url = None
-    class estandar:
-      activo = True
 
   class db:
     name=id_agencia
