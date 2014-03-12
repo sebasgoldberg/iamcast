@@ -100,6 +100,7 @@ function install_standard_framework
   pip install django-grappelli==2.5.1
   pip install feedparser==5.1.3
   pip install django-form-admin==0.4.2
+  pip install django-simple-captcha==0.4.1
 }
 
 function install_iampacks
