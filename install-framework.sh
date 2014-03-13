@@ -101,6 +101,7 @@ function install_standard_framework
   pip install feedparser==5.1.3
   pip install django-form-admin==0.4.2
   pip install django-simple-captcha==0.4.1
+  pip install django-modeltranslation==0.7.3
 }
 
 function install_iampacks

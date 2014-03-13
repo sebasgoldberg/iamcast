@@ -147,6 +147,7 @@ INSTALLED_APPS = (
     'cities_light',
     'formadmin',
     'captcha',
+    'modeltranslation',
     #'smart_selects',
     # Aplicaciones de la agencia
     'iampacks.cross.estatico',

@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo pip install django-simple-captcha==0.4.1
+pip install django-modeltranslation==0.7.3
 
 WD="$(pwd)"
 
@@ -13,4 +13,4 @@ cd "$WD"
 ./manage.py migrate
 ./manage.py syncdb --all
 ./manage.py collectstatic
-
+./manage.py update_translation_fields
