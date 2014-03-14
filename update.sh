@@ -14,3 +14,4 @@ cd "$WD"
 ./manage.py syncdb --all
 ./manage.py collectstatic
 ./manage.py update_translation_fields
+./manage.py loadperfil
