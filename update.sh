@@ -1,5 +1,5 @@
 #!/bin/bash
-pip install django-modeltranslation==0.7.3
+sudo pip install django-modeltranslation==0.7.3
 
 WD="$(pwd)"
 
