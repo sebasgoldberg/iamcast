@@ -162,6 +162,7 @@ INSTALLED_APPS = (
     'iampacks.agencia.trabajo',
     'iampacks.cross.install',
     'iampacks.cross.backup',
+    'zohoverify',
 )
 
 if not ambiente.productivo:

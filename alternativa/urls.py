@@ -33,5 +33,6 @@ urlpatterns = patterns('',
     url(r'^direccion/', include('iampacks.cross.direccion.urls')),
     url(r'^usuario/', include('iampacks.cross.usuario.urls')),
     url(r'^captcha/', include('captcha.urls')),
+    url(r'^zohoverify/', include('zohoverify.urls')),
 )
 
