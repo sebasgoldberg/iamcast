@@ -1,6 +1,4 @@
 #!/bin/bash
-sudo pip install django-modeltranslation==0.7.3
-
 WD="$(pwd)"
 
 cd ../iampacks/agencia
@@ -13,5 +11,3 @@ cd "$WD"
 ./manage.py migrate
 ./manage.py syncdb --all
 ./manage.py collectstatic
-./manage.py update_translation_fields
-./manage.py loadperfil

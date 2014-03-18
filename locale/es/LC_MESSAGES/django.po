@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-15 15:30-0200\n"
+"POT-Creation-Date: 2014-03-18 18:05-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,43 +18,47 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: alternativa/dashboard.py:53
+#: alternativa/dashboard.py:54
 msgid "Eventos del Dia"
 msgstr "Eventos del Día"
 
-#: alternativa/dashboard.py:84
+#: alternativa/dashboard.py:85
 msgid "Proximos Eventos"
 msgstr "Próximos Eventos"
 
-#: alternativa/dashboard.py:99
+#: alternativa/dashboard.py:100
 msgid "Ultimos Trabajos"
 msgstr "Últimos Trabajos"
 
-#: alternativa/dashboard.py:109
+#: alternativa/dashboard.py:110
 msgid "Aplicaciones Principales"
 msgstr "Aplicaciones Principales"
 
-#: alternativa/dashboard.py:137
+#: alternativa/dashboard.py:138
 msgid "Diccionario de datos"
 msgstr "Diccionario de datos"
 
-#: alternativa/dashboard.py:145
+#: alternativa/dashboard.py:146
 msgid "Administracion de usuarios y permisos"
 msgstr "Administracion de usuarios y permisos"
 
-#: alternativa/dashboard.py:155
+#: alternativa/dashboard.py:156
 msgid "Recent Actions"
 msgstr "Acciones Recientes"
 
-#: alternativa/dashboard.py:166
+#: alternativa/dashboard.py:167
+msgid "Configuracion"
+msgstr "Configuración"
+
+#: alternativa/dashboard.py:171
+msgid "Agencia"
+msgstr "Agencia"
+
+#: alternativa/dashboard.py:181
 msgid "Links"
 msgstr "Links"
 
-#: alternativa/dashboard.py:175
-msgid "facebook"
-msgstr "facebook"
-
-#: alternativa/dashboard.py:180
+#: alternativa/dashboard.py:190
 msgid "Proponer una mejora"
 msgstr "Proponer una mejora"
 
@@ -110,6 +114,9 @@ msgstr ""
 "\n"
 "Por favor, verifique si los datos de su perfil son correctos. En caso de ser "
 "necesario, modifique los datos que correspondan."
+
+#~ msgid "facebook"
+#~ msgstr "facebook"
 
 #~ msgid "Ultimas novedades de la aplicacion"
 #~ msgstr "Ultimas novedades de la aplicación"

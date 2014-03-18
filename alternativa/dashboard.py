@@ -14,6 +14,7 @@ from grappelli.dashboard import modules, Dashboard
 from grappelli.dashboard.utils import get_admin_site_name
 from django.conf import settings
 
+from iampacks.agencia.agencia.models import Agencia
 from iampacks.agencia.trabajo.models import Trabajo, EventoTrabajo, EventoRol
 
 from datetime import datetime, date, timedelta
@@ -160,6 +161,20 @@ class CustomIndexDashboard(Dashboard):
 
         self.add_eventos_del_dia()
         self.add_proximos_eventos()
+
+        # append another link list module for "support".
+        self.children.append(modules.LinkList(
+            _('Configuracion'),
+            column=3,
+            children=[
+                {
+                    'title': _(u'Agencia'),
+                    'url': Agencia.get_activa().get_url_admin(),
+                    'external': False,
+                },
+            ]
+        ))
+
 
         # append another link list module for "support".
         self.children.append(modules.LinkList(
