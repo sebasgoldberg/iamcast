@@ -230,4 +230,4 @@ GRAPPELLI_AUTOCOMPLETE_LIMIT = 10
 
 GRAPPELLI_INDEX_DASHBOARD = 'alternativa.dashboard.CustomIndexDashboard'
 
-ALLOWED_HOSTS = ['*.iamsoft.com.ar']
+ALLOWED_HOSTS = [ambiente.dominio]
