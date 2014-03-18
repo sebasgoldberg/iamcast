@@ -229,3 +229,5 @@ GRAPPELLI_ADMIN_TITLE = ambiente.id_agencia
 GRAPPELLI_AUTOCOMPLETE_LIMIT = 10
 
 GRAPPELLI_INDEX_DASHBOARD = 'alternativa.dashboard.CustomIndexDashboard'
+
+ALLOWED_HOSTS = ['*.iamsoft.com.ar']
