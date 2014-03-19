@@ -15,6 +15,10 @@ class Ambiente(BaseAmbiente):
   puerto_http='80'
   puerto_https='443'
 
+  admins = (
+    ('admin', 'admin@xxxx.com'),
+  )
+
   class sitio:
     class externo:
       url = None

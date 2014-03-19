@@ -9,9 +9,7 @@ CRISPY_FAIL_SILENTLY = not DEBUG
 
 CRISPY_TEMPLATE_PACK = 'bootstrap'
 
-ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
-)
+ADMINS = ambiente.admins
 
 MANAGERS = ADMINS
 
