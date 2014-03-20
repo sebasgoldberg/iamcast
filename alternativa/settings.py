@@ -111,6 +111,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'iampacks.agencia.agencia.middleware.AgenciaMiddleware',
 )
 
 ROOT_URLCONF = 'alternativa.urls'
