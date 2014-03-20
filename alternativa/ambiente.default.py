@@ -27,6 +27,8 @@ class Ambiente(BaseAmbiente):
     name=id_agencia
     user=id_agencia
     password='password'
+    class root:
+      password=None
 
   class ciudades:
     class db:
