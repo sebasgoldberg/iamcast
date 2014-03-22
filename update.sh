@@ -9,5 +9,5 @@ git pull origin master
 
 cd "$WD"
 ./manage.py migrate
-./manage.py syncdb --all
-./manage.py collectstatic
+./manage.py syncdb --all --noinput
+./manage.py collectstatic --noinput
