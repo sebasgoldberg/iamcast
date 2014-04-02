@@ -4,11 +4,7 @@
 {% block mensaje %}
 {%blocktrans with first_name=user.first_name base_url=ambiente.get_base_url username=user.username%}Oi {{first_name}}!
 
-Você tem uma nova conta em {{base_url}}/ com dados de sue perfil.
-
-Se você e um agenciado, então pode carregar informação de seu perfil: {{base_url}}/agenciado/
-
-Se você e um agenciador pode acessar a administração do site: {{base_url}}/admin/
+Você tem uma nova conta com dados de sue perfil: {{base_url}}/agenciado/
 
 Você poderá ingressar a sua nova conta com seu usuário ({{username}}) e sua chave.
 
