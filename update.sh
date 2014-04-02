@@ -1,6 +1,8 @@
 #!/bin/bash
 WD="$(pwd)"
 
+git pull origin master
+
 cd ../iampacks/agencia
 git pull origin master
 
