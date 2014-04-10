@@ -1,7 +1,5 @@
 # Django settings for alternativa project.
 from ambiente import ambiente
-from django.utils.translation import ugettext as _
-from django.utils.translation import ugettext_lazy
 ###
 AMBIENTE=ambiente
 
@@ -227,7 +225,7 @@ LOCALE_PATHS=(ambiente.project_directory+'locale',)
 
 CORREO_CLASS='iampacks.agencia.agencia.mail.MailAgencia'
 
-GRAPPELLI_ADMIN_TITLE = _('Agencia')
+GRAPPELLI_ADMIN_TITLE = 'IamCast'
 GRAPPELLI_AUTOCOMPLETE_LIMIT = 10
 
 GRAPPELLI_INDEX_DASHBOARD = 'alternativa.dashboard.CustomIndexDashboard'
