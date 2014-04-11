@@ -231,3 +231,11 @@ GRAPPELLI_AUTOCOMPLETE_LIMIT = 10
 GRAPPELLI_INDEX_DASHBOARD = 'alternativa.dashboard.CustomIndexDashboard'
 
 ALLOWED_HOSTS = [ambiente.dominio]
+
+import socket
+
+try:
+  IP = socket.gethostbyname(ambiente.dominio)
+  ALLOWED_HOSTS.append(IP)
+except socket.gaierror:
+  pass
