@@ -21,6 +21,7 @@ DATABASES = {
         'PASSWORD': ambiente.db.password,                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'TEST_CHARSET': 'utf8',
     }
 }
 
@@ -159,6 +160,7 @@ INSTALLED_APPS = (
     'iampacks.agencia.agencia',
     'iampacks.agencia.agenciado',
     'iampacks.agencia.trabajo',
+    'iampacks.agencia.notificacion',
     'iampacks.cross.install',
     'iampacks.cross.backup',
     'iampacks.cross.utils',
@@ -239,3 +241,6 @@ try:
   ALLOWED_HOSTS.append(IP)
 except socket.gaierror:
   pass
+
+SKIP_SOUTH_TESTS = True # To disable South's own unit tests
+SOUTH_TESTS_MIGRATE = False # To disable migrations and use syncdb instead
