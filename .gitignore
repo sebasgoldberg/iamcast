@@ -9,3 +9,4 @@ alternativa/ambiente.py
 collectedstatic/
 alternativa/static/bootstrap/
 mysql.backup
+.project

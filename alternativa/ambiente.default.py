@@ -50,5 +50,11 @@ class Ambiente(BaseAmbiente):
     user = None
     host = None
     destination = None
+ 
+  class presentation:
+    static = None
+
+    templates = None
+
 
 ambiente=Ambiente()

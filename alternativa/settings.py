@@ -86,6 +86,9 @@ STATICFILES_DIRS = (
 #    ambiente.project_directory+'direccion/static',
 )
 
+if ambiente.presentation.static is not None:
+    STATICFILES_DIRS += ambiente.presentation.static
+
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
@@ -126,6 +129,9 @@ TEMPLATE_DIRS = (
     ambiente.project_directory+'templates',
 )
 
+if ambiente.presentation.templates is not None:
+    TEMPLATE_DIRS += ambiente.presentation.templates
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -165,6 +171,7 @@ INSTALLED_APPS = (
     'iampacks.cross.backup',
     'iampacks.cross.utils',
 )
+
 
 if not ambiente.productivo:
   if ambiente.app_in_dev is not None:
@@ -244,3 +251,4 @@ except socket.gaierror:
 
 SKIP_SOUTH_TESTS = True # To disable South's own unit tests
 SOUTH_TESTS_MIGRATE = False # To disable migrations and use syncdb instead
+
